@@ -1,0 +1,83 @@
+-- ircd-ratbox-1.0 RELNOTES 
+
+-- ircd-ratbox-1.0-rc2
+- fixed a bug with internal channel structures that could core the ircd
+- flood_exempt can now be specified via flags=...; in auth {};
+- fix a bug inherented from hyb7 that would allow a NULL nick
+- removed the unused config option maximum_links
+- added option to general {}; - tkline_expire_notices = [yes|no];
+  which controls whether tkline expiration notices are shown
+- iauth has been removed, it didnt work anyway.
+
+-- ircd-ratbox-1.0-rc1
+o) Temp dline support has been added.
+o) Temp klines and dlines are now maxed at 4weeks, due to an improved
+   system of storing them.
+o) Flood exemption has been added to auth {};
+      flood_exempt = yes;
+o) Remote unkline support has been added, uses same syntax as remote klines.
+   shared {}; has been extended with two new options to control whether
+   a user may kline, unkline or both:
+      kline = yes;
+      unkline = yes;
+
+o) /quote XLINE support.  Controlled via an option in oper {};
+      xline = yes;
+
+      /quote xline <gecos> [type] :<reason>
+
+   The gecos may not contain spaces.
+
+o) Networkwide user@host limits, controlled in general {}; by:
+     use_global_limits = yes;
+
+   In the class by:
+     number_per_ident = 2;
+     number_per_ip = 3;
+     number_per_ip_global = 5;
+
+o) CIDR +beI modes are supported.
+o) CIDR glines are supported.
+o) Vchans, lazylinks and halfops have been removed.
+o) CALLERID (+g) will now use numerics instead of notices.
+o) The config parser is now much more modular, allowing modules to add
+   their own config options.  It also supports blocks in the format of:
+      connect "irc.server.com" {}; class "users" {}; etc.
+o) TRACE has been fixed for local lusers with speed increases.
+o) CONNECT_TIMEOUT has been moved from config.h to the config in general {};
+      connect_timeout = 5m;
+o) Support for RPL_WHOISACTUALLY to help prevent people faking DNS.  Will 
+   show the real IP of non-spoofed users.  controlled in general {}; by:
+      use_whois_actually = yes;
+o) A desync issue with persistent channels has been fixed.
+o) stats v will now show sendq and connect duration.
+
+For more details of these options see example.conf
+
+--------------------------------------------------------------------------------
+
+This is the current release candidate version of ircd-ratbox.
+
+NOTE: This is still BETA code.  Run it at your own risk.  By running this
+ code you assume FULL responsibility for any problems it may cause.  We do
+ NOT recommend that you run BETA code on production IRC networks such
+ as EFnet.
+
+BUGS: Major bugs in this release are listed in BUGS
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+ the bug in one of the following ways:
+  a) By EMAIL to ircd-ratbox@lists.ratbox.org
+ Please include a gdb backtrace and keep the core file, binaries and 
+ modules in case the developers need them.
+
+DISCUSSION: There is a mailing list for discussion of ratbox issues,
+ To subscribe, visit:
+      http://lists.ratbox.org/cgi-bin/mailman/listinfo/ircd-ratbox
+
+Please read doc/whats-new.txt for information about what is in this release
+
+Other files recommended for reading: BUGS, README.FIRST, INSTALL
+
+--------------------------------------------------------------------------------
+$Id$

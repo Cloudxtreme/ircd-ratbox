@@ -1,0 +1,15 @@
+XLINE <gecos> [type] :[reason]
+
+Bans by gecos (aka 'real name') field by adding a line to xline.conf.
+If you need to, use ? in place of spaces in the <gecos>.
+
+The type field denotes how the XLINE works and may be:
+  0 - Send a warning to +r opers but allow user to connect.
+  1 - Reject the user and send a warning to +r opers.
+  2 - Reject the user silently.
+
+An XLINE can only be removed by editing the xline.conf file.
+
+Eg. /quote xline eggdrop?bot 2 :no bots
+
+- Requires Oper Priv: X

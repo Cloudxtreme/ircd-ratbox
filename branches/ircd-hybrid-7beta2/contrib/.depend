@@ -1,0 +1,57 @@
+m_clearchan.so: m_clearchan.c ../include/tools.h ../include/handlers.h \
+ ../include/channel.h ../include/config.h ../include/setup.h \
+ ../include/ircd_defs.h ../include/client.h ../include/ircd_handler.h \
+ ../include/linebuf.h ../include/ircd.h ../include/numeric.h \
+ ../include/s_log.h ../include/s_serv.h ../include/send.h \
+ ../include/whowas.h ../include/irc_string.h ../include/hash.h \
+ ../include/msg.h ../include/parse.h ../include/modules.h \
+ ../include/memory.h ../include/blalloc.h ../include/vchannel.h
+m_jupe.so: m_jupe.c ../include/tools.h ../include/irc_string.h \
+ ../include/ircd_defs.h ../include/config.h ../include/setup.h \
+ ../include/handlers.h ../include/channel.h ../include/client.h \
+ ../include/ircd_handler.h ../include/linebuf.h ../include/ircd.h \
+ ../include/numeric.h ../include/s_log.h ../include/s_serv.h \
+ ../include/send.h ../include/whowas.h ../include/hash.h \
+ ../include/msg.h ../include/parse.h ../include/modules.h \
+ ../include/memory.h ../include/blalloc.h ../include/class.h \
+ ../include/common.h ../include/event.h ../include/fdlist.h \
+ ../include/list.h ../include/s_conf.h ../include/fileio.h \
+ ../include/motd.h ../include/scache.h
+m_hash.so: m_hash.c ../include/tools.h ../include/handlers.h \
+ ../include/channel.h ../include/config.h ../include/setup.h \
+ ../include/ircd_defs.h ../include/client.h ../include/ircd_handler.h \
+ ../include/linebuf.h ../include/hash.h ../include/irc_string.h \
+ ../include/ircd.h ../include/numeric.h ../include/s_conf.h \
+ ../include/fileio.h ../include/motd.h ../include/send.h \
+ ../include/msg.h ../include/parse.h ../include/modules.h \
+ ../include/memory.h ../include/blalloc.h
+m_nickinfo.so: m_nickinfo.c ../include/handlers.h ../include/client.h \
+ ../include/config.h ../include/setup.h ../include/ircd_defs.h \
+ ../include/ircd_handler.h ../include/linebuf.h ../include/tools.h \
+ ../include/fdlist.h ../include/irc_string.h ../include/ircd.h \
+ ../include/numeric.h ../include/s_conf.h ../include/fileio.h \
+ ../include/motd.h ../include/s_stats.h ../include/s_user.h \
+ ../include/hash.h ../include/whowas.h ../include/s_serv.h \
+ ../include/send.h ../include/list.h ../include/channel.h \
+ ../include/s_log.h ../include/msg.h ../include/parse.h \
+ ../include/modules.h ../include/memory.h ../include/blalloc.h
+m_opme.so: m_opme.c ../include/tools.h ../include/handlers.h \
+ ../include/channel.h ../include/config.h ../include/setup.h \
+ ../include/ircd_defs.h ../include/client.h ../include/ircd_handler.h \
+ ../include/linebuf.h ../include/ircd.h ../include/numeric.h \
+ ../include/s_log.h ../include/s_serv.h ../include/send.h \
+ ../include/whowas.h ../include/irc_string.h ../include/hash.h \
+ ../include/msg.h ../include/parse.h ../include/modules.h \
+ ../include/memory.h ../include/blalloc.h ../include/vchannel.h
+whois_notice.so: whois_notice.c ../include/modules.h \
+ ../include/ircd_handler.h ../include/msg.h ../include/config.h \
+ ../include/setup.h ../include/memory.h ../include/ircd_defs.h \
+ ../include/blalloc.h ../include/hook.h ../include/tools.h \
+ ../include/client.h ../include/linebuf.h ../include/ircd.h \
+ ../include/send.h
+stats_notice.so: stats_notice.c ../include/modules.h \
+ ../include/ircd_handler.h ../include/msg.h ../include/config.h \
+ ../include/setup.h ../include/memory.h ../include/ircd_defs.h \
+ ../include/blalloc.h ../include/hook.h ../include/tools.h \
+ ../include/client.h ../include/linebuf.h ../include/ircd.h \
+ ../include/send.h

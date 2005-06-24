@@ -1,0 +1,87 @@
+/*
+ *  ircd-ratbox: A slightly useful ircd.
+ *  send.h: A header for the message sending functions.
+ *
+ *  Copyright (C) 1990 Jarkko Oikarinen and University of Oulu, Co Center
+ *  Copyright (C) 1996-2002 Hybrid Development Team
+ *  Copyright (C) 2002-2004 ircd-ratbox development team
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+ *  USA
+ *
+ *  $Id$
+ */
+
+#ifndef INCLUDED_send_h
+#define INCLUDED_send_h
+
+#include "ircd_defs.h"
+#include "config.h"		/* HAVE_STDARG_H */
+
+struct rpi_client;
+struct Channel;
+struct dlink_list;
+
+/* The nasty global also used in s_serv.c for server bursts */
+extern unsigned long current_serial;
+
+extern void send_queued_write(int fd, void *data);
+extern void send_queued_slink_write(int fd, void *data);
+
+extern void sendto_one(struct rpi_client *target_p, const char *, ...) AFP(2, 3);
+extern void sendto_one_notice(struct rpi_client *target_p,const char *, ...) AFP(2, 3);
+extern void sendto_one_prefix(struct rpi_client *target_p, struct rpi_client *source_p,
+			      const char *command, const char *, ...) AFP(4, 5);
+extern void sendto_one_numeric(struct rpi_client *target_p,
+			       int numeric, const char *, ...) AFP(3, 4);
+
+extern void sendto_server(struct rpi_client *one, struct Channel *chptr,
+			  unsigned long caps, unsigned long nocaps,
+			  const char *format, ...) AFP(5, 6);
+
+extern void sendto_channel_flags(struct rpi_client *one, int type, struct rpi_client *source_p,
+				 struct Channel *chptr, const char *, ...) AFP(5, 6);
+
+extern void sendto_channel_local(int type, struct Channel *, const char *, ...) AFP(3, 4);
+extern void sendto_common_channels_local(struct rpi_client *, const char *, ...) AFP(2, 3);
+
+
+extern void sendto_match_butone(struct rpi_client *, struct rpi_client *,
+				const char *, int, const char *, ...) AFP(5, 6);
+extern void sendto_match_servs(struct rpi_client *source_p, const char *mask,
+				int capab, int, const char *, ...) AFP(5, 6);
+
+extern void sendto_anywhere(struct rpi_client *, struct rpi_client *, const char *,
+			    const char *, ...) AFP(4, 5);
+
+extern void sendto_realops_flags(int, int, const char *, ...) AFP(3, 4);
+extern void sendto_wallops_flags(int, struct rpi_client *, const char *, ...) AFP(3, 4);
+
+extern void kill_client(struct rpi_client *client_p, struct rpi_client *diedie,
+			 const char *pattern, ...) AFP(3, 4);
+extern void kill_client_serv_butone(struct rpi_client *one, struct rpi_client *source_p,
+				    const char *pattern, ...) AFP(3, 4);
+
+#define L_ALL 	0
+#define L_OPER 	1
+#define L_ADMIN	2
+
+#define NOCAPS          0	/* no caps */
+
+/* used when sending to #mask or $mask */
+#define MATCH_SERVER  1
+#define MATCH_HOST    2
+
+#endif /* INCLUDED_send_h */

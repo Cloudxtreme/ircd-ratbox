@@ -1,0 +1,5 @@
+UNXLINE <gecos>
+
+-- Remove a XLINE on specified gecos
+Will attempt to remove the xline for the given 
+gecos.

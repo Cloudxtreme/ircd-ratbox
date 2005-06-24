@@ -1,0 +1,21 @@
+Syntax for HASH
+
++ HASH          - HASH <param>
+                  Shows some stats about ircd's internal hashes.
+                  V - Verify and report channel hash table stats
+                  v - Verify and report client hash table stats
+                  P - Report channel hash table stats
+                  p - Report client hash table stats
+                  R - Rebuild channel hash table
+                  r - Rebuild client hash table
+
+Instructions for use:
+compile m_hash.c (run 'make' in the contrib directory)
+make install - will install it into IRCD_PREFIX/modules...it will NOT be
+               autoloaded!
+1. manually load m_hash.so - MODLOAD modules/m_hash.so
+2. create a modules block entry for it:
+modules {
+	module="modules/m_hash.so";
+};
+

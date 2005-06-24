@@ -1,0 +1,353 @@
+temp-dline.diff
+
+This patch adds support for temporary dlines to hybrid7.
+
+Normal dlines can still be placed as normal:
+  /quote dline <nick|ip> :reason
+
+However they can be made temporary by adding a time:
+  /quote dline [duration] <nick|ip> :reason
+
+The duration is in minutes, and the maximum length is 4 days.
+
+This patch is used at your own risk and is not an official
+ircd-hybrid patch.
+
+--
+Lee H <lee@leeh.co.uk>
+
+
+Index: include/s_conf.h
+===================================================================
+RCS file: /cvsroot/ircd-hybrid-7/include/s_conf.h,v
+retrieving revision 7.179
+diff -u -r7.179 s_conf.h
+--- include/s_conf.h	25 Apr 2002 17:53:18 -0000	7.179
++++ include/s_conf.h	8 May 2002 12:06:50 -0000
+@@ -322,6 +322,7 @@
+ /* End GLOBAL section */
+ 
+ dlink_list temporary_klines;
++dlink_list temporary_dlines;
+ dlink_list temporary_ip_klines;
+ 
+ extern void clear_ip_hash_table(void);
+@@ -382,6 +383,7 @@
+ 			       const char *oper_reason,
+ 			       const char *current_date, time_t cur_time );
+ extern  void    add_temp_kline(struct ConfItem *);
++extern  void	add_temp_dline(struct ConfItem *);
+ extern  void    report_temp_klines(struct Client *);
+ extern  void    show_temp_klines(struct Client *, dlink_list *);
+ extern  void    cleanup_tklines(void *notused);
+Index: modules/m_kline.c
+===================================================================
+RCS file: /cvsroot/ircd-hybrid-7/modules/m_kline.c,v
+retrieving revision 1.100
+diff -u -r1.100 m_kline.c
+--- modules/m_kline.c	26 Apr 2002 11:51:19 -0000	1.100
++++ modules/m_kline.c	8 May 2002 12:06:52 -0000
+@@ -97,12 +97,17 @@
+ static int valid_user_host(struct Client *source_p, char *user, char *host);
+ static int valid_wild_card(char *user, char *host);
+ static int already_placed_kline(struct Client*, char*, char*);
++
+ static void apply_kline(struct Client *source_p, struct ConfItem *aconf,
+                         const char *reason, const char *oper_reason,
+ 			const char *current_date, time_t cur_time);
+-
++static void apply_dline(struct Client *source_p, struct ConfItem *aconf,
++		        const char *reason, const char *oper_reason,
++			const char *current_date, time_t cur_time);
+ static void apply_tkline(struct Client *source_p, struct ConfItem *aconf,
+                          const char *current_date, int temporary_kline_time);
++static void apply_tdline(struct Client *source_p, struct ConfItem *aconf,
++		         const char *current_date, int temporary_kline_time);
+ 
+ 
+ char buffer[IRCD_BUFSIZE];
+@@ -406,6 +411,43 @@
+  check_klines();
+ }
+ 
++/* apply_dline
++ *
++ * input	- dline info
++ * output	- none
++ * side effects - dline is added to hashtable
++ */
++static void apply_dline(struct Client *source_p, struct ConfItem *aconf,
++		        const char *reason, const char *oper_reason,
++			const char *current_date, time_t cur_time)
++{
++  add_conf_by_address(aconf->host, CONF_DLINE, NULL, aconf);
++  WriteKlineOrDline(DLINE_TYPE, source_p, NULL, aconf->host, reason,
++		    oper_reason, current_date, cur_time);
++}
++
++/* apply_tdline
++ *
++ * input	- dline info
++ * output	- none
++ * side effects - tdline is added
++ */
++static void apply_tdline(struct Client *source_p, struct ConfItem *aconf,
++		         const char *current_date, int tdline_time)
++{
++  aconf->hold = CurrentTime + tdline_time;
++  add_temp_dline(aconf);
++  sendto_realops_flags(FLAGS_ALL, L_ALL,
++		       "%s added temporary %d min. D-Line for [%s] [%s]",
++		       source_p->name, tdline_time/60, 
++		       aconf->host, aconf->passwd);
++
++  sendto_one(source_p, ":%s NOTICE %s :Added temporary %d min. D-Line for [%s]",
++             me.name, source_p->name, tdline_time/60, aconf->host);
++  ilog(L_TRACE, "%s added temporary %d min. D-Line for [%s] [%s]",
++       source_p->name, tdline_time/60, aconf->host, aconf->passwd);
++}
++
+ /*
+  * valid_tkline()
+  * 
+@@ -439,8 +481,8 @@
+   if(result == 0)
+     result = 1;
+ 
+-  if(result > (24*60))
+-    result = (24*60); /* Max it at 24 hours */
++  if(result > (24*60*7))
++    result = (24*60*7); /* Max it at 7 days */
+ 
+   result = (time_t)result * (time_t)60;  /* turn it into seconds */
+ 
+@@ -583,6 +625,8 @@
+   char dlbuffer[1024];
+   const char* current_date;
+   time_t cur_time;
++  time_t tdline_time = 0;
++  int loc = 0;
+ 
+   if(!IsOperK(source_p))
+     {
+@@ -590,7 +634,23 @@
+       return;
+     }
+ 
+-  dlhost = parv[1];
++  loc++;
++
++  tdline_time = valid_tkline(source_p, parv[loc]);
++
++  if(tdline_time == -1)
++    return;
++  else if(tdline_time) 
++    loc++;
++
++  if(parc < loc+1)
++  {
++    sendto_one(source_p, form_str(ERR_NEEDMOREPARAMS),
++	       me.name, source_p->name, "DLINE");
++    return;
++  }
++  
++  dlhost = parv[loc];
+   strlcpy(cidr_form_host, dlhost, HOSTLEN);
+   cidr_form_host[HOSTLEN] = '\0';
+ 
+@@ -601,7 +661,7 @@
+               me.name, parv[0]);
+    return;
+ #else
+-      if (!(target_p = find_chasing(source_p, parv[1], NULL)))
++      if (!(target_p = find_chasing(source_p, parv[loc], NULL)))
+         return;
+ 
+       if(!target_p->user)
+@@ -667,14 +727,15 @@
+ #endif
+     }
+ 
++  loc++;
+ 
+-  if (parc > 2) /* host :reason */
++  if (parc >= loc+1) /* host :reason */
+     {
+-      if ( valid_comment(source_p,parv[2]) == 0 )
++      if ( valid_comment(source_p, parv[loc]) == 0 )
+ 	return;
+ 
+-      if(*parv[2])
+-        reason = parv[2];
++      if(*parv[loc])
++        reason = parv[loc];
+       else
+         reason = "No reason";
+     }
+@@ -735,18 +796,23 @@
+       oper_reason++;
+     }
+ 
+-  ircsprintf(dlbuffer, "%s (%s)",reason, current_date);
+-
+   aconf->status = CONF_DLINE;
+   DupString(aconf->host, dlhost);
+-  DupString(aconf->passwd, dlbuffer);
++  
++  if(tdline_time)
++  {
++    ircsprintf(dlbuffer, "Temporary D-line %d min. - %s (%s)",
++	       (int)(tdline_time/60), reason, current_date);
++    DupString(aconf->passwd, dlbuffer);
++    apply_tdline(source_p, aconf, current_date, tdline_time);
++  }
++  else
++  {
++    ircsprintf(dlbuffer, "%s (%s)",reason, current_date);
++    DupString(aconf->passwd, dlbuffer);
++    apply_dline(source_p, aconf, reason, oper_reason, current_date, cur_time);
++  }
+ 
+-  add_conf_by_address(aconf->host, CONF_DLINE, NULL, aconf);
+-  /*
+-   * Write dline to configuration file
+-   */
+-  WriteKlineOrDline(DLINE_TYPE, source_p, NULL, dlhost, reason,
+-		    oper_reason, current_date, cur_time);
+   check_klines();
+ } /* m_dline() */
+ 
+Index: modules/m_unkline.c
+===================================================================
+RCS file: /cvsroot/ircd-hybrid-7/modules/m_unkline.c,v
+retrieving revision 1.44
+diff -u -r1.44 m_unkline.c
+--- modules/m_unkline.c	7 Mar 2002 06:21:48 -0000	1.44
++++ modules/m_unkline.c	8 May 2002 12:06:52 -0000
+@@ -81,6 +81,7 @@
+ 
+ static int flush_write(struct Client *, FBFILE* , char *, char *);
+ static int remove_tkline_match(char *,char *);
++static int remove_tdline_match(const char *);
+ 
+ 
+ /*
+@@ -321,6 +322,42 @@
+ }
+ 
+ /*
++ */
++static int remove_tdline_match(const char *cidr)
++{
++  struct ConfItem *td_conf;
++  dlink_node *td_node;
++  struct irc_inaddr addr, caddr;
++  int nm_t, cnm_t, bits, cbits;
++  nm_t = parse_netmask(cidr, &addr, &bits);
++
++  for(td_node = temporary_dlines.head; td_node; td_node = td_node->next)
++  {
++    td_conf = (struct ConfItem *)td_node->data;
++
++    cnm_t = parse_netmask(td_conf->host, &caddr, &cbits);
++    
++    if(cnm_t != nm_t)
++      continue;
++
++    if((nm_t==HM_HOST && !irccmp(td_conf->host, cidr)) ||
++       (nm_t==HM_IPV4 && bits==cbits && match_ipv4(&addr, &caddr, bits))
++#ifdef IPV6
++       || (nm_t==HM_IPV6 && bits==cbits && match_ipv6(&addr, &caddr, bits))
++#endif
++      )
++    {
++      dlinkDelete(td_node, &temporary_dlines);
++      free_dlink_node(td_node);
++      delete_one_address_conf(td_conf->host, td_conf);
++      return 1;
++    }
++  }
++
++  return 0;
++}
++	  
++/*
+ ** m_undline
+ ** added May 28th 2000 by Toby Verrall <toot@melnet.co.uk>
+ ** based totally on m_unkline
+@@ -359,6 +396,18 @@
+       return;
+     }
+ #endif
++
++  if(remove_tdline_match(cidr))
++  {
++    sendto_one(source_p,
++	       ":%s NOTICE %s :Un-dlined [%s] from temporary D-lines",
++	       me.name, parv[0], cidr);
++    sendto_realops_flags(FLAGS_ALL, L_ALL,
++                         "%s has removed the temporary D-Line for: [%s]",
++			 get_oper_name(source_p), cidr);
++    ilog(L_NOTICE, "%s removed temporary D-Line for [%s]", parv[0], cidr);
++    return;
++  }
+ 
+   filename = get_conf_name(DLINE_TYPE);
+ 
+Index: src/s_conf.c
+===================================================================
+RCS file: /cvsroot/ircd-hybrid-7/src/s_conf.c,v
+retrieving revision 7.301
+diff -u -r7.301 s_conf.c
+--- src/s_conf.c	1 May 2002 17:24:03 -0000	7.301
++++ src/s_conf.c	8 May 2002 12:06:55 -0000
+@@ -1664,6 +1664,22 @@
+   add_conf_by_address(aconf->host, CONF_KILL, aconf->user, aconf);
+ }
+ 
++/* add_temp_dline
++ *
++ * input	- pointer to struct ConfItem
++ * output	- none
++ * side effects - added to tkline link list and address hash
++ */
++void add_temp_dline(struct ConfItem *aconf)
++{
++  dlink_node *kill_node;
++
++  kill_node = make_dlink_node();
++  dlinkAdd(aconf, kill_node, &temporary_dlines);
++  aconf->flags |= CONF_FLAGS_TEMPORARY;
++  add_conf_by_address(aconf->host, CONF_DLINE, aconf->user, aconf);
++}
++
+ /*
+  * cleanup_tklines
+  *
+@@ -1676,6 +1692,7 @@
+ cleanup_tklines(void *notused)
+ {
+   expire_tklines(&temporary_klines);
++  expire_tklines(&temporary_dlines);
+ }
+ 
+ /*
+@@ -1699,10 +1716,17 @@
+       if (kill_ptr->hold <= CurrentTime)
+ 	{
+           /* Alert opers that a TKline expired - Hwy */
+-          sendto_realops_flags(FLAGS_ALL, L_ALL,
++          if(kill_ptr->status & CONF_KILL)
++            sendto_realops_flags(FLAGS_ALL, L_ALL,
+ 			       "Temporary K-line for [%s@%s] expired",
+ 			       (kill_ptr->user) ? kill_ptr->user : "*",
+ 			       (kill_ptr->host) ? kill_ptr->host : "*");
++
++	  /* temp dline */
++	  else
++            sendto_realops_flags(FLAGS_ALL, L_ALL,
++			       "Temporary D-line for [%s] expired",
++			       kill_ptr->host);
+ 
+ 	  delete_one_address_conf(kill_ptr->host, kill_ptr);
+ 	  dlinkDelete(kill_node, tklist);
