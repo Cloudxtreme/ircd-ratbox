@@ -1,0 +1,43 @@
+HOW TO BUILD:
+-------------
+As of hybrid-4, the distribution uses gnu autoconf instead of the old
+Config script.  The Makefile has also been updated to include CFLAGS
+defines for popular modern OSes.
+
+0.  Read the ChangeLog file to find out about the exciting new
+features in this version.
+
+1.  Run the configure script.  It will create include/setup.h and the
+Makefiles to match your system:
+	./configure
+
+2.  Edit the the "include/config.h" file.  This allows you to change
+various options of how the ircd will operate.  Notes: "HARD_FDLIMIT_"
+and "INIT_MAXCLIENTS" must be less than the maximum file descriptors
+per process allowed by your kernel, and must be <= FD_SETSIZE (usually
+defined in system includes, but may need to overridden in the Makefile.
+Note that the old OS definitions are gone, autoconf handles this now.
+Finally set the various PATH's to where you are going to stick this stuff.
+
+3.  "make" should build ircd.
+
+4.  "make install" to install the server and tools in the path defined
+in config.h.
+
+
+HOW TO GET HELP:
+----------------
+Send Check or Money Order to...  just kidding!  You're on your own for
+support.  Try asking other ircd-hybrid admins on EFnet if you can't fix
+it yourself.  If you do fix anything, however, please send context
+diffs to ircd-hybrid@the-project.org so the fixes can be incorporated
+into the next release of ircd-hybrid.  If hybrid crashes on you,
+PLEASE CONTACT ircd-hybrid@the-project.org ASAP with a backtrace of
+the core.  The hybrid team can't fix bugs if no one tells us about them!
+
+There is now a mailing list for general discussion of Hybrid.  To subscribe
+to the Hybrid List, send email to listmanager@the-project.org with
+the subject "subscribe hybrid".
+
+--
+$Id$

@@ -1,0 +1,41 @@
+If you don't read this first, we won't help you.
+:-)
+
+See the INSTALL document for info on configuring and compiling
+ircd-hybrid.
+
+IMPORTANT. if you are used to using "ONE" in the password field
+of I lines to limit clients to one per ip, hybrid-5 no longer does it
+that way. It now does it the same way CSr does it. The limit is set
+by the normally unused (for clients) confreq field in the corresponding
+Y line.
+
+TRANSLATION: You *MUST* fix your I and Y lines to be hybrid-5
+compatible before running hybrid-5.
+
+LOTS OF THINGS HAVE CHANGED IN CONFIG.H.  PLEASE READ THROUGH IT.
+
+NEW DEBUGGING MODE: if you run ircd with the -s flag, it will send
+errors that are normally syslogged to stderr.  This is very useful
+if you don't have syslogging set up and ircd won't run.
+
+There is now a mailing list for general discussion of Hybrid.  To subscribe
+to the Hybrid List, send email to listmanager@the-project.org with
+the subject "subscribe hybrid".
+
+SOLARIS USERS: this code appears to tickle a bug in older gcc and 
+egcs ONLY on 64-bit Solaris7.  gcc-2.95 and SunPro C on 64bit should
+work fine, and any gcc or SunPro compiled on 32bit.
+
+SUPPORTED PLATFORMS: this code should compile without any warnings
+on FreeBSD 3.x, RedHAt 6.2 and Solaris 7/sparc.  Please let us know
+if you find otherwise.  It probably does not compile on AIX, IRIX
+or libc5 Linux.
+
+CYGWIN USERS: This code is known to compile and run somewhat under
+Cygwin 1.1.2.  You will need BIND-4.9.7 and libcrypt to compile hybrid
+under Cygwin.  I have ported BIND 4.9.7 to Cygwin and written a standalone
+md5-based libcrypt that I will make available seperately.
+
+--
+$Id$

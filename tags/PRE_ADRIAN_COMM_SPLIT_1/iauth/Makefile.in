@@ -1,0 +1,20 @@
+# IAuth Makefile (C) Patrick Alken 1999
+# $Id$
+
+CC = @CC@
+CFLAGS = @CFLAGS@
+RM = @RM@
+
+all: source
+	@cd source ; $(MAKE) "CC=$(CC)" "CFLAGS=$(CFLAGS)"
+
+build: all
+
+clean:
+	@cd source ; $(MAKE) clean
+
+distclean:
+	@cd source ; $(MAKE) distclean
+	${RM} -f Makefile
+
+# End of Makefile

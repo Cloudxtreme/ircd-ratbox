@@ -1,0 +1,2013 @@
+*** 20001023_2 by adrian
+
+
+* add myself as a core member. Uh, thanks again Diane
+* add Toby to Hybrid-team, because he wasn't there
+
+
+
+*** 20001023_1 by db
+- oopsies in fix_key
+
+
+
+*** 20001022_6 by db
+- committed desrt's patches to add magic voodoo to invite on vchan
+  /invite to vchan puts you on right vchan without the !nick key being
+  needed.
+
+
+
+*** 20001022_5 by toot
+fixed spelling of my name in version.c.SH :)
+
+
+*** 20001022_4 by db
+- added patches for invite by  Ryan Lortie <desertangel@mindless.com> (desrt)
+- updated contributors/core group
+
+
+
+*** 20001022_3 by db
+- removed chan_id
+- Can't reject long channels for interoperability reasons
+
+
+
+*** 20001022_2 by toot
+bysin's patch to check for a overly long channel name in /join too.
+or you could end up with a channel you couldn't /cjoin..
+
+
+*** 20001022_1 by db
+- ok, sub1_from_channel went through all the work to figure out if the
+  root channel could be removed if a sub channel was removed, only it uh
+  forgot to make sure it was empty first. (oh oh) This meant that
+  the root channel also got removed from the hash when a client left
+  the sub chan. oops
+
+
+
+*** 20001021_7 by db
+- applied bysin's two patches 
+
+
+
+*** 20001021_6 by toot
+free topic_info when the channel's deleted
+
+
+*** 20001021_5 by toot
+. renamed free_bans_exceptions_denies to free_channel_masks, and had it
+  free invite exceptions too.
+. remove_empty_channels() wasn't freeing +d (or +I)
+
+
+*** 20001021_4 by bill
+
+/usr/local/ircd/ IS the default, not /usr/ejb/whatever
+
+
+*** 20001021_3 by lusky
+put DPATH and SPATH back to defaults
+
+
+*** 20001021_2 by bill
+
+
+fixed bug in MODE (MODE #non-existant-chan caused segfault)
+made attempted JOIN to a juped channel specify between user or oper
+
+
+*** 20001021_1 by lusky
+fix for duplicate 401's for kick #validchan invalnick
+ServerStats->is_ref is incremented twice on an X-line
+  which is set to 1 (jdc)
+STATS P notifications were not sent to opers (jdc)
+stats l/L target to FLAGS_SPY (if STATS_NOTICE) (jdc)
+uname info only displayed to opers
+If X-line port field is 2, reject client but do not send
+  a notification to opers
+STATS y/Y now oper-only
+did NOT add any of the other conf line display restrictions, I think
+  we should integrate control of those on a per-line basis in the new
+  conf format.
+
+
+*** 20001020_1 by toot
+msg nick with no text made it core..
+privmsg/notice give different errors depending what args are missing, so
+they check it instead of parse()
+
+
+*** 20001019_5 by toot
+/list #channel was showing the wrong key :P
+
+
+*** 20001019_4 by toot
+cleaned m_list slightly..
+
+
+*** 20001019_3 by toot
+. /join just skips over a subchan you're already in, instead of giving an error.
+. /list shows vchans as #chan<!key> if there's subchans for it..
+
+
+*** 20001019_2 by db
+- removed the dns cache built into res.c
+- will have to fill out cres_mem with something more appropriate
+
+
+
+*** 20001019_1 by lusky
+dns cache entries were never fully expiring, stayed in the hashtable forever
+
+
+*** 20001018_1 by db
+- fixed core with who of client not on a channel. ooops
+- fixed mo_privmsg
+- fixed @# style channel messages 
+
+
+
+*** 20001017_1 by lusky
+fixed a bug tickled by sending a bogus SERVER command from hacked server
+auditted leakage of IP address from get_client_name calls
+
+
+*** 20001016_10 by db
+- prelim changes for m_topic
+
+
+
+*** 20001016_9 by toot
+now it will remove the basechan when there's no vchans left under it
+
+
+*** 20001016_8 by toot
+. this should remove the basechan after deleting its last vchan, but didn't
+. don't bother to show possible vchans if they're already
+  in one of them.
+. there's one case where the root is empty, and there's only one
+  vchan.. just have them join that vchan.
+. displays the last nick to join each vchannel for now, and won't show empty vchans
+
+
+*** 20001016_7 by toot
+map_vchan checks root channel too
+
+
+*** 20001016_6 by db
+- semi fixed whois
+
+
+
+*** 20001016_5 by toot
+. don't allow JOIN to a 'real' subchan name
+. some extra brackets in privmsg/notice to kill a compile warning
+. mpw JOIN #chan !nick will work on any nick in the channel, just need to
+  update show_vchans
+
+
+*** 20001016_4 by db
+- global who should work when its a wild card mask
+
+
+
+*** 20001016_3 by db
+- fixed bug in m_who
+
+
+
+*** 20001016_2 by db
+- added prelim vchan support to notice as well
+- still have to do @# type of vchan 
+
+
+
+*** 20001016_1 by db
+- fixed stupid bug with vchan == chptr i.e. top level chptr == vchan
+  that would result in it never being removed, since vchan == chptr (top chan)
+  would never result in a match ... this led to rework of privmsg to channel
+
+- kick appears to work now on vchan
+
+
+
+*** 20001015_5 by db
+- m_who.c what a MESS
+
+
+
+*** 20001015_4 by db
+- the m_mode changes needed
+  this allows you to mode +o etc. on sub chans. wheeeeeee
+
+
+
+*** 20001015_3 by db
+- m_names now recognizes vchan names
+
+
+
+*** 20001015_2 by db
+- slightly rewrote m_names. its still a stinking mess but getting there
+- added function call to make vchan names listing easier
+
+
+
+*** 20001015_1 by toot
+some more fixes to join/cjoin
+
+
+*** 20001014_11 by toot
+another fix to m_names call in m*_join
+
+
+*** 20001014_10 by toot
+. move add_vchan_to_client lower down, incase of bans etc in m_join
+. hopefully m_names works now after /join #chan !id
+. put a del_vchan_from_client in remove_user_from_channel
+
+
+*** 20001014_9 by db
+- fixed bug in add_vchan_to_client_cache, reversed two args while at it
+- made m_privmsg message right channel 
+- m_join also has to update cache
+
+
+
+*** 20001014_8 by db
+- added code to remove chan from client cache, not used yet
+- added checks to ensure client doesn't join twice a subchan, not tested yet
+- corrected conflict introduced by me
+- added another macro for top level vchan detect
+
+
+
+*** 20001014_7 by toot
+. fixed typo in s_user.c
+. made RPL_WHOISADMIN numeric consistent with dalnet
+. changed a ->flags pointer that should have been ->umodes in m_whois
+
+
+*** 20001014_6 by toot
+forgot to change that parv to parc>2
+
+
+*** 20001014_5 by toot
+. don't allow CJOIN to a non-base channel
+. don't list sub-channels if they try to /join a sub-channel's
+  'long' name
+. added an extra arg to m_names so it works after a CJOIN
+  (there might be a better way to do this)
+
+
+*** 20001014_4 by db
+- moved show_vchans and find_vchan into vchannel.c
+
+
+
+*** 20001014_3 by db
+- mod Makefile.in to  add new vchannel.c
+- added new vchannel.c for vchan support
+- added new vchannel.h for vchan support
+- added vchan cache call in m_cjoin.c
+
+
+
+*** 20001014_2 by db
+- m_names() after cjoin (toot)
+
+
+
+*** 20001014_1 by db
+- fixed cjoin so you actually look like you are joining the subchan now
+
+
+
+*** 20001013_3 by db
+- numeric 247 (uptime) got trashed in table. (HOW?) would cause server
+  to core on /stats u
+
+
+
+*** 20001013_2 by db
+- cleaner sub1 fix for vchans
+
+
+
+*** 20001013_1 by bill
+
+Added null chptr checking to set_channel_modes()
+
+
+*** 20001012_2 by db
+- fixed bug in sub1_from_channel for vchans
+
+
+
+*** 20001012_1 by db
+- folded in work toot (Toby Verrall) to7@antipope.fsnet.co.uk
+  did for first rough proof of concept vchans. We'll have to go in and
+  #ifdef these later.
+
+
+
+*** 20001011_1 by lusky
+fix for *@*.foo.com I:lines being broken by a user@host.foo.com I:lines
+change chptr->vchans to chptr->vchan_flag in channel.c to get this tree
+  to compile.  not sure if this is correct.
+
+
+*** 20001006_4 by db
+Make virtual channels doubly linked.
+
+
+
+*** 20001006_3 by lusky
+updated autoconf and Makefile.in to support flex when available
+
+
+*** 20001006_2 by lusky
+deleted ChangeLog.old and include/defs.h
+
+
+*** 20001006_1 by lusky
+updated Makefile.in's to support parallel make ala -6
+fixed up cjoin a little so it would compile
+synced up changes from -6rc4 to -6rc5(20001005_3):
+ added CVS Id tags to numerous files
+ brought Hybrid-team and version.c.SH
+ deleted ChangeLog.old and include/defs.h
+ Fixed misnamed va var in sendto_realops()
+ changed ltrace to be consistant with trace for non-opers
+ mode channel +e now returns an error to non-chanops
+ unauth connection notices now include servername/port (jdc)
+ changed "juping locally" to "locally juping" (gp)
+ typo in stats z display (gp)
+ typo in channel jupe oper notice (db)
+ new config.h option ALLOW_DOT_IN_IDENT
+
+
+*** 20001003_1 by db
+- initial changes to add cjoin for vchan support
+ 
+
+
+*** 20000930_1 by db
+- started adding VCHAN code. I
+
+
+
+*** 20000929_1 by ejb
+merged toot's patch to resync with -6rc4
+
+*** 20000926_1 by ejb
+- added myself to core team list in version.c.SH
+- added ircnet's +I invite exceptions
+- remove {add,del}_*id(), replaced with a single function
+  add_id and del_id, removes code duplication.
+- added seperate error_sents for +I and +d in channel.c.
+- removed some false BAN_INFO ifdefs
+
+
+
+*** 20000907_1 by ejb
+initial stab at IPv6 .. it doesn't compile with IPV6 defined yet..
+
+
+
+*** 20000813_1 by ejb
+Large commit, folding in a number of changes i made over the weekend.
+- add n!u@h for topic_info ala ircnet.
+- stats p notice.
+- removed some old non-TS cruft.
+- unreg users can't send version.
+- added +a umode, shows oper is admin in whois 
+  if they are 'admin=yes'.
+- users can see the topic of a -s channel they aren't
+  on (but can't set it even if it is -t, to prevent
+  topic floods *sigh*)
+- many changes in parse.c .. fixed a few bugs, rewrote
+  the argument parser code, added support for catching
+  users passing not enough parms before the m_ function
+  is even called.
+- you can now set in ircd.conf whether channels have to
+  be +i for an invite to work.
+- added a numeric (504) for sending to users trying to
+  invite remote users to +i channels.
+- started changing m_* functions to not check parc anymore,
+  in most cases parse() has already handled this.
+- move glines from config.h to ircd.conf
+plus a lot of other stuff i probably forgot.
+
+
+
+*** 20000731_1 by db
+- Added Pie-Man changes, added him to list of contributors
+
+
+
+*** 20000724_1 by db
+- commiting in changes made by pie-man (ins oper)
+
+
+
+*** 20000719_1 by db
+- redid to use handlers. untested, but it copmiles at least
+
+
+
+*** 20000525_1 by wnder
+a strncpy --> strncpy_irc
+fix for a potential dereference of bad ptr in vsendto_prefix_one (db)
+
+
+*** 20000516_1 by wnder
+ Fix for % in user's ident bug
+
+
+*** 20000407_1 by db
+- unused variable never caught, uneeded va_end caused solaris compiler
+  to not compile
+
+
+
+*** 20000405_1 by db
+- committing some quick hacks for verifying block allocator
+  is not leaking.
+  These should be #ifdef'ed perhaps in future.
+  when an oper does /stats $
+  four files will be written to DPATH
+  which will contain hex values of allocated memory for each client
+
+  local_block_allocator_client_list.txt from block allocator
+  local_client_list.txt                 from link list
+
+  remote_block_allocator_client_list.txt from block allocator
+  remote_client_list.txt                 from link list
+
+  code external to the ircd is needed to verify consistency
+
+
+
+*** 20000404_2 by db
+- clean ups to parser
+
+
+
+*** 20000404_1 by db
+- fixed memory leak in parser code. strdup in lexer never freed
+  found by Krome from ircnet
+
+
+
+*** 20000402_10 by db
+- MAX_SETBACK_TIME added
+
+
+
+*** 20000402_9 by db
+- more cleanups to parser
+- make sure 'O' is converted to global=yes in convertconf
+
+
+
+*** 20000402_8 by db
+- clean: in Makefile remove .c files for parser
+- cleaned up serverinfo code
+- make sure network order not host order for local ip
+
+
+
+*** 20000402_7 by db
+- further cleanups to remove #ifdef's 
+
+
+
+*** 20000402_6 by db
+- removed last remnant of cidr_ban (sorry is)
+
+
+
+*** 20000402_5 by db
+- broke ZIP_LINKS forgot to remove all #ifdef's on SENDQ_ALWAYS
+  "is" and "Perly" found it
+
+
+
+*** 20000402_4 by db
+- changed comment in res.c also trimmed if down to match undernet's
+
+
+
+*** 20000402_3 by db
+- changed CONFIG_H_LEVEL_6 to CONFIG_H_LEVEL_7
+- updated config.h.dist to match config.h
+
+
+
+*** 20000402_2 by db
+- Pointed out by "is" with non standard p vs. s this else if is wrong
+  "is" <ejb@debian.org>
+
+
+
+*** 20000402_1 by db
+- This bug caused only the first connection in a class to be tried
+  i.e. if you had several C: lines in one =class= only the first
+  C: line was ever used. This is code that was #ifdef'd out from original
+  hybrid-5                    
+
+
+
+*** 20000401_1 by db
+- removal of #define kludge for GlobalSetOptions
+
+
+
+*** 20000330_1 by db
+- large resync , folding in a number of changes contributed by is
+  This moves some config.h items into the conf file
+
+
+
+*** 20000319_1 by lusky
+Changed my email address, this is a test commit (jrl)
+
+
+*** 20000209_1 by db
+- fixed goof with removing of an #ifdef for TOPIC_INFO 
+  patch done by is- 
+
+
+
+*** 20000201_3 by db
+- synced up convertconf to current parser format
+
+
+
+*** 20000201_2 by tomh
+
+Fix UMR picked up by purify:
+****  Purify instrumented ircd (pid 11725)  ****
+UMR: Uninitialized memory read (15 times):
+  * This is occurring while in:
+        read_message   [s_bsd.c:909]
+        main           [ircd.c:688]
+        _start         [crt1.o]
+  * Reading 4 bytes from 0xefffe5ac on the stack.
+  * Address 0xefffe5ac is local variable "poll_fds" in function read_message.
+
+
+
+*** 20000201_1 by db
+- converted separate user/host forms to user="user@host.part"; forms
+  it looks nicer, and easier for admins to work with I think. Plus recommended
+  by the #coder-com crew. ok.
+- fixed stupid in initconf where it missed # commented out lines and
+  tried to parse old format as new...
+- folded in the old -5 nick collide code already folded into the -6 tree.
+  its #ifdef'ed for future fixes...
+
+
+
+*** 20000131_1 by db
+- improvements to connect section. allow multiple hub_masks etc.
+
+
+
+*** 20000124_3 by db
+- first work on logging section, 
+  logging level can be set from new conf file format now.
+
+
+
+*** 20000124_2 by db
+- updated convertconf
+
+
+
+*** 20000124_1 by db
+- removed #ifdef for ZIP_LINKS
+  I hate #ifdef's
+
+
+
+*** 20000123_2 by db
+- added fbunputc mimics unputc (Sorry Tom)
+- single conf file, is either old style or new style determined
+  at initconf time (Again, sorry Tom)
+  Could have done it simpler, but this is safer for now...
+
+
+
+*** 20000123_1 by db
+- cleaned up some "bare" 512 defines. added new IRCD_BUFSIZE define
+- added better error recovery to parser, 
+- added better error reporting.
+- tentative new conf format mostly finished, will "warp" it a bit
+  more to match Kev's proposed format as possible, given undernet vs.
+  efnet differences..
+- need to handle ircd.conf form as the new format as default,
+  and fall back to old format as needed. i.e. kludge code still to 
+  be removed in source...
+
+
+
+*** 20000122_1 by db
+- more cleanup on new conf file parser..
+  using "auth" instead of "client" as per Kev's document..
+
+
+
+*** 20000121_1 by db
+- preliminary serverinfo section done
+
+
+
+*** 20000120_1 by db
+- CONNECT in new parser works, needs full testing
+
+
+
+*** 20000117_3 by db
+- added a few more sections
+
+
+
+*** 20000117_2 by db
+- Added quarantine
+
+
+
+*** 20000117_1 by db
+- continuing with new parser code... listen/operator tested
+
+
+
+*** 20000116_7 by db
+- bunch of changes in order to have class names not numbers. *sigh*
+  I toyed with the idea of keeping class #'s and having class_names
+  to class #' mapping somewhere, but thats just getting silly.. sooo....
+  Here we are...
+
+
+
+*** 20000116_6 by db
+- make_class should return a 0'ed class to be safe
+
+
+
+*** 20000116_5 by db
+- prelim. change before I start on class names
+
+
+
+*** 20000116_4 by db
+- oper section complete except for class operations..
+
+
+
+*** 20000116_3 by db
+- checkpoint with operator section mostly working...
+  class code has to be rewritten still
+
+
+
+*** 20000116_2 by db
+- oops. I changed Makefile rather than Makefile.in
+
+
+
+*** 20000116_1 by db
+- copyright touch ups
+- missing -ll in Makefile
+
+
+
+*** 20000115_3 by db
+- The lex/yacc files...
+
+
+
+*** 20000115_2 by db
+- first very rough working lex/yacc under ircd-hybrid..
+  parser doesn't actually do anything.... yet...
+  Tom, we could use a fileio pushback, to push back a line thats
+  "not for us"
+
+
+
+*** 20000115_1 by db
+- more cleanups to parse code
+
+
+
+*** 20000113_3 by db
+- someone forgot to add a file. wonder who
+
+
+
+*** 20000113_2 by db
+- externalized the old parser, unfortunately, this means a lot
+  more of the s_conf interface is visible ;-(, can do better in the future...
+  This is in preparation for new parser inclusion.
+  This will (ick) allow us to use both old conf files and new format conf files
+  for backwards compatibility. (I'm not terribly happy about this, but...
+  Hi Tom!)
+
+
+
+*** 20000113_1 by db
+- updated client/deny sections to use new IP_TYPE
+- fixed union to use struct ip_value
+
+
+
+*** 20000112_1 by db
+- returned to ';' at end of each section, this is actually easier to
+  recover from errors; just scan for ';'
+- updated convertconf to produce test file
+- added IP token to lexer and to client section
+
+
+
+*** 20000111_11 by db
+- added DENY 
+
+
+
+*** 20000111_10 by db
+- more work on yacc/lex parser
+  added "kill" open to discussion, but efnet has "K" and "D" lines
+  
+
+
+*** 20000111_9 by db
+- changes to bring it into line with Kev's sample conf just a tiny bit
+- removed that dumb ';' at end of sections
+
+
+
+*** 20000111_8 by db
+- tiny cleanup to Makefile
+  Copyright notice fixed 
+
+
+
+*** 20000111_7 by db
+- added preliminary yacc/lex test parser code
+
+
+
+*** 20000111_6 by db
+Directory /usr/hybrid/ircd-hybrid-7/src/test/newconf added to the repository
+
+
+*** 20000111_5 by db
+- oops port in connect was quoted
+
+
+
+*** 20000111_4 by db
+- more tiny tweaks
+
+
+
+*** 20000111_3 by db
+- tweaks to new conf format
+
+
+
+*** 20000111_2 by db
+- sample ircd.conf and its converted ircd.conf.new 
+
+
+
+*** 20000111_1 by db
+- Now pretty much handles a "normal" conf file.. output is
+  a "new" style conf format file, with details still to be hashed out.
+  Do we want to handle multiple C/N's ? multiple H lines? *sigh* yes
+  Thats next, but not yet.
+ 
+
+
+*** 20000110_4 by db
+- tiny tweak much more to do
+
+
+
+*** 20000110_3 by db
+- Nearly done. TODO Finish off I lines (I line prefixes)
+  HUB or LEAF control set in old M line
+
+
+
+*** 20000110_2 by db
+- updated Makefile, fleshed out convertconf more
+
+
+
+*** 20000110_1 by db
+- small cleanup to s_conf.c before the bigger one
+
+
+
+*** 20000109_12 by wnder
+woopsies
+
+
+*** 20000109_11 by wnder
+Added documentation of the iauth protocol
+
+
+*** 20000109_10 by db
+- bit more fleshing out of convertconf.c
+
+
+
+*** 20000109_9 by db
+- first rough outline of conversion program to convert old style
+  to new style conf file format. No Makefile, incomplete still.
+
+
+
+*** 20000109_8 by db
+- more cleanups, made consistent... no need for MSG_PRIVMSG/MSG_NOTICE
+  other m_ files don't do that
+
+
+
+*** 20000109_7 by db
+- cleanups
+
+
+
+*** 20000109_6 by db
+- m_mode bursts/looks for channel mode on uplink in LazyLinks code
+
+
+
+*** 20000109_5 by db
+- removed uneeded #include
+
+
+
+*** 20000109_4 by db
+- forgot to remove now unused m_message.c
+
+
+
+*** 20000109_3 by db
+- split m_privmsg and m_notice into two files. My rationale for doing this
+  is: slightly faster, no more if(notice) in code, m_privmsg/m_notice
+  rarely change anyway.
+
+
+
+*** 20000109_2 by wnder
+Added support for when SerialNumber rolls over to 0
+
+
+*** 20000109_1 by db
+- as fbgets is re-entrant, redid .include code. Much nicer
+
+
+
+*** 20000108_5 by wnder
+Implemented serial number method to keep track of searched nodes.
+(hi diane!!)
+
+
+*** 20000108_4 by db
+- LazyLinks /list on leaf is sent to its uplink now
+- still bug to track down with leaf connected to hub, hub joins net
+  leaf does not see channel bursts properly
+
+
+
+*** 20000108_3 by wnder
+Implemented unsortable I/K lines
+
+
+*** 20000108_2 by db
+- still slowly working in LazyLinks version 2 code. nick collides
+  have to be handled by the LazyLinks uplink, for now sending back
+  KILL's (which were removed!) as needed...
+
+
+
+*** 20000108_1 by wnder
+fixed missing #include "s_conf.h"
+
+
+*** 20000107_4 by db
+- sticky / key
+
+
+
+*** 20000107_3 by db
+- don't core if chptr == NULL in sendto_match_servs()
+  shouldn't normally ever happen, but does in LL 
+
+
+
+*** 20000107_2 by db
+- closer version of LazyLinks version 2
+
+
+
+*** 20000107_1 by db
+- split out m_user.c m_nick.c, modified s_user.c s_user.h Makefile.in
+  LazyLinks is in unworkable state in this version.
+
+
+
+*** 20000106_1 by db
+- fixed bug introduced in ReplaceQuotes, '\#' was not handled correctly.
+
+
+
+*** 20000105_16 by db
+- all over the place
+
+
+
+*** 20000105_15 by db
+- yet another hidden HUB in .h
+
+
+
+*** 20000105_14 by db
+- removed more pesky #ifdef HUB hidden in .h files
+
+
+
+*** 20000105_13 by db
+- always initialize serverMask
+
+
+
+*** 20000105_12 by db
+- HUB removed, server determines if its HUB or LEAF by looking
+  at (Now unused) port line in M line. If its a 1, its a HUB, if
+  its missing or anything else, its a LEAF.
+  Can be queried from /admin
+  Yes, its a hack for now.
+
+
+
+*** 20000105_11 by db
+- removed HUB from config.h etc. now in a config entry
+
+
+
+*** 20000105_10 by db
+- allow single dot in user names to allow for "first.last" user name style
+
+
+
+*** 20000105_9 by db
+- removed unneeded include
+
+
+
+*** 20000105_8 by db
+- oops. missed comment in m_lljoin.c
+
+
+
+*** 20000105_7 by db
+- oops. removed comments belonging to channel.c only
+
+
+
+*** 20000105_6 by db
+- committing the split out m_cburst.c m_drop.c m_lljoin.c
+
+
+
+*** 20000105_5 by db
+- split out m_drop.c m_cburst.c m_lljoin.c
+
+
+
+*** 20000105_4 by db
+- further cleanups to s_conf.c
+
+
+
+*** 20000105_3 by db
+- Further cleanups to s_conf.c
+
+
+
+*** 20000105_2 by db
+- fixed missing Y line detection code which got broken in clean up
+
+
+
+*** 20000105_1 by db
+- cleanups to dbuf code. Try to flush connections if dbuf list is
+  empty then try to allocate.
+- tiny start on new channel hierarchy scheme.
+
+
+
+*** 20000104_6 by wnder
+Prettied up source files by converting tabs to spaces
+
+
+*** 20000104_5 by db
+- fixed DEBUG error in s_conf.c
+
+
+
+*** 20000104_4 by db
+- also report how many malloc()'ed dbufs there were max
+
+
+
+*** 20000104_3 by db
+- changed slightly wording in LazyLinks As Implemented doc
+- removed more DEBUGLL debug cruft
+- simplified m_join CBURST call
+
+
+
+*** 20000104_2 by db
+- added "Lazy Links As Implemented in Hybrid" doc
+
+
+
+*** 20000104_1 by db
+- removed more #ifdef's removed BAN_INFO BAN_UH
+
+
+
+*** 20000103_7 by db
+- mods to try to flush connections if dbufs are used up
+
+
+
+*** 20000103_6 by db
+- it all works now (LL). channel cleanup etc. 
+
+
+
+*** 20000103_5 by db
+- this version doesn't core as often. *sigh*
+  cleanup channels code needs to be gone over again, its stable
+  without.
+- removed some cruft and useless comments from client.c
+
+
+
+*** 20000103_4 by db
+- *sigh* code got lost in the shuffle
+  fix stats c so n lines show as n not N
+  fix spacing on 333 numeric to match others
+
+
+
+
+*** 20000103_3 by db
+- removed last vestige of TOPIC_WHO define
+
+
+
+*** 20000103_2 by db
+- fixed a typo in ircd.c
+
+
+
+*** 20000103_1 by db
+- Folded in Perly's cleanup channel code. The idea is to remove
+  channels from the lazylinks leaf server if no local members are on them
+  and they haven't been used by anyone locally in a "while" where
+  "while" is set in s_serv.h CLEANUP_CHANNELS_TIME seconds.
+  I've redone the destroy channel code. It should work, but its untested.
+  CLEANUP_CHANNELS_TIME is set way low still for debugging,
+  its currently 30 seconds. In production it could range from 15 to 60 minutes
+  I'd guess.
+
+
+
+*** 20000102_9 by db
+- key handling was broken in m_cburst
+
+
+
+*** 20000102_8 by db
+- oops got an if backwards key when NULL cores it
+
+
+
+*** 20000102_7 by db
+- try to negotiate a non LL connect if serverMask's get all used up
+- report all serverMask's used up. That will mean a recode ;-)
+
+
+
+*** 20000102_6 by db
+- fixed a bug in m_join.c
+- cleaned up LL channel key handling
+- don't assign serverMask's to non LL servers
+
+
+
+*** 20000102_5 by db
+- added LazyLinks.txt document outlining original Lazy Links protocol
+  its been modified for -7
+- ensure serverMask of 0 just causes restoreUnusedServerMask to return
+
+
+
+*** 20000102_4 by db
+- First working Lazy Links implementation
+  still needs debugging/testing etc.
+
+
+
+*** 20000102_3 by db
+- bug reported by Colten Edwards in m_userhost.c
+
+
+
+*** 20000102_2 by db
+- oops bogus code in m_sjoin.c
+
+
+
+*** 20000102_1 by db
+- few tidy ups in prelim LL code
+
+
+
+*** 20000101_4 by db
+- implemented DROP, not tested, not used yet.
+
+
+
+*** 20000101_3 by db
+- Preliminary rough cut at Lazy Links, still a lot of mopping up to do
+  'n' in c/n's means try lazy link, 'N' means do normal.
+
+
+
+*** 20000101_2 by db
+- Cleanups to allow DEBUGMODE to compile
+
+
+
+*** 20000101_1 by db
+- cleanup of LITTLE_I_LINES #ifdef
+
+
+
+*** 19991231_4 by db
+- renamed channel to GLobalChannelList in jupe channel code
+
+
+
+*** 19991231_3 by db
+- more cleanup of s_conf.c
+
+
+
+*** 19991231_2 by db
+- Preliminary cleanups on s_conf.c
+
+
+
+*** 19991231_1 by db
+- missing NULL assignment would cause double free's and eventual
+  core on malformed U: lines.
+
+
+
+*** 19991230_11 by wnder
+more iauth fixups - this should finish it!
+
+
+*** 19991230_10 by wnder
+IAuth fixups
+
+
+*** 19991230_9 by db
+- oopsies in opcount code spotted by Perly.. flag has to be used
+  before set...
+
+
+
+*** 19991230_8 by db
+- more missed updates local_cptr_list -> LocalClientList
+
+
+
+*** 19991230_7 by db
+- missed a opcount-- in m_sjoin.c
+- missed an #endif for IAUTH
+
+
+
+*** 19991230_6 by db
+- Added chanop counter to Channel struct, keep track of current op count
+  use instead of that nasty loop in SJOIN code
+
+
+
+*** 19991230_5 by db
+- folding back in USE_IAUTH code
+
+
+
+*** 19991230_4 by db
+- completion of mop up of resync with -6 tree. Compiles again
+
+
+
+*** 19991230_3 by db
+- mop up of resync of -7 with -6
+
+
+
+*** 19991230_2 by db
+- mop up -7 tree resync with -6
+
+
+
+*** 19991230_1 by db
+resync with current ircd-hybrid-6 tree
+
+
+
+*** 19991217_1 by db
+1) folded in d line fix from -6
+2) folded in res.c core bug fix from -6
+
+
+
+*** 19991109_1 by db
+- changes to sendto_one_type to not send @# style of message to non
+  CHW servers
+- m_userhost old behaviour restored, but rewritten. Need to support
+  up to 5 userhost requests, this fixes ircle clients which depend on
+  this behaviour.
+
+
+
+*** 19991022_1 by db
+- disallow -ve limit on mode #channel +l 
+
+
+
+*** 19991017_2 by db
+- missing mask check in IP kline code. no idea why.
+
+
+
+*** 19991017_1 by db
+- removed (+) cruft as this was a Tanerism
+
+
+
+*** 19991013_10 by tomh
+Removed CONNECTFAST garbage, it was causing production boxes to load up on
+SYNs on the primary port and killing poll performance.
+
+
+*** 19991013_9 by lusky
+fixed m_ison to put trailing space on 303 responses
+CONNECTFAST is always defined for USE_POLL now, was causing very poor
+  accept performance on heavily loaded non-Solaris machines using poll()
+
+
+*** 19991013_8 by tomh
+put USE_POLL back in setup.h.in, removed stuff that wasn't needed
+
+
+*** 19991013_7 by lusky
+syncd config.h.dist to config.h
+
+
+*** 19991013_6 by wnder
+missing macros
+
+
+*** 19991013_5 by lusky
+updated opers.txt to include set log
+
+
+*** 19991013_4 by db
+- fixed misnomer
+
+
+
+*** 19991013_3 by db
+- corrected table in s_log.c for log level to string
+
+
+
+*** 19991013_2 by db
+- added strings to m_set LOG
+
+
+
+*** 19991013_1 by db
+- botched wild card matching fixed
+
+
+
+*** 19991011_1 by db
+  It turns out, that cptr->fd is <0 in some cases when its being used, just
+as Q described. I was confused at first, because it sounded like he
+was saying cptr was =freed= then being used. It appears its still a valid
+pointer, but its fd has been closed...
+
+  The ideal solution would be to make sure the cptr is removed from the 
+channel link list before the code even gets to sendto_common_channels()
+
+  In any case, using an fd < 0 in this section is a BAD THING 
+
+
+
+*** 19991009_1 by db
+- better fix for umode code
+
+
+
+*** 19990925_1 by db
+- simpler mode letter to bit mask table lookup, safer
+
+
+
+*** 19990924_2 by db
+- yet another ->name instead of ->user this one in report_tklines
+
+
+
+*** 19990924_1 by db
+- This patch corrects a case where a normal user can oper themselves. oops.
+- It also corrects a possible core due to a bogus H or L line. (neph)
+
+
+
+*** 19990914_1 by wnder
+IAuth updates:
+ * mtree.c is (hopefully) approaching it's final stages - much
+   more bulletproof now.
+
+
+*** 19990913_1 by wnder
+IAuth updates:
+ * added a new mtree module - handles I: and K: lines. Please
+   throw all sorts of odd combinations at it to give it a good
+   run - highly experimental :-)
+
+
+*** 19990912_2 by wnder
+IAuth updates:
+ * got "I line is full" check working
+ * ircd now sends iauth it's list of classes (Y:) upon
+   connection
+
+
+*** 19990912_1 by wnder
+IAuth updates:
+ * bug fix in iauth connection code
+ * register_user() has been replaced with:
+   GreetUser()            - for local clients
+   register_remote_user() - for remote clients
+   (all under #ifdef USE_IAUTH)
+
+
+*** 19990911_1 by tomh
+add fd check to other #ifdef SENDQALWAYS
+
+
+*** 19990910_6 by tomh
+types cleanup
+NOTE: the interface in s_zip.c is a little borked, the length field should
+not be used to convey error results
+
+
+*** 19990910_5 by tomh
+type cleanups, remove bogus casts
+
+
+*** 19990910_4 by tomh
+type cleanups
+
+
+*** 19990910_3 by tomh
+change poll.h to sys/poll.h
+
+
+*** 19990910_2 by wnder
+IAuth changes:
+ * the listen port is now dynamically configurable (iauth.conf)
+   - I'll have to do something similar to ircd.conf
+ * k/i/q lines (read at run-time from iauth.conf)
+
+
+*** 19990910_1 by wnder
+IAuth changes:
+ * fully functional and tested: K, I, Q lines (D and G to come)
+ * non-blocking connect to IAuth server
+ * _every_ change i made is under #define USE_IAUTH
+
+
+*** 19990909_26 by tomh
+ewps make sentinel char* instead of void*
+
+
+*** 19990909_25 by tomh
+change (void*)1 to valid sentinel pointer
+
+
+*** 19990909_24 by tomh
+type fixes
+
+
+*** 19990909_23 by tomh
+cleanups
+
+
+*** 19990909_22 by tomh
+missing header
+
+
+*** 19990909_21 by tomh
+change return type for get_sendq, remove redundant casts
+
+
+*** 19990909_20 by tomh
+change return type for get_sendq
+
+
+*** 19990909_19 by tomh
+remove (char*)NULL casts, pointless
+
+
+*** 19990909_18 by tomh
+remove non-ansi prototype for crypt
+
+
+*** 19990909_17 by tomh
+change int to size_t in accept_connection
+
+
+*** 19990909_16 by tomh
+non-ansi prototype for sync_channels
+
+
+*** 19990909_15 by tomh
+remove redundant initializer
+
+
+*** 19990909_14 by tomh
+cleanup types, bug fix
+
+
+*** 19990909_13 by tomh
+replaced wrong type
+
+
+*** 19990909_12 by tomh
+remove misplaced cast
+
+
+*** 19990909_11 by tomh
+remove inappropriate casts in MyFree, rename class c_class
+
+
+*** 19990909_10 by lusky
+killpath fixes (jl)
+check for client instead of connect in m_links
+
+
+*** 19990909_9 by tomh
+missing include
+
+
+*** 19990909_8 by tomh
+more type fixups
+
+
+*** 19990909_7 by tomh
+fix bug in dopacket return values
+
+
+*** 19990909_6 by tomh
+incorrect type usage
+
+
+*** 19990909_5 by tomh
+removed non-ansi prototypes for flud code from
+we need to review this sort of thing better, sigh
+
+
+*** 19990909_4 by tomh
+add missing header
+
+
+*** 19990909_3 by wnder
+everything seems to be working again - just took out iauth/
+from Makefile
+
+
+*** 19990909_2 by wnder
+more #ifdef USE_IAUTH stuff
+
+
+*** 19990909_1 by wnder
+Ok, sorry for the broken compile - I put all the iauth code
+in the ircd tree under #ifdef USE_IAUTH so hopefully nothing
+else will be affected until it's good and ready - i'll do a
+checkout after this to make sure everything's fine.
+
+
+*** 19990908_2 by lusky
+fixes to userhost, changed to -5 style
+
+
+*** 19990908_1 by wnder
+IAuth changes:
+ * put dns and ident back into s_auth.c
+ * added kline check to iauth
+
+
+*** 19990907_2 by tomh
+move dbuf cleanup to free_client, fix send.c bug
+
+
+*** 19990907_1 by lusky
+killpath is now opers only
++k/-k compatiblity issues
+Makefile distclean cleanup for iauth
+
+
+*** 19990906_4 by tomh
+little logic fix
+
+
+*** 19990906_3 by tomh
+little logic tweaks
+
+
+*** 19990906_2 by tomh
+read dbufs right into client buffer
+
+
+*** 19990906_1 by db
+- -k should remove key only if matching key or its a *
+  thats a bug. 
+
+
+
+*** 19990904_1 by tomh
+change (start < end && IsEol(*start)) to (start < end)
+
+
+*** 19990903_2 by wnder
+IAuth now does dns queries
+
+
+*** 19990903_1 by tomh
+bug fix
+
+
+*** 19990902_8 by tomh
+rewrite dbuf.c
+
+
+*** 19990902_7 by wnder
+test
+
+
+*** 19990902_6 by wnder
+oops
+
+
+*** 19990902_5 by wnder
+ircd needs these changes to work with iauth - as of right now,
+ircd attempts a connection to 127.0.0.1 port 4444 where it
+expects the IAuth server to be - you just need to run
+-7/iauth/source/iauth first so it listens on 4444. In the future,
+the iauth host/port will be dynamically configurable.
+
+
+*** 19990902_4 by wnder
+ident support
+
+
+*** 19990902_3 by wnder
+minor fix
+
+
+*** 19990902_2 by wnder
+IAuth updates: Got ident query working
+
+
+*** 19990902_1 by lusky
+added check for '#' in username and hostname of /quote kline
+
+
+*** 19990901_10 by wnder
+goes with ircdauth.c
+
+
+*** 19990901_9 by wnder
+ircd module to allow communication with iauth
+
+
+*** 19990901_8 by wnder
+IAuth needs a makefile too!
+
+
+*** 19990901_7 by wnder
+more iauth stuff
+
+
+*** 19990901_6 by wnder
+Changes to accomodate iauth
+
+
+*** 19990901_5 by wnder
+Iauth headers
+
+
+*** 19990901_4 by wnder
+IAuth source files : as of right now IAuth accepts authentication
+queries of the form: DoAuth <ID> <ip address> and returns an
+answer of the form: DoneAuth <ID> <username> <hostname>.
+Ident/DNS have not been completed yet.
+
+
+*** 19990901_3 by wnder
+Directory /usr/hybrid/ircd-hybrid-7/iauth/source added to the repository
+
+
+*** 19990901_2 by wnder
+Directory /usr/hybrid/ircd-hybrid-7/iauth/include added to the repository
+
+
+*** 19990901_1 by wnder
+Directory /usr/hybrid/ircd-hybrid-7/iauth added to the repository
+
+
+*** 19990831_7 by tomh
+cleanup dbuf interface, code will follow
+
+
+*** 19990831_6 by tomh
+break out m_nick
+
+
+*** 19990831_5 by tomh
+Changed MyFree to automatically set the pointer to zero after freeing it.
+#define MyFree(x) do { if ((x)) { free((x)); (x) = 0; } while (0)
+The assignment is cheap, and it should eliminate double free issues.
+
+
+*** 19990831_4 by tomh
+break out m_user
+
+
+*** 19990831_3 by tomh
+use development CFLAGS, change for release
+
+
+*** 19990831_2 by wnder
+standard gnu copyright
+
+
+*** 19990831_1 by wnder
+New macro: IsEol() which looks for \r or \n characters
+
+
+*** 19990830_2 by db
+- left over aconf->user gets freed twice, causing some malloc packages
+  to leave their lunch all over the disk.... NULL things after every
+  free silly... -db 
+
+
+
+*** 19990830_1 by lusky
+jk's umode +O fix
+
+
+*** 19990826_1 by lusky
+turned on ANTI_DRONE_FLOOD by default
+sync'd config.h.dist
+include class.h in m_message.c
+
+
+*** 19990825_3 by lusky
+cleaned up tools/Makefile.in
+added CVS Id tags to a many files
+
+
+*** 19990825_2 by db
+- Don't be lazy *BAD* Diane, BAD BAD BAD
+
+
+
+*** 19990825_1 by db
+- fixed stupid in s_conf.c
+- reconciled -7 with -6 tree
+
+
+
+*** 19990821_2 by tomh
+removed unused struct member
+
+
+*** 19990821_1 by tomh
+break out m_hash from hash.c
+
+
+*** 19990820_1 by tomh
+client struct rearangements
+
+
+*** 19990819_10 by tomh
+fixups for missing stuff when disabled features are turned on
+
+
+*** 19990819_9 by tomh
+rename channel to GlobalChannelList
+
+
+*** 19990819_8 by tomh
+little cleanups
+
+
+*** 19990819_7 by tomh
+broke out the rest of the commands from channel.c
+
+
+*** 19990819_6 by khuon
+Added the missing include for common.h
+
+
+
+*** 19990819_5 by tomh
+new files, work in progress
+
+
+*** 19990819_4 by tomh
+Directory /usr/hybrid/ircd-hybrid-7/src/conf added to the repository
+
+
+*** 19990819_3 by db
+- cosmetic change, U lines without a password appear with * instead of <NULL>
+
+
+
+*** 19990819_2 by tomh
+split out m_join.c
+
+
+*** 19990819_1 by tomh
+add new m_command (m_join), sort msg strings
+
+
+*** 19990818_3 by tomh
+call release_client_dns_reply for servers too
+
+
+*** 19990818_2 by db
+- fixes for U and X lines
+
+
+
+*** 19990818_1 by db
+- fixed compile errors with SLAVE_SERVERS
+- fixed coring problem with SLAVE_SERVERS
+
+
+
+*** 19990817_2 by lusky
+fixed LIMIT_UH and IDLE_CHECK which were using old structs
+
+
+*** 19990817_1 by db
+- Hide path on kill from "victim"
+- Hide path on kill from oper to non opers
+
+
+
+*** 19990816_4 by tomh
+bug fix for reverse dns mismatch
+
+
+*** 19990816_3 by tomh
+clean up dn_expand result checks
+
+
+*** 19990816_2 by lusky
+removed redundant "New highest connections" server notice
+
+
+*** 19990816_1 by tomh
+bullet proof resolver against bogus replies
+
+
+*** 19990815_6 by tomh
+more fixes for memory counting
+
+
+*** 19990815_5 by tomh
+fixup cryptic message, remove XxxAccess
+
+
+*** 19990815_4 by tomh
+removed FLAGS_CHKACCESS
+
+
+*** 19990815_3 by tomh
+more memory count bug fixes, fix SYSLOG_USERS bug
+
+
+*** 19990815_2 by tomh
+cleanup memory counting code, still more to do
+
+
+*** 19990815_1 by tomh
+cleanup memory counting code
+
+
+*** 19990813_2 by tomh
+remove redundant check
+
+
+*** 19990813_1 by tomh
+count fix
+
+
+*** 19990812_1 by tomh
+hash function fix
+
+
+*** 19990811_2 by lusky
+throttle accept errors in listener.c
+oper motd rehash bug fix from perly
+ensure that SERVER must come before SVINFO (jl)
+neglected to detach_conf for umode -o (jl)
+
+
+*** 19990811_1 by tomh
+fake direction bug fix
+
+
+*** 19990810_4 by tomh
+removed unneeded include
+
+
+*** 19990810_3 by lusky
+fixed bug with NO_JOIN_ON_SPLIT on a coldstart
+added include for stdlib.h to mkpasswd.c
+moved rcs Id into comments in fixklines.c
+
+
+*** 19990810_2 by db
+- %lu screws up idle times as seen by a lot of scripts, notably bitchx *sigh*
+
+
+
+*** 19990810_1 by db
+- FLAGS_SPY was being checked against old flags, its now umodes *sigh*
+
+
+
+*** 19990809_3 by db
+- missed the user mode +b for bots
+- applied neph's operwall/wallops pacing patch
+
+
+
+*** 19990809_2 by db
+- fixes to allow SLAVE_SERVER to work
+- RPL_MYINFO should report the user modes and channel modes available
+  we've added +x user mode and +d channel mode
+
+
+
+*** 19990809_1 by db
+- missing #include breaks SLAVE_SERVERS
+
+
+
+*** 19990806_1 by sean
+Diane's freaky patch
+
+
+*** 19990805_4 by db
+- fixed rehash dump, would core on bad admin line
+
+
+
+*** 19990805_3 by db
+- user_mode allowed decrement of oper count even if client was not opered to begin with
+
+
+
+*** 19990805_2 by db
+- botch in client.h, umodes were moved to umodes in client, forgot
+  to redefine the macros for SetInvisible etc. this broke remote
+  setting of +i on clients. major bug.
+
+
+
+*** 19990805_1 by db
+- bug in stats Q line found by Dustin Marquess (Jailbird)
+
+
+
+*** 19990804_3 by tomh
+fix luser count bug
+
+
+*** 19990804_2 by db
+- fixed broken m_unkline.c it would unkline everything. duh
+
+
+
+*** 19990804_1 by db
+- fixes IP Klines not showing host
+
+
+
+*** 19990803_2 by db
+- updated .depend
+- added m_set for LOG
+
+
+
+*** 19990803_1 by db
+- oops. USE_ALLOW_OP was never defined. use NO_CHANOPS_WHEN_SPLIT instead
+  This one has to go into the -6 tree before release as well.
+
+
+
+*** 19990802_9 by tomh
+missed a log thing in m_kill somehow
+
+
+*** 19990802_8 by tomh
+missed one
+
+
+*** 19990802_7 by tomh
+remove struct.h includes, new .depend
+
+
+*** 19990802_6 by tomh
+removed unused data member from client struct
+
+
+*** 19990802_5 by tomh
+changed 2 headed function calls, removed unused data member in client struct
+
+
+*** 19990802_4 by db
+- goofed the 216 reply
+
+
+
+*** 19990802_3 by db
+- bug in mtrie_conf.c causing ~ klines not to work
+
+
+
+*** 19990802_2 by db
+- major bug in s_conf.c to do with reading of kline.conf
+
+
+
+*** 19990802_1 by db
+- removed struct.h
+
+
+
+*** 19990801_19 by lusky
+testing to see that the serial number isn't jumping
+
+
+*** 19990801_18 by lusky
+ChangeLog should be automated now.  Also the serial number should
+no longer jump more than one because of a commit of multiple subdirs.
+Please be descriptive and unique in your commit comments.
+
+
+19990801_17 by lusky
+I think it's working this time.
+
+version hybrid-7-current 1999-08-01 to present
+* Restarted changelog
+-Rodder
+

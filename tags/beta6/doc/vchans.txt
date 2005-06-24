@@ -1,0 +1,154 @@
+$Id$
+
+                  "Virtual Channels"
+		======================
+
+		Non flat channels	
+		Or relative ops take 3
+
+
+		Diane Bruce (db@db.net)
+		Roger Espel Llima (espel@iagora.net)
+		David Harmelin (lunah@mach.unseen.org)
+
+Introduction:
+
+    EFnet IRC is suffering from denial of service attacks of
+an unprecedented level. It is clear that the DoS attacks going on
+are partially over channels. It is proposed here to modify slightly
+how IRCII works to remove the single level channel scheme, hence
+removing the incentive to DoS for channels. It also allows two
+competing groups to "own" the same channel without DoSing each other.
+
+Description:
+
+    The scheme works like this. ircd is modified to allow the creation
+of a copy of a channel name. An additional command is added to irc
+called "CJOIN" for "create on join." This allows the creation of
+multiple versions of the same channel behind one channel name.
+
+eg.
+Using Client A,B,C,D and channel #cats for examples.
+
+Scenario 1.
+
+Client A  /join #cats
+
+    There is a single channel known as "#cats" there is no difference
+so far. Any other client joining "#cats" shows up on the same channel
+as client A.
+
+Client B /join #cats
+
+    There are two clients on channel #cats. No difference from standard IRC
+so far. As it happens it behaves as standard IRC completely in this scenario.
+
+Scenario 2.
+
+Client A ops Client B on #cats with TS T0, Client B "takes over."
+
+    Client A /parts #cats (or has been kicked) Client A attempts
+to rejoin #cats, discovers they have been banned. Client A then
+does /quote cjoin #cats, thus creating a new version of #cats.
+
+    We now have (where T0 is earlier timestamp then T1)
+
+        T1
+             / Client A with ops
+       #cats/
+            \
+        T0   \ Client B with ops, this version of #cats has Client A banned.
+
+
+    Newbie mirc user Client C /join #cats, the ircd will then present
+them with a list of #cats variants to join. 
+
+This will be given as a NOTICE to the client.
+{perhaps better to use numerics? then advanced users could ignore the help}
+
+NOTICE C "n other channels #cats are available."
+NOTICE C "Type: /join #cats <key> to join the one you wish to join."
+NOTICE C "key1,key2,key3"
+
+For now, the key will be a randomly picked user from one of the channels.
+
+Scenario 3.
+
+   Classic "Channel faction war". In this scenario two competing
+factions for the same channel fight it out. In todays IRC one faction
+"wins" kicking and deopping the other faction. With this modified model
+the "loser" faction can /cjoin #cats and create their own version of the
+channel.
+
+  Established "regulars" can choose to join the "other" version of
+the channel with a key on /join.
+This key will be the nick[2] of any regular (could be a bot) on
+this alternative version of the channel. Note this automatically means
+one nick cannot be on two variants of the same channel.
+
+   i.e. Client D does /join #cats !catbot
+
+   Where catbot is the nick of a bot on #cats.
+
+
+   T1     /Clients A,D,catbot
+         /
+   #cats/
+        \
+         \
+   T0     \Client B
+
+
+
+
+Implementation:
+
+    For this scheme to work, "op hacking" has to be completely disabled.
+This can be done easily in the ircd by noting on an SJOIN whether
+the channel joining has a TS less than the current TS, and deopping
+all local channel members who have ops. This breaks Roger original
+protocol, as the ircd will have to send non local deops. (Sorry Roger)
+This is the only way that a mixed net can be brought online in stages.
+
+   Each vchan aware server will understand a new CAPAB "VCHAN" and
+will negotiate channel rejoins in the following manner. [1]
+
+mode -o's are only sent on non-vchan
+aware links.  so you can have something like this:
+
+A(vchan) <-- rejoins --> B(vchan) <--> C (vchan) <--> D (no vchan)
+                            |
+                            v
+                            E (no vchan)
+
+B has local ops with TS 1000; A sends an SJOIN with no ops but TS 900.
+then B deops its local users, and sends mode -o's only towards E.  then
+C understands the SJOIN and deops its users too, and sends mode -o's
+
+   All a CJOIN does, is link a new channel with the base name of the
+current channel into the IRC namespace. i.e. #cats T1 is actually
+##cats_970165390 with a link list from the base channel name of #cats.
+This allows clients on non "virtual channel" servers to join, as the
+name maps into "normal" old fashioned IRC channel name space.
+
+   Using a namespace with "##" to map sub channels lessens the parsing
+needed for vchan aware servers to pick up new vchans.
+
+   Name space collision is dealt with by the ircd by changing the name
+slightly. i.e. CJOIN tries to create ##cats_970165390 but discovers
+the channel already exists. In this case the name is pertubed by 1
+until successful creation happens. (A cleaner approach would be an 
+MD5 hash on the name + TS instead, but then this makes it more difficult
+to join from a non virtual channel server.)
+
+   "JOIN" is modified to allow the addition of a nick "tag"
+{n.b. I haven't checked key name space yet, we might be able to use
+a non valid key to make the parsing cheaper. I have used '!' for now}
+
+
+
+1 - diagram and idea by Roger Espel
+2 - similar to Roger Espel "sync" to nick idea in his original
+    relative ops paper
+
+

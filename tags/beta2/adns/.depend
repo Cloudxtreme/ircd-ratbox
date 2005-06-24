@@ -1,0 +1,43 @@
+check.o: check.c ../include/fileio.h internal.h ../include/config.h \
+ ../include/setup.h adns.h ../include/ircd.h ../include/tools.h \
+ ../include/ircd_defs.h ../include/irc_string.h \
+ ../include/sprintf_irc.h dlist.h
+event.o: event.c ../include/fileio.h ../include/s_bsd.h \
+ ../include/config.h ../include/setup.h ../include/fdlist.h \
+ ../include/ircd_defs.h ../include/res.h ../include/../adns/adns.h \
+ ../include/ircd.h ../include/tools.h ../include/irc_string.h \
+ ../include/sprintf_irc.h internal.h adns.h dlist.h \
+ ../include/memory.h ../include/blalloc.h tvarith.h
+general.o: general.c ../include/fileio.h ../include/s_log.h \
+ ../include/memory.h ../include/ircd_defs.h ../include/config.h \
+ ../include/setup.h ../include/blalloc.h internal.h adns.h \
+ ../include/ircd.h ../include/tools.h ../include/irc_string.h \
+ ../include/sprintf_irc.h dlist.h
+parse.o: parse.c ../include/fileio.h internal.h ../include/config.h \
+ ../include/setup.h adns.h ../include/ircd.h ../include/tools.h \
+ ../include/ircd_defs.h ../include/irc_string.h \
+ ../include/sprintf_irc.h dlist.h
+query.o: query.c ../include/memory.h ../include/ircd_defs.h \
+ ../include/config.h ../include/setup.h ../include/blalloc.h \
+ ../include/fileio.h internal.h adns.h ../include/ircd.h \
+ ../include/tools.h ../include/irc_string.h ../include/sprintf_irc.h \
+ dlist.h
+reply.o: reply.c ../include/memory.h ../include/ircd_defs.h \
+ ../include/config.h ../include/setup.h ../include/blalloc.h \
+ ../include/fileio.h internal.h adns.h ../include/ircd.h \
+ ../include/tools.h ../include/irc_string.h ../include/sprintf_irc.h \
+ dlist.h
+setup.o: setup.c ../include/memory.h ../include/ircd_defs.h \
+ ../include/config.h ../include/setup.h ../include/blalloc.h \
+ ../include/fileio.h ../include/s_bsd.h ../include/fdlist.h \
+ ../include/res.h ../include/../adns/adns.h ../include/ircd.h \
+ ../include/tools.h ../include/irc_string.h ../include/sprintf_irc.h \
+ internal.h adns.h dlist.h
+transmit.o: transmit.c ../include/fileio.h internal.h \
+ ../include/config.h ../include/setup.h adns.h ../include/ircd.h \
+ ../include/tools.h ../include/ircd_defs.h ../include/irc_string.h \
+ ../include/sprintf_irc.h dlist.h tvarith.h
+types.o: types.c ../include/config.h ../include/setup.h \
+ ../include/fileio.h ../include/irc_string.h ../include/ircd_defs.h \
+ internal.h adns.h ../include/ircd.h ../include/tools.h \
+ ../include/sprintf_irc.h dlist.h

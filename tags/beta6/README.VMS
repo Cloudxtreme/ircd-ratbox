@@ -1,0 +1,34 @@
+To compile ircd on VMS, simply execute the make.com script
+from the top-level ircd directory:
+
+  $ SET DEF [.IRCD-HYBRID-7]
+  $ @MAKE
+
+This should build [.SRC]IRCD.EXE (servlink is not yet supported
+for VMS). 
+
+You'll probably want to edit [.INCLUDE]CONFIG.H before you build,
+to change the IRCD_PREFIX. NOTE: the ']' is deliberately left off
+the IRCD_PREFIX string - adding one will break it.
+
+You might also want to change some of the other paths in [.INCLUDE]CONFIG.H.
+
+After IRCD.EXE is built, you'll have to install it by hand.  Put it
+in a BIN subdirectory of the IRCD_PREFIX directory. IRCD.CONF
+goes into the ETC subdir.  You should also create LOGS, if you're
+putting logs there.
+
+Known problems on VMS:
+  - Lack of SERVLINK support means that ZIP and SSL aren't yet possible
+    for VMS.
+  - If IRCD.EXE exits immediately after startup, make sure that [.ETC]IRCD.PID
+    doesn't exist.
+
+It should work fine when started with RUN/DETACH.
+
+So far, IRCD is known to work on OpenVMS 7.2/Alpha systems.
+
+If anyone gets ircd working on VMS (or has problems with it), please mail me
+(ejb@leguin.org.uk) with any comments you have.
+
+$Id$

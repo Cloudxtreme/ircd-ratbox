@@ -1,0 +1,227 @@
+
+This is the current beta release version of the 'devel' tree of ircd-ratbox.
+
+NOTE: THIS IS BETA CODE.  It is run at your own risk.  By running this
+      code you assume FULL responsibility for any problems it may cause.  We
+      do NOT recommend this code is run on production servers. 
+
+doc/whats-new.txt contains important lists of changes between 2.0 and 1.4 -
+it is important you read this file before upgrading.
+
+-- ircd-ratbox-2.0rc6
+- we werent opening logfiles properly on boot
+- stats T shows how many clients are in delayed exit
+- fix a core with logging glines from hyb6 servers
+- add a "client_auth" hook so people can hook into clients connecting
+- add back io send debug hooks
+- nick delay length is now in stats z
+- kills are now in their own logfile, fname_killlog and formatted nicer
+- kline log has been rewritten to be machine parsable
+  see doc/logfiles.txt
+- unresv over encap had wrong parc count
+- add operspy/hidden_oper to shown operprivs
+- fix for poll() issues with cpu
+- contrib/m_olist.c now has operspy logging
+- cleaned up how we test and mark clients as dead to (hopefully) fix a core
+
+-- ircd-ratbox-2.0rc5
+- fix rejected clients sometimes also ending up on the abort_list
+- append reason to joining juped channel notice
+- dont replace a clients ident when theyre unidented, if its supposed
+  to be spoofed
+
+-- ircd-ratbox-2.0rc4
+- fix expiry of temp xlines/resvs
+- split stats q/Q and x/X to show temp/perm
+- fix problem with ::1 as a host
+- fix select() support
+- fix operspy logging on /who !*mask*
+- add ELIST 005 numeric
+- allow servers to issue version requests, for compatibility
+- /quote set maxclients is now an alias for /quote set max
+- update of manpage via Jeremy
+- raise default split_delay to 60s
+- add rehash TXLINES/TRESVS
+- fix reject cache free()'ing a dlink_node it doesnt allocate
+- all /quote set options now use n!u@h{oper} instead of nick
+- fix a couple of tests for deadness after parsing data
+- fix coming out of splitmode when we use split_delay and we arent
+  out of split anymore when the delay ends
+- fix a possible double exit of aborted clients
+- prefix the exempt notice for Y: properly
+
+-- ircd-ratbox-2.0rc3
+- dont allow external messages to a +m channel
+- fix an IO error with rejected clients
+- match() speedup for special case of "*"
+- remove some debug asserts that are quite evil
+- fix propagation of TS6 JOIN on +k channels
+- DEFAULT_SENDQ is now 20mb
+- default sendq_eob is now 0 rather than DEFAULT_SENDQ, so itll just fall
+  back to class sendq if its not set.
+- EOB command is gone, now always emulated over PING/PONG, fixing a
+  bug with sendq_eob
+- fix SID leak in PONG
+- fix invalid error string in "Error connecting to.." notice on timeout
+- fix a memory leak with local clients
+- add sendq_eob to stats Y
+- fix the reject cache list ordering
+- quick and simple channel list searches on min/max users: LIST <n,>m
+- misplaced ':' in stats T
+- remove bogus assert in free_conf()
+
+-- ircd-ratbox-2.0rc2
+- only attempt to propagate modes if we actually need to
+- updated convertilines to take account of new conf format
+- ilog() now properly handles an error during writing
+- rehash/SIGHUP now close/reopen logfiles
+- reject list is now ordered by time, for efficiency
+- fix the time_t formatting stuff, now always uses %ld, casted to (long)
+- fix remote klines that werent accepted causing a rehash
+- fix no libz and compression check in parser
+- we were (wrongly) showing 'E' in stats C if a servers password is
+  crypt()ed
+- added an (unused) type field to xlines over ENCAP, for compatibility with
+  other ircds which have it.  Temporary xlines, or xlines sent over a hyb6
+  hub will NOT work between between 2.0rc2 and earlier versions anymore.
+- implemented operspy stuff, same as 1.x
+- added m_testmask.c, given a user@host mask, gives anonymous stats on how
+  many local/remote clients match the mask:
+  <- :stable.lan 724 anfl *@*.goat 1 0 :Local/remote clients match
+- fixed problems when removing modes due to an SJOIN/JOIN if MAXMODEPARAMS
+  wasnt 4
+- fix a buffer overflow when removing bans
+- ignore ERR_NOSUCHSERVER directed at us, happens naturally now.
+- removed warning when clock runs backwards, happens naturally from ntp
+- first param of RPL_STATSXLINE is now the amount of times that xline has
+  been used to reject a client
+- "SAFELIST" added to 005
+- rewrote testline to be somewhat more useful
+- added testgecos to test a gecos against xlines
+- fix a core on an external privmsg to a -n channel
+- check for empty sjoins more thoroughly
+
+-- ircd-ratbox-2.0rc1
+- fix servlink errors with high fds
+- fix typo in conf parser, "autocon" instead of "autoconn"
+- add a quick netwide EOB via PING/PONG
+- add challenge.pl, for irssi
+- fixed LOCOPS to go over ENCAP when no CAP_CLUSTER is available
+- fix core on passworded auth when user doesnt send a password
+- added hash statistics via stats B
+- fixed the server ip hiding mess.  HIDE_SERVERS_IPS now either hides to
+  everyone or noone.
+- fix core in CIDR channel bans
+- make channel hash bigger for better results
+- fixed dead clients ending up on abort list
+- operspy log [and others] had a double \n
+- fix core in AWAY
+- gline/klinelog were inverted
+- fix possible core in rejectcache when walking the patricia
+- ClearOper() was setting clients to have local handlers
+- fix a buffer overflow in MODE
+- fix a nick delay core
+- unglines are now logged in a consistent format with glines
+- balloc now memset()'s on alloc
+- locops propagation was missing a ':'
+- convertconf is gone
+- default compression_level is now 4
+- fixed remote ban logic, which caused a desync
+- always use "0::1" etc instead of "::1" in sockhost, as it breaks TS6.
+
+-- ircd-ratbox-2.0b5
+- AWAYLEN added to 005, shows maximum length of an away message.  Default is
+  now 90, not TOPICLEN
+- kick/part/quit now use REASONLEN (120) rather than TOPICLEN
+- challenge.irc update
+- fix a core when using rsa keys in operator {};
+- fix challenge not working for the first user=""; line in operator {};
+- log for outbound connect is now "*[name] @host" over "*[host] @host"
+- updated example_module.c documenting new API [via koitsu]
+- {compressed|encrypted|topicburst|autoconn} = {yes|no} is gone in connect
+  {}; - replaced with flags = compressed, encrypted, topicburst, autoconn;
+  for consistency
+- fixed problem with long passwords
+- fixed strdup() check
+- fix servlink overstepping bounds of array
+- fixed global capabs to not lose capabilities we dont ourselves support
+- fixed ERR_NOSUCHNICK/ERR_NOSUCHSERVER to not leak UIDs
+- disallow servernames beginning with a digit, as they break TS6
+- fix errors when attempting to send to clients we just had a read error for
+- allow blank gecos fields
+- fixed modules not removing hooks properly on unload
+
+-- ircd-ratbox-2.0b4
+- fixed stats L
+- fixed hunt_server() breaking parv[]
+- fix the configure tests for darwin
+- fix the hostname hash
+- fix PING/PONG
+- HTM is gone - it didnt work properly
+- TRACE no longer lists unknowns to remote opers
+- fixed kline checking on spoofs, need to test bitmask rather than
+  aconf->name
+- fixed a core when a user on a TS6 server joined a +lk channel
+- m_join.c is now a core module
+- fixed a core in /info
+- fixed /who leaking hopcount during flatten_links
+- fixed serverhiding leaks
+- fixed dns/host issue with ::1
+- fixed local +beI to collapse ** into *
+
+-- ircd-ratbox-2.0b3
+- fix ipv6 on openbsd
+- fix a possible core when parsing auth {};
+- spoofs are now checked against klines
+- speedups to kline finding
+- fixed up contrib/
+- ltrace/omode in contrib are gone
+- added LOC_CHANNELLEN, max length of a channel local user may join,
+  currently 50
+- fix the user exit log
+- trace spy now contains target param if its a single user
+- fixed KILL logic for TS6
+- fixed error logging in init_netio()
+- fixed PRIVMSG/NOTICE to not bounce back to source on fake direction
+
+-- ircd-ratbox-2.0b2
+- new hash function which should ease collisions on UIDs
+- fix to remove local clients from &me.serv->clients, which broke map count
+- broken writev() support removed
+- fixed problem with kill reasons
+- fixed trace
+- removed support for sigio
+- support for global capabilities
+- support for propagating temp xlines/resvs, note these can only be done to
+  2.x servers
+- remote servers can now introduce nicks beginning with a digit
+- fix a core with invalid nicks
+- added SIDs to /map
+- support for remote commands (kline, unkline etc) over ENCAP
+- proper encap handlers in struct Message.  This breaks any modules designed
+  for 2.0b1 -- to fix add "mg_ignore," after the server handler.
+- fix various problems with connect blocks that are marked for removal being
+  used/shown
+- UIDs from a remote server are now validated
+
+-- ircd-ratbox-2.0b1
+No release notes, please see whats-new.txt
+
+--------------------------------------------------------------------------------
+
+BUGS: Major bugs in this release are listed in BUGS
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+the bug by EMAIL to ircd-ratbox@lists.ratbox.org
+
+Please include a gdb backtrace and keep the core file, binaries and 
+modules in case the developers need them.
+
+DISCUSSION: There is a mailing list for discussion of ratbox issues,
+ To subscribe, visit:
+      http://lists.ratbox.org/cgi-bin/mailman/listinfo/ircd-ratbox
+
+Other files recommended for reading: BUGS, README.FIRST, INSTALL
+
+--------------------------------------------------------------------------------
+$Id$

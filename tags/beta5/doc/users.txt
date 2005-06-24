@@ -1,0 +1,74 @@
+This file outlines the features that ircd-hybrid supports for users.
+$Id$
+
+=-=-=-=-=-=-=-=-=
+    USERMODES
+=-=-=-=-=-=-=-=-=
+
+    MODE    - DESCRIPTION
+------------------------------------------------------------------------
+     +i     - 'Invisible'.  This usermode will stop people seeing if
+              your name when they do /names on a channel without mode +s
+              It does NOT make you invisible in any other way.
+     +g     - Server side ignore.  This will block all private messages
+              from users who are not on your /accept list.
+
+=-=-=-=-=-=-=-=-=-=-=
+    CHANNELMODES
+=-=-=-=-=-=-=-=-=-=-=
+
+    MODE    - DESCRIPTION
+------------------------------------------------------------------------
+     +n     - 'No external messages'.  This will prevent any user who
+              isnt in the channel from sending messages to the channel.
+
+     +t     - 'Ops Topic'.  This will prevent any user who isnt opped,
+              or halfopped (+o/+h) from setting a channel topic.
+
+     +s     - 'Secret'.  This will prevent the channel from being shown
+              in a /whois, and in the channel list.
+
+     +p     - 'Private'. 
+
+     +m     - 'Moderated'.  This will prevent any user who isnt opped,
+              halfopped or voiced (+o/+h/+v) from talking in the channel.
+
+     +a     - 'Anonymous ops'.  This will stop people who join from
+              seeing who has ops.  Any modes set in the channel will
+              be shown as if a server set them.
+
+              When a user becomes opped or halfopped (+o/+h) they will
+              receive an op sync, where the server will op every user
+              that is opped.  They will then see modes normally, and
+              have the true list of who has ops/halfops/voices
+
+     +i     - 'Invite only'.  This will stop anyone from joining your
+              channel who hasnt received an /invite or whos host isnt in
+              the +I list.
+
+     +k     - 'Key'.  This will require users joining to know the key,
+              they must then use /join #channel KEY
+
+     +l     - 'Limit'. This will stop there being more than LIMIT people 
+              in the channel at any time.
+
+     +v     - 'Voice'.  This will allow a user to talk in a moderated (+m)
+              channel.  Shown by the +nick flag.
+
+     +h     - 'Halfop'.  This will allow a user to set all of the above
+              modes, (and some more below..), whilst stopping the user
+              from doing harm to the channel.  Users who are +h CANNOT
+              kick opped (+o) users, or set modes +h/-h/+o/-o.
+
+     +o     - 'Op'.  This gives the user full control over the channel.
+              An opped user may op other users, set any mode, and 
+              remove ops from whoever they want.
+
+     +b     - 'Ban'.  This will prevent a user from entering the channel,
+              based on a nick!ident@host match.
+
+     +e     - 'Exempt'.  This will allow a user to join a channel even if
+              they are banned (+b).
+
+     +I     - 'Invite Exempt'.  This will allow a user to join an
+              invite-only (+i) channel, based on a nick!user@host match.

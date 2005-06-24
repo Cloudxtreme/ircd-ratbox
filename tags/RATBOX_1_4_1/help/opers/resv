@@ -1,0 +1,5 @@
+RESV <channel|nick> :<reason>
+
+Will create a resv for the given channel/nick, stopping
+local users from joining the channel, or using the
+nick.  Will not affect remote clients.

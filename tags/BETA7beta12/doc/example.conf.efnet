@@ -1,0 +1,1051 @@
+/* Hybrid 7 Example configuration file
+ * $Id$
+ * December 2000 - ejb, wcampbel, db and others
+ */
+
+/*
+  Both shell-style and C-style comments are supported in this file.
+  We also support .include "filename" and .include <filename>.
+
+  Nothing in this file is case sensitive now.
+
+  A note on numeric values:
+  Times can be written like so:
+    3 years 10 minutes 1 second
+  The valid units of time are: second, minute, hours, day, week,
+                               month (28 days), year (365 days), decade,
+                               century, millennium.
+ 
+  For sizes, you can use: byte, kilobyte/kbyte/kb, megabyte/mbyte/mb,
+                          gigabyte/gbyte/gb, terabyte/tbyte/tb.
+
+  Both singular and plurals are accepted for times and sizes.
+
+  There is also a simple arithmatic parser, which understands
+  +, -, *, / and () precedence rules. */
+
+# serverinfo replaces the old M: line
+serverinfo {
+	name = "hades.arpa";
+	description = "hybrid-7 test server";
+
+	/* The network_name and network_desc variables override
+	 * the compiled in defaults.  These are used for server 
+	 * hiding.  network_name is shown to clients connecting to
+         * your server, in the welcome message.
+	 */
+	network_name = "EFnet";
+	network_desc = "Eris Free Network";
+
+	/* HUB is no longer a compiled in option.  It is set at 
+	 * runtime in this block and changeable with a REHASH
+	 * Note that you cannot change this setting if you are currently
+	 * linked as a LazyLeaf, or to a LazyLeaf server.
+	 */
+	hub = yes;
+
+	/* vhost defines what IP to bind to for *OUTGOING* connections.
+	 * This replaces the old M: line IP, and is only needed for 
+	 * multi-homed or virtual hosted machines not using the default
+	 * IP.  This should be an IPv4 IP ***ONLY***, not IPv6/host
+	 */
+	# vhost = "192.169.0.1";
+
+	/* vhost6 defines what IPv6 IP to bind to for *OUTGOING* connections.
+	 * This should be an IPv6 IP ***ONLY***, and not a host..
+	 */
+	# vhost6 = "3ffe:80e8:546::2";
+
+	/* Define the maximum number of clients that can connect to the 
+	 * server.
+	 */
+	max_clients = 2048;
+
+	/* Set to a file containing an RSA key, if you wish to use KSERVER
+	 * authentication.
+	 *
+	 * Example command to store a 2048 bit RSA keypair in
+	 * rsa.key, and the public key in rsa.pub:
+	 * 
+	 * 	openssl genrsa -out rsa.key 2048
+	 *	openssl rsa -in rsa.key -pubout -out rsa.pub
+	 *	chown <ircd-user>.<ircd.group> rsa.key rsa.pub
+	 *	chmod 0600 rsa.key
+	 *	chmod 0644 rsa.pub
+	 */
+	rsa_private_key_file = "/usr/local/ircd/etc/rsa.key";
+};
+
+# admin (or administrator) replaces the old A: line
+# A:description:name:email
+admin {
+	name = "Smurf target";
+	description = "Main Server Administrator";
+	email = "<syn@packets.r.us>";
+};
+
+# The logging block defines runtime logging options.
+# There is no correspondence to the old conf.
+logging {
+	/* These three paths are not *CURRENTLY* used.  They are still
+	 * compiled into the ircd with config.h
+	 */
+	logpath = "/var/log/ircd/";
+	oper_log = "oper.log";
+	gline_log = "gline.log";
+
+	/* This option is used, however.
+	 * The following settings are valid (This can also be changed
+	 * by /quote SET LOG in the ircd)
+	 * L_CRIT, L_ERROR, L_WARN, L_NOTICE, L_TRACE, L_INFO, L_DEBUG
+	 */
+	log_level = L_INFO;
+};
+
+# Class blocks must be defined before using them in auth, operator, or
+# connect blocks.
+# Old Y: lines
+class {
+	# *FINALLY* we get rid of class numbers.
+	name = "users";
+
+	/* If a client doesn't reply to a PONG within ping_time,
+	 * they are dropped.
+	 */
+	ping_time = 2 minutes;
+
+	/* We still have clone control.  Only specify number_per_ip for
+	 * user classes.
+	 */
+	number_per_ip = 2;
+
+	/* How many clients, total, can be in this class. */
+	max_number = 100;
+
+	/* How much data we queue to sending to a client in this
+	 * class before dropping them.
+	 */
+	sendq = 100 kbytes;
+};
+
+class {
+	# A VERY limited restrictive class
+	name = "restricted";
+	ping_time = 1 minute 30 seconds; /* "seconds" isnt really
+                                             needed here. */
+	number_per_ip = 2;
+	max_number = 100;
+	sendq = 60kb;
+};
+
+class {
+	name = "opers";
+	ping_time = 5 minutes;
+	number_per_ip = 10;
+	max_number = 100;
+	sendq = 100kbytes;
+};
+
+class {
+	name = "server";
+	ping_time = 5 minutes;
+
+	/* Only specify the connection frequency for server classes.
+	 * This is how often we try to connect to this server if
+	 * autoconn is turned on.
+	 */
+	connectfreq = 5 minutes;
+
+	/* We never try to autoconn to more than this many servers
+	 * in this class.
+	 */
+	max_number = 1;
+
+	/* Recommended: at least 10Mb for EFnet */
+	sendq=10 megabytes;
+};
+
+# Old P: lines, listen on a port
+# Note that you must listen on a port.  A serverinfo block
+# will not create a port to listen on.
+
+listen {
+	/* The hostname, IPv4 or IPv6 address for us to listen to
+	 * Leaving the host out will cause the server to bind to all
+	 * available IPs on a machine, if you have compiled for IPv6
+	 * it will bind to the IPv4 port as well.
+	 * You can bind to multiple ports in one listen {} block.
+	 * each host=""; line sets the address to bind to for the
+	 * following port=; lines.  eg:
+	 */
+	port = 6665 .. 6669;	# bind to all interfaces on ports 6665 to 6669
+
+	host = "1.2.3.4";
+	port = 7000, 7001;	# bind only to 1.2.3.4
+
+	host = "3ffe:1234:a:b:c::d";
+        port = 7002;
+	# etc
+};
+
+/* IMPORTANT:  The order of auth blocks is important.
+ * They MUST be listed in order of importance, from greatest -> least, so
+ * spoofs first, general access *@* blocks last.
+ *
+ * auth blocks replace I: lines.  The old I: line flags are still preserved
+ * as options.
+ */
+auth {
+	user = "db@koruna.varner.com";
+
+	/* Free-form spoofs are allowed.  Just do all of us a favor and
+	 * don't abuse this ability.  (Spoofing was the old I: = flag).
+	 */
+        spoof = "I.still.hate.packets";
+
+        /* Enable/disable spoofing notification to admins (default=yes). */
+        spoof_notice = yes;
+
+	/* This is the old F: line (I: > flag) */
+	exceed_limit = yes;
+
+	/* This is the old E: line (I: ^ flag) */
+	kline_exempt = yes;
+
+	/* Make users matching this auth block exempt from
+	 * G-lines (Old _ flag).
+	 */
+	gline_exempt = yes;
+
+	class = "opers";
+};
+
+auth {
+	/* This block is for distant clients, restrict their actions so that
+	 * they can become chanops but cannot chanop someone else.
+	 */
+
+	/* Specify the user@host in this option (I:ip:pass:USER@HOST:...)
+         * Multiple user="" lines are permitted per auth{} block, the same
+	 * options (class, flags, etc), will apply to all hosts.
+	 */
+        user = "*@*.au";
+        user = "*@*.nz";
+
+	/* put them in a restricted class */
+	class = "restricted";
+
+	/* Restrict them, but still require ident...we don't want a bunch
+	 * of clones and drones.
+	 */
+	restricted = yes;
+
+	/* We can force the user to have ident here (I: + flag) */
+	have_ident = yes;
+};
+
+
+auth {
+	/* ip/ipv6 addresses are also valid.
+	 * Note that this is in CIDR or with '*' on the end.
+	 */
+	user = "*@172.16.0.0/12";
+        user = "*@192.17.*";
+        user = "*@124A:ABCD::1DFA";
+        user = "*test*@123D:B567:*";
+	/* Require a password for access */
+	password = "gimmeaccess";
+
+	/* If the user does not have ident, act like they do and do not
+	 * send the ~ in front of their username out to the network. 
+	 * I: line - flag
+	 */
+	no_tilde = yes;
+
+	class = "users";
+};
+
+/* Auth blocks now allow a server to redirect the user to another server
+ * (possibly one that is closer) (This is very similar to IRCnet B: lines)
+ * NOTE:  You MUST put a class in even if it's not intended to ever be used
+ */
+auth {
+	user = "*.fi";
+	redirserv = "efnet.cs.hut.fi";
+	redirport = 6667;
+	class = "users";
+};
+
+/* We have to have our open auth block at the bottom */
+auth {
+	/* Specify the user@host in this option (I:ip:pass:USER@HOST:...) */
+	user = "*@*";
+
+	/* Classes are names */
+	class = "users";
+
+	/* We can force the user to have ident here (I: + flag) */
+	have_ident = yes;
+};
+
+/* Define operators, old O: lines.
+ * oper { } is also accepted.
+ * Note that local opers are no longer part of Hybrid.  Oper privileges are
+ * controlled by the flags now.
+ */
+operator {
+	/* The nick of the oper */
+	name = "god";
+
+	/* user@host, note that CIDR in O: lines is not *CURRENTLY* 
+	 * supported (an important note for Hybrid 6 users)
+	 */
+	user = "*god@*";
+
+        /* multiple user="" lines are supported per operator block. */
+
+	/* The encrypted password used in the OPER command
+	 * Note:  if you #undef CRYPT_OPER_PASSWORD in config.h, you must
+	 *        use the plain text password here.  MD5 passwords are 
+	 *        supported and available on some platforms (FreeBSD 4.x
+	 *        and Linux glibc are known to work)
+	 */
+	# password = "$1$tPH$nN7t5Jj14wYCoDZXc4fe91";
+	# password = "etcnjl8juSU1E"
+	password = "test";
+
+	# RSA Public key for Challenge support.  Note that password should
+	# not be set when using this. See doc/challenge.txt for more details
+	rsa_public_key_file = "/usr/local/ircd/etc/oper.pub";
+
+
+	class = "opers";
+
+	/* Allow the oper to global KILL (old O flag) */
+	global_kill = yes;
+
+	/* Allow the oper to remote SQUIT and CONNECT (old R flag) */
+	remote = yes;
+
+	/* Allow the oper to issue KILL, KLINE and DLINE (old K flag) */
+	kline = yes;
+
+	/* Allow the oper to issue UNKLINE and UNDLINE (old U flag) */
+	unkline = yes;
+
+	/* Allow the oper to issue GLINE (old G flag) */
+	gline = yes;
+
+	/* Allow the oper to issue DIE and RESTART (old D flag) */
+	die = yes;
+
+	/* Allow the oper to issue REHASH (old H flag) */
+	rehash = yes;
+
+	/* Allow the oper to see nick changes (old N flag) */
+	nick_changes = yes;
+
+	/* Set the oper +a when they oper up.  Marks them as an 
+	 * admin.  Admins can load and unload modules, as well as
+	 * see the real IPs in STATS c.
+	 */
+	admin = yes;
+};
+
+# Connect blocks replace and VASTLY simplify C/N/H/L lines
+connect {
+	name = "irc.uplink.com";
+
+	/* Hostnames and IP's are both accepted */
+	host = "192.168.0.1";
+
+	/* send_password is the C line password, accept_password is the
+	 * N line password, they are not required to match.  The remote
+	 * server will have the two passwords reversed.
+	 */
+	send_password = "password";
+	accept_password = "password";
+
+	/* What port should we autoconnect on (if autoconn is set to yes) */
+	port = 6666;
+
+	/* hub_mask replaces H: lines, multiple ones are accepted in each
+	 * connect block.
+	 */
+	hub_mask = "*";
+
+	class = "server";
+
+	/* Set your server to autoconnect */
+	autoconn = yes;
+
+        /* The IP to bind to for an outgoing connection for this server.
+         * This may be IPv4 or IPv6.  Uses default if none exists
+         */
+        vhost = "127.0.0.1";
+};
+
+connect {
+	name = "irc2.some.server";
+	host = "some.host.name.com";
+	send_password = "password";
+
+	/* The old CRYPT_LINK_PASSWORD is now defined per connect {} block */
+	encrypted = yes;
+	accept_password = "v/FfoSzTu1u3A";
+
+	/* compressed allows you to disable ziplinks support.
+	 * 
+	 * By default, if configure detected ziplinks support, all
+	 * links to servers which support ziplinks will be compressed.
+	 * compressed = no; will disable this.
+	 *
+	 * If configure didn't detect ziplinks support, no links will
+	 * (or can) be compressed.
+	 */
+	#compressed = no;
+
+	port = 6666;
+
+	/* Force this server to be a leaf */
+	leaf_mask = "*";
+
+	/* Force this server to be a LazyLink server.  Read 
+	 * doc/LazyLinks.as.implemented.txt for more information.
+	 */
+	lazylink = yes;
+	class = "server";
+};
+
+# Here is an example of how to do an encrypted link
+# (compatable with hybrid-6 + other CRYPTLINK implementations)
+connect {
+	name = "encrypted.auth.example";
+	host = "some.host.somewhere";
+	port = 6667;
+
+	/* .
+	 * .	Normal config options (no passwords)
+	 * .
+	 */
+
+	cryptlink = yes;
+
+	# remote server's public key
+	rsa_public_key_file = "etc/remote.server.keyfile";
+
+	/*
+	 * cipher_preference = cipher;
+	 *
+	 * Allows you to set the preferred cipher for this link.
+	 *
+	 * Available ciphers (listed in default preference) are:
+	 *
+	 *  BF/256 BF/128 CAST/128 IDEA/128 RC5.16/128 RC5.12/128 RC5.8/128
+	 *  3DES/168 DES/56
+	 *
+	 * NOTE:  Some ciphers may not be supported by your OpenSSL.
+	 *        Check the output from 'configure' for available ciphers.
+	 * 
+	 * NOTE2: To help you decide what cipher to use, tools/encspeed
+	 *        will show you approximately how fast each cipher is.
+	 *        However, blowfish is fast and secure, and is probably
+	 *        a good default for most situations.
+	 *
+	 * The cipher *MUST* be the same in both directions.  If you
+	 * set a cipher preference, your uplink must set the same cipher,
+	 * else it will not link.
+	 */
+	# Force this link to 56bit DES
+	#cipher_preference = "DES/56";
+};
+
+
+connect {
+        name = "ipv6.some.server";
+        host = "3ffd:dead:beef::1";
+        send_password = "password";
+        encrypted = yes;
+        accept_password = "v/FfoSzTu1u3A";
+        port = 6666;
+
+        /* Force this server to be a leaf */
+        leaf_mask = "*";
+
+	/* Force this server to connect via IPv6
+	 * use aftype = ipv4 for IPv4 specific connects.
+	 */
+	aftype = ipv6;
+        class = "server";
+};
+
+connect {
+        name = "irc.bighub.net";
+
+        /* Hostnames and IP's are both accepted */
+        host = "10.0.0.1";
+
+        /* send_password is the C line password, accept_password is the
+         * N line password, they are not required to match.  The remote
+         * server will have the two passwords reversed.
+	 */
+        send_password = "pass4go";
+        accept_password = "pass2get";
+
+        /* What port should we autoconnect on (if autoconn is set to yes) */
+        port = 6666;
+
+        /* hub_mask replaces H: lines, multiple ones are accepted in each
+         * connect block.
+	 */
+        hub_mask = "*";
+        class = "server";
+
+	/* When we connect to this server, we will mask ourselves as *.arpa
+	 * Server host masking is ONLY for legacy setups.
+	 */
+	fakename = "*.arpa";
+
+        /* Set your server to autoconnect.
+	 */
+        autoconn = YES;
+};
+
+/* The server listed in each shared block will be permitted to send their
+ * K-lines to you.  Note that this is very similar to the old U: lines.
+ * Now you can optionally specify what user@host's are allowed to send 
+ * K-lines as well.
+ */
+shared {
+	name = "irc2.some.server";
+	user = "username@hostname";
+};
+
+/* Replacement for K: lines, bans based on user@host */
+kill {
+	user = "bad@*.hacked.edu";
+	reason = "Obviously hacked account";
+};
+
+/* Replacement for D: lines, deny IP's and IP blocks.  CIDR notation is
+ * recommended.
+ */
+deny {
+	ip = "10.0.1.0/24";
+	reason = "Reconnecting vhosted bots";
+};
+
+/* Replacement for d: lines, provides protection from D-Lines. */
+exempt {
+	ip = "192.168.0.0/16";
+};
+
+/* Replacement for Q: lines, preventing nicks and channels being used 
+ * The reasons for the resv are decided by the reason=""; line
+ * preceding the resv
+ */
+resv {
+        /* set the reason for the resv first */
+        reason = "There are no services on this network";
+
+	/* then we add the lines to block the nicks nickserv/chanserv,
+	 * and the channel #services
+	 */
+	nick = "nickserv";
+	nick = "chanserv";
+	channel = "#services";
+
+        /* wildcard masks in nicks are also supported, this would
+	 * block anyone using a nick that starts with "clone"
+	 */
+	reason = "Clone bots";
+	nick = "clone*";
+};
+
+/* Replacement for X: lines, denying users based on their "realname"
+ * field, useful for blocking known trojan drones, troublesome clients,
+ * and floodnets.  We now have a silent deny (2 in the last X: line field
+ * in the old conf).
+ */
+gecos {
+	name = "*sex*";
+	reason = "Possible spambot";
+	action = warn;
+};
+
+gecos {
+	name = "sub7server";
+	reason = "Trojan drone";
+	action = reject;
+};
+
+gecos {
+	name = "*http*";
+	reason = "Spambot";
+	action = silent;
+};
+
+/* The channel block contains options pertaining to channels
+ * The defaults shown here, are the ones approved for EFNet usage
+ * as of October 11 2001
+ */
+channel {
+	/* allow the use of +I as a channel mode. This mode (from
+	 * ircnet) allows the setting of a nick!user@host mask
+	 * that will be allowed to always join a +i channel.
+	 */
+	use_invex = no;
+
+        /*
+         * Enable/disable support for chanmode "+h <nick>" (halfops).
+         */
+        use_halfops = no;
+
+	/* allow the use of +e as a channel mode. This mode (from
+	 * just about every other net,including ircnet) allows the
+	 * setting of a nick!user@host mask that will be exempt from
+	 * channel bans. This would allow you to set +b *!*@*.aol.com
+	 * but +e *!friend@*aol.com would allow them to join through the ban.
+	 */
+	use_except = no;
+
+	/* This allows you to /quote knock #channel, when you are unsure
+	 * who is in the channel. If the channel is +p or you are banned
+	 * the knock will not be sent.
+	 */
+	use_knock = no;
+
+        /* use_vchans
+         * disable the creation of vchans by remote servers.. we do not
+         * currently recommend this feature, as it removes a lot of
+         * functionality, however it's here for those who don't want
+         * vchan support at all.
+         */
+        use_vchans = no;
+
+	/* vchans_oper_only
+         * allow non-opers to use CJOIN?
+	 *
+	 * As vchans map into regular channels, and only opers can 
+ 	 * use cjoin when this is set, this is still EFNet compatible 100%
+	 */
+	vchans_oper_only = yes;
+
+	/* knock_delay
+	 * how long a user must wait between knocks
+	 * default to one knock per user, per 5 minutes
+	 */
+	knock_delay = 5 minutes;
+
+	/* knock_delay_channel
+	 * how long a user must wait between knocks to a specific channel
+	 * this is a global limit, so everytime we receive a knock for a
+	 * channel we reset that channels last knock.
+	 *
+	 * default to one knock per channel, per minute
+	 */
+	knock_delay_channel = 1 minute;
+
+	/* The maximum number of channels a user can join/be on. */
+	/* The default is 15. */
+	max_chans_per_user = 15;
+
+        /* stop banned people from being able to talk in channels. */
+        quiet_on_ban = no;
+
+        /* maximum number of +b/e/I modes in a channel */
+        maxbans = 25;
+
+	/* length of time a channel will remain once its last user has quit
+	 * from the channel (via a netsplit or otherwise).  the channel will
+	 * remain with all its modes, for no less than this length of time
+	 */
+	persist_time = 30 minutes;
+
+        /* NOTE: the splitcode works on a timer.  once we enter splitmode,
+	 * we check every 60s to see if we should leave it, therefore its
+	 * possible that there may be a delay between being able to leave
+	 * splitmode, and actually doing so
+	 *
+	 * split_user_count and split_server_count BOTH need to be true, as
+	 * well as one of the split options to enter splitmode
+	 */
+
+	/* the minimum number of users we have before we consider ourselves
+	 * split from the network
+	 */
+	split_user_count = 15000;
+
+	/* the minimum number of servers we have before we consider
+	 * ourselves split from the network
+	 */
+	split_server_count = 10;
+
+	/* disallow users creating channels on split, works in tandem with
+	 * persisting channels, they can join channels that are persisting
+	 * and have kept their modes, which will retain +ki etc
+	 */
+	no_create_on_split = yes;
+
+	/* disallow users joining channels at all on a split
+	 */
+	no_join_on_split = no;
+};
+
+
+/* The serverhide block contains the options regarding serverhiding */
+serverhide {
+	/* How often to update the links file that users see when the list
+	 * is flattened after a netsplit or a netjoin has occured.  Once a
+	 * netsplit/netjoin occurs, the ircd will wait for this delay then
+	 * update the links file.
+	 */
+	links_delay = 5 minutes;
+
+	/* Flatten the links list, so it looks like all servers are
+	 * connected to this one.
+	 */
+	flatten_links = no;
+
+	/* Hide this server from a flattened /links output on remote
+	 * servers.  It will not be hidden locally, only remotely.  This
+	 * allows a /links output to contain for example only client servers.
+	 */
+        hidden = no;
+
+	/* Allow servers to hide themselves from the flattened /links output.
+	 */
+	allow_hidden = yes;
+
+	/* Hide the server a user is on in /whois etc, and make it use
+	 * network_name and network_desc instead
+	 */
+	hide_servers = no;
+
+	/* Disable users from doing remote commands on other servers from
+	 * your server, ie: /motd some.hubserver
+	 */
+	disable_remote_commands = no;
+
+	/* Disable users from joining &channels (local channels).  This is
+	 * an extreme, but anybody in a &channel is on the same server,
+	 * theyre here as it is a flaw in serverhide, however we do not
+	 * recommend enabling this, it removes far more from users than what
+	 * it gives back in security.
+	 */
+	disable_local_channels = no;
+};
+
+/* The general block contains many of the options that were once compiled
+ * in options in config.h.  The general block is read at start time.
+ */
+general {
+	/* Specify the default setting of FLOODCOUNT at startup.
+	 * This is how many lines per second we allow before we throttle
+	 * users MSGs/Notices ONLY affects the startup value, otherwise
+	 * use: /quote set floodcount.
+	 */
+        default_floodcount = 10;
+
+	/* Send a notice to all opers on the server when someone tries
+	 * to OPER and uses the wrong password, or the wrong host or ident.
+	 */
+	failed_oper_notice = yes;
+
+	/* Define how many '.' characters are permitted in an ident reply
+	 * before rejecting the user.
+	 */
+	dots_in_ident=2;
+
+	/* dot_in_ip6_addr
+	 * older servers (hybrid6.0 and earlier) will disallow hosts that
+	 * dont have a '.' in.  this will add a '.' to the end of ip6 hosts
+	 *
+	 * only needed if older servers exist on the network
+	 */
+        dot_in_ip6_addr = yes;
+        
+        /* Define how many non-wildcard (not: '.' '*' '?' '@') characters are
+	 * needed in klines/dlines/glines for them to be placed.  Does not affect
+	 * klines hand-placed in kline.conf.  eg to disallow *@*.com.
+	 */
+	min_nonwildcard = 4;
+
+        /* how many nicknames someone may /accept in +g umode */
+        max_accept = 20;
+
+	/* Enable the nick flood control code. */
+	anti_nick_flood = yes;
+	/* These settings will allow 5 nick changes in 20 seconds. */
+	max_nick_time = 20 seconds;
+	max_nick_changes = 5;
+
+        /* Do not allow the clients exit message to be
+         * sent to a channel if the client has been on for less than
+         * anti_spam_exit_message_time
+         * The idea is, some spambots exit with their spam, thus advertising
+         * this way. (idea due to ThaDragon, I just couldn't find =his= code).
+	 */
+        anti_spam_exit_message_time = 5 minutes;
+
+	/* Define the time delta permissible for a remote server connection.
+	 * If our timestamp and the remote server's timestamp are over
+	 * ts_max_delta different, the connection will be dropped.  If it
+	 * is less than ts_max_delta but more than ts_warn_delta, send 
+	 * a notice to opers on the server, but still allow the connection.
+	 * Overrides the compiled in defaults.
+	 */
+	ts_warn_delta = 30 seconds;
+	ts_max_delta = 5 minutes;
+
+	/* When a user QUITs, prepend their QUIT message with "Client exit:"
+	 * in order to help prevent against faking server error messages (eg.
+	 * ping timeout, connection reset by peer).
+	 */
+	client_exit = yes;
+
+	/* Show the reason why the user was K-lined or D-lined to the "victim"
+	 * It's a neat feature except for one thing... If you use a tcm
+	 * and it shows the nick of the oper doing the kline (as it does by 
+	 * default) Your opers can be hit with retaliation... Or if your 
+	 * opers use scripts that stick an ID into the comment field. etc.
+	 * It's up to you whether you want to use it or not.
+	 */
+	kline_with_reason = yes;
+
+	/* Force the sign-off reason to be "Connection closed" when a user is
+	 * K-lined.  The user will still see the real reason.  This prevents 
+	 * other users seeing the client disconnect from harassing the IRCops.
+	 */
+	kline_with_connection_closed = yes;
+
+	/* Set to "yes" if you wish your server to flag and not apply redundant
+	 * K-lines.
+	 */
+	non_redundant_klines = yes;
+
+	/* Enable this if you want opers to get noticed about "things" trying
+	 * to connect as servers that don't have N: lines.  Twits with 
+	 * misconfigured servers can get really annoying with this enabled.
+	 */
+	warn_no_nline = yes;
+
+	/* Set STATS o to be oper only */
+	stats_o_oper_only=yes;
+
+	/* set STATS P to be oper only (ports) */
+	stats_P_oper_only=no;
+
+	/* We can either show users a full stats I list: 
+	 *                                      stats_i_oper_only=no;
+	 * a list of auth blocks matching them: stats_i_oper_only=masked;
+	 * or make the list oper only:          stats_i_oper_only=yes;
+	 */
+	stats_i_oper_only=masked;
+
+	/* We can either show users a full stats k/K list:
+	 *                                 stats_k_oper_only=no;
+	 * a list of klines matching them: stats_k_oper_only=masked;
+	 * or make the list oper only:     stats_k_oper_only=yes;
+	 */
+	stats_k_oper_only=masked;
+                                    
+	/* time between notifications of ignored messages in +g mode */
+	caller_id_wait = 1 minute;
+
+	/* time between uses of the less intensive commands:
+	 * HELP/WHOIS/WHOWAS
+	 */
+	pace_wait_simple = 2 seconds;
+
+	/* time between uses of various commands such as INFO */
+	pace_wait = 10 seconds;
+
+	/* There are clients ignoring the FORCE_MOTD numeric.  There is no 
+	 * no point forcing MOTD on connecting clients IMO.  Give them a short
+	 * NOTICE telling them they should read the MOTD, and leave it at that.
+	 */
+	short_motd = no;
+
+	/* Enable PING cookies, clients must respond to a random string
+	 * sent to them in a PING command before being accepted by the server.
+	 * This is used to help block certain types of drones and FTP PASV
+	 * mode "spoofing".  The default is 'no'
+	 */
+	ping_cookie = no;
+
+	/* Set to "yes" to disable flood control for opers. */
+	no_oper_flood = yes;
+
+	/* Enable G-lines */
+	glines = no;
+
+	/* Set the time for how long G-lines will last.  This example is
+	 * the old setting of 12 * 3600. 
+	 */
+	gline_time = 1 day;
+
+	/* Define the maximum amount of time a user can idle before 
+	 * disconnecting them.  Set to 0 to disable.
+	 */
+        idletime = 0;
+
+	/* This is useful for leaf nodes and gateways. It keeps you from
+	 * connecting to too many places. It works by keeping you from
+	 * connecting to more than "n" nodes which you have C:blah::blah:6667
+	 * lines for.
+   	 *
+	 * Note that any number of nodes can still connect to you. This only
+	 * limits the number that you actively reach out to connect to.
+	 *
+	 * This value is only used if you don't have server classes defined,
+	 * and a server is in class 0 (the default class if none is set).
+	 */
+	maximum_links = 1;
+
+	/* This line will prevent the ircd from loading.  Remove it.  */
+	havent_read_conf = 1;
+	
+	/* Define these to the log files you want to use for user connections
+	 * (userlog), successful use of /oper (operlog), and failed use of
+	 * /oper (foperlog).  Logging will stop if either these files do not
+ 	 * exist, or if they are not defined.
+	 */
+	fname_userlog = "logs/userlog";
+	fname_operlog = "logs/operlog";
+	fname_foperlog = "logs/foperlog";
+
+	/* max_targets
+	 * only max_target targets can be PRIVMSG'ed / NOTICE'd in a single
+	 * command. default is 4 if not defined here. setting to 0 will have
+	 * broken results (ie PRIVMSG/NOTICE won't work).
+	 */
+	max_targets = 4;
+
+	/* client_flood
+	 * max number of _lines_ from a client that will be buffered
+	 * awaiting parsing, before dropping with 'Excess Flood'
+	 */
+	client_flood = 20;
+
+	/* message_locale
+	 * default message locale to use if gettext() is enabled
+	 * Use "custom" for the (in)famous Hybrid custom messages.
+	 * Use "standard" for the compiled in defaults.
+	 */
+	message_locale = "custom";
+
+	/* List of usermodes for the next two options:
+
+	 * Complete list:
+	 * +a - NONE       - Admin status.  OPER controls this
+	 * +b - bots       - See bot and drone flooding notices
+	 * +c - cconn      - Client connection/quit notices
+	 * +d - debug      - See debugging notices
+	 * +f - full       - See I: line full notices
+	 * +g - callerid   - Server Side Ignore
+	 * +i - invisible  - Not shown in NAMES or WHO unless you share a 
+	 *                   a channel
+	 * +k - skill      - See server generated KILL messages
+	 * +l - locops     - See LOCOPS messages
+	 * +n - nchange    - See client nick changes
+	 * +o - NONE       - Operator status.  OPER controls this
+	 * +r - rej        - See rejected client notices
+	 * +s - servnotice - See general server notices
+	 * +u - unauth     - See unauthorized client notices
+	 * +w - wallop     - See server generated WALLOPS
+	 * +x - external   - See remote server connection and split notices
+	 * +y - spy        - See LINKS, STATS (if configured), TRACE notices
+	 * +z - operwall   - See oper generated WALLOPS
+	 */
+	 
+	/*
+ 	 * List of usermodes that only operators can set.  Useful for
+	 * stopping clients setting modes they shouldnt be using like wallops.
+	 */
+	oper_only_umodes = bots, cconn, debug, full, skill, nchange, 
+                     rej, spy, external, operwall, locops, unauth;
+
+	/* List of usermodes that get set when a user /oper's
+	 * Default: locops, wallop, operwall, servnotice.	
+	 */
+	oper_umodes = locops, servnotice, operwall, wallop;
+
+
+	/*
+	 * servlink_path defines the path to the 'servlink' program.
+	 *
+	 * servlink is included with hybrid-7, and by default is installed
+	 * in the same directory as ircd, which is usually
+	 * /usr/local/ircd/bin.
+	 *
+	 * servlink is used to perform encryption/compression of
+	 * server<->server links.
+	 */
+	servlink_path = "/usr/local/ircd/bin/servlink";
+
+	/*
+	 * default_cipher_preference = cipher;
+	 *
+	 * Determines the default cipher preference to use for a link,
+	 * if no cipher_preference line is set for that connect {} block.
+	 */
+	# e.g. Use BF/256 unless overriden in connect {} block.
+	# default_cipher_preference = "BF/256";
+
+	/*
+	 * If your system does not have *random devices and you want to be
+	 * able to use OpenSSL and CRYPT_LINKS, set this and option
+	 * below if necessary. Beware - EGD is *very* CPU intensitive
+	 * process when gathering data for its pool.
+	 */
+	# use_egd = yes;
+
+	/*
+	 * Define location of EGD pool. Not necessary for OpenSSL >= 0.9.7
+	 * since it will automagically check locations.
+	 */
+	# egdpool_path = "/var/run/egd-pool";
+
+
+	/*
+	 * compression_level = <level>;
+	 *
+	 * Allows you to select desired trade off between speed/compression.
+	 *
+	 * Available values are 1 (least compression, fastest)
+	 * through 9 (most compression, slowest).
+	 *
+	 * The default value is 6.
+	 */
+	# compression_level = 9;
+
+	/*
+	 * throttle_time = <time>;
+	 * Allows you to set the minimum amount of time allowed between
+	 * connections from the same IP. This drops flooders very
+	 * quickly(long before usernames or hostnames are looked up), and
+	 * it is recommended you set it to at least 15 seconds. If you do
+	 * decide to disable it, use: */
+	 # throttle_time = 0;
+	/* Note that dline exempts work against throttling too, and you
+	 * should make yourself and the servers which connect to you dline
+	 * exempt.
+	 */
+	throttle_time = 30;
+
+};
+
+modules {
+	/* things relating to modules */
+
+	/* set paths for module.  these paths are searched both for
+	 * module="" and /quote modload, when a relative pathname
+	 * is specified. 
+	 */
+	path = "/usr/local/ircd/modules";
+	path = "/usr/local/ircd/modules/autoload";
+
+	/* load a module upon startup (or rehash) */
+	#module = "some_module.so";
+};

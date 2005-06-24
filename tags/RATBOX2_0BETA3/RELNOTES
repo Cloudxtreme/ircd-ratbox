@@ -1,0 +1,78 @@
+
+This is the current beta release version of the 'devel' tree of ircd-ratbox.
+
+NOTE: THIS IS BETA CODE.  It is run at your own risk.  By running this
+      code you assume FULL responsibility for any problems it may cause.  We
+      do NOT recommend this code is run on production servers. 
+
+-- ircd-ratbox-2.0 RELNOTES 
+
+-- ircd-ratbox-2.0beta3
+- rewrite of the module api.  modules from 1.x will no longer work
+- fix static module build
+- various bug fixes wrt client exit code
+- new blockheap code to allow for garbage collection to be done with
+  balloc.c instead of in various places
+- revert back to the old poll() code.  I broke it somewhere along the way
+- bugfix in adns.c that caused us to seemingly randomly dump core(old, old
+  bug)
+- added xline hash for non-wildcard xlines
+- optimization for moving clients between local lists. no more dlinkFind()
+  call here(ick)
+- added reject cache code
+- various vms cleanups
+- soft asserts, basically scream loudly on assert fail instead of core dump
+- added operstring/adminstring vanity stuff
+- modified burst order to send nicks then channels
+- added support for VMS ast i/o
+- misc code cleanups
+- added a helpfile cache, allowing users to use /quote help
+- all fixes done to -stable
+
+-- ircd-ratbox-2.0beta2 
+- added UNXLINE, controlled via xline=yes; in operator {};
+- removed anonops
+- removed gettext support, this never worked quite right
+- added experimental epoll support
+- massive client exit cleanups
+- allow bursting away messages, this is configurable
+- add cluster support
+- added back HTM mode messages(but not HTM code)
+- remove connection throttling as this didn't work quite right
+- removed iphash support, and just stick with using the host hash
+- clean up of banned client notifications
+- clean ups and optimization of poll() code
+- remove the non block heap code along with efence option
+  in configure
+- rework REHASH using a table
+- move m_map from contrib to modules/ 
+- add map_oper_only=yes|no to general{}, defaults to yes
+- Massive ipv6 cleanups.  Avoid using mapped ipv4 in ipv6 sockets.
+  On some platforms this requires help from the OS.  We attempt 
+  to disable this, but in some cases it isn't possible
+- optimized quit storm code
+- support for ipv6 cidr limits(hi Atomix :P)
+- split dline/undline/ungline into their own files
+- killed the abort_list
+- fix a bug that caused ziplinks to fail at random
+
+--------------------------------------------------------------------------------
+
+BUGS: Major bugs in this release are listed in BUGS
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+ the bug in one of the following ways:
+  a) By EMAIL to ircd-ratbox@lists.ratbox.org
+ Please include a gdb backtrace and keep the core file, binaries and 
+ modules in case the developers need them.
+
+DISCUSSION: There is a mailing list for discussion of ratbox issues,
+ To subscribe, visit:
+      http://lists.ratbox.org/cgi-bin/mailman/listinfo/ircd-ratbox
+
+Please read doc/whats-new.txt for information about what is in this release
+
+Other files recommended for reading: BUGS, README.FIRST, INSTALL
+
+--------------------------------------------------------------------------------
+$Id$

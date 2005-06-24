@@ -1,0 +1,134 @@
+
+This is the current release of the 'stable' tree of ircd-ratbox.  In theory
+this code should not break your network.
+
+-- ircd-ratbox-1.3rc1
+- omotd uses numerics nows
+- fix an adns bug where the resolver could hang and stop resolving clients
+- use writev when we have it available.
+- remove rt sigio support, it never really worked right
+- updated epoll support
+- STATS Y returns the number of clients currently in the class in the last
+  value
+- Make ping cookies be a bit more useful on boxes where rand() only returns
+  up to 32K
+- fix to disallow +beI modes starting with ':'
+- can now specify the minimum length of CIDR glines, in general {}:
+  gline_min_cidr = 16;
+- added temp xlines, see /quote help xline.  note permanent purely numerical 
+  xlines (ie "123") must now be specified with a time field of "0".
+- cluster {}; entries are now listed in stats U
+
+-- ircd-ratbox-1.2-3
+- really fix the /rehash rejectcache bug(somebody find me my brown paper
+  bag)
+- make joining resv channel notice give the reason for the jupe to the opers
+
+-- ircd-ratbox-1.2-2
+- fix linebuf corruption that can/will break your network
+- fix a core dump on /rehash rejectcache
+
+-- ircd-ratbox-1.2-1
+- emulated EOB via PING/PONG
+- added sendq_eob to class {};, controls a servers sendq after the
+  burst has ended.
+- new topic bursting system.  servers which have (default is off):
+  topicburst = yes; in their connect {}; will be burst topics.
+
+  burst_topicwho = yes; in channel {}; will enable bursting of 'who'
+  set the topic (default is off)
+- allow propagation of remote xlines from servers
+- stats d (temp dlines) now uses 'd' as the character on replies
+- servlink fix, ziplinks should work again now
+- reject cache now defaults to on
+- xlines now have two more 'special' characters:
+  '#' will match any digit [0-9], '@' will match any letter [A-Za-z]
+
+                          IMPORTANT
+
+  You MUST edit your xline.conf and escape any current uses of these
+  characters in the first field with '\'
+  ------------------------------------------------------------------
+  
+
+
+-- ircd-ratbox-1.2
+- fixed a fallthrough in the trace code causing wierd output
+- destroy channels that are created but have no users joined to them
+  in sjoin
+- fixed an ifdef using hide_spoof_ips instead of hide_servers_ips
+
+-- ircd-ratbox-1.2rc2
+- removed owho/owhois, from contrib/ - use opercheats
+- removed jupe from contrib/ - its just broken.
+- fixed rest of contrib code, it wont broadcast wallops for local
+  channels now.
+- minor speedup to /list
+- fixed bug with spoof lengths
+- /trace will no longer give "routing information" during flatten_links
+- fixed a possible core in the auth system
+- removed the max_clients option from serverinfo {};, it didnt do anything
+
+-- ircd-ratbox-1.2rc1
+- fix a few bugs in the new channel membership code
+- you may now specify "operspy" in oper_umodes/oper_only_umodes
+- fixed the spoof notice stuff.  no_spoof_notice has gone back to being
+  spoof_notice, which defaults to off.  If its set, the notice will be
+  sent always, but if we're in HIDE_SPOOF_IPS, itll not give the real host
+- opers are now exempt from knock-per-user limits
+- a partial fix for the modunload core (seems to fix fbsd but not linux)
+- fixed invite allowing users to go over the max_chans limit
+- extended spoofs to be able to spoof user@host
+- added spambot_exempt to auth { flags = ... }; to exempt a user from
+  spambot checks in join/part
+- the channel send code wasnt dealing with ONLY_CHANOPS properly, fixed.
+- only show errors from unregged servers to admins.
+
+-- ircd-ratbox-1.2beta1
+- added CIDR limits to classes, to limit the amount of connections in a
+  given prefix allowed.
+- added a reject cache, to handle people hammering the server when
+  theyre banned
+- added back split delay, the duration of time after a netsplit ends to
+  come out of splitmode
+- removed wildcard whois
+- added /quote SET OPERSTRING to give the reply of an oper
+- added /quote SET ADMINSTRING to give the reply used instead of
+  operstring for an admin.
+- added "operspy" logging into the ircd, this adds logging and the 
+  usermode +Z.  the actual operspy commands are not included.
+  
+  this adds options into logging {};
+    - fname_foperspylog = "path"; for local uses of operspy
+    - fname_foperspyremotelog = "path"; for remote uses of operspy
+  into general {};
+    - operspy_admin_only, controlling whether +Z is shown to admins only
+  into operator { flags = x; };
+    - oper_spy, controlling whether an oper may use operspy commands
+      if theyre patched in.
+- the ircd will now burst nicks first, then channels.
+- global "/names" now works properly again.
+- massive quitstorm cleanups, this should dramatically cut the amount
+  of cpu time used.
+- fix to disallow our servers impersonating glines from other users
+    
+--------------------------------------------------------------------------------
+
+BUGS: Major bugs in this release are listed in BUGS
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+ the bug in one of the following ways:
+  a) By EMAIL to ircd-ratbox@lists.ratbox.org
+ Please include a gdb backtrace and keep the core file, binaries and 
+ modules in case the developers need them.
+
+DISCUSSION: There is a mailing list for discussion of ratbox issues,
+ To subscribe, visit:
+      http://lists.ratbox.org/cgi-bin/mailman/listinfo/ircd-ratbox
+
+Please read doc/whats-new.txt for information about what is in this release
+
+Other files recommended for reading: BUGS, README.FIRST, INSTALL
+
+--------------------------------------------------------------------------------
+$Id$

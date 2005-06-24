@@ -1,0 +1,23 @@
+$Id$
+Updated for Hybrid 7 (2000/12/28)
+
+When you type /version you will often see something like this:
+*** hybrid-7(alpha)(20010117_13). irc.vchan GHCiIMp TS3ow
+
+Ever wondered what those funny chars mean after the version number? Well
+here they are:
+
+'C'	CMDLINE_CONFIG
+'D'	DEBUGMODE
+'G'	GLINES
+'H'	HUB
+'i'     SHOW_INVISIBLE_LUSERS (to opers)
+'I'     NO_DEFAULT_INVISIBLE
+'M'     IDLE_FROM_MSG
+'p'	CRYPT_OPER_PASSWORD
+'Y'	USE_SYSLOG
+
+'TS'    Supports TS
+'3'     TS Version 3
+'o'     TS Only
+'w'     TS Warnings

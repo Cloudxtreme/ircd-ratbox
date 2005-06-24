@@ -1,0 +1,111 @@
+                   Oper Challenge and Response System
+
+     In an effort to reduce the damage caused to a network by a 'hacked'
+O-line, Hybrid supports an OpenSSL based challenge-response system.  This
+new system allows the admin to remove all O: line passwords from the conf
+file.  Authentication is done through a public/private key.
+
+Requirements:
+
+The ircd must be compiled with the --enable-openssl option to configure.
+
+oper {} blocks must not have "normal" passwords, but should contain the
+contents of the private key file.  See below for more details
+
+m_challenge.so must be loaded.
+
+Process:
+
+Each oper should have a private key file and a public key file.  The keys
+can be generated with the genkey utility provided in tools/rsa_respond.
+
+The oper keeps their private key file in a safe place, and gives their
+public key file to their admin(s).
+
+The admin will place the contents of the public key file into the password 
+field of each of the oper's oper {} block in the conf file.
+
+The oper wishes to obtain their operator status, and issues the CHALLENGE
+command.
+
+The server will print out a long hexadecimal string, that needs to be fed
+to the respond utility provided in tools/rsa_respond
+
+The respond program will generate an answer, that is fed back to the CHALLENGE
+command.
+
+Generating the Key Files:
+
+The genkey and respond tools are in tools/rsa_respond in the source tree.
+These two programs can easily be distributed separately to each oper
+
+A script is included in the Makefile to create a distributable tar file
+from the source tree.  Issue 'make rsa_respond' from the root of the source
+tree to create the rsa_respond.tar.gz archive.  This can then be distributed
+to all of the server opers.  Look at the README in the tar archive for 
+more detailed instructions.
+
+genkey will create the private and public key files.  The syntax is as
+follows:
+$ ./genkey <public key file> <private key file>
+
+Example:
+$ ./genkey hwy.pub hwy.key
+Keyphrase:
+
+The genkey utility will ask for a keyphrase that will be needed to be typed in
+whenever the private key is used.
+
+Using CHALLENGE and respond:
+
+The administrator of the server you oper on must replace the password in your
+oper {} block with the contents of the public key file.  This means that
+/oper will no longer work.
+
+Note that the public key is a VERY long string.  It is a single line, and must
+be kept a single line in the conf file.
+
+The oper will issue /challenge <oper nick>, and see something like below:
+*** 56F1FDAE4C590C524CF758917E62C2A2A1376CB9C4C2E7D411BB0AD9C4A605A2D05A94E725
+4197E9D71438B5FB565B6FD35465E462305F35F4A2D45311F983B3E062F635912FA155B4B1E18E
+AA782CC107F4C9DA83092658D16A2E88A6BCF9820F5A044A29CDD4C062F05BF509CA3B561375CB
+C4179BD1CF6026BDE960E52C6B
+
+Note that the challenge is all on one line.
+
+Also note that with some clients, the oper will have to issue /quote CHALLENGE
+instead of /challenge.
+
+The oper will then have to feed that challenge to the respond program.
+
+The respond utility's syntax is:
+$ ./respond <private key file> <challenge from the server>
+
+Example:
+wcampbel@botbay (rsa_respond): ./respond hwy.key 56F1FDAE4C590C524CF758917E62C
+2A2A1376CB9C4C2E7D411BB0AD9C4A605A2D05A94E7254197E9D71438B5FB565B6FD35465E4623
+05F35F4A2D45311F983B3E062F635912FA155B4B1E18EAA782CC107F4C9DA83092658D16A2E88A
+6BCF9820F5A044A29CDD4C062F05BF509CA3B561375CBC4179BD1CF6026BDE960E52C6B
+Keyphrase:
+6B882932DD00F86123869E401F7334B9B0D0018A60F1DE244E90E47246AA87C7
+
+Note that the challenge parameter must be on one line.
+
+The keyphase must be entered properly to get the response.  The bottom line 
+is the response that must be sent back to the server.
+
+The oper will issue the following command in order to obtain operator status:
+/challenge +6B882932DD00F86123869E401F7334B9B0D0018A60F1DE244E90E47246AA87C7
+
+Note that the '+' is needed
+
+If successful, the oper will obtain operator status on the server.
+
+Benefits:
+
+The greatest benefit of using the challenge/response system is that there
+are no passwords sent over the network in plaintext.  There are also no
+credentials left on the server side, as only public keys are kept in the conf.
+The use of public/private key encryption provides far greater security over
+having a single password, and may (if the key is kept secure, and has a good
+passphrase) virtually eliminate hacked O-lines.

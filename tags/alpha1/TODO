@@ -1,0 +1,204 @@
+NOTE: If a todo matches a bug/enhancement listed on http://bugs.efnow.net
+then the bug number should appear in brackets (ie (#15)) - madmax
+
+- add example *::* and NOMATCH::* I: lines to example.conf
+- add more stderr debugging (ircd -s)... one for every place we syslog()
+- make wrapper function for res_init() to do spare_fd crap
+- ircd -s doesn't work through a restart
+- re-implement first parm in m_lusers()
+- trie' channel name list
+- one time oper passwords
+- SSL support
+- finish RFC'ing m_message.c
+
+----
+is-'s TODO list
+
+- umode +R for registered nick
+- TBURST
+- change nick instead of kill on nick collide
+- PART_REASON
+- dynamically extensible parser for modules
+- modularise channel, network code etc (not just commands)
+    we can use override_function() or similar for this
+- username/passwords (iauth ?)
+- channel modes to allow/prevent talking on channel
+  by hostmasks. 
+
+----
+fl's TODO
+
+- remote klines should be checked for redundancy
+- users should see +b/+d modes, however when +a they should see it as smode
+  bearing in mind it can be +a/-a, and set by a server/user, which gives 4
+  combinations
+
+-----------------------------------------------------------------------------
+madmax's TODO / New Years Resolutions
+
+\ Quit smoking - DONE
+- Get Laid in 2001
+- Do more exercise
+- Fix /links *mask* for non-opers/server_hide output (#4)
+\ Make /links from file server_hide only (#6)
+- Fix remote whois so 'works' but only returns idle time for opers (#1)
+- Make stats p just notice opers, rather than return a list, when
+  server_hide is on (#13)
+- Idle time should never be sent if local whois for nonops on shide, but a 
+  remote whois should show idle time, with a forced delay if local (#12)
+- Split up server_hide into parts (#17)
+- Client UIDs (ts4 style?) for cookies (later for persistent nicks)
+- vchans_oper_only (#18)
+- Definable server region or 'global' (open I) for /links output (#20)
+-----------------------------------------------------------------------------
+
+Adrian's TODO list
+
+* Check to make sure a SIGHUP actually causes a rehash. The last time I tried
+  it, the server stayed running, but the ircd stopped listening on ports.
+
+* make the reserved FD limit run-time tuneable, esp from comm_open()
+  This involves making fd_table[] a dynamically growing/(don't bother with
+  shrinking) list.. have the max fd list configurable in the conf file..
+
+* Fix the anti-client flood code to not be so anal when people connect -
+  I've counted all lines from a client as being a flood, so if a client
+  connects and issues JOIN's to a whole bunch of channels the flood
+  protection stops everything coming through at once .. (not that I mind.. :)
+
+* PLEASE redo all dlink_list management with the stuff in src/tools.c
+
+* In the server outbound connection code, make the sendto_realops()
+  logging more sane. Ie, if there's an error, also log the errno string.
+
+* look at timeout_resolver() and the actual work function, remove needing
+  to track the time for the next dns timeout, see if we can make them
+  simpler.
+    -- Nah, don't worry about this one. leave the DNS resolver alone..
+
+* look at the old Listener code in s_bsd.c before I chopped it. Notice
+  the anti-flood code in there. Make sure the same load-checking stuff
+  is in listener.c
+
+* look at mo_die() - find the restart function, break out the shutdown code,
+  and tidy shit up!
+
+* get send_message(), replace comm_setselect() with send_queued_write(), see
+  if the optimisation works
+
+* search for FLAGS_DEADSOCKET and IsDead() tests, figure out how to get
+  rid of them. Remember that you can't just call exit_client() from
+  dead_link() as I *bet* that cptr going away would be *bad*. So, this
+  basically means going through the code and checking return values of
+  things. :-)
+
+* remove aconf->ipnum, since we're doing a DNS lookup each time we
+  connect. If people don't like this, they can (should!) be running
+  a namecache locally!
+
+db-->>ummm aconf->ipnum is used for IP based klines only, not for DNS
+
+* What the _FUCK_ is IsLocal() and FLAGS_LOCAL and why the *smeg* is it
+  not defined ?
+
+* find what causes this
+
+[cacheboy]  Link with irc.vchan[unknown@255.255.255.255] established: (TS )
+            link
+
+thats INADDR_NONE. Find, fix.
+
+* Add the ircnet(?) split logic for nick collisions - on a nick collision,
+  change to "%d-%s", random, nick
+
+* Hrm. Since diane changed the user->channel code to use dlink_lists,
+  she's made some things faster (deopping lists of people in a net.join,
+  finding an op, etc) but some things slower (deleting from the channel,
+  change_channel_membership(), etc.) What needs to happen is that for
+  each channel a user is on, a flag needs to be set tracking which list
+  they're on so we don't have to search the lists when we want to change
+  their status. This could become a slow-CPU sticking point.
+
+db-->> Actually, the old code was just as slow at doing that, since
+    it was a link list of SLink's with a flag denoting whether client
+    on channel was an op or not... With a channel of 100 clients and 
+    thats 100 link SLink's
+
+Done things:
+
+* in read_packet(), there is a bit where a rejected client is being
+  "fake" read. Make sure you read() all the data first, or we'll end up
+  CPU-hogging the box. (check REJECT_HOLD)
+
+* kill fdlist_add() and associated mask stuff. We'll revisit the fdset
+  stuff through comm_setselect() magic later.
+
+* Find what uses the res.c routines. Since there's no caching anymore,
+  rip out the code that deals with cached replies.
+
+* KILL THE ZIPLINKS CODE! DIE! Reimplement as an external process later.
+
+* make sure we've fd_note()d on all the fd's as they change state
+  eg a listen socket becoming a client or server, etc ...
+
+* check out what the hell safe_write() is, why its in s_conf.c but being
+  used in other places, and why its closing the fd for people. It should
+  be moved out of there, and *not* close fds (forcing its users to instead!)
+  (Its been deleted now.. thanks dianora)
+
+* ok, this sucks. search for cptr->since, and esp in src/parse.c .
+  All this flood protection has to come out and reappear in *one* place!
+  (Adrian rewrote the line buffering code and client flood code..)
+
+
+------------------------------------------------------------------------------
+Little things to be done given enough time and initiative
+
+.  Bring back CIDR support in operator blocks
+   user="wcampbel@144.26.*"; # works - even if the hostname resolves
+   user="wcampbel@144.26.0.0/16"; # Does not work
+.  The 3 logging path settings are NOOP in the conf (logpath, oper_log, 
+   gline_log)
+.  $$*.server.mask and $#*.user.mask do not currently work...
+   Notice -- Unknown prefix (:Hwy-7!wcampbel@bee-90-245.bee.net PRIVMSG 
+   $hyb-devel.monkie.org :test) from 
+   hyb-devel.monkie.org[wcampbel@cats.meow.st], Squitting 
+   Hwy-7!wcampbel@bee-90-245.bee.net (DONE -- except for LL bugs)
+.  Have a few more things /quote SET'table
+.  Have a command (maybe a STATS or in INFO) to show all ircd.conf derived
+   options (Partially done in INFO) (In progress)
+.  More documentation on the gettext stuff, enough for a layman to use
+.  Extra \r\n sent to the log file by ts_warn needs to go
+.  Hyb7-ize Riedel's great oper document (Done, Riedel updated it)
+.  Get rid of the old useless test stuff, save about 100k untarred
+.  Fix tools/fixklines.c and tools/klineParse.c for the new kline.conf
+   format.
+.  Update tools/mkconf as well.
+.  Document the openssl CHALLENGE support more.
+.  Create some make release or something for rsa_respond
+.  Fix convertconf more
+.  Do we still need start_ircd.c and ircd_start.c?
+.  Look to see what other STATS commands can be made optionally oper-only
+.  Update ircd.8, or get rid of it (move to old?)
+.  2 pass conf parser (grab classes before anything that uses them)
+.  Replacement for the old X:...:2, silent reject
+.  Add scaleable database-based authentication.  Probably part of Iauth.
+   Also add support for server-side notify with the list stored in the
+   auth database.  This would make ircd an awesome instant messaging
+   backend.
+
+
+-- Diane's list
+
+* (Isomer promised this)
+  break /accept link when target changes nick (I can do that instead if
+  need be )
+
+* add logging to ircd.log of possible channel floods
+
+* add code to log a minute worth of flooding if the ircd gets n possible
+  flood messages on a channel in t seconds.. This log would be available
+  to hand to authorities if requested.
+
+
+  

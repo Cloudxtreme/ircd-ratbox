@@ -1,0 +1,16 @@
+Currently ircd-ratbox does support using the epoll interface added in linux
+2.5.x.  However since most systems do not have glibc support for epoll yet,
+I've had to hack in support for it.  Basically you'll need to make sure that
+the headers in /usr/include/linux point to the 2.5.x tree otherwise it will
+refuse to build.  This hack will go away once glibc has been updated to
+support it.  
+
+Otherwise to enable support for it just simply do 
+./configure --enable-epoll 
+
+I'm interested to see some benchmarks from users comparing epoll with
+poll and rtsigio.
+
+-Aaron Sethman <androsyn@ratbox.org>
+
+$Id$

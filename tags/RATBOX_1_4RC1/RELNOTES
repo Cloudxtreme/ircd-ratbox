@@ -1,0 +1,37 @@
+
+This is the current release candidate of the 'stable' tree of ircd-ratbox.
+
+-- ircd-ratbox-1.4rc1
+- update challenge.irc
+- added challenge.pl for irssi
+- fix servlink problems when using high fds
+- fix cpu/memory problems with sendto_realops_flags()
+- disallow invalid servernames, servernames without dots, and ones that
+  begin with digit as it breaks TS6
+- remove traces of UID
+- integrate opercheats patch
+- integrate hidden oper patch
+- updated hook system from 2.0
+- fix possible issue with challenge
+- have X-line reject message append the pattern matched to the notice
+
+--------------------------------------------------------------------------------
+
+BUGS: Major bugs in this release are listed in BUGS
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+ the bug in one of the following ways:
+  a) By EMAIL to ircd-ratbox@lists.ratbox.org
+ Please include a gdb backtrace and keep the core file, binaries and 
+ modules in case the developers need them.
+
+DISCUSSION: There is a mailing list for discussion of ratbox issues,
+ To subscribe, visit:
+      http://lists.ratbox.org/cgi-bin/mailman/listinfo/ircd-ratbox
+
+Please read doc/whats-new.txt for information about what is in this release
+
+Other files recommended for reading: BUGS, README.FIRST, INSTALL
+
+--------------------------------------------------------------------------------
+$Id$

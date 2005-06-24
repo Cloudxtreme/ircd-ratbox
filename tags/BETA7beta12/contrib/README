@@ -1,0 +1,38 @@
+$Id$
+
+This directory contains modules that have been contributed
+by other people, or aren't suitable for including into the 
+hybrid tree.
+
+m_flags.c      - FLAGS - csircd like support of changing usermodes
+                 Syntax:  FLAGS :+OWALLOPS -SWALLOPS
+
+m_jupe.c       - JUPE - Server juping command
+                 Syntax:  JUPE juped.server.name :Reason
+		 
+m_map.c        - MAP - Display the server routing graph in a visually pleasing
+                       format
+                 Syntax:  MAP
+		 
+m_mkpasswd.c   - MKPASSWD - generate a DES or MD5 encryption of a password
+                 Syntax:  MKPASSWD <plaintext> [MD5|DES]
+		 
+example_module.c - An example module to be used for creating your own.
+                   Syntax: TEST
+
+
+The following are the 'spy' parts, accessible via the +y usermode
+
+spy_admin_notice.c   - Spy on clients doing ADMIN
+spy_info_notice.c    - Spy on clients doing INFO
+spy_links_notice.c   - Spy on clients doing LINKS
+spy_motd_notice.c    - Spy on clients doing MOTD
+spy_stats_notice.c   - Spy on clients doing all STATS
+spy_stats_p_notice.c - Spy on clients doing STATS p only
+spy_trace_notice.c   - Spy on clients doing TRACE
+spy_whois_notice.c   - Spy on local clients who WHOIS you.
+
+Note: if you have both spy_stats_notice.c and spy_stats_p_notice.c loaded
+you will get two messages.
+
+vms_*.c        - Misc files needed for VMS support.

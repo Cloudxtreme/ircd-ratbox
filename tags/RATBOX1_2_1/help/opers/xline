@@ -1,0 +1,27 @@
+XLINE <gecos> [type] :<reason>
+
+Bans by gecos (aka 'real name') field by adding a line to xline.conf.
+If you need to, use ? in place of spaces in the <gecos>.
+
+The type field denotes how the XLINE works and may be:
+  0 - Send a warning to +r opers but allow user to connect.
+  1 - Reject the user and send a warning to +r opers. (default)
+  2 - Reject the user silently.
+
+Eg. /quote xline eggdrop?bot 2 :no bots
+
+The <gecos> field contains certain special characters:
+  ? - Match any single character
+  * - Many any characters
+  @ - Match any letter [A-Za-z]
+  # - Match any digit [0-9]
+
+To use a literal one of these characters, escape it with '\'.  A 
+literal '\' character must also be escaped.
+
+XLINE <gecos> <type> ON <server> :<reason>
+
+Will attempt to set the XLINE on <server> if <server> accepts
+remote xlines.  The <type> MUST be specified for a remote xline.
+
+- Requires Oper Priv: X

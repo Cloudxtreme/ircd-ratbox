@@ -1,0 +1,13 @@
+  Things to reduce, to use less startup memory.
+(originally from flier@globecom.net)
+
+in config.h:
+
+   - reduce NICKNAMEHISTORYLENGTH from 15000 to say 1000
+
+in defaults.h:
+
+   - reduce MAXSENDQLENGTH from 9000000 to 500000 or 1000000
+
+--------------------------------------------------------------------------------
+$Id$

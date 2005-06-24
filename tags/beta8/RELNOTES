@@ -1,0 +1,43 @@
+ ircd-hybrid-7b1 Release Notes
+--------------------------------------------------------------------------------
+
+This is the current beta version of ircd-hybrid-7.
+
+NOTE: This is still BETA code.  Run it at your own risk.  By running this
+ code you assume FULL responsibility for any problems it may cause.  We do
+ NOT recommend that you run BETA code on production IRC networks such
+ as EFnet.
+
+BUGS: Major bugs in this release are listed in BUGS
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+ the bug in one of the following ways:
+  a) By EMAIL to ircd-hybrid@the-project.org.  
+  b) By GNATS - use the `send-pr' script that should be installed into bin/ 
+     along with the rest of ircd.
+ Please include a gdb backtrace and a copy of your config.h and ircd.conf 
+ with any report  (with passwords and other sensitive information masked).
+
+DISCUSSION: there is a mailing list for discussion of hybrid issues,
+ including betas.  To subscribe, send a message with the subject "subscribe"
+ to hybrid-request@the-project.org.  This is the proper place to discuss new
+ features, bugs, etc.  Posting here is much more likely to get something
+ done than ranting on #TZ.
+
+Questions/comments directed to ircd-hybrid@the-project.org
+
+Please read doc/whats-new.txt for information about what is in this release
+
+Other files recommended for reading: BUGS, README.FIRST, INSTALL
+
+  *********** Note for those who dont bother reading docs *****************    
+  * - Reading INSTALL is now a must, as the old DPATH is now specified    *
+  *   when configure is run.                                              *
+  *   You now need to ./configure --prefix="/path/to/install/it"          *
+  * - The old config format WILL NOT WORK.  Please see doc/example.conf!  *
+  * - If you get errors compiling custom.mo, ensure you are using the     *
+  *   latest available gettext.  Tested with GNU gettext 0.10.35          *
+  *************************************************************************
+
+--------------------------------------------------------------------------------
+$Id$

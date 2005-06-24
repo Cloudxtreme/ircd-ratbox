@@ -1,0 +1,56 @@
+$Id$
+
+  The hybrid team is a group of ircd coders who were frustrated
+with the instability and all-out "dirtiness" of the efnet ircd's
+available. "hybrid" is the name for the collective efforts of a group
+of people, all of us.
+
+Anyone is welcome to contribute to this effort. We are serious about this.
+
+  We have run the code through "purify", a commercial program designed
+to find memory leaks. It continues to be checked with malloc tools today.
+The code has been prototyped. Profiling has also been done to catch 
+slow portions of the code. "crufty" code has been re-written, obsolete
+code has been ripped out. We have also looked at making the code as easy
+to setup up and run as possible using configure etc. 
+Finally speed enhancements and other enhancements have been made to this ircd,
+and continue to be made to this ircd. 
+
+ That is not to say that there are still not bugs, There are always bugs.
+But we review each others work on this project, and are open
+to bug reports.
+
+The core team as, of this major release:
+
+adrian, Adrian Chadd <adrian@creative.net.au>
+cosine, Patrick Alken <wnder@uwns.underworld.net>
+Dianora, Diane Bruce <db@db.net>
+is, Edward Brocklesby <ejb@leguin.org.uk>
+Neph|l|m, Adel Mezibra <adel@cybercable.fr>
+pro, Bill Jonus <proggy@earthling.net>
+Rodder, Jon Lusky <lusky@blown.net>
+toot, Toby Verrall <to7@antipope.fsnet.co.uk>
+Wohali, Joan Touzet <joant@cadence.com>
+
+The following people have contributed blood, sweat, and/or code to
+this release of hybrid, in nick alphabetical order:
+
+Bleep, Thomas Helvey <tomh@inxpress.net>
+CBongo, Chris Bongaarts <cab@tc.umn.edu>
+comstud, Chris Behrens <cbehrens@concentric.net>
+echo, Adam J. Durana <adam@caca.com>
+FlashMan, Craig A. Huegen <chuegen@quadrunner.com>
+jailbird, Dustin Marquess <jailbird@alcatraz.fdf.net>
+johan, Johannes Erdfelt <jerdfelt@eng.mindspring.net>
+LarZ, Matthew Ramsey <mjr@blackened.com>
+orabidoo, Roger Espel LLima <espel@unix.bigots.org>
+Seaner, Sean McVeigh <sdlmcvei@uwaterloo.ca>
+Shadowfax, Michael Pearce <mpearce@varner.com>
+Slowaris, Ryan Parker <rjp@wpmedia.com>
+ThemBones, Brian Kraemer <kraemer@u.washington.edu>
+White_Dragon, Chip Norkus, <wd@dal.net>
+WintrHawk, Jake Khuon <khuon@GCtr.Net>
+
+Others are welcome. Always.
+
+email bug fixes/complaints/rotten tomatoes to ircd-hybrid@the-project.org

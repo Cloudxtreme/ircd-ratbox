@@ -1,0 +1,64 @@
+#
+# Makefile.in for ircd/contrib
+#
+# $Id$
+#
+CC		= @CC@
+RM		= @RM@
+SED             = @SED@
+LEX		= @LEX@
+LEXLIB		= @LEXLIB@
+CFLAGS		= @CFLAGS@ -DIRCD_PREFIX=\"@prefix@\"
+MKDEP		= ${CC} -MM
+INSTALL		= @INSTALL@
+INSTALL_PROGRAM	= @INSTALL_PROGRAM@
+INSTALL_DATA	= @INSTALL_DATA@
+INSTALL_SUID    = @INSTALL_PROGRAM@ -o root -m 4755
+SHELL		= /bin/sh
+AUTOMODULEDIR	= @prefix@/modules
+
+IRCDLIBS	= @LIBS@ @SSL_LIBS@
+
+INCLUDES	= -I../include
+CPPFLAGS	= ${INCLUDES} @SSL_DEFINE@ @CPPFLAGS@
+
+SRCS =                          \
+  m_clearchan.c			\
+  m_jupe.c			\
+  m_hash.c			\
+  m_nickinfo.c                  \
+  m_opme.c                      \
+  whois_notice.c                \
+  stats_notice.c                \
+  links_notice.c
+
+OBJS = ${SRCS:.c=.so}
+
+default:	build
+build: all
+all: $(OBJS)
+
+install: all
+	@echo "Installing modules into $(AUTOMODULEDIR) .."
+	@for file in $(OBJS); do \
+		$(INSTALL_DATA) $$file $(AUTOMODULEDIR); \
+	done
+
+.SUFFIXES: .so
+
+.c.so:
+	${CC} -DPIC -fPIC -shared ${CPPFLAGS} $(CFLAGS) $< -o $@
+
+.PHONY: depend clean distclean
+depend:
+	${MKDEP} ${CPPFLAGS} ${SRCS} > .depend.tmp
+	${SED} s/\\\.o/\\\.so/ < .depend.tmp > .depend
+	${RM} -f .depend.tmp
+
+clean:
+	${RM} -f *.so *~ 
+
+distclean: clean
+	${RM} -f Makefile
+
+@INCDEP@

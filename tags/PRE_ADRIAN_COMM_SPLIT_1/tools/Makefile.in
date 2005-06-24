@@ -1,0 +1,54 @@
+# $Id$
+# $Id$
+
+CC=@CC@
+RM=@RM@
+IRCDLIBS=@LIBS@
+INCLUDEDIR=-I../include -I../zlib
+
+mkpasswd_SOURCES = mkpasswd.c
+mkpasswd_OBJECTS = mkpasswd.o
+viconf_SOURCES = viconf.c
+viconf_OBJECTS = viconf.o
+fixklines_SOURCES = fixklines.c
+fixklines_OBJECTS = fixklines.o
+convertconf_SOURCES = convertconf.c
+convertconf_OBJECTS = convertconf.o
+
+all_OBJECTS = $(viconf_OBJECTS) $(mkpasswd_OBJECTS) $(fixklines_OBJECTS)\
+	$(convertconf_OBJECTS)
+
+all: viconf mkpasswd fixklines convertconf
+
+build: all
+
+mkpasswd: $(mkpasswd_OBJECTS)
+	$(CC) $(LDFLAGS) -o mkpasswd $(mkpasswd_OBJECTS) $(IRCDLIBS)
+
+viconf: $(viconf_OBJECTS)
+	$(CC) $(LDFLAGS) -o viconf $(viconf_OBJECTS) $(IRCDLIBS)
+
+fixklines: fixklines.o $(IRCDLIBS)
+	$(CC) $(LDFLAGS) -o fixklines $(fixklines_OBJECTS) $(IRCDLIBS)
+
+convertconf: convertconf.o $(IRCDLIBS)
+	$(CC) $(LDFLAGS) -o convertconf $(convertconf_OBJECTS) $(IRCDLIBS)
+
+clean:
+	$(RM) -f $(all_OBJECTS) convertconf fixklines viconf chkconf mkpasswd *~ core *.exe
+
+distclean: clean
+	$(RM) -f Makefile
+
+.c.o:
+	$(CC) $(CFLAGS) $(INCLUDEDIR) -c $<
+
+install: build
+	@echo "Please do a make install from the top level directory"
+
+# DO NOT DELETE
+
+mkpasswd.o: ../include/setup.h ../zlib/zlib.h
+mkpasswd.o: ../zlib/zconf.h
+viconf.o: ../include/config.h ../include/setup.h
+viconf.o: ../zlib/zlib.h ../zlib/zconf.h

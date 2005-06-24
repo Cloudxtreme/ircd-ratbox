@@ -1,0 +1,21 @@
+This directory contains modules that have been contributed
+by other people, or isn't suitable for including into the 
+hybrid tree.
+
+links_notice.c - A Hook to provide the old LINKS notice functionality
+m_clearchan.c  - CLEARCHAN - clear a channel of all users and lock modes
+                 Syntax:  CLEARCHAN <#channel>
+m_hash.c       - HASH - The old hash table debugging code, look at README.HASH
+                 Syntax:  HASH <parameter>
+m_jupe.c       - JUPE - Jupe a server, this is as of yet unfinished
+                 Syntax:  JUPE <juped-server> :<Reason>
+m_opme.c       - OPME - op yourself on an opless channel
+                 Syntax:  OPME <#channel>
+m_nickinfo.c   - NICKINFO - provide info on a nick, for debugging purposes.
+                 Syntax:  NICKINFO <nick>
+stats_notice.c - A Hook to provide the old STATS notice functionality
+whois_notice.c - A Hook to provide the old WHOIS notice functionality
+
+example_module.c - An example module to be used for creating your own.
+                   Adds command: TEST
+vms_*.c        - Misc files needed for VMS support.

@@ -1,0 +1,248 @@
+This file outlines the features that ircd-hybrid has for IRC Operators.
+$Id$
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Usermodes: (* designates that the umode is oper only)
+
+     USERMODE     DESCRIPTION
+-----------------------------------------------------------------
+         +O     - Designates this client is a local IRC Operator.
+                  Use the /oper command to attain this.
+         +o     - Designates this client is a global IRC Operator.
+                  Use the /oper command to attain this.
+         +i     - Designates this client 'invisible'.
+       * +w     - Can see server wallops.
+       * +z     - Can see oper wallops.
+       * +s     - Can see generic server messages and oper kills.
+       * +c     - Can see client connections and exits.
+       * +u     - Can see unauthorized client connections.
+       * +r     - Can see 'rejected' client notices.
+       * +k     - Can see server kill messages.
+       * +f     - Can see 'I-line is full' notices.
+       * +y     - Can see stats/links/admin requests to name a few.
+       * +d     - Can see server debug messages.
+       * +n     - Can see client nick changes.
+       * +x     - Can see new server introduction and split messages.
+       * +b     - Can see possible bot warnings.
+       * +a     - Is marked as a server admin in whois.
+         +g     - "caller id" mode only allow accept clients to message you
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Oper Commands: (+ indicates that /quote must be used with ircII)
+
+COMMAND         - USAGE and DESCRIPTION
+-------------------------------------------------------------------
+  SQUIT         - SQUIT <server> [reason]
+                  Splits <server> away from your side of the net with
+                  [reason].
+
+  KILL          - KILL <nick> <reason>
+                  Disconnects user <nick> from the IRC server he/she
+                  is connected to with reason <reason>.
+                  Local Opers can only kill clients on his/her server.
+                  Global Opers can kill clients on any server on the
+                  IRC network.
+
+  STATS         - STATS <letter> [server|nick]
+                  Queries server [server] (or your own server if no
+                  server parameter is given) for info corresponing to
+                  <letter>.
+                  LETTER (* = Oper only.)
+                  ------ (^ = Can be configured to be oper only.)
+                  * c - Shows C/N lines
+                  * d - Shows D lines
+                  * e - Shows Events
+                  * f - Shows File Descripters
+                  * g - Shows G lines
+                  * h - Shows H/L lines
+                  * i - Shows I lines
+                    K - Shows K lines (or matched klines)
+                  * k - Shows temporary K lines (or matched temp klines)
+                    L - Shows IP and generic info about [nick]
+                    l - Shows hostname and generic info about [nick]
+                  * m - Shows commands and their usage
+                  ^ o - Shows O/o lines
+                  * P - Shows configured ports
+                    p - Shows opers connected and their idle times
+                  * q - Shows quaranteened nicks (Old Q: lines)
+                  * r - Shows resource usage by ircd
+                  * s - Shows the server cache
+                  * t - Shows generic server stats
+                  * U - Shows shared blocks (Old U: lines)
+                    u - Shows server uptime
+                  * v - Shows connected servers and their idle times
+                  * X - Shows gecos bans (Old X: lines)
+                  * y - Shows Y lines
+                  * z - Shows memory stats
+                  * ? - Shows connected servers and sendq info about them
+
+  CONNECT       - CONNECT <server_A> [port] [server_B]
+                  When [server_B] is used, CONNECT asks [server_B] to
+                  connect to <server_A>.  Global Opers only.
+
+                  When [server_B] is not used, CONNECT trys to connect
+                  your server to <server_A>.  Local and Global Opers.
+
+                  When [port] is used, the connection will be attempted
+                  to [port].
+                  When [port] is not used, 6667 is used as a default.
+
++ WALLOPS       - WALLOPS :<message>
+                  Sends a WALLOPS message of <message> to all opers
+                  who are umode +w and +z (see above)
+
+                  Server sent wallops go to all users who are umode
+                  +w, oper or not.
+
++ OPERWALL      - OPERWALL :<message>
+                  Sends an OPERWALL message of <message> to all
+                  opers who are umode +w and +z
+
++ LOCOPS        - LOCOPS :<message>
+                  Sends an LOCOPS message of <message. o to all
+                  opers on local server who are umode +w and +z
+
+  TRACE         - TRACE [server|nick]
+                  TRACE shows client info about [server|nick] or about
+                  the server you are on if no [server|nick] is given.
+
+                  All users that use TRACE can see the path to
+                  [server|nick] if given and all servers and opers
+                  connected, as well as the connection class they
+                  fall into.
+
+                  Opers can see all clients connected to a server
+                  with TRACE as well as the connection class they
+                  fall into.
+
+  REHASH        - REHASH [option]
+                  When no [option] is given, ircd will re-read the
+                  ircd.conf file.
+
+                  [option] can be one of the following:
+                    DNS     - Re-read the /etc/resolv.conf file
+                    GC      - Performs garbage collecting of excess
+                              memory.
+                    MOTD    - Re-reads MOTD file
+                    OMOTD   - Re-reads Oper MOTD file
+                    HELP    - Re-reads this HELP file
+
+  RESTART       - RESTART
+                  Restarts the IRC server.
+
+  CLOSE         - CLOSE
+                  Close any connections from clients who have not fully
+                  registered yet.
+
+  DIE           - DIE server.name [reason]
+                  Terminates the IRC server with optional reason 
+                  [reason]
+
++ HASH          - HASH <param>
+                  Shows some stats about ircd's internal hashes.
+                  V - Verify and report channel hash table stats
+                  v - Verify and report client hash table stats
+                  P - Report channel hash table stats
+                  p - Report client hash table stats
+                  R - Rebuild channel hash table
+                  r - Rebuild client hash table
+
++ KLINE         - KLINE <nick|user@host> :[reason]
+                  Adds a KLINE to the ircd.conf or klines.conf file which
+                  will ban the specified user from using that server.
+                  The banned client will receive a message saying he/she
+                  is banned with reason [reason]
+
+                  KLINE user@ip.ip.ip.ip :[reason]
+                  will kline the user at the unresolved ip.
+                  ip.ip.ip.ip can be in CIDR form i.e. 192.168.0.0/24
+                  or 192.168.0.* (which is converted to CIDR form internally)
+
+                  For a temporary KLINE, length of kline is given in
+                  minutes as the first parameter i.e.
+                  KLINE 10 <nick|user@host> :cool off for 10 minutes
+
++ UNKLINE       - UNKLINE <user@host>
+                  Will attempt to unkline the given <user@host>
+                  Will unkline a temporary kline.
+
++ DLINE         - DLINE <nick|ip> :[reason]
+                  Adds a DLINE to the ircd.conf or klines.conf file
+                  which will deny any connections from the IP address
+                  of the banned client.  The banned client will receive
+                  a message saying he/she is banned with reason [reason]
+
+                  In order to use <nick> rather than <ip>, <nick> must
+                  be on your server.
+
++ UNDLINE       - UNDLINE <ip>
+                  Will attempt to undline the given <ip>
+
++ SET           - SET <option> <value>
+                  <option> can be one of the following:
+                    AUTOCONN    - Sets autoconnect on or off for a particular
+                                  server
+                    AUTOCONNALL - Sets autoconnect on or off for all servers
+                    LOG         - Sets the Logging level for what is logged
+                                  to ircd.log and syslog.
+                    MAX         - Sets the number of max connections
+                                  to <value>.  (This number cannot exceed
+                                  HARD_FDLIMIT in config.h)
+                    IDLETIME    - The number of seconds a client can be idle
+                                  before disconnecting them
+                    SHIDE       - Turn server hiding on or off on the fly
+                    FLOODCOUNT  - The number of lines allowed before 
+                                  throttling a connection due to flooding
+                                  Note that this variable is used for both
+                                  channels and clients
+                    SPAMNUM     - Sets how many join/parts to channels
+                                  constitutes a possible spambot.
+                    SPAMTIME    - Below this time on a channel
+                                  counts as a join/part as above.
+                    MSGLOCALE   - Set the gettext() message locale
+                                  standard - Compiled in defaults
+                                  custom   - Old CUSTOM_ERR messages
+
++ GLINE         - GLINE <user@host> :[reason]
+		   -- if glines are enabled --
+                   Attempts to add a global IRC-network wide ban on
+                   <user@host> for the reason [reason].
+
+                   It takes three different opers on three different 
+                   servers to do the same GLINE within a short interval,
+                   to have a GLINE triggered for a compiled time of hours.
+
++ UNGLINE        - UNGLINE <user@host>
+                   -- if glines are enabled --
+                   Will attempt to remove gline matching <user@host>
+                   This will only remove the gline from YOUR server, it
+                   does not try to remove it globally.
+
++ TESTLINE       - TESTLINE <user@host>|ip
+                   -- Looks up given user@host or user@ip 
+                   returns info on any found I line or K line for that user,
+                   or D-line on ip.
+
++ CJOIN          - CJOIN <channel>
+                   -- Creates a new vchan
+                   Note: this command is optionally usable by users
+
++ MODLOAD        - MODLOAD <path/module.so>
+                   -- Load a module into the ircd
+                   the path can be an absolute path from / or from the
+                   IRCD_PREFIX (ie modules/autoload/m_users.so)
+                   NOTE:  Restricted to admins only
+
++ MODLIST        - MODLIST
+                   -- List the modules that are currently loaded into the
+                   ircd, along with their address and version.
+                   NOTE:  Restricted to admins only
+
++ MODUNLOAD      - MODUNLOAD <module.so>
+                   -- Unload a module from the ircd
+                   Use just the module name, the path is not needed.
+                   When a module is unloaded, all commands associated 
+                   with it are unloaded as well.
+                   NOTE:  Restricted to admins only

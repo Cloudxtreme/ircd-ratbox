@@ -1,0 +1,51 @@
+
+This is the current beta release version of the 'devel' tree of ircd-ratbox.
+
+NOTE: THIS IS BETA CODE.  It is run at your own risk.  By running this
+      code you assume FULL responsibility for any problems it may cause.  We
+      do NOT recommend this code is run on production servers. 
+
+doc/whats-new.txt contains important lists of changes between 2.0 and 1.3 -
+it is important you read this file before upgrading.
+
+-- ircd-ratbox-2.0b2
+- new hash function which should ease collisions on UIDs
+- fix to remove local clients from &me.serv->clients, which broke map count
+- broken writev() support removed
+- fixed problem with kill reasons
+- fixed trace
+- removed support for sigio
+- support for global capabilities
+- support for propagating temp xlines/resvs, note these can only be done to
+  2.x servers
+- remote servers can now introduce nicks beginning with a digit
+- fix a core with invalid nicks
+- added SIDs to /map
+- support for remote commands (kline, unkline etc) over ENCAP
+- proper encap handlers in struct Message.  This breaks any modules designed
+  for 2.0b1 -- to fix add "mg_ignore," after the server handler.
+- fix various problems with connect blocks that are marked for removal being
+  used/shown
+- UIDs from a remote server are now validated
+
+-- ircd-ratbox-2.0b1
+No release notes, please see whats-new.txt
+
+--------------------------------------------------------------------------------
+
+BUGS: Major bugs in this release are listed in BUGS
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+the bug by EMAIL to ircd-ratbox@lists.ratbox.org
+
+Please include a gdb backtrace and keep the core file, binaries and 
+modules in case the developers need them.
+
+DISCUSSION: There is a mailing list for discussion of ratbox issues,
+ To subscribe, visit:
+      http://lists.ratbox.org/cgi-bin/mailman/listinfo/ircd-ratbox
+
+Other files recommended for reading: BUGS, README.FIRST, INSTALL
+
+--------------------------------------------------------------------------------
+$Id$

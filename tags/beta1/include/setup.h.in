@@ -1,0 +1,81 @@
+/* include/setup.h.in.  Generated automatically from autoconf/configure.in by autoheader.  */
+
+/* Define if you need to in order for stat and other things to work.  */
+#undef _POSIX_SOURCE
+
+/* Define to the type of arg1 for select(). */
+#undef SELECT_TYPE_ARG1
+
+/* Define to the type of args 2, 3 and 4 for select(). */
+#undef SELECT_TYPE_ARG234
+
+/* Define to the type of arg5 for select(). */
+#undef SELECT_TYPE_ARG5
+
+/* Define if you have the ANSI C header files.  */
+#undef STDC_HEADERS
+
+/* Define with our select type */
+#undef SELECT_TYPE
+
+/* Define if we are going to use /dev/poll for network IO */
+#undef HAVE_DEVPOLL
+
+/* Define if we have socklen_t */
+#undef HAVE_SOCKLEN_T
+
+/* Define if we can include both string.h and strings.h */
+#undef STRING_WITH_STRINGS
+
+/* This is a string containing any extra underscores that must be prepended
+ * to symbols loaded from modules.
+ */
+#undef SYMBOL_PREFIX
+
+/* Define if you have the gettext function.  */
+#undef HAVE_GETTEXT
+
+/* Define if you have the <errno.h> header file.  */
+#undef HAVE_ERRNO_H
+
+/* Define if you have the <getopt.h> header file.  */
+#undef HAVE_GETOPT_H
+
+/* Define if you have the <stddef.h> header file.  */
+#undef HAVE_STDDEF_H
+
+/* Define if you have the <stdlib.h> header file.  */
+#undef HAVE_STDLIB_H
+
+/* Define if you have the <string.h> header file.  */
+#undef HAVE_STRING_H
+
+/* Define if you have the <strings.h> header file.  */
+#undef HAVE_STRINGS_H
+
+/* Define if you have the <sys/param.h> header file.  */
+#undef HAVE_SYS_PARAM_H
+
+/* Define if you have the <sys/syslog.h> header file.  */
+#undef HAVE_SYS_SYSLOG_H
+
+/* Define if you have the <unistd.h> header file.  */
+#undef HAVE_UNISTD_H
+
+/* Define if you have the descrypt library (-ldescrypt).  */
+#undef HAVE_LIBDESCRYPT
+
+/* Define if you have the dl library (-ldl).  */
+#undef HAVE_LIBDL
+
+/* Define if you have the intl library (-lintl).  */
+#undef HAVE_LIBINTL
+
+/* Define if you have the nsl library (-lnsl).  */
+#undef HAVE_LIBNSL
+
+/* Define if you have the resolv library (-lresolv).  */
+#undef HAVE_LIBRESOLV
+
+/* Define if you have the socket library (-lsocket).  */
+#undef HAVE_LIBSOCKET

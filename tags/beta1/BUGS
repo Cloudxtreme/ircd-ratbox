@@ -1,0 +1,63 @@
+ Known Bugs worthy of a mention:
+--------------------------------------------------------------------------------
+
+1.  Issues with server hostmasking.
+    - If for example the new servername is blah.blah.blah.nl, the following 
+      servernames will be checked, in this order: *.blah.blah.nl, *.blah.nl,
+      *.nl, one of which will match the host-masked server they are
+      connecting behind. This will be accepted by the host-masked server it
+      is connected behind, but when it reaches the server the host-masked
+      server is connected to, the find_server will match, so the host-masked
+      server will be dropped.
+
+2.  Unconfirmed reports of /modunload coring on certain platforms.
+    - There is an issue here with unloading a different module to that what
+      is loaded.  For example, you have m_vanity.so as a loaded module, and
+      you add 4 new commands to it, replace the module, then try to unload it.
+      
+      If you have made the module correctly, when unloading the module, you
+      would have also coded it to remove the 4 new commands, which it cant do
+      as they dont exist.  This could cause the server to core.  It also cannot
+      realistically be fixed, as you remove the whole point of dynamic modules.
+
+      This could also happen if you have a modules { path="x"; }; statement in
+      your config, with an old, or different copy of the module in.  It may
+      try to unload this version of the module, instead of the one that is 
+      actually loaded.
+
+      So:
+      - Minor changes are normally ok, such as adding a couple of lines to code.
+      If you do a major change to the module, including adding new commands, it
+      is recommended that you unload the module FIRST, replace the module file
+      and then /modload the module.
+      - Dont have multiple copies of the same module in your paths.
+
+3.  Problem with msgfmt command building custom msgs using gettext
+    - Please ensure you are using GNU gettext version 0.10.35.
+      Other versions are untested, and some are known to be
+      incompatible.
+
+4.  When linking servers, you may see warnings about servers being sent
+    403 numerics.  This is caused by the NOTICE AUTH :*** ... messages,
+    and is normal.
+
+5.  Admins receiving multiple notices
+    - Due to the fact we try to hide a servers real IP, we send some 
+      notices that have an IP address in them twice.  We send one to
+      the admins with the real IP in, and one to all opers (admins inc.)
+      with the servername instead.
+
+
+For more information see http://bugs.efnow.net
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+ the bug in one of the following ways:
+  a) By WEB - fill in the forms at http://bugs.efnow.net;
+  b) By EMAIL to ircd-hybrid@the-project.org.
+  c) By GNATS - use the `send-pr' script that should be installed into bin/ 
+     along with the rest of ircd.
+ Please include a gdb backtrace and a copy of your config.h and ircd.conf 
+ with any report  (with passwords and other sensitive information masked).
+
+--------------------------------------------------------------------------------
+$Id$

@@ -1,0 +1,79 @@
+
+This is the current release of the 'RATBOX_1' tree of ircd-ratbox.
+
+-- ircd-ratbox-1.4-2
+- remove the EOB command and force it via PING/PONG, fixing a bug with
+  sendq_eob
+- fixed problems with clients not being removed properly from reject cache
+- allow "LIST <n,>m" to search for channels with <n and >m users
+- fix giving no such kline on successful remote unkline
+- add ELIST 005 token, described in include/supported.h
+- /quote set maxclients is now an alias for /quote set max
+- raise split_delay to 60s, 15 just isnt enough for a burst on efnet
+- update of ircd manpage via Jeremy
+- we could come out of splitmode if we split again whilst waiting for split
+  delay, fixed.
+
+-- ircd-ratbox-1.4-1
+- init_netio() was in the wrong place, causing cpu spins on fbsd when kqueue
+  was enabled.
+
+-- ircd-ratbox-1.4
+- cleanup the ::1 handling
+- don't propagate channel modes for remote clients if we are a leaf
+- optimize reject list removals by order it by time
+- fix a logic error when doing an operspy with no argument
+- propagate remote x/k/d lines over encap if we don't have the CAPAB
+  for them
+- add a new testmask command - gives anonymous stats on how many clients
+  match
+- add safelist to 005 numeric
+- remove persistant channels
+- handle sjoins with no clients better
+- fix a buglet with pid file checking
+- fix a bug that caused opered clients to end up with the default ping
+  timeout
+
+-- ircd-ratbox-1.4rc2
+- fix a theoretical buffer overflow with mode handling
+- fix a possible core with the reject cache with the memory frobber
+  is enabled (with --enable-assert=hard)
+- have X-line warning messages append the pattern matched to the notice
+- fix a mode desync with bans
+- fix an issue with IPv6 ::1 type addresses, now we store it as 0::1
+  everywhere due to protocol issues
+
+-- ircd-ratbox-1.4rc1
+- update challenge.irc
+- added challenge.pl for irssi
+- fix servlink problems when using high fds
+- fix cpu/memory problems with sendto_realops_flags()
+- disallow invalid servernames, servernames without dots, and ones that
+  begin with digit as it breaks TS6
+- remove traces of UID
+- integrate opercheats patch
+- integrate hidden oper patch
+- updated hook system from 2.0
+- fix possible issue with challenge
+- have X-line reject message append the pattern matched to the notice
+
+--------------------------------------------------------------------------------
+
+BUGS: Major bugs in this release are listed in BUGS
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+ the bug in one of the following ways:
+  a) By EMAIL to ircd-ratbox@lists.ratbox.org
+ Please include a gdb backtrace and keep the core file, binaries and 
+ modules in case the developers need them.
+
+DISCUSSION: There is a mailing list for discussion of ratbox issues,
+ To subscribe, visit:
+      http://lists.ratbox.org/cgi-bin/mailman/listinfo/ircd-ratbox
+
+Please read doc/whats-new.txt for information about what is in this release
+
+Other files recommended for reading: BUGS, README.FIRST, INSTALL
+
+--------------------------------------------------------------------------------
+$Id$

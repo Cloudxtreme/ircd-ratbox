@@ -1,0 +1,522 @@
+core/m_die.so: core/m_die.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/irc_string.h \
+  ../include/numeric.h ../include/commio.h ../include/s_log.h \
+  ../include/s_conf.h ../include/send.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_newconf.h
+m_error.so: core/m_error.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/numeric.h \
+  ../include/send.h ../include/memory.h ../include/hook.h \
+  ../include/modules.h ../include/s_log.h ../include/s_conf.h
+m_join.so: core/m_join.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/channel.h ../include/client.h ../include/hash.h \
+  ../include/irc_string.h ../include/ircd.h ../include/numeric.h \
+  ../include/send.h ../include/s_serv.h ../include/s_conf.h \
+  ../include/s_newconf.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h ../include/sprintf_irc.h
+core/m_kick.so: core/m_kick.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/channel.h ../include/client.h ../include/irc_string.h \
+  ../include/ircd.h ../include/numeric.h ../include/send.h \
+  ../include/hook.h ../include/modules.h ../include/parse.h \
+  ../include/hash.h ../include/s_serv.h
+core/m_kill.so: core/m_kill.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/hash.h ../include/ircd.h \
+  ../include/numeric.h ../include/sprintf_irc.h ../include/s_log.h \
+  ../include/s_serv.h ../include/s_conf.h ../include/send.h \
+  ../include/whowas.h ../include/irc_string.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_newconf.h
+core/m_message.so: core/m_message.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/numeric.h \
+  ../include/s_conf.h ../include/s_serv.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/channel.h \
+  ../include/irc_string.h ../include/hash.h ../include/class.h \
+  ../include/send.h ../include/event.h ../include/patricia.h \
+  ../include/s_newconf.h ../include/memory.h
+core/m_mode.so: core/m_mode.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/balloc.h ../include/channel.h ../include/client.h \
+  ../include/hash.h ../include/irc_string.h ../include/ircd.h \
+  ../include/numeric.h ../include/s_user.h ../include/s_conf.h \
+  ../include/s_serv.h ../include/s_log.h ../include/send.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h \
+  ../include/sprintf_irc.h ../include/s_newconf.h
+core/m_nick.so: core/m_nick.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/hash.h ../include/irc_string.h \
+  ../include/ircd.h ../include/numeric.h ../include/s_conf.h \
+  ../include/s_stats.h ../include/s_user.h ../include/whowas.h \
+  ../include/s_serv.h ../include/send.h ../include/channel.h \
+  ../include/s_log.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h ../include/scache.h ../include/s_newconf.h \
+  ../include/balloc.h ../include/monitor.h ../include/commio.h
+core/m_part.so: core/m_part.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/channel.h ../include/client.h ../include/hash.h \
+  ../include/irc_string.h ../include/ircd.h ../include/numeric.h \
+  ../include/send.h ../include/s_serv.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_conf.h
+core/m_quit.so: core/m_quit.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/numeric.h \
+  ../include/s_serv.h ../include/send.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_conf.h \
+  ../include/sprintf_irc.h
+core/m_server.so: core/m_server.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/event.h ../include/hash.h \
+  ../include/irc_string.h ../include/ircd.h ../include/numeric.h \
+  ../include/s_conf.h ../include/s_newconf.h ../include/s_log.h \
+  ../include/s_serv.h ../include/s_stats.h ../include/scache.h \
+  ../include/send.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h
+core/m_sjoin.so: core/m_sjoin.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/channel.h ../include/client.h ../include/hash.h \
+  ../include/irc_string.h ../include/sprintf_irc.h ../include/ircd.h \
+  ../include/numeric.h ../include/send.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_serv.h \
+  ../include/s_conf.h
+core/m_squit.so: core/m_squit.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/irc_string.h ../include/ircd.h \
+  ../include/numeric.h ../include/s_conf.h ../include/s_log.h \
+  ../include/s_serv.h ../include/send.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/hash.h \
+  ../include/s_newconf.h
+m_accept.so: m_accept.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/hash.h ../include/ircd.h \
+  ../include/numeric.h ../include/s_conf.h ../include/s_serv.h \
+  ../include/send.h ../include/parse.h ../include/sprintf_irc.h \
+  ../include/hook.h ../include/modules.h ../include/irc_string.h
+m_admin.so: m_admin.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/numeric.h \
+  ../include/s_conf.h ../include/s_serv.h ../include/send.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h \
+  ../include/irc_string.h
+m_away.so: m_away.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/irc_string.h ../include/ircd.h \
+  ../include/numeric.h ../include/send.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_conf.h \
+  ../include/s_serv.h ../include/memory.h
+m_cap.so: m_cap.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/class.h ../include/client.h ../include/irc_string.h \
+  ../include/ircd.h ../include/numeric.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_serv.h \
+  ../include/s_user.h ../include/sprintf_irc.h ../include/send.h
+m_capab.so: m_capab.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/irc_string.h ../include/s_serv.h \
+  ../include/s_conf.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h ../include/memory.h
+m_challenge.so: m_challenge.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/memory.h ../include/client.h ../include/ircd.h \
+  ../include/hook.h ../include/modules.h ../include/numeric.h \
+  ../include/send.h ../include/s_conf.h ../include/parse.h \
+  ../include/irc_string.h ../include/s_log.h ../include/s_user.h \
+  ../include/cache.h ../include/s_newconf.h
+m_close.so: m_close.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/numeric.h \
+  ../include/commio.h ../include/send.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h
+m_cmessage.so: m_cmessage.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/channel.h ../include/numeric.h \
+  ../include/hook.h ../include/modules.h ../include/hash.h \
+  ../include/send.h ../include/s_conf.h ../include/ircd.h
+m_connect.so: m_connect.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/irc_string.h \
+  ../include/numeric.h ../include/commio.h ../include/s_conf.h \
+  ../include/s_newconf.h ../include/s_log.h ../include/s_serv.h \
+  ../include/send.h ../include/parse.h ../include/hash.h \
+  ../include/hook.h ../include/modules.h
+m_dline.so: m_dline.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/channel.h ../include/class.h ../include/client.h \
+  ../include/irc_string.h ../include/sprintf_irc.h ../include/ircd.h \
+  ../include/hostmask.h ../include/numeric.h ../include/commio.h \
+  ../include/s_conf.h ../include/s_newconf.h ../include/s_log.h \
+  ../include/send.h ../include/hash.h ../include/s_serv.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h \
+  ../include/memory.h
+m_encap.so: m_encap.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/send.h ../include/channel.h ../include/ircd.h \
+  ../include/numeric.h ../include/memory.h ../include/s_serv.h \
+  ../include/hash.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h ../include/sprintf_irc.h ../include/irc_string.h
+m_etrace.so: m_etrace.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/class.h ../include/hook.h ../include/client.h \
+  ../include/hash.h ../include/irc_string.h ../include/ircd.h \
+  ../include/numeric.h ../include/commio.h ../include/s_serv.h \
+  ../include/s_conf.h ../include/send.h ../include/parse.h \
+  ../include/modules.h
+m_gline.so: m_gline.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/s_gline.h ../include/channel.h ../include/client.h \
+  ../include/irc_string.h ../include/sprintf_irc.h ../include/ircd.h \
+  ../include/hostmask.h ../include/numeric.h ../include/commio.h \
+  ../include/s_conf.h ../include/s_newconf.h ../include/scache.h \
+  ../include/send.h ../include/s_serv.h ../include/hash.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h \
+  ../include/s_log.h ../include/memory.h
+m_help.so: m_help.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/ircd.h ../include/numeric.h ../include/send.h \
+  ../include/s_conf.h ../include/s_log.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/hash.h \
+  ../include/cache.h ../include/irc_string.h
+m_info.so: m_info.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/m_info.h ../include/channel.h ../include/client.h \
+  ../include/irc_string.h ../include/ircd.h ../include/hook.h \
+  ../include/numeric.h ../include/s_serv.h ../include/s_user.h \
+  ../include/send.h ../include/s_conf.h ../include/parse.h \
+  ../include/modules.h
+m_invite.so: m_invite.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/channel.h ../include/client.h ../include/hash.h \
+  ../include/irc_string.h ../include/ircd.h ../include/numeric.h \
+  ../include/send.h ../include/s_conf.h ../include/s_serv.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h
+m_ison.so: m_ison.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/irc_string.h ../include/sprintf_irc.h ../include/ircd.h \
+  ../include/numeric.h ../include/send.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_conf.h \
+  ../include/s_serv.h ../include/hash.h
+m_kline.so: m_kline.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/channel.h ../include/class.h ../include/client.h \
+  ../include/irc_string.h ../include/sprintf_irc.h ../include/ircd.h \
+  ../include/hostmask.h ../include/numeric.h ../include/commio.h \
+  ../include/s_conf.h ../include/s_newconf.h ../include/s_log.h \
+  ../include/send.h ../include/hash.h ../include/s_serv.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h \
+  ../include/event.h ../include/memory.h
+m_knock.so: m_knock.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/sprintf_irc.h ../include/channel.h ../include/client.h \
+  ../include/hash.h ../include/irc_string.h ../include/ircd.h \
+  ../include/numeric.h ../include/send.h ../include/s_conf.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h \
+  ../include/s_serv.h
+m_links.so: m_links.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/irc_string.h ../include/ircd.h \
+  ../include/numeric.h ../include/s_serv.h ../include/send.h \
+  ../include/s_conf.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h ../include/cache.h
+m_list.so: m_list.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/linebuf.h ../include/channel.h ../include/hash.h \
+  ../include/irc_string.h ../include/ircd.h ../include/numeric.h \
+  ../include/s_conf.h ../include/s_serv.h ../include/send.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h \
+  ../include/class.h
+m_locops.so: m_locops.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/irc_string.h \
+  ../include/numeric.h ../include/send.h ../include/s_user.h \
+  ../include/s_conf.h ../include/s_newconf.h ../include/hash.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h \
+  ../include/s_serv.h
+m_lusers.so: m_lusers.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/ircd.h ../include/numeric.h ../include/s_serv.h \
+  ../include/s_user.h ../include/send.h ../include/s_conf.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h
+m_map.so: m_map.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/hook.h ../include/modules.h \
+  ../include/numeric.h ../include/send.h ../include/s_conf.h \
+  ../include/sprintf_irc.h ../include/ircd.h ../include/irc_string.h
+m_monitor.so: m_monitor.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h ../include/balloc.h ../include/monitor.h \
+  ../include/numeric.h ../include/s_conf.h ../include/ircd.h \
+  ../include/irc_string.h ../include/send.h
+m_motd.so: m_motd.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/ircd.h ../include/send.h ../include/numeric.h \
+  ../include/hook.h ../include/s_serv.h ../include/parse.h \
+  ../include/modules.h ../include/s_conf.h ../include/cache.h
+m_names.so: m_names.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/sprintf_irc.h ../include/tools.h \
+  ../include/struct.h ../include/channel.h ../include/client.h \
+  ../include/hash.h ../include/irc_string.h ../include/ircd.h \
+  ../include/numeric.h ../include/send.h ../include/s_serv.h \
+  ../include/s_conf.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h
+m_oper.so: m_oper.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/irc_string.h ../include/ircd.h \
+  ../include/numeric.h ../include/commio.h ../include/s_conf.h \
+  ../include/s_newconf.h ../include/s_log.h ../include/s_user.h \
+  ../include/send.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h ../include/cache.h
+m_operspy.so: m_operspy.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/send.h ../include/channel.h ../include/ircd.h \
+  ../include/numeric.h ../include/memory.h ../include/s_serv.h \
+  ../include/hash.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h ../include/sprintf_irc.h ../include/s_log.h
+m_pass.so: m_pass.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/irc_string.h ../include/send.h \
+  ../include/numeric.h ../include/ircd.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_serv.h \
+  ../include/hash.h ../include/s_conf.h ../include/memory.h
+m_ping.so: m_ping.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/numeric.h \
+  ../include/send.h ../include/irc_string.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/hash.h \
+  ../include/s_conf.h ../include/s_serv.h
+m_pong.so: m_pong.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/ircd.h ../include/s_user.h ../include/client.h \
+  ../include/hash.h ../include/numeric.h ../include/s_conf.h \
+  ../include/send.h ../include/channel.h ../include/irc_string.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h
+m_post.so: m_post.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/numeric.h \
+  ../include/s_serv.h ../include/send.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_conf.h
+m_rehash.so: m_rehash.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/channel.h ../include/irc_string.h \
+  ../include/ircd.h ../include/s_gline.h ../include/numeric.h \
+  ../adns/adns.h ../include/res.h ../include/s_conf.h \
+  ../include/s_newconf.h ../include/s_log.h ../include/send.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h \
+  ../include/hostmask.h ../include/reject.h ../include/hash.h \
+  ../include/cache.h ../include/memory.h
+m_restart.so: m_restart.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/irc_string.h ../include/sprintf_irc.h \
+  ../include/ircd.h ../include/numeric.h ../include/s_conf.h \
+  ../include/s_newconf.h ../include/restart.h ../include/s_log.h \
+  ../include/send.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h
+m_resv.so: m_resv.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/channel.h ../include/ircd.h \
+  ../include/numeric.h ../include/s_serv.h ../include/send.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h \
+  ../include/s_conf.h ../include/s_newconf.h ../include/hash.h \
+  ../include/s_log.h ../include/sprintf_irc.h ../include/irc_string.h \
+  ../include/memory.h
+m_set.so: m_set.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/event.h ../include/irc_string.h \
+  ../include/sprintf_irc.h ../include/ircd.h ../include/numeric.h \
+  ../include/commio.h ../include/s_serv.h ../include/send.h \
+  ../include/channel.h ../include/s_conf.h ../include/s_newconf.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h
+m_stats.so: m_stats.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/class.h ../include/client.h ../include/irc_string.h \
+  ../include/ircd.h ../include/listener.h ../include/s_gline.h \
+  ../include/hostmask.h ../include/numeric.h ../include/scache.h \
+  ../include/send.h ../include/commio.h ../include/s_conf.h \
+  ../include/s_serv.h ../include/s_stats.h ../include/s_user.h \
+  ../include/event.h ../include/linebuf.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_newconf.h \
+  ../include/hash.h ../adns/adns.h ../include/res.h
+m_svinfo.so: m_svinfo.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/irc_string.h ../include/ircd.h \
+  ../include/numeric.h ../include/send.h ../include/s_conf.h \
+  ../include/s_log.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h
+m_tb.so: m_tb.c ../include/stdinc.h ../include/setup.h ../include/config.h \
+  ../include/defaults.h ../include/ircd_defs.h ../include/common.h \
+  ../include/tools.h ../include/struct.h ../include/send.h \
+  ../include/channel.h ../include/client.h ../include/ircd.h \
+  ../include/s_conf.h ../include/hook.h ../include/modules.h \
+  ../include/hash.h ../include/s_serv.h
+m_testline.so: m_testline.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/send.h ../include/hook.h ../include/modules.h \
+  ../include/hostmask.h ../include/numeric.h ../include/s_conf.h \
+  ../include/s_newconf.h ../include/sprintf_irc.h ../include/irc_string.h \
+  ../include/ircd.h
+m_testmask.so: m_testmask.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/irc_string.h \
+  ../include/numeric.h ../include/s_conf.h ../include/s_log.h \
+  ../include/s_serv.h ../include/send.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h
+m_time.so: m_time.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/numeric.h \
+  ../include/s_conf.h ../include/s_serv.h ../include/send.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h \
+  ../include/sprintf_irc.h
+m_topic.so: m_topic.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/channel.h ../include/client.h ../include/hash.h \
+  ../include/irc_string.h ../include/sprintf_irc.h ../include/ircd.h \
+  ../include/numeric.h ../include/send.h ../include/s_conf.h \
+  ../include/s_serv.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h
+m_trace.so: m_trace.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/class.h ../include/hook.h ../include/client.h \
+  ../include/hash.h ../include/irc_string.h ../include/ircd.h \
+  ../include/numeric.h ../include/commio.h ../include/s_serv.h \
+  ../include/s_conf.h ../include/s_newconf.h ../include/send.h \
+  ../include/parse.h ../include/modules.h
+m_user.so: m_user.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/irc_string.h ../include/ircd.h \
+  ../include/numeric.h ../include/s_user.h ../include/send.h \
+  ../include/s_conf.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h ../include/sprintf_irc.h ../include/memory.h
+m_userhost.so: m_userhost.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/numeric.h \
+  ../include/s_serv.h ../include/send.h ../include/irc_string.h \
+  ../include/sprintf_irc.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h ../include/s_conf.h
+m_users.so: m_users.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/ircd.h ../include/numeric.h ../include/s_serv.h \
+  ../include/s_conf.h ../include/send.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h
+m_version.so: m_version.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/numeric.h \
+  ../include/s_conf.h ../include/s_serv.h ../include/s_user.h \
+  ../include/send.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h
+m_wallops.so: m_wallops.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/ircd.h ../include/irc_string.h \
+  ../include/numeric.h ../include/send.h ../include/s_user.h \
+  ../include/s_conf.h ../include/s_newconf.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_serv.h
+m_who.so: m_who.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/channel.h ../include/hash.h \
+  ../include/ircd.h ../include/numeric.h ../include/s_serv.h \
+  ../include/send.h ../include/irc_string.h ../include/sprintf_irc.h \
+  ../include/s_conf.h ../include/s_log.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_newconf.h
+m_whois.so: m_whois.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/client.h ../include/hash.h ../include/channel.h \
+  ../include/ircd.h ../include/numeric.h ../include/s_conf.h \
+  ../include/s_serv.h ../include/send.h ../include/irc_string.h \
+  ../include/sprintf_irc.h ../include/s_log.h ../include/parse.h \
+  ../include/hook.h ../include/modules.h ../include/s_newconf.h
+m_whowas.so: m_whowas.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/whowas.h ../include/client.h ../include/hash.h \
+  ../include/irc_string.h ../include/ircd.h ../include/numeric.h \
+  ../include/s_serv.h ../include/s_user.h ../include/send.h \
+  ../include/s_conf.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h
+m_unreject.so: m_unreject.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/s_conf.h ../include/hostmask.h ../include/reject.h \
+  ../include/hook.h ../include/modules.h ../include/send.h \
+  ../include/ircd.h
+m_xline.so: m_xline.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/send.h ../include/channel.h ../include/client.h \
+  ../include/class.h ../include/ircd.h ../include/numeric.h \
+  ../include/memory.h ../include/s_log.h ../include/s_serv.h \
+  ../include/whowas.h ../include/irc_string.h ../include/sprintf_irc.h \
+  ../include/hash.h ../include/parse.h ../include/hook.h \
+  ../include/modules.h ../include/s_conf.h ../include/s_newconf.h
+m_services.so: m_services.c ../include/stdinc.h ../include/setup.h \
+  ../include/config.h ../include/defaults.h ../include/ircd_defs.h \
+  ../include/common.h ../include/tools.h ../include/struct.h \
+  ../include/send.h ../include/channel.h ../include/client.h \
+  ../include/ircd.h ../include/numeric.h ../include/memory.h \
+  ../include/s_conf.h ../include/s_serv.h ../include/hash.h \
+  ../include/parse.h ../include/hook.h ../include/modules.h \
+  ../include/sprintf_irc.h ../include/irc_string.h

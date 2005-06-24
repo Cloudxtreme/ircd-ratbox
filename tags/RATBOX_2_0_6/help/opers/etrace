@@ -1,0 +1,10 @@
+ETRACE [-full|-v4|-v6]
+
+With no argument, ETRACE gives a list of all clients connected
+to the local server, both users and operators.
+
+With -full option, ETRACE lists all clients along with the
+two unused fields sent in the USER command when they connected.
+
+When ipv6 is enabled, the -v4 and -v6 options display clients
+using ipv4 and ipv6 respectively.

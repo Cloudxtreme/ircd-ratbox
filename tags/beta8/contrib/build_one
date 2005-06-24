@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# This is a script to build a single module based on the variables
+# in Makefile (yes, this means that configure MUST have been run
+# prior to using this)
+
+if [ ! $1 ]; then
+  echo Please specify a module source
+  exit 1
+fi
+
+if [ ! -f $1 ]; then
+  echo Please specify a valid module source
+  exit 2
+fi
+
+if [ ! -f Makefile ]; then
+  echo Please run configure first
+  exit 3
+fi
+  
+CC=`grep '^CC' Makefile | sed 's/CC//' | sed 's/= //' | tr -d '\r' | \
+    tr -d '\n'`
+CFLAGS=`grep '^CFLAGS' Makefile | sed 's/CFLAGS//' | sed 's/= //' | \
+    tr -d '\r' | tr -d '\n' | tr -d '\\'`
+SSL_INCLUDES=`grep '^SSL_INCLUDES' Makefile | sed 's/SSL_INCLUDES//' |
+    sed 's/= //' | tr -d '\r' | tr -d '\n'`
+BASENAME=`basename $1 | sed 's/\.c//'`
+
+echo $CC -DPIC -fPIC -shared $CFLAGS -I../include -I/usr/local/include $SSL_INCLUDES $1 -o $BASENAME.so
+$CC -DPIC -fPIC -shared $CFLAGS -I../include -I/usr/local/include $SSL_INCLUDES $1 -o $BASENAME.so

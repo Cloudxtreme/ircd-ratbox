@@ -1,0 +1,78 @@
+$Id$
+
+The following is a list of major changes between ircd-ratbox-1.x and
+ircd-ratbox-2.x
+
+Config File
+-----------
+- name="foo"; is no longer supported in connect {}; operator {}; and
+  class {};.  You must now use connect "irc.foo.com" { ... }; etc.
+- operator {}; no longer contains a class
+- kline_with_connection_closed is gone, replaced with 
+  kline_reason = "Connection closed";
+- logging {}; is gone, replaced with more advanced log system - see
+  example.conf log {}; for more info.
+- kline = yes; etc is no longer supported, please use 
+  flags = kline, gline; etc.  As a side effect of this, an oper is not
+  given any default flags, including operwall.
+- support for a specific opers initial umodes on /oper, by umodes = ...;
+  in operator {};
+- added stats_e_disabled = yes|no; to general {};, controlling whether stats
+  e (which can contain server ips) is never shown to anyone
+
+Client
+------
+- /help is now available for all users, as its now cached in memory.
+  removes config option use_help from general {};
+
+Oper
+----
+- kline/dline <nick> is no longer supported
+- oper reasons are now more fully supported
+- opers can now be hidden from stats p, by flag "invisible"
+- XLINEs no longer contain a type field, theyll now all just silently reject
+- temp xlines and resvs
+
+Channels
+--------
+- persistent channels have been removed
+- quiet_on_ban now uses a cache, which should speed it up
+
+Server <-> Server Protocol
+--------------------------
+- support for bursting away messages on connect, controlled by
+  burst_away = yes|no; in general {};
+- TS6, the new server <-> server protocol.  As part of this you *must*
+  specify a "sid" in serverinfo {}; that is three alphanumeric characters,
+  and must start with a digit.  use_ts6 = yes|no; in general controls
+  whether it is actually used or not.  For more information, see:
+  http://www.ircd-ratbox.org/TS6.txt 
+- fakename in connect {}; is gone, you can no longer mask servers.
+- support for encrypted links are gone
+
+Misc
+----
+- support for message translation has been removed.  If you want these, you
+  modify messages.tab and distribute that.
+- by popular request, HTM notification is back
+- most of server hiding is gone, only thing that is left is flattened links
+- flattened links cache is now stored in memory instead of a file
+- nick delay.  any client which splits will have their nick 'locked', until
+  a remote client uses this nick, or until it expires after the time nick_delay 
+  in general {}.  This prevents the masses of kills from clients 'regaining'
+  nicknames on a short split.
+- the old "you need xline=yes;" notices have been replaced by ERR_NOPRIVS
+  (numeric 723)
+
+Code cleanups
+-------------
+- remove mapped ipv4 in ipv6 sockets, the correct native socket will now be
+  used for each.
+- module API has been rewritten, 1.x modules will no longer work.
+- hook API has been rewritten
+- proper handlers for ENCAP commands
+- support for vms ast i/o
+- connect {}; and operator {}; are now in their own structs, saving memory
+  in ConfItem
+- shared/cluster now use the same struct and flags
+- various other code cleanups thatd take all year to list ;)

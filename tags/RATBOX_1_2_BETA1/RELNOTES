@@ -1,0 +1,52 @@
+
+This is the current release candidate version of the 'stable' tree of 
+ircd-ratbox.  This code is run at your own risk.
+
+-- ircd-ratbox-1.2rc1
+- added CIDR limits to classes, to limit the amount of connections in a
+  given prefix allowed.
+- added a reject cache, to handle people hammering the server when
+  theyre banned
+- added back split delay, the duration of time after a netsplit ends to
+  come out of splitmode
+- removed wildcard whois
+- added /quote SET OPERSTRING to give the reply of an oper
+- added /quote SET ADMINSTRING to give the reply used instead of
+  operstring for an admin.
+- added "operspy" logging into the ircd, this adds logging and the 
+  usermode +Z.  the actual operspy commands are not included.
+  
+  this adds options into logging {};
+    - fname_foperspylog = "path"; for local uses of operspy
+    - fname_foperspyremotelog = "path"; for remote uses of operspy
+  into general {};
+    - operspy_admin_only, controlling whether +Z is shown to admins only
+  into operator { flags = x; };
+    - oper_spy, controlling whether an oper may use operspy commands
+      if theyre patched in.
+- the ircd will now burst nicks first, then channels.
+- global "/names" now works properly again.
+- massive quitstorm cleanups, this should dramatically cut the amount
+  of cpu time used.
+- fix to disallow our servers impersonating glines from other users
+    
+--------------------------------------------------------------------------------
+
+BUGS: Major bugs in this release are listed in BUGS
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+ the bug in one of the following ways:
+  a) By EMAIL to ircd-ratbox@lists.ratbox.org
+ Please include a gdb backtrace and keep the core file, binaries and 
+ modules in case the developers need them.
+
+DISCUSSION: There is a mailing list for discussion of ratbox issues,
+ To subscribe, visit:
+      http://lists.ratbox.org/cgi-bin/mailman/listinfo/ircd-ratbox
+
+Please read doc/whats-new.txt for information about what is in this release
+
+Other files recommended for reading: BUGS, README.FIRST, INSTALL
+
+--------------------------------------------------------------------------------
+$Id$

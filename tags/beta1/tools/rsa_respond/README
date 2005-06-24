@@ -1,0 +1,19 @@
+# $Id$
+
+rsa_respond
+(a tiny little example implementation of client support for RSA authentication)
+
+This program takes the hexadecimal challenge string from the irc server and
+produces the appropriate response (as calculated against your ssh identity file
+or by ssh-agent)
+
+An example usage (tested on BitchX):
+
+/on ^386 * exec rsa_respond a $1
+
+Will cause the response to be displayed on numeric 386 received from the IRC
+server (numeric 386 is in reply to /quote CHALLENGE).  The response is
+generated using a key in the ssh-agent.
+
+Unfortunately, we can't make it respond with a /oper command or anything else.
+/exec output can only be directed to the console, or a PRIVMSG/NOTICE afaik :(

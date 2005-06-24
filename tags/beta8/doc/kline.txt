@@ -1,0 +1,95 @@
+			    kline 
+                            =====
+
+
+  kline has been extended to add remote server klines, this is an extension
+of the original hybrid-6 concept of server shared mode which allowed a hub
+and leaf to share klines, locops etc. 
+
+  In this implementation, it is extended to be routable among servers which
+understand the "KLN" capability. This allows us to continue to "talk"
+to non remote kline capable servers without breaking anything. This keeps
+us completely EFnet compatible.
+
+  Oper usage:
+
+  Oper wishes to place a permanent kline on user@host giving reason for kline.
+
+  /quote kline [nick|user@host]   :reason
+
+  Oper wishes to place a temporary kline (tkline) time in minutes is
+  given as 'n'. 
+
+  /quote kline n [nick|user@host] :reason
+
+
+  For a remote kline
+  Oper wishes to kline user@host on server irc.xyz.net
+
+  /quote kline [nick|user@host] on irc.xyz.net :reason
+
+  and the tkline version
+
+  /quote kline n [nick|user@host] on irc.xyz.net :reason
+
+
+  For a masked-net kline
+  Oper wishes to kline user@host on all servers within uk: *.uk
+
+  /quote kline [nick|user@host] on *.uk :reason
+
+  and the tkline version
+
+  /quote kline n [nick|user@host] on *.uk :reason
+
+  
+  For a network wide kline
+  Oper wishes to kline user@host on all shared servers, and the local server
+
+  /quote kline [nick|user@host] on * :reason
+
+  and the tkline version
+
+  /quote kline n [nick|user@host] on * :reason
+
+
+  Note, in all the remote cases, the originating server must be
+put into shared{} block(s) in ircd.conf. (see example.conf in this directory
+for full information)
+
+   shared {
+          name = "this.server.net";
+
+# optional limit on user@host for oper
+          user = "db";
+          host = "db.net";
+   };           
+
+
+
+Server to Server Protocol
+=========================
+
+  As mentioned above, each server capable of remote klines passes
+the capability KLN along. No server will send a KLINE to a server
+without a KLN capability.
+
+  Server to server messages are formatted like this:
+
+  ":oper KLINE target.server.name N user host :reason"
+    
+  Note the difference between hybrid-6 GLINE which explicitly passed
+the oper user@host and server along. This was originally done to handle
+possible desync conditions, but is now shelved in favor of saving 
+some bandwidth.
+
+   oper is the nick of the oper placing the kline
+
+   target.server.name is the target name, *.mask or *
+   N is 0 for a perm kline, some value > 0 for a tkline
+
+   user,host,reason should be obvious..
+
+
+$Id$
+

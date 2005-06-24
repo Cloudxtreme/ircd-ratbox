@@ -1,0 +1,44 @@
+
+The actual usage of the hook system needs documented here, I'll wait for
+larne to fix that, but here is the list of supported hooks at current.
+
+
+This is currently the list of supported hooks in ircd-ratbox
+
+"new_local_client" - takes struct Client as an argument and gets called
+		     when a new client is introduced but before we
+		     release the client into read_packet()
+"burst_channel"	   - takes struct hook_burst_channel as an argument
+		     and gets called as channels are getting burst on to
+		     the network.  See contrib/m_tburst.c for an example
+
+"exit_local_client" - takes a struct exit_client_hook and gets called
+		      while a local client is exiting.
+
+"exit_unknown_client" - takes a struct exit_client_hook and gets called
+			while an unknown client is exiting.
+
+
+The following are for debugging and take struct hook_io_data for arguments. 
+These can be used for a variety of purposes, but are aimed at the developer
+community.
+"iosend"
+"iorecv"
+"iorecvctrl"
+
+Also some modules declare their own hooks, and can be used in other modules. 
+The majority of these are used to implement the spy functions in contrib/. 
+These all take an argument that is struct hook_spy_data
+
+"doing_admin_hook"
+"doing_stats_hook"
+"doing_stats_p_hook"
+"doing_info_hook"
+"doing_stats_L_hook"
+"doing_trace_hook"
+"doing_whois_local_hook"
+"doing_whois_global_hook"
+"doing_motd_hook"
+"doing_links_hook"
+
+$Id$

@@ -1,0 +1,28 @@
+
+This is the current version of the 'devel' tree of ircd-ratbox.  This code
+is not suitable for use on production servers.
+
+If you are upgrading from 2.0, you must read doc/whats-new-2.1.txt
+If you are upgrading from 1.x, you must read doc/whats-new-2.1.txt and
+doc/whats-new-2.0.txt
+
+--------------------------------------------------------------------------------
+
+BUGS: Major bugs in this release are listed in BUGS
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+the bug by EMAIL to ircd-ratbox@lists.ratbox.org
+
+Please include a gdb backtrace and keep the core file, binaries and 
+modules in case the developers need them.
+
+DISCUSSION: There is a mailing list for discussion of ratbox issues,
+ To subscribe, visit:
+      http://lists.ratbox.org/cgi-bin/mailman/listinfo/ircd-ratbox
+
+You may also (if youre lucky) find us on #ratbox@EFNet
+
+Other files recommended for reading: BUGS, README.FIRST, INSTALL
+
+--------------------------------------------------------------------------------
+$Id$

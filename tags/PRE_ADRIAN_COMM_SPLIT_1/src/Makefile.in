@@ -1,0 +1,162 @@
+#
+# Makefile.in for ircd/src
+#
+# $Id$
+#
+CC = @CC@
+RM = @RM@
+LEX = @LEX@
+LEXLIB = @LEXLIB@
+
+MKDEP = ${CC} -MM
+
+IRCDLIBS = @LIBS@ ../zlib/libz.a
+
+INCLUDES = -I../include -I../zlib
+CPPFLAGS = ${INCLUDES} @CPPFLAGS@
+ 
+y.tab.o:	y.tab.c ircd_parser.y
+	gcc -g -I ../include -I. -c y.tab.c
+
+y.tab.c:	ircd_parser.y
+	yacc -d ircd_parser.y
+
+lex.yy.o:	lex.yy.c ircd_lexer.l
+	gcc -g -I ../include -c lex.yy.c
+
+lex.yy.c:	ircd_lexer.l
+	${LEX} ircd_lexer.l
+
+SRCS =                          \
+  blalloc.c                     \
+  channel.c                     \
+  vchannel.c                    \
+  class.c                       \
+  client.c                      \
+  dbuf.c                        \
+  dline_conf.c                  \
+  fdlist.c                      \
+  fileio.c                      \
+  flud.c                        \
+  hash.c                        \
+  irc_string.c                  \
+  ircd.c                        \
+  ircdauth.c                    \
+  ircd_signal.c                 \
+  list.c                        \
+  listener.c                    \
+  m_admin.c                     \
+  m_away.c                      \
+  m_capab.c                     \
+  m_cburst.c                    \
+  m_cjoin.c                     \
+  m_close.c                     \
+  m_connect.c                   \
+  m_die.c                       \
+  m_drop.c                      \
+  m_error.c                     \
+  m_gline.c                     \
+  m_htm.c                       \
+  m_info.c                      \
+  m_ison.c                      \
+  m_join.c                      \
+  m_help.c                      \
+  m_invite.c                    \
+  m_kick.c                      \
+  m_kill.c                      \
+  m_kline.c                     \
+  m_knock.c                     \
+  m_links.c                     \
+  m_list.c                      \
+  m_lljoin.c                    \
+  m_locops.c                    \
+  m_lusers.c                    \
+  m_mode.c                      \
+  m_names.c                     \
+  m_nick.c			\
+  m_notice.c			\
+  m_oper.c                      \
+  m_operwall.c                  \
+  m_part.c                      \
+  m_pass.c                      \
+  m_ping.c                      \
+  m_pong.c                      \
+  m_privmsg.c			\
+  m_quit.c                      \
+  m_rehash.c                    \
+  m_restart.c                   \
+  m_server.c                    \
+  m_set.c                       \
+  m_sjoin.c                     \
+  m_squit.c                     \
+  m_stats.c                     \
+  m_svinfo.c                    \
+  m_time.c                      \
+  m_topic.c                     \
+  m_trace.c                     \
+  m_unkline.c                   \
+  m_userhost.c                  \
+  m_user.c			\
+  m_users.c                     \
+  m_version.c                   \
+  m_wallops.c                   \
+  m_who.c                       \
+  m_whois.c                     \
+  match.c                       \
+  motd.c                        \
+  mtrie_conf.c                  \
+  oldparse.c			\
+  oratime.c                     \
+  numeric.c                     \
+  packet.c                      \
+  parse.c                       \
+  res.c                         \
+  restart.c                     \
+  s_auth.c                      \
+  s_bsd.c                       \
+  s_conf.c                      \
+  s_debug.c                     \
+  s_log.c                       \
+  s_misc.c                      \
+  s_serv.c                      \
+  s_stats.c                     \
+  s_user.c                      \
+  s_zip.c                       \
+  scache.c                      \
+  send.c                        \
+  sprintf_irc.c                 \
+  whowas.c
+
+OBJS = ${SRCS:.c=.o}
+
+all: ircd
+
+build: all
+
+ircd: ${OBJS} y.tab.o lex.yy.o version.o
+	${CC} ${LDFLAGS} -o $@ ${OBJS} lex.yy.o y.tab.o version.o ${IRCDLIBS} ${LEXLIB}
+	mv version.c version.c.last
+
+install: build
+	@echo "Please do a make install from the top level directory"
+
+version.c: version.c.SH
+	/bin/sh ./version.c.SH
+
+
+# this is really the default rule for c files
+.c.o:
+	${CC} ${CPPFLAGS} ${CFLAGS} -c $<
+
+.PHONY: depend clean distclean
+depend:
+	${MKDEP} ${CPPFLAGS} ${SRCS} > .depend
+
+clean:
+	${RM} -f *.o *.exe *~ y.tab.c lex.yy.c ircd.core core ircd 
+
+distclean: clean
+	${RM} -f Makefile version.c.last
+
+include .depend
+

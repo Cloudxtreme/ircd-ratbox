@@ -1,0 +1,25 @@
+$Id$
+
+A directory of support programs for ircd.
+
+convertconf - converts a Hybrid 5 or 6 conf file to the new
+              style
+
+mkpasswd - makes password for O lines
+
+start_ircd.c - start program for fbsd and bsd/os systems
+ircd_start.c - start program for solaris
+
+fixklines.c - converts 192.168.0.* K and D lines to CIDR format
+
+mkconf - a script to create a basic ircd.conf (Note:  not updated for -7)
+
+klineParse.c  - cleans out redundant klines
+
+viconf - edit your conf file without having to chdir su etc. etc.
+         also locks the file if file locking is used.
+
+untabify - converts tab characters to a specific number of spaces
+
+rsa_respond - a tool to generate an RSA response to the challenge asked
+              by the server.  This is not completely finished yet.

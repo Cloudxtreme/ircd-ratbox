@@ -1,0 +1,1 @@
+#define SERIALNUM "20050608_2"

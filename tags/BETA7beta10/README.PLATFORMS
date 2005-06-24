@@ -1,0 +1,24 @@
+IRCD-Hybrid Platforms Information
+
+Sometimes problems and inconsistencies in the Hybrid code may only occur 
+on a specific platform (architecture and/or operating system and/or 
+compiler). In these cases you may want to directly contact a person who is 
+interested in maintaining Hybrid on that platform. Below is a list of 
+people who have jumped up and taken responsibility for Hybrid, including 
+making sure it compiles, runs, and doesn't crash.
+
+ARCHITECTURE COMPILER         SYSTEM	    MAINTAINER
+============ ================ ============= =====================================
+PowerPC      Apple gcc        Darwin        J. Mallett <jmallett@newgold.net>
+PowerPC      Apple gcc        Mac OS X      J. Mallett <jmallett@newgold.net>
+SPARC        gcc              OpenBSD       J. Mallett <jmallett@newgold.net>
+SPARC        gcc              NetBSD        J. Mallett <jmallett@newgold.net>
+x86          TenDRA           FreeBSD       J. Mallett <jmallett@newgold.net>
+SPARC        Forte C v6,v7    Solaris       Joan Touzet <joant@ieee.org>
+SPARC        gcc              Solaris       Joan Touzet <joant@ieee.org>
+x86          Cygwin gcc       Windows       W. Campbell <wcampbel@botbay.net>
+x86          gcc              Linux         Aaron Sethman <androsyn@ratbox.org>
+SPARC        gcc              Linux         Aaron Sethman <androsyn@ratbox.org>
+Alpha        DEC C V6.0       OpenVMS 7.2   Edward Brocklesby <ejb@sdf.lonestar.org>
+
+$Id$

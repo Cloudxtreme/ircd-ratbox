@@ -1,0 +1,168 @@
+There have been quite a few changes in Hybrid-7 from previous versions.
+This document is an overview of what new features are included
+
+AWAY is now propogated.  
+
+The conf file format has been vastly improved.  The old conf format is 
+no longer supported.  Many options that were defined at compile time are
+now set in the config file.
+
+Unauthorized connection notices have been moved to the +u user mode.
+
+Server side ignore is included for all users.  Setting user mode +g will
+make you ignore all private messages.  Channel messages are not affected.
+People who you wish to communicate with can be permitted with the
+/quote ACCEPT nick command.  The current accept list can be seen with
+/quote ACCEPT *, and nicks can be removed with /quote ACCEPT -nick.
+When a user tries to message you when you are set +g, and they are not
+on the accept list, they will receive a message saying you are on server
+side ignore.  You will also receive a message, but it is paced, so you will
+only receive a notification every 60 seconds.
+
+Channels are also flood controlled.  Sending too many messages to a channel
+when you are not opped or voiced will cause the server to block the flood 
+after a certain amount of lines.  Opers can change the number of lines with 
+/quote SET FLOODCOUNT.  The default is currently 8 lines.  A side effect
+of this is that channel CTCP's will be throttled for non ops.
+
+Half ops are included.  Setting a user +h in a channel will give them half-op
+privilages.  Half ops can kick regular users but not full ops.
+
+Channel Op Hiding is included as a channel mode.  By setting a channel +a, 
+the ops are hidden to non-ops.  Once a user receives ops or halfops, they
+may have to issue a NAMES command to resync their userlist.
+
+Server hiding is also a conf file option.  With this option enabled, only 
+opers can see what server a user is on.  TRACE and LTRACE are disabled for
+non-opers, LINKS, WHO, WHOIS and the like are modified to not show a server.
+Note that this can break certain clients.
+
+The old $*.server.mask and #*.host.mask no longer work.  The replacement is
+$$*.server.mask and $#*.host.mask.  This change removes a long standing "bug"
+in which a user can sit in a channel #*.fi and catch all messages directed
+at #*.fi users.
+
+The infamous VChans are included as well.  There can be multiple channels with
+the same name, each has different "views" with different users.  When joining
+a channel with vchans, a simple JOIN #channel will show a message saying 
+which channels are available.  The user will then have to JOIN #channel !key
+with one of the provided keys.  Creating a new vchan is easy as well.  Part 
+the channel and do /quote CJOIN #channel.  A new view of the channel is 
+created.  Currently, all users are able to issue CJOIN and create vchans.
+Channel takeovers are now useless.  A legitimate op can just CJOIN a new 
+vchan and get all of the old users over to the new vchan.  The takeover
+people will then be sitting opped by themselves in a vchan while the original
+users are back the way they were before in another vchan.  
+
+CJOIN can be disabled for non-opers by setting vchans_oper_only=yes; in
+the ircd.conf file.
+
+Channels that have existed for at least 30 minutes are now preserved for 30
+minutes if they are empty or split.  If a channel was +i before a split, it
+will remain that way for 30 minutes.  All bans will still exist, preventing
+abusers from joining through a ban on splits.  A user that does sucessfully
+join an empty preserved channel will have ops.  If it was split at the time,
+the timestamp protocol will remove the newer side's ops.  These preserved
+channels replace the old NO_CHANOPS_ON_SPLIT and NO_JOIN_ON_SPLIT options.
+
+Due to the new flood control for users, the multiple message restriction has
+been removed. (/msg nick1,nick2,nick3 message)
+
+Nearly all commands are now modules.  MODLIST will list all loaded modules, 
+MODUNLOAD will remove a module from the ircd, and MODLOAD will load a new
+module into the ircd.  All of these commands are documented in opers.txt 
+and are restricted to admins only.
+
+LazyLinks are now included.  These enable a leaf server to only need 
+information about channels that it's local users are on, and nicks that have
+been used (in a channel, in a private message, or in a WHO or WHOIS by a user
+or channel on the leaf).  Read the LazyLinks.as.implemented.txt document for
+more information.
+
+STATS e now shows events.
+
+STATS f now shows active file descriptors.
+
+List of CAPAB's:
+TS      - Support the TS protocol
+QS      - Remove the QUIT storm on splits
+EX      - Support +e exceptions in channels
+CHW     - Support PRIVMSG/NOTICE @#channel messages
+DE      - Support channel mode +d - block based on the realname field
+LL      - LazyLink server
+IE      - Invite Exceptions - +I on channels - All nick!user@hosts listed in 
+          a +I are exempt from having to be invited to the channel before 
+          JOINing
+VCHAN   - Support Virtual Channels
+EOB     - End of Burst - Servers with this enabled cannot issue burst commands
+          after it sends and receives an EOB command, thereby preventing op
+          hacking
+KLN     - Support remote K-lines
+GLN     - Support G-lines
+HOPS    - Support half-ops
+HUB     - Is a hub server (used to prevent two LL hubs from linking in that 
+          state)
+AOPS    - Supports anonymous channel ops (channel mode +a)
+
+K-lines can now be sent to and accepted from other servers.  The shared {}
+block in the conf file is used to specify which servers are trusted.
+
+HUB is now a runtime option.  
+
+Classes (Y: lines) can now have names instead of numbers.
+
+Hybrid now supports IRCnet like redirection.  The redirserv and redirport 
+options in an auth {} block will allow an admin to specify other servers 
+to forward user connections to.  The client must support the 010 numeric
+for this to work (EPIC supports it).
+
+Local operators are no longer part of ircd.  The oper flags are used to 
+restrict what each operator can do.
+
+Autoconnects are far more customizable now.
+
+A number of new options are in the general {} block of ircd.conf.  Look at
+example.conf for more information
+
+Remote K-lines are supported.  The shared block in the conf file is what
+gives remote servers (and optionally restricted to specific user@host's)
+permission to send their k-lines to your server.  Look at kline.txt for more 
+details.  Below is a brief overview of the oper protocol to remote K-lines.
+
+kline directed at a specific server
+  /quote kline user@host ON server :reason
+  /quote kline [time] user@host on server :reason
+
+kline directed at all servers
+  /quote kline user@host on * :reason
+  /quote kline [time] user@host on * :reason
+
+original normal local klines
+
+  /quote kline user@host :reason
+  /quote kline [time] user@host :reason
+
+User modes can be specified oper only.  This is yet another start time
+configurable option in ircd.conf.  See the comments in example.conf for
+more details.
+
+Hybrid now has the ISUPPORT/005 numeric now.  It can be seen when the client 
+connects and in VERSION.  The fields are as follows:
+KNOCK          - Support KNOCK
+VCHANS         - Support Virtual Channels
+MODES=%i       - The number of channel modes accepted per MODE command
+MAXCHANNELS=%i - The compiled in maximum channels per user (Note that this
+                 may become controlled in class {} in the future)
+MAXBANS=%i     - The compiled in limit on the number of bans per channel
+MAXTARGETS=%i  - The number of users that may be chained together in a 
+                 PRIVMSG or NOTICE (user1,user2,user3...)
+NICKLEN=%i     - The maximum nickname length
+TOPICLEN=%i    - The compiled in topic length
+KICKLEN=%i     - The length of a KICK message
+CHANTYPES=%s   - The types of channels supported (currently '#&')
+PREFIX=%s      - The allowed PRIVMSG/NOTICE channel prefixes (server based
+                 /onotice, NOTICE @%#channel :message)
+
+# complete me
+
+# $Id$

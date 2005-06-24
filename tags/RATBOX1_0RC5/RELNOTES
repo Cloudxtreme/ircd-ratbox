@@ -1,0 +1,146 @@
+-- ircd-ratbox-1.0 RELNOTES 
+
+-- ircd-ratbox-1.0-rc5
+- Added ISON support for servers.  Disabled for users when shide is on.
+- Added a operator flag to allow or disallow operators from doing /operwall
+- Fix a bug in WHO that would leak a channel the user was in regardless of
+  +s/+p or +i modes.
+- With hide_servers=yes and disable_remote=no, the servername is removed
+  from the 312 numeric when you /whois nick, but you can just do /motd 
+  nick and see the server they are on. This has been fixed
+- Added hidden admin support
+- Fixed a bug where bare modes could be sent to local users, that is without
+  a + or - before the mode
+- Fixed a bug in foperlog that would cause a core dump
+- Added support for ip6.arpa and added a configuration option to fallback to
+  ip6.int
+
+-- ircd-ratbox-1.0-rc4
+- RESVs are now written to a file and will be kept through a restart.
+  By default they are written to IRCD_PREFIX/etc/resv.conf which 
+  means if you have ircd.conf style resv {}; in this file it must
+  be renamed.
+- added rehash tdlines, fixed behaviour of rehash tklines to not
+  clear temp dlines too
+- added rehash pglines to clear pending glines
+- foperlog code has been fixed
+- the directives fname_userlog, fname_operlog and fname_foperlog
+  have been moved from general {}; to logging {};
+- stats U will now show the user@host and privs of a shared {};
+- stats_i_oper_only and stats_k_oper_only have been fixed
+- a pending gline desync issue has been fixed
+- encrypted passwords in oper {}; are now specified per oper block.
+  They will default to being encrypted, any unencrypted passwords
+  in oper {}; must also have "encrypted = no;"
+- encrypted passwords in auth {}; are now supported.  To use them
+  encrypt your password (DES or MD5) and set "encrypted = yes;"
+- fixed notice @#channel to not echo back to sender
+- Hwys rsa_respond-insecure.diff has been added to tools/rsa_respond/.
+  This diff will allow rsa_respond to be called from a script, read
+  the top of the diff for more information.
+
+
+-- ircd-ratbox-1.0-rc3
+- PRIVMSG was not giving ERR_NOSUCHNICK for non-existant chans/users
+- speed improvements to stats k
+- stats g fixed to show the real user@ portion of the gline
+- +beI modes will be dropped on persistent channels when someone joins,
+  other modes will be burst to prevent desync.
+- fixed a bug allowing opped users to op themselves
+- the redundant mode code (what stopped multiple +o etc) has been 
+  removed
+- stats g/G have been split up.
+  stats g will now show pending glines
+  stats G will now show triggered glines
+- fixed a problem with double RPL_TOPICWHO being sent
+- fixed another null nick issue
+- the conf has been updated:
+
+  - instead of class { name="users"; ... }; use
+    class "users" { ... };
+  - instead of operator { name="myoper"; ... }; use
+    operator "myoper" { ... };
+  - instead of connect { name="irc.x.com"; ... }; use
+    connect "irc.x.com" { ... };
+
+-- ircd-ratbox-1.0-rc2
+- fixed a bug with internal channel structures that could core the ircd
+- flood_exempt can now be specified via flags=...; in auth {};
+- fix a bug inherented from hyb7 that would allow a NULL nick
+- removed the unused config option maximum_links
+- added option to general {}; - tkline_expire_notices = [yes|no];
+  which controls whether tkline expiration notices are shown
+- iauth has been removed, it didnt work anyway.
+
+-- ircd-ratbox-1.0-rc1
+o) Temp dline support has been added.
+o) Temp klines and dlines are now maxed at 4weeks, due to an improved
+   system of storing them.
+o) Flood exemption has been added to auth {};
+      flood_exempt = yes;
+o) Remote unkline support has been added, uses same syntax as remote klines.
+   shared {}; has been extended with two new options to control whether
+   a user may kline, unkline or both:
+      kline = yes;
+      unkline = yes;
+
+o) /quote XLINE support.  Controlled via an option in oper {};
+      xline = yes;
+
+      /quote xline <gecos> [type] :<reason>
+
+   The gecos may not contain spaces.
+
+o) Networkwide user@host limits, controlled in general {}; by:
+     use_global_limits = yes;
+
+   In the class by:
+     number_per_ident = 2;
+     number_per_ip = 3;
+     number_per_ip_global = 5;
+
+o) CIDR +beI modes are supported.
+o) CIDR glines are supported.
+o) Vchans, lazylinks and halfops have been removed.
+o) CALLERID (+g) will now use numerics instead of notices.
+o) The config parser is now much more modular, allowing modules to add
+   their own config options.  It also supports blocks in the format of:
+      connect "irc.server.com" {}; class "users" {}; etc.
+o) TRACE has been fixed for local lusers with speed increases.
+o) CONNECT_TIMEOUT has been moved from config.h to the config in general {};
+      connect_timeout = 5m;
+o) Support for RPL_WHOISACTUALLY to help prevent people faking DNS.  Will 
+   show the real IP of non-spoofed users.  controlled in general {}; by:
+      use_whois_actually = yes;
+o) A desync issue with persistent channels has been fixed.
+o) stats v will now show sendq and connect duration.
+
+For more details of these options see example.conf
+
+--------------------------------------------------------------------------------
+
+This is the current release candidate version of ircd-ratbox.
+
+NOTE: This is still BETA code.  Run it at your own risk.  By running this
+ code you assume FULL responsibility for any problems it may cause.  We do
+ NOT recommend that you run BETA code on production IRC networks such
+ as EFnet.
+
+BUGS: Major bugs in this release are listed in BUGS
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+ the bug in one of the following ways:
+  a) By EMAIL to ircd-ratbox@lists.ratbox.org
+ Please include a gdb backtrace and keep the core file, binaries and 
+ modules in case the developers need them.
+
+DISCUSSION: There is a mailing list for discussion of ratbox issues,
+ To subscribe, visit:
+      http://lists.ratbox.org/cgi-bin/mailman/listinfo/ircd-ratbox
+
+Please read doc/whats-new.txt for information about what is in this release
+
+Other files recommended for reading: BUGS, README.FIRST, INSTALL
+
+--------------------------------------------------------------------------------
+$Id$

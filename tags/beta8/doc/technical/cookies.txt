@@ -1,0 +1,80 @@
+		  "Cookies and Cream"
+	        ========================
+		
+	 	Cookie solution to reduce opless channels
+
+		Original Idea : orabidoo(?) 
+		
+		Paul Lomax (madmax) <madmax@efnet.org>
+		Ben Maizels (Pie-Man) <ben@cpshome.com>
+
+Introduction:
+
+Many solutions have been suggested recently to solve efnet's problems.  
+Unfortunately they are all far from perfect, and often come at a cost.
+The main problem we want to solve is how do we reduce attacks on our servers.
+Servers are DoS'd for the following reasons:
+a. An oper annoys somebody - Since spoofs, they cant take the oper down, so they hit the server
+   (helping regain ops in a channel may come under this.. it'll annoy the kiddies trying to take it)
+b. To split a server to ride a split to get ops in an opless channel
+c. To kill a server to make a channel opless
+d. For the hell of it.
+
+We also need to think of the users.  Without users the network may as well be hybnet ;)
+
+Any solution which encourages oper intervention helps the end user in that channels arent left opless - 
+a problem left by the NO_CHANOPS/JOIN_WHEN_SPLIT.  But not only is it open to abuse and means opers are
+intervening in channels when our policy is not to, it also means that we attract yet MORE DoS to our servers.
+
+Another solution is to remove their ability to see hubs, what server a user is on, and topology.   
+This option will pretty much stop c. and will reduce b. somewhat. However, this has major implementation 
+issues ie it only works if everybody changes at once.  But a good idea non the less.  It doesn't mean
+that there wont be opless channels left though. 
+
+Another solution is vchans.  An excellent idea, not without its draw backs, but we feel that too many people
+just dont think it is 'efnet'.
+
+The perfect solution is to remove the possibility for a channel to become opless.  The problem is how does
+the server know who to op.  The work around may be a cookie.
+
+Description:
+
+Unfortunately cookies require some form of client side support.  This problem can be minimized by providing 
+support in the form of a simple script.  ircii, tcl and mirc versions could be provided easily, from a number
+of ftp sites mentioned in motds for example.   
+
+The beauty of this solution is that the onus is on the lusers to secure their channels, by running the cookie script.
+It also means that people not running the cookie script can still IRC as normal, and it will still work to some extent
+if not all the servers on the network support the code.
+
+A client connects to a server.  The script, on a successful connection (waits for numeric 004?), checks for a filename,
+for example .efnetcookie.  If the file is not found, or empty, it sends the command
+ COOKIE request
+
+This makes the server create a 'uid' for that client. It then sends back a new numeric (addition to RFC2812)
+
+389	RPL_COOKIE
+	":<cookie>"
+
+The script, upon receipt of a 389 numeric, writes the string to the file.
+
+If the file is found, and it contains a string, then the command
+ COOKIE <cookie> 
+is sent.
+
+The server replies back with a 389 and echos the cookie if it is valid.  If it is invalid, then it sends
+489(?) ERR_COOKIE
+ 	"<cookie> is not valid"
+
+The server the client is on then stores the cookie, and propagates a COOKIE to other servers.  
+
+When a user with a cookie is opped in a channel, all servers then store the channel they were opped in the cookie list.
+If a user is QUIT within 5 mins of being opped, the channel is removed from their cookie info.
+
+For each channel there is a last_op'd field.  When a client quits, if it had ops in any channel, then this timestamp is
+updated.
+Periodically, servers will clear out stale cookies that have a timestamp older than, say, 24 hours, but as long as the
+associated user isn't currently online.
+
+When a user with a cookie joins a channel with no ops (and only when its opless), 
+

@@ -1,0 +1,19 @@
+(NOTE: ircd doesn't currently build on VMS, a few things are left
+to be done. However, if it did work, this is how you'd do it..)
+
+To compile ircd, execute the following commands (this assumes
+you extracted the archive into [.ircd-hybrid-7]:
+
+$ SET DEF [.IRCD-HYBRID-7.INCLUDE]
+$ COPY SETUP.H_VMS SETUP.H
+$ EDIT CONFIG.H   <or whatever your preferred editor is>
+Change config.h as appropriate.  Note that the paths have to
+be changed to use VMS-style pathnames, not Unix style.
+$ SET DEF [-]
+$ @make
+
+This should build [.src]ircd.exe, and the associated modules
+[.modules]*.obj;*. It's not installed automatically yet, you'll
+have to copy it to IRCD_PREFIX by hand.
+
+$Id$
