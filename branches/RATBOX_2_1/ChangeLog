@@ -1,3 +1,11 @@
+androsyn    2005/07/04 08:27:58 UTC	(20050704_0-19391)
+  Log:
+  set m->prev = NULL in dlinkAdd, as it could possibly cause issues
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/include/tools.h (File Modified) 
+
+
 leeh        2005/06/22 22:10:50 UTC	(20050622_0)
 
   Modified files:        (Branch: RATBOX_2_1)
