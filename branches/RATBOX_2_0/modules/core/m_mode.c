@@ -693,7 +693,7 @@ fix_key(char *arg)
 	for (s = t = (u_char *) arg; (c = *s); s++)
 	{
 		c &= 0x7f;
-		if(c != ':' && c > ' ')
+		if(c != ':' && c != ',' &&  c > ' ')
 			*t++ = c;
 	}
 
@@ -716,7 +716,7 @@ fix_key_remote(char *arg)
 	for (s = t = (u_char *) arg; (c = *s); s++)
 	{
 		c &= 0x7f;
-		if((c != 0x0a) && (c != ':') && (c != 0x0d) && (c != ' '))
+		if((c != 0x0a) && (c != ':') && (c != ',') && (c != 0x0d) && (c != ' '))
 			*t++ = c;
 	}
 
