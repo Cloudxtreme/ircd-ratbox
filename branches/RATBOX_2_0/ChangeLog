@@ -1,3 +1,12 @@
+androsyn    2005/07/05 04:19:22 UTC	(20050705_0-19407)
+  Log:
+  Adds OMOTD to display the OPER MOTD
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/modules/m_motd.c (File Modified) 
+
+
 androsyn    2005/07/04 08:49:20 UTC	(20050704_0-19393)
   Log:
   set m->prev = NULL in dlinkAdd, as it could possibly cause issues
