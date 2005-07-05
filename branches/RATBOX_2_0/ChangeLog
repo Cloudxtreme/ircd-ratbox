@@ -1,3 +1,12 @@
+androsyn    2005/07/05 04:57:21 UTC	(20050705_1-19413)
+  Log:
+  Having commas in channel keys are bad
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/modules/core/m_mode.c (File Modified) 
+
+
 androsyn    2005/07/05 04:19:22 UTC	(20050705_0-19407)
   Log:
   Adds OMOTD to display the OPER MOTD
