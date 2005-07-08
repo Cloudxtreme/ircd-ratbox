@@ -1,3 +1,12 @@
+androsyn    2005/07/08 00:40:56 UTC	(20050708_1-20557)
+  Log:
+  well cvs repo info surely is of no use now
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/CVS-Access (File Deleted) 
+	ircd-ratbox/branches/RATBOX_2_1/CVS-Access (File Deleted) 
+
+
 androsyn    2005/07/08 00:38:15 UTC	(20050708_0-20555)
   Log:
   svn repo access stuff
