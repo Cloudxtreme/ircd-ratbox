@@ -1,3 +1,13 @@
+leeh        2005/07/17 17:15:57 UTC	(20050717_1-20577)
+  Log:
+  - swap a space for tabs to try and fix build on darwin
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/adns/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_0/modules/Makefile.in (File Modified) 
+
+
 leeh        2005/07/17 16:58:38 UTC	(20050717_0-20573)
   Log:
   - abort_list is static, so doesnt need an extern in ircd.h
