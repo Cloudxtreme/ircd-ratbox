@@ -69,8 +69,6 @@ int conf_end_block(struct TopConf *);
 int conf_call_set(struct TopConf *, char *, conf_parm_t *, int);
 void conf_report_error(const char *, ...);
 void newconf_init(void);
-extern dlink_list conf_items;
-extern char *conf_cur_block_name;
 int add_conf_item(const char *topconf, const char *name, int type, void (*func) (void *));
 int remove_conf_item(const char *topconf, const char *name);
 

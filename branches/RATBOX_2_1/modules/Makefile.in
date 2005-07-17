@@ -123,8 +123,8 @@ S_OBJS = ${ALL_SRCS:.c=.o}
 DOLLAR = $$
 
 default:	build
-build: all
-all: @MOD_TARGET@
+build:	all
+all:	@MOD_TARGET@
 
 shared_modules: $(SH_CORE_OBJS) $(SH_OBJS)
 
