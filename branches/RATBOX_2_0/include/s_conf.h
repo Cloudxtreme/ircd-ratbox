@@ -56,7 +56,6 @@ struct ip_value
 
 extern FBFILE *conf_fbfile_in;
 extern char conf_line_in[256];
-extern struct ConfItem *yy_aconf;
 
 struct ConfItem
 {

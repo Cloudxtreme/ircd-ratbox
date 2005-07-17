@@ -142,7 +142,7 @@
 
 
 #ifdef SOCKADDR_IN_HAS_LEN
-#define SET_SS_LEN(x, y) ((struct irc_sockaddr_storage)(x)).ss_len = y
+#define SET_SS_LEN(x, y) (x).ss_len = (y)
 #define GET_SS_LEN(x) x.ss_len
 #else
 #define SET_SS_LEN(x, y)

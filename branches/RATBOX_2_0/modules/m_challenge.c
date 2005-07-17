@@ -92,7 +92,7 @@ static int
 m_challenge(struct Client *client_p, struct Client *source_p, int parc, const char *parv[])
 {
 	struct oper_conf *oper_p;
-	char *challenge;
+	char *challenge = NULL; /* to placate gcc */
 
 	/* if theyre an oper, reprint oper motd and ignore */
 	if(IsOper(source_p))

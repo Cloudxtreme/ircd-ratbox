@@ -166,7 +166,7 @@ fnv_hash_upper_len(const unsigned char *s, int bits, int len)
 static u_int32_t
 hash_nick(const char *name)
 {
-	return fnv_hash_upper(name, U_MAX_BITS);
+	return fnv_hash_upper((const unsigned char *) name, U_MAX_BITS);
 }
 
 /* hash_id()
@@ -176,7 +176,7 @@ hash_nick(const char *name)
 static u_int32_t
 hash_id(const char *name)
 {
-	return fnv_hash(name, U_MAX_BITS);
+	return fnv_hash((const unsigned char *) name, U_MAX_BITS);
 }
 
 /* hash_channel()
@@ -186,7 +186,7 @@ hash_id(const char *name)
 static u_int32_t
 hash_channel(const char *name)
 {
-	return fnv_hash_upper_len(name, CH_MAX_BITS, 30);
+	return fnv_hash_upper_len((const unsigned char *) name, CH_MAX_BITS, 30);
 }
 
 /* hash_hostname()
@@ -197,7 +197,7 @@ hash_channel(const char *name)
 static u_int32_t
 hash_hostname(const char *name)
 {
-	return fnv_hash_upper_len(name, HOST_MAX_BITS, 30);
+	return fnv_hash_upper_len((const unsigned char *) name, HOST_MAX_BITS, 30);
 }
 
 /* hash_resv()
@@ -207,7 +207,7 @@ hash_hostname(const char *name)
 static u_int32_t
 hash_resv(const char *name)
 {
-	return fnv_hash_upper_len(name, R_MAX_BITS, 30);
+	return fnv_hash_upper_len((const unsigned char *) name, R_MAX_BITS, 30);
 }
 
 static unsigned int
