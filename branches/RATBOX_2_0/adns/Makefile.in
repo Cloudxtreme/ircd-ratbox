@@ -43,9 +43,9 @@ SRCS = ${BASE_SRCS} ${SELECT_SRC}
 
 OBJS = ${SRCS:.c=.o}
 
-all: libadns.a
+all:	libadns.a
 
-build: all
+build:	all
 
 libadns.a: ${OBJS}
 		rm -f $@
