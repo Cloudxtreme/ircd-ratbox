@@ -1,3 +1,12 @@
+leeh        2005/07/17 16:58:38 UTC	(20050717_0-20573)
+  Log:
+  - abort_list is static, so doesnt need an extern in ircd.h
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/include/ircd.h (File Modified) 
+
+
 androsyn    2005/07/08 00:40:56 UTC	(20050708_1-20557)
   Log:
   well cvs repo info surely is of no use now
