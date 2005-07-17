@@ -1,3 +1,12 @@
+leeh        2005/07/17 22:57:39 UTC	(20050717_3-20591)
+  Log:
+  - move socket length var int -> socklen_t
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/adns/event.c (File Modified) 
+
+
 leeh        2005/07/17 18:51:50 UTC	(20050717_2-20581)
   Log:
   - more darwin fixes
