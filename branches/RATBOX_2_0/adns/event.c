@@ -334,7 +334,8 @@ int adns__pollfds(adns_state ads, struct adns_pollfd pollfds_buf[MAX_POLLFDS]) {
   return 2;
 }
 int adns_processreadable(adns_state ads, int fd, const struct timeval *now) {
-  int want, dgramlen, r, udpaddrlen, serv, old_skip;
+  int want, dgramlen, r, serv, old_skip;
+  socklen_t udpaddrlen;
   byte udpbuf[DNS_MAXUDP];
   struct sockaddr_in udpaddr;
   
