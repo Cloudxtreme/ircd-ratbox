@@ -103,7 +103,6 @@ extern dlink_list serv_list;
 extern dlink_list global_serv_list;
 extern dlink_list oper_list;
 extern dlink_list dead_list;
-extern dlink_list abort_list;
 
 extern void get_current_bandwidth(struct Client *source_p, struct Client *target_p);
 
