@@ -1,3 +1,19 @@
+leeh        2005/08/21 11:25:46 UTC	(20050821_0-20624)
+  Log:
+  - fix some char vs byte usage to make adns compile cleanly with gcc4
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/adns/event.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/adns/general.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/adns/internal.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/adns/parse.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/adns/query.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/adns/reply.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/adns/transmit.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/adns/types.c (File Modified) 
+
+
 androsyn    2005/07/31 05:12:43 UTC	(20050731_0-20607)
   Log:
   userhost should allow 5 userhost checks, not 4
