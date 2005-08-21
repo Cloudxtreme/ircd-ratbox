@@ -206,13 +206,13 @@ void adns__querysend_tcp(adns_query qu, struct timeval now) {
   }
 
   if (wr<2) {
-    r= adns__vbuf_append(&ads->tcpsend,length,2-wr); assert(r);
+    r= adns__vbuf_append(&ads->tcpsend,(char *) length,2-wr); assert(r);
     wr= 0;
   } else {
     wr-= 2;
   }
   if (wr<qu->query_dglen) {
-    r= adns__vbuf_append(&ads->tcpsend,qu->query_dgram+wr,qu->query_dglen-wr); assert(r);
+    r= adns__vbuf_append(&ads->tcpsend,(char *) qu->query_dgram+wr,qu->query_dglen-wr); assert(r);
   }
 }
 

@@ -139,12 +139,12 @@ int adns__vbuf_ensure(vbuf *vb, int want) {
   return 1;
 }
   
-void adns__vbuf_appendq(vbuf *vb, const byte *xdata, int len) {
+void adns__vbuf_appendq(vbuf *vb, const char *xdata, int len) {
   memcpy(vb->buf+vb->used,xdata,len);
   vb->used+= len;
 }
 
-int adns__vbuf_append(vbuf *vb, const byte *xdata, int len) {
+int adns__vbuf_append(vbuf *vb, const char *xdata, int len) {
   int newlen;
   void *nb;
 
@@ -196,7 +196,7 @@ const char *adns__diag_domain(adns_state ads, int serv, adns_query qu,
     adns__vbuf_appendstr(vb,"<truncated ...>");
     adns__vbuf_append(vb,"",1);
   }
-  return vb->buf;
+  return (char *) vb->buf;
 }
 
 adns_status adns_rr_info(adns_rrtype type,
@@ -222,7 +222,7 @@ adns_status adns_rr_info(adns_rrtype type,
   if (!adns__vbuf_append(&vb,"",1)) { st= adns_s_nomemory; goto x_freevb; }
   assert(strlen(vb.buf) == vb.used-1);
   *data_r= realloc(vb.buf,vb.used);
-  if (!*data_r) *data_r= vb.buf;
+  if (!*data_r) *data_r= (char *) vb.buf;
   return adns_s_ok;
 
  x_freevb:
