@@ -62,10 +62,12 @@
 		" CHANNELLEN=%i"	\
 		" TOPICLEN=%i"		\
 		" KICKLEN=%i"		\
-		" ETRACE"
+		" ETRACE"		\
+		" TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:%d,NOTICE:%d,ACCEPT:"
 
 #define FEATURES2VALUES \
-	NICKLEN-1, LOC_CHANNELLEN, TOPICLEN, REASONLEN
+	NICKLEN-1, LOC_CHANNELLEN, TOPICLEN, REASONLEN, \
+	ConfigFileEntry.max_targets, ConfigFileEntry.max_targets
 
 /*
  * - from mirc's versions.txt
