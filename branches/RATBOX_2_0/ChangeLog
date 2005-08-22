@@ -1,3 +1,13 @@
+leeh        2005/08/22 21:22:33 UTC	(20050822_2-20648)
+  Log:
+  - adding clients that dont exist or are already on your accept list
+    shouldnt be included in the count for going over max_accepts
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/modules/m_accept.c (File Modified) 
+
+
 leeh        2005/08/22 21:20:50 UTC	(20050822_1-20646)
   Log:
   - add TARGMAX 005 token
