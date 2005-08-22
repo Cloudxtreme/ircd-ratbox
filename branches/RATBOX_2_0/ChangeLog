@@ -1,3 +1,12 @@
+leeh        2005/08/22 21:20:50 UTC	(20050822_1-20646)
+  Log:
+  - add TARGMAX 005 token
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/include/supported.h (File Modified) 
+
+
 leeh        2005/08/22 20:33:58 UTC	(20050822_0-20644)
   Log:
   - via jilles, invalidate the ban cache when a user changes
