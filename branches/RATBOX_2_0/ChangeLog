@@ -1,3 +1,13 @@
+leeh        2005/08/22 20:33:58 UTC	(20050822_0-20644)
+  Log:
+  - via jilles, invalidate the ban cache when a user changes
+    nicks
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/modules/core/m_nick.c (File Modified) 
+
+
 androsyn    2005/07/31 05:12:06 UTC	(20050731_0-20605)
   Log:
   userhost should allow 5 userhost checks, not 4
