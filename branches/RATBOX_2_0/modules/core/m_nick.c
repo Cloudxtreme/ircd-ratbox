@@ -599,6 +599,30 @@ set_initial_nick(struct Client *client_p, struct Client *source_p, char *nick)
 	}
 }
 
+/* invalidate_bancache_user()
+ *
+ * input	- user to invalidate ban cache for
+ * output	-
+ * side effects - ban cache is invalidated for all memberships of that user
+ *                to be used after a nick change
+ */
+static void
+invalidate_bancache_user(struct Client *client_p)
+{
+	struct membership *msptr;
+	dlink_node *ptr;
+
+	if(client_p == NULL)
+		return;
+
+	DLINK_FOREACH(ptr, client_p->user->channel.head)
+	{
+		msptr = ptr->data;
+		msptr->bants = 0;
+		msptr->flags &= ~CHFL_BANNED;
+	}
+}
+
 static void
 change_local_nick(struct Client *client_p, struct Client *source_p, char *nick)
 {
@@ -633,6 +657,8 @@ change_local_nick(struct Client *client_p, struct Client *source_p, char *nick)
 	if(source_p->user)
 	{
 		add_history(source_p, 1);
+
+		invalidate_bancache_user(source_p);
 
 		sendto_server(client_p, NULL, CAP_TS6, NOCAPS, ":%s NICK %s :%ld",
 				use_id(source_p), nick, (long) source_p->tsinfo);
