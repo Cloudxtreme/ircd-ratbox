@@ -245,6 +245,7 @@ single_whois(struct Client *source_p, struct Client *target_p, int operspy)
 	char *name;
 	char quest[] = "?";
 	int visible;
+	int extra_space = 0;
 
 	if(target_p->name[0] == '\0')
 		name = quest;
@@ -266,6 +267,17 @@ single_whois(struct Client *source_p, struct Client *target_p, int operspy)
 	cur_len = mlen = ircsprintf(buf, form_str(RPL_WHOISCHANNELS), 
 				    get_id(&me, source_p), get_id(source_p, source_p), 
 				    target_p->name);
+	/* Make sure it won't overflow when sending it to the client
+	 * in full names; note that serverhiding may require more space
+	 * for a different server name (not done here) -- jilles */
+	if (!MyConnect(source_p))
+	{
+		extra_space = strlen(source_p->name) - 9;
+		if (extra_space < 0)
+			extra_space = 0;
+		extra_space += strlen(me.name) - 2; /* make sure >= 0 */
+		cur_len += extra_space;
+	}
 
 	t = buf + mlen;
 
@@ -281,7 +293,7 @@ single_whois(struct Client *source_p, struct Client *target_p, int operspy)
 			if((cur_len + strlen(chptr->chname) + 3) > (BUFSIZE - 5))
 			{
 				sendto_one(source_p, "%s", buf);
-				cur_len = mlen;
+				cur_len = mlen + extra_space;
 				t = buf + mlen;
 			}
 
