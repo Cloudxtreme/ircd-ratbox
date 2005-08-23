@@ -4,6 +4,19 @@ This is the current release version of the 'stable' tree of ircd-ratbox.
 doc/whats-new.txt contains important lists of changes between 2.0 and 1.5 -
 it is important you read this file before upgrading.
 
+-- ircd-ratbox-2.0.10
+- fix minor time bug which occurs on december 31st
+- dont drop a servers link when we get a malformed WHOIS
+- disallow commas in channel keys
+- fix compile problem with abort_list
+- fix build on darwin
+- userhost was only allowing 4 targets instead of 5
+- invalidate channel ban cache on nickchange
+- add TARGMAX to 005, detailing maximum targets for messages
+- fix counting of clients on accept list when adding users
+- use ID instead of name when bursting SJOIN to TS6 servers
+- lower id in struct User, which was one byte bigger than it needs to be
+
 -- ircd-ratbox-2.0.9
 - fix propagation of xlines/resvs through hubs
 - fix port in unauthorised conn notice
