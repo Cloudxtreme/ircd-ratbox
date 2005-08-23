@@ -1,3 +1,13 @@
+leeh        2005/08/23 19:28:33 UTC	(20050823_0-20664)
+  Log:
+  - via jilles, fix possibility of RPL_WHOISCHANNELS being cut when we
+    send it over TS6
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/modules/m_whois.c (File Modified) 
+
+
 leeh        2005/08/22 20:13:32 UTC	(20050822_1-20640)
   Log:
   - remove an unused variable
