@@ -1,3 +1,14 @@
+leeh        2005/08/23 19:31:32 UTC	(20050823_0-20666)
+  Log:
+  - IDLEN is already +1, dont +1 in struct User
+  - s/me.name/me.id in burst_TS6()
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_0/src/s_serv.c (File Modified) 
+
+
 leeh        2005/08/22 21:22:33 UTC	(20050822_2-20648)
   Log:
   - adding clients that dont exist or are already on your accept list
