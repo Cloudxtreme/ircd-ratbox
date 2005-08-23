@@ -145,7 +145,7 @@ struct Client
 	char sockhost[HOSTIPLEN + 1]; /* clients ip */
 	char info[REALLEN + 1];	/* Free form additional client info */
 
-	char id[IDLEN + 1];	/* UID/SID, unique on the network */
+	char id[IDLEN];		/* UID/SID, unique on the network */
 
 	/* list of who has this client on their allow list, its counterpart
 	 * is in LocalUser

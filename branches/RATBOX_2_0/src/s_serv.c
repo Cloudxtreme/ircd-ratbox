@@ -875,8 +875,9 @@ burst_TS6(struct Client *client_p)
 		*modebuf = *parabuf = '\0';
 		channel_modes(chptr, client_p, modebuf, parabuf);
 
-		cur_len = mlen = ircsprintf(buf, ":%s SJOIN %ld %s %s %s:", me.name,
-				(long) chptr->channelts, chptr->chname, modebuf, parabuf);
+		cur_len = mlen = ircsprintf(buf, ":%s SJOIN %ld %s %s %s:", 
+				me.id, (long) chptr->channelts, 
+				chptr->chname, modebuf, parabuf);
 
 		t = buf + mlen;
 
