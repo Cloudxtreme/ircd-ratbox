@@ -1,3 +1,14 @@
+leeh        2005/08/23 19:40:17 UTC	(20050823_1-20674)
+  Log:
+  - update RELNOTES
+  - revved patchlevel to 2.0.10
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_0/include/patchlevel.h (File Modified) 
+
+
 leeh        2005/08/23 19:31:32 UTC	(20050823_0-20666)
   Log:
   - IDLEN is already +1, dont +1 in struct User
