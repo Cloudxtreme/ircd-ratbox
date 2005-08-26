@@ -1,3 +1,14 @@
+leeh        2005/08/26 13:07:25 UTC	(20050826_1-20692)
+  Log:
+  - update RELNOTES
+  - revved patchlevel to 2.1.4
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/include/patchlevel.h (File Modified) 
+
+
 leeh        2005/08/26 12:22:52 UTC	(20050826_0-20690)
   Log:
   - add TARGMAX to 005
