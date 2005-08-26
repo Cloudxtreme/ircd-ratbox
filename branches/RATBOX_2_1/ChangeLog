@@ -1,3 +1,17 @@
+leeh        2005/08/26 12:22:52 UTC	(20050826_0-20690)
+  Log:
+  - add TARGMAX to 005
+  - remove the +1 from ->uid in struct Client
+  - fix checking of accept entries in m_accept.c
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/include/supported.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/modules/m_accept.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/src/s_user.c (File Modified) 
+
+
 leeh        2005/08/23 19:28:33 UTC	(20050823_0-20664)
   Log:
   - via jilles, fix possibility of RPL_WHOISCHANNELS being cut when we
