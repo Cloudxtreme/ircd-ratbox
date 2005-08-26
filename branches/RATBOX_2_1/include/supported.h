@@ -71,6 +71,11 @@
 	NICKLEN-1, LOC_CHANNELLEN, TOPICLEN, \
 	ConfigFileEntry.max_monitor
 
+#define FEATURES3 "TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:%d,NOTICE:%d,ACCEPT:,MONITOR:"
+
+#define FEATURES3VALUES \
+	ConfigFileEntry.max_targets, ConfigFileEntry.max_targets
+
 /*
  * - from mirc's versions.txt
  *

@@ -103,7 +103,7 @@ m_accept(struct Client *client_p, struct Client *source_p, int parc, const char 
 	accept_num = dlink_list_length(&source_p->localClient->allow_list);
 
 	/* parse the add list */
-	for (nick = strtoken(&p, addbuf, ","); nick; nick = strtoken(&p, NULL, ","), accept_num++)
+	for (nick = strtoken(&p, addbuf, ","); nick; nick = strtoken(&p, NULL, ","))
 	{
 		/* shouldnt happen, but lets be paranoid */
 		if((target_p = find_named_person(nick)) == NULL)
@@ -130,7 +130,7 @@ m_accept(struct Client *client_p, struct Client *source_p, int parc, const char 
 		/* why is this here? */
 		/* del_from accept(target_p, source_p); */
 		add_accept(source_p, target_p);
-
+		accept_num++;
 	}
 
 	return 0;

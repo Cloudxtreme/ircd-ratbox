@@ -250,6 +250,9 @@ show_isupport(struct Client *source_p)
 	ircsprintf(isupportbuffer, FEATURES2, FEATURES2VALUES);
 	sendto_one_numeric(source_p, RPL_ISUPPORT, form_str(RPL_ISUPPORT), isupportbuffer);
 
+	ircsprintf(isupportbuffer, FEATURES3, FEATURES3VALUES);
+	sendto_one_numeric(source_p, RPL_ISUPPORT, form_str(RPL_ISUPPORT), isupportbuffer);
+
 	return;
 }
 
