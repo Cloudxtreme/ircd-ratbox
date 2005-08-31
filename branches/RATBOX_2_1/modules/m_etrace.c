@@ -3,7 +3,7 @@
  *  m_etrace.c: Gives local opers a trace output with added info.
  *
  *  Copyright (C) 2002-2003 Lee Hardy <lee@leeh.co.uk>
- *  Copyright (C) 2002-2004 ircd-ratbox development team
+ *  Copyright (C) 2002-2005 ircd-ratbox development team
  *
  *  Redistribution and use in source and binary forms, with or without
  *  modification, are permitted provided that the following conditions are

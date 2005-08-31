@@ -9,7 +9,7 @@ cat > static_modules.c <<EOF
  *  ircd-ratbox: A slightly useful ircd
  *
  *  Copyright (C) 2003 Aaron Sethman <androsyn@ratbox.org>
- *  Copyright (C) 2003-2004 ircd-ratbox development team
+ *  Copyright (C) 2003-2005 ircd-ratbox development team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

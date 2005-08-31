@@ -1,5 +1,5 @@
 /*  modules/m_operspy.c
- *  Copyright (C) 2003-2004 ircd-ratbox development team
+ *  Copyright (C) 2003-2005 ircd-ratbox development team
  *  Copyright (C) 2003 Lee Hardy <lee@leeh.co.uk>
  *
  * Redistribution and use in source and binary forms, with or without

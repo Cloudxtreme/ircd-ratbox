@@ -4,7 +4,7 @@
  *
  * Copyright (C) 1990 Jarkko Oikarinen and University of Oulu, Co Center
  * Copyright (C) 1996-2002 Hybrid Development Team
- * Copyright (C) 2002-2004 ircd-ratbox development team
+ * Copyright (C) 2002-2005 ircd-ratbox development team
  *
  *  File:   blalloc.c
  *  Owner:  Wohali (Joan Touzet)
