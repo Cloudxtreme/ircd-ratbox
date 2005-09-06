@@ -1,3 +1,13 @@
+leeh        2005/09/06 15:58:31 UTC	(20050906_1-20746)
+  Log:
+  - fix buffer overflow and unterminated buffer when removing TS6 bans
+  - fix rebuilding of SJOIN
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/modules/core/m_sjoin.c (File Modified) 
+
+
 androsyn    2005/09/06 02:31:24 UTC	(20050906_0-20728)
   Log:
   have servlink report if it gets an uncompressed error message when it gets inflate failures
