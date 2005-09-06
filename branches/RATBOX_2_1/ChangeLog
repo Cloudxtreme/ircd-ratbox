@@ -1,3 +1,14 @@
+leeh        2005/09/06 15:59:08 UTC	(20050906_2-20748)
+  Log:
+  - update RELNOTES
+  - revved patchlevel to 2.1.5
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/include/patchlevel.h (File Modified) 
+
+
 leeh        2005/09/06 15:58:31 UTC	(20050906_1-20746)
   Log:
   - fix buffer overflow and unterminated buffer when removing TS6 bans
