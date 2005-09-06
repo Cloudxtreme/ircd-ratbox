@@ -4,6 +4,13 @@ This is the current release version of the 'stable' tree of ircd-ratbox.
 doc/whats-new.txt contains important lists of changes between 2.0 and 1.5 -
 it is important you read this file before upgrading.
 
+-- ircd-ratbox-2.0.11
+- fix a buffer overflow and an unterminated buffer when TS6 forces us
+  to remove bans
+- fix potential junk SJOIN generation when splitting it into multiple
+  lines
+- make servlink check for an uncompressed ERROR
+
 -- ircd-ratbox-2.0.10
 - fix minor time bug which occurs on december 31st
 - dont drop a servers link when we get a malformed WHOIS
