@@ -1,3 +1,11 @@
+androsyn    2005/09/06 02:31:24 UTC	(20050906_0-20728)
+  Log:
+  have servlink report if it gets an uncompressed error message when it gets inflate failures
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/servlink/io.c (File Modified) 
+
+
 leeh        2005/08/31 20:59:02 UTC	(20050831_0-20702)
   Log:
   - extend our copyrights to 2005.
