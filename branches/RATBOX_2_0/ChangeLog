@@ -1,3 +1,15 @@
+leeh        2005/09/06 15:48:48 UTC	(20050906_1-20742)
+  Log:
+  - fix a buffer overflow when removing bans
+  - fix unterminated buffer when removing bans
+  - fix building SJOIN buffers on hubs when we have to convert
+    a single SJOIN into multiple lines.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/modules/core/m_sjoin.c (File Modified) 
+
+
 androsyn    2005/09/06 02:28:30 UTC	(20050906_0-20726)
   Log:
   Have servlink report an uncompressed ERROR if found
