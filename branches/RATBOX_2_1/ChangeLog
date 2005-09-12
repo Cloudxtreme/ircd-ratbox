@@ -1,3 +1,30 @@
+androsyn    2005/09/12 16:58:45 UTC	(20050912_0-20756)
+  Log:
+  commit jilles' helpfile updates :)
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/help/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/die (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/join (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/links (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/lusers (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/motd (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/names (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/notice (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/operspy (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/part (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/privmsg (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/restart (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/set (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/stats (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/trace (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/version (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/who (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/users/notice (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/users/privmsg (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/users/stats (File Modified) 
+
+
 leeh        2005/09/06 15:59:08 UTC	(20050906_2-20748)
   Log:
   - update RELNOTES
