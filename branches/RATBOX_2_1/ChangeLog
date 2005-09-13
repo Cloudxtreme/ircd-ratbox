@@ -1,3 +1,11 @@
+androsyn    2005/09/13 00:14:06 UTC	(20050913_0-20762)
+  Log:
+  add help/opers/map
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/map (File Added) 
+
+
 androsyn    2005/09/12 16:58:45 UTC	(20050912_0-20756)
   Log:
   commit jilles' helpfile updates :)
