@@ -1073,7 +1073,7 @@ static void
 conf_set_shared_flags(void *data)
 {
 	conf_parm_t *args = data;
-	int flags;
+	int flags = 0;
 	dlink_node *ptr, *next_ptr;
 
 	if(yy_shared != NULL)
@@ -1320,7 +1320,7 @@ static void
 conf_set_cluster_flags(void *data)
 {
 	conf_parm_t *args = data;
-	int flags;
+	int flags = 0;
 	dlink_node *ptr, *next_ptr;
 
 	if(yy_shared != NULL)
