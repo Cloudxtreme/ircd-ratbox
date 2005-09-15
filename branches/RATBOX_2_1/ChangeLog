@@ -1,3 +1,12 @@
+leeh        2005/09/15 18:22:47 UTC	(20050915_0-20768)
+  Log:
+  - fix shared/cluster flags not being initialised to 0
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/src/newconf.c (File Modified) 
+
+
 androsyn    2005/09/13 00:14:06 UTC	(20050913_0-20762)
   Log:
   add help/opers/map
