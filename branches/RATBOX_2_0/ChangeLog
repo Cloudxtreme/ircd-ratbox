@@ -1,3 +1,11 @@
+androsyn    2005/09/17 23:31:14 UTC	(20050917_0-20774)
+  Log:
+  finally someone found the randomly breaking servlink bug. thanks jilles
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/src/linebuf.c (File Modified) 
+
+
 androsyn    2005/09/13 00:14:29 UTC	(20050913_0-20764)
   Log:
   add help/opers/map
