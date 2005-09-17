@@ -1,3 +1,11 @@
+androsyn    2005/09/17 23:30:22 UTC	(20050917_0-20772)
+  Log:
+  finally someone found the randomly breaking servlink bug. thanks jilles
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/src/linebuf.c (File Modified) 
+
+
 leeh        2005/09/15 18:22:47 UTC	(20050915_0-20768)
   Log:
   - fix shared/cluster flags not being initialised to 0
