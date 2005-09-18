@@ -1,3 +1,11 @@
+androsyn    2005/09/18 01:51:50 UTC	(20050918_2-20780)
+  Log:
+  use TS6 form for SQUIT wallops
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/modules/core/m_squit.c (File Modified) 
+
+
 androsyn    2005/09/18 01:41:23 UTC	(20050918_1-20778)
   Log:
   propagate nick changes for remote clients in TS6 form if possible, simplify a bit - from jilles
