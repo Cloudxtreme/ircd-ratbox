@@ -911,12 +911,12 @@ user_mode(struct Client *client_p, struct Client *source_p, int parc, const char
 						break;
 
 					ClearOper(source_p);
-					source_p->umodes &= ~ConfigFileEntry.oper_only_umodes;
 
 					Count.oper--;
 
 					if(MyConnect(source_p))
 					{
+						source_p->umodes &= ~ConfigFileEntry.oper_only_umodes;
 						source_p->flags2 &= ~OPER_FLAGS;
 
 						MyFree(source_p->localClient->opername);
