@@ -1,3 +1,15 @@
+leeh        2005/09/21 18:22:14 UTC	(20050921_0-20784)
+  Log:
+  - via jilles:
+    - disallow uid targets in whois
+    - disallow uid targets in mode
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/modules/m_whois.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/src/s_user.c (File Modified) 
+
+
 androsyn    2005/09/18 01:51:50 UTC	(20050918_2-20780)
   Log:
   use TS6 form for SQUIT wallops
