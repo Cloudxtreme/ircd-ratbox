@@ -815,7 +815,7 @@ user_mode(struct Client *client_p, struct Client *source_p, int parc, const char
 		return 0;
 	}
 
-	if((target_p = find_person(parv[1])) == NULL)
+	if((target_p = MyClient(source_p) ? find_named_person(parv[1]) : find_person(parv[1])) == NULL)
 	{
 		if(MyConnect(source_p))
 			sendto_one_numeric(source_p, ERR_NOSUCHCHANNEL,
