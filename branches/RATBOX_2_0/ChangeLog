@@ -1,3 +1,14 @@
+leeh        2005/09/21 18:24:05 UTC	(20050921_0-20786)
+  Log:
+  - via jilles,
+    - disallow uid targets in whois/mode
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/modules/m_whois.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_0/src/s_user.c (File Modified) 
+
+
 androsyn    2005/09/17 23:31:14 UTC	(20050917_0-20774)
   Log:
   finally someone found the randomly breaking servlink bug. thanks jilles
