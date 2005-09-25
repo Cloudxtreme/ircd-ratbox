@@ -1058,6 +1058,7 @@ if test "$shared_modules" = yes; then
 		if test "$ac_cv_c_compiler_gnu" = "yes"; then
 			AC_MSG_RESULT(gcc: -fPIC -DPIC -shared)
 			PICFLAGS="-fPIC -DPIC -shared"
+			IRC_CFLAGS="$IRC_CFLAGS -fPIC -DPIC" 
 		else
 			AC_MSG_RESULT(no)
 			shared_modules=no
