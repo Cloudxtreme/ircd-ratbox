@@ -1,3 +1,11 @@
+androsyn    2005/09/25 21:12:01 UTC	(20050925_0-20798)
+  Log:
+  fix a silly bug in gcap where client_p should be source_p -via jilles
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/modules/m_capab.c (File Modified) 
+
+
 leeh        2005/09/21 18:22:14 UTC	(20050921_0-20784)
   Log:
   - via jilles:
