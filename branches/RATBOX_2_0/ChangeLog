@@ -1,3 +1,12 @@
+androsyn    2005/09/25 22:09:02 UTC	(20050925_6-20816)
+  Log:
+  don't use stdinc.h for testing in6addr_any
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_0/configure.ac (File Modified) 
+
+
 androsyn    2005/09/25 22:05:49 UTC	(20050925_5-20814)
   Log:
   commit configure too
