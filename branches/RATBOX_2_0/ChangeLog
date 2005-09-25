@@ -1,3 +1,17 @@
+androsyn    2005/09/25 21:06:45 UTC	(20050925_1-20794)
+  Log:
+  make gcc 4.x shut up about signedness
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/adns/general.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_0/adns/internal.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_0/adns/parse.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_0/adns/query.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_0/adns/reply.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_0/adns/transmit.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_0/adns/types.c (File Modified) 
+
+
 androsyn    2005/09/25 20:57:45 UTC	(20050925_0-20792)
   Log:
   for some reason, the glibc developers decided somewhere along the way to have sprintf be a macro..wtf?
