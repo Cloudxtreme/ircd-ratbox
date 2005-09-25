@@ -1,3 +1,11 @@
+androsyn    2005/09/25 20:57:45 UTC	(20050925_0-20792)
+  Log:
+  for some reason, the glibc developers decided somewhere along the way to have sprintf be a macro..wtf?
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/adns/adns.h (File Modified) 
+
+
 leeh        2005/09/21 18:24:05 UTC	(20050921_0-20786)
   Log:
   - via jilles,
