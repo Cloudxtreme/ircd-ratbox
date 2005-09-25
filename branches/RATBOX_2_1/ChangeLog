@@ -1,3 +1,12 @@
+androsyn    2005/09/25 22:59:59 UTC	(20050925_3-20822)
+  Log:
+  build all the code as PIC if we're using PIC in general(at least with gcc)
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/configure.ac (File Modified) 
+
+
 androsyn    2005/09/25 22:28:41 UTC	(20050925_2-20818)
   Log:
   fix the in6addr_any check
