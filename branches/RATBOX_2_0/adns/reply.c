@@ -204,7 +204,7 @@ void adns__procdgram(adns_state ads, const byte *dgram, int dglen,
 			       dgram,dglen, &rdstart,rdstart+rdlength);
 	if (!qu->vb.used) goto x_truncated;
 	if (st) { adns__query_fail(qu,st); return; }
-	l= strlen(qu->vb.buf)+1;
+	l= strlen((const char *) qu->vb.buf)+1;
 	qu->answer->cname= adns__alloc_preserved(qu,l);
 	if (!qu->answer->cname) { adns__query_fail(qu,adns_s_nomemory); return; }
 

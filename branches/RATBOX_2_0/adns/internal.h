@@ -337,9 +337,9 @@ void adns__diag(adns_state ads, int serv, adns_query qu,
 
 int adns__vbuf_ensure(vbuf *vb, int want);
 int adns__vbuf_appendstr(vbuf *vb, const char *xdata); /* does not include nul */
-int adns__vbuf_append(vbuf *vb, const byte *xdata, int len);
+int adns__vbuf_append(vbuf *vb, const char *xdata, int len);
 /* 1=>success, 0=>realloc failed */
-void adns__vbuf_appendq(vbuf *vb, const byte *xdata, int len);
+void adns__vbuf_appendq(vbuf *vb, const char *xdata, int len);
 void adns__vbuf_init(vbuf *vb);
 void adns__vbuf_free(vbuf *vb);
 

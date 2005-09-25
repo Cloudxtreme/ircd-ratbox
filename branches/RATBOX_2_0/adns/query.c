@@ -181,7 +181,8 @@ void adns__search_next(adns_state ads, adns_query qu, struct timeval now) {
   free(qu->query_dgram);
   qu->query_dgram= 0; qu->query_dglen= 0;
 
-  query_simple(ads,qu, qu->search_vb.buf, qu->search_vb.used, qu->typei, qu->flags, now);
+  query_simple(ads,qu, (const char *) qu->search_vb.buf, 
+		  qu->search_vb.used, qu->typei, qu->flags, now);
   return;
   
 x_fail:
@@ -557,7 +558,7 @@ void adns__query_done(adns_query qu) {
 
   if (qu->flags & adns_qf_owner && qu->flags & adns_qf_search &&
       ans->status != adns_s_nomemory) {
-    if (!save_owner(qu, qu->search_vb.buf, qu->search_vb.used)) {
+    if (!save_owner(qu, (const char *) qu->search_vb.buf, qu->search_vb.used)) {
       adns__query_fail(qu,adns_s_nomemory);
       return;
     }

@@ -121,7 +121,7 @@ static adns_status csp_qstring(vbuf *vb, const char *dp, int len) {
     } else if (ch == '"') {
       CSP_ADDSTR("\\\"");
     } else if (ch >= 32 && ch <= 126) {
-      if (!adns__vbuf_append(vb,&ch,1)) R_NOMEM;
+      if (!adns__vbuf_append(vb,(const char *) &ch,1)) R_NOMEM;
     } else {
       sprintf(buf,"\\x%02x",ch);
       CSP_ADDSTR(buf);
@@ -1002,11 +1002,11 @@ static adns_status pap_mailbox822(const parseinfo *pai, int *cbyte_io, int max,
     for (i=0, needquote=0, p= pai->dgram+labstart; i<lablen; i++, p++) {
       c= *p;
       if (c == '"' || c=='\\') adns__vbuf_appendq(vb,"\\",1);
-      adns__vbuf_appendq(vb,p,1);
+      adns__vbuf_appendq(vb,(const char *) p,1);
     }
     adns__vbuf_appendq(vb,"\"",1);
   } else {
-    r= adns__vbuf_append(vb, pai->dgram+labstart, lablen); if (!r) R_NOMEM;
+    r= adns__vbuf_append(vb, (const char *) pai->dgram+labstart, lablen); if (!r) R_NOMEM;
   }
 
   r= adns__vbuf_appendstr(vb,"@"); if (!r) R_NOMEM;
