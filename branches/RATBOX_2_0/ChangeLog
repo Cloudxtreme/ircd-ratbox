@@ -1,3 +1,11 @@
+androsyn    2005/09/25 22:05:49 UTC	(20050925_5-20814)
+  Log:
+  commit configure too
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/configure (File Modified) 
+
+
 androsyn    2005/09/25 22:02:57 UTC	(20050925_4-20812)
   Log:
   I hate gcc 4.x.  Make it shut up about an unused var when testing
