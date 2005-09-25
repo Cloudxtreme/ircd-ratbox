@@ -68,6 +68,14 @@ struct adns_pollfd { int fd; short events; short revents; };
 #define ADNS_POLLIN  1
 #define ADNS_POLLPRI 2
 #define ADNS_POLLOUT 4
+
+#ifdef sprintf
+#undef sprintf
+#endif
+#ifdef vsnprintf
+#undef vsnprintf
+#endif
+
 #define sprintf ircsprintf
 #define vsnprintf ircvsnprintf
 #define comm_socket(a, b, y, z) comm_open(a, b, y, z)
