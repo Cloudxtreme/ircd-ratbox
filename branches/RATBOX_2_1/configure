@@ -9609,6 +9609,7 @@ echo "${ECHO_T}Tru64: -shared -expect_unresolved '*'" >&6
 			echo "$as_me:$LINENO: result: gcc: -fPIC -DPIC -shared" >&5
 echo "${ECHO_T}gcc: -fPIC -DPIC -shared" >&6
 			PICFLAGS="-fPIC -DPIC -shared"
+			IRC_CFLAGS="-fPIC -DPIC"
 		else
 			echo "$as_me:$LINENO: result: no" >&5
 echo "${ECHO_T}no" >&6
