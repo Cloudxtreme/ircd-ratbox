@@ -279,7 +279,7 @@ AC_COMPILE_IFELSE(
 			[AC_LANG_PROGRAM(
 				[[#define IN_AUTOCONF
 				#include "include/stdinc.h"]],
-				[[struct in6_addr a = in6addr_any;]]
+				[[struct in6_addr a = in6addr_any; void foo() { struct in6_addr *p; p = &a; }]]
 			)],
 			[AC_MSG_RESULT(yes)],
 			[
