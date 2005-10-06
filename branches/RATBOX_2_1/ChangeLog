@@ -1,3 +1,12 @@
+leeh        2005/10/06 14:21:14 UTC	(20051006_0-20894)
+  Log:
+  - via jilles, fix blank whoises being sent out
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/modules/m_whois.c (File Modified) 
+
+
 leeh        2005/09/28 21:06:45 UTC	(20050928_0-20834)
   Log:
   - via jilles, fix UID leak in monitor
