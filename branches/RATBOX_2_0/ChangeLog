@@ -1,3 +1,12 @@
+leeh        2005/10/08 21:09:00 UTC	(20051008_0-20918)
+  Log:
+  - fix a core in trace
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/modules/m_trace.c (File Modified) 
+
+
 androsyn    2005/09/25 22:58:24 UTC	(20050925_7-20820)
   Log:
   build all the code as PIC if we're using PIC in general(at least with gcc)
