@@ -1,3 +1,12 @@
+leeh        2005/10/08 21:09:40 UTC	(20051008_1-20920)
+  Log:
+  - fix a trace core
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/modules/m_trace.c (File Modified) 
+
+
 leeh        2005/10/08 18:16:50 UTC	(20051008_0-20916)
   Log:
   - remove unused ->next in struct ConfItem
