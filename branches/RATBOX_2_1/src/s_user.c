@@ -502,6 +502,10 @@ register_local_user(struct Client *client_p, struct Client *source_p, const char
 			IsIPSpoof(source_p) ? "255.255.255.255" :
 #endif
 			ipaddr, get_client_class(source_p),
+#ifdef HIDE_SPOOF_IPS
+			/* mirc can sometimes send ips here */
+			IsIPSpoof(source_p) ? "<hidden> <hidden>" :
+#endif
 			source_p->localClient->fullcaps,
 			source_p->info);
 
