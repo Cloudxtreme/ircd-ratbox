@@ -1,3 +1,13 @@
+leeh        2005/10/16 20:21:10 UTC	(20051016_2-20966)
+  Log:
+  - via jilles, when compiled for rserv support, show the username people are
+    logged in as always, not just for local clients.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/modules/m_services.c (File Modified) 
+
+
 leeh        2005/10/16 20:12:07 UTC	(20051016_1-20964)
   Log:
   - make TS6 server introductions call the server_introduced hook.
