@@ -1,11 +1,27 @@
 
-This is the current version of the 'testing' tree of ircd-ratbox.  This code
-should be suitable for most servers, however production servers may prefer
-to use the 'stable' branch.
+This is the current version of the 'stable' tree of ircd-ratbox.  This code
+is suitable for all servers.
 
 If you are upgrading from 2.0, you must read doc/whats-new-2.1.txt
 If you are upgrading from 1.x, you must read doc/whats-new-2.1.txt and
 doc/whats-new-2.0.txt
+
+-- ircd-ratbox-2.1.6
+- updates to the help files
+- fix shared {};/cluster {}; flags not being initialised to 0
+- fix a servlink bug that could cause a connect to fail
+- use TS6 form for a few more commands
+- dont remove oper umodes when remote clients deoper
+- fix some protocol stuff being sent in TS5 only
+- disallow UID targets in a few more places
+- fix global capabilities applying to local server
+- fix blank whoises being sent out sometimes
+- remove an unused variable in struct ConfItem
+- fix a remotely triggerable core in trace
+- port over missing TS6 invites
+- fix TS6 server introductions not calling the server introduced hook
+- non-efnet: store username users are logged in as always, not just when
+  we're a hub
 
 -- ircd-ratbox-2.1.5
 - fix a buffer overflow and an unterminated buffer when TS6 forces us
