@@ -99,8 +99,7 @@ me_su(struct Client *client_p, struct Client *source_p,
 	if((target_p = find_client(parv[1])) == NULL)
 		return 0;
 
-	/* we only care about all clients if we're a hub */
-	if(!IsPerson(target_p) || (!ServerInfo.hub && !MyClient(target_p)))
+	if(!IsPerson(target_p))
 		return 0;
 
 	if(EmptyString(parv[2]))
@@ -115,7 +114,7 @@ static int
 me_login(struct Client *client_p, struct Client *source_p,
 	int parc, const char *parv[])
 {
-	if(!IsPerson(source_p) || !ServerInfo.hub)
+	if(!IsPerson(source_p))
 		return 0;
 
 	/* this command is *only* accepted from bursting servers */
@@ -268,9 +267,6 @@ h_svc_server_introduced(hook_data_client *hdata)
 static void
 h_svc_whois(hook_data_client *data)
 {
-	if(!MyClient(data->target))
-		return;
-
 	if(!EmptyString(data->target->user->suser))
 	{
 		sendto_one(data->client, form_str(RPL_WHOISLOGGEDIN),
