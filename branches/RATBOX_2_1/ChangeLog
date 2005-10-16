@@ -1,3 +1,12 @@
+leeh        2005/10/16 20:12:07 UTC	(20051016_1-20964)
+  Log:
+  - make TS6 server introductions call the server_introduced hook.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/modules/core/m_server.c (File Modified) 
+
+
 leeh        2005/10/16 19:58:49 UTC	(20051016_0-20962)
   Log:
   - port over missing TS6 invites
