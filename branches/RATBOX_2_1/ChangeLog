@@ -1,3 +1,14 @@
+leeh        2005/10/16 20:56:30 UTC	(20051016_6-20974)
+  Log:
+  - include the old IRC_CFLAGS when appending -fPIC and -DPIC
+  - 2.1.6 is really this commit.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/configure.ac (File Modified) 
+
+
 leeh        2005/10/16 20:35:09 UTC	(20051016_5-20972)
   Log:
   - update RELNOTES
