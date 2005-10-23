@@ -574,7 +574,7 @@ comm_open(int family, int sock_type, int proto, const char *note)
 
 #if defined(IPV6) && defined(IPV6_V6ONLY)
 	/* 
-	 * Make sure we can take both IPv4 and IPv6 connections
+	 * Make sure we only take ipv6 connections
 	 * on an AF_INET6 socket
 	 */
 	if(family == AF_INET6)
