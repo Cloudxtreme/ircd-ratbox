@@ -1,3 +1,12 @@
+androsyn    2005/10/23 01:00:16 UTC	(20051023_0-20986)
+  Log:
+  fix a misleading comment regarding IPV6_V6ONLY
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_0/src/commio.c (File Modified) 
+
+
 leeh        2005/10/08 21:09:00 UTC	(20051008_0-20918)
   Log:
   - fix a core in trace
