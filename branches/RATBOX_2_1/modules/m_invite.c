@@ -98,7 +98,7 @@ m_invite(struct Client *client_p, struct Client *source_p, int parc, const char 
 	if(parv[2][0] == '&' && !MyConnect(target_p))
 	{
 		sendto_one(source_p, form_str(ERR_USERNOTONSERV),
-			   me.name, source_p->name, parv[1]);
+			   me.name, source_p->name, target_p->name);
 		return 0;
 	}
 
@@ -120,7 +120,8 @@ m_invite(struct Client *client_p, struct Client *source_p, int parc, const char 
 	if(IsMember(target_p, chptr))
 	{
 		sendto_one_numeric(source_p, ERR_USERONCHANNEL,
-				   form_str(ERR_USERONCHANNEL), parv[1], parv[2]);
+				   form_str(ERR_USERONCHANNEL),
+				   target_p->name, parv[2]);
 		return 0;
 	}
 
