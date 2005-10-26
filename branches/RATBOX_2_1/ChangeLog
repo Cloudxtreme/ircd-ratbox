@@ -1,3 +1,11 @@
+androsyn    2005/10/26 17:54:12 UTC	(20051026_1-21002)
+  Log:
+  reset last_ptr when looping over the monitor_hash table
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/src/monitor.c (File Modified) 
+
+
 androsyn    2005/10/26 16:09:09 UTC	(20051026_0-21000)
   Log:
   don't have monitor build the n\!u@h buffer for every user it notifies when a client comes online
