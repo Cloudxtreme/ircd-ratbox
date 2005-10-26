@@ -120,7 +120,10 @@ add_monitor(struct Client *client_p, const char *nicks)
 			}
 
 			if(cur_onlen != mlen)
+			{
 				*onptr++ = ',';
+				cur_onlen++;
+			}
 
 			arglen = sprintf(onptr, "%s!%s@%s",
 					target_p->name, target_p->username,
@@ -138,7 +141,10 @@ add_monitor(struct Client *client_p, const char *nicks)
 			}
 
 			if(cur_offlen != mlen)
+			{
 				*offptr++ = ',';
+				cur_offlen++;
+			}
 
 			arglen = sprintf(offptr, "%s", name);
 			offptr += arglen;
@@ -211,7 +217,11 @@ list_monitor(struct Client *client_p)
 		}
 
 		if(cur_len != mlen)
+		{
 			*nbuf++ = ',';
+			cur_len++;
+		}
+
 		arglen = sprintf(nbuf, "%s", monptr->name);
 		cur_len += arglen;
 		nbuf += arglen;
@@ -256,7 +266,10 @@ show_monitor_status(struct Client *client_p)
 			}
 
 			if(cur_onlen != mlen)
+			{
 				*onptr++ = ',';
+				cur_onlen++;
+			}
 
 			arglen = sprintf(onptr, "%s!%s@%s",
 					target_p->name, target_p->username,
@@ -274,7 +287,10 @@ show_monitor_status(struct Client *client_p)
 			}
 
 			if(cur_offlen != mlen)
+			{
 				*offptr++ = ',';
+				cur_offlen++;
+			}
 
 			arglen = sprintf(offptr, "%s", monptr->name);
 			offptr += arglen;
