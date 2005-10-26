@@ -105,12 +105,12 @@ monitor_signon(struct Client *client_p)
 	if(monptr == NULL)
 		return;
 
+	ircsnprintf(buf, sizeof(buf), "%s!%s@%s",
+		    client_p->name, client_p->username, client_p->host);
+
 	DLINK_FOREACH(ptr, monptr->users.head)
 	{
 		target_p = ptr->data;
-
-		snprintf(buf, sizeof(buf), "%s!%s@%s",
-			client_p->name, client_p->username, client_p->host);
 
 		sendto_one(target_p, form_str(RPL_MONONLINE),
 				me.name, target_p->name, buf);
