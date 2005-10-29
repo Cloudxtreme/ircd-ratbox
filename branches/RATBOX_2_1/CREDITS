@@ -1,14 +1,14 @@
 $Id$
  
 ircd-ratbox is an evolution where ircd-hybrid left off around version 7-rc1.  
-Currently the ircd-ratbox consists of the following developers:
+Currently the ircd-ratbox team consists of the following developers:
  
 AndroSyn, Aaron Sethman <androsyn -at- ratbox.org>
 anfl, Lee Hardy <lee -at- leeh.co.uk>
 larne, Edward Brocklesby <ejb -at- sdf.lonestar.org>
-
+ 
 Special thanks for support, code and ideas to:
-
+ 
 Hwy, W. Campbell <wcampbel -at- botbay.net>
 jilles, Jilles Tjoelker <jilles -at- stack.nl>
  
