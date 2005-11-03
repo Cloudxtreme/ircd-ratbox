@@ -1,3 +1,12 @@
+leeh        2005/11/03 19:36:40 UTC	(20051103_0-21058)
+  Log:
+  - add in a numeric patchlevel
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/include/patchlevel.h (File Modified) 
+
+
 leeh        2005/10/29 09:58:50 UTC	(20051029_1-21040)
   Log:
   - add missing word 'team'
