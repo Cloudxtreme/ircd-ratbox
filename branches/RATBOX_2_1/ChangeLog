@@ -1,3 +1,13 @@
+leeh        2005/11/06 22:32:38 UTC	(20051106_0-21094)
+  Log:
+  - dont use a blockheap for the file cache.. its not really needed.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/include/balloc.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/src/cache.c (File Modified) 
+
+
 leeh        2005/11/03 19:36:40 UTC	(20051103_0-21058)
   Log:
   - add in a numeric patchlevel
