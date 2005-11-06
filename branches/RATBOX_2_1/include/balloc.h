@@ -32,10 +32,6 @@
 #include "memory.h"
 #include "ircd_defs.h"
 
-#define CACHEFILE_HEAP_SIZE	32
-#define CACHELINE_HEAP_SIZE	64
-
-
 #ifdef NOBALLOC 
   	 
 typedef struct BlockHeap BlockHeap; 	 

@@ -45,9 +45,6 @@
 #include "cache.h"
 #include "sprintf_irc.h"
 
-static BlockHeap *cachefile_heap = NULL;
-static BlockHeap *cacheline_heap = NULL;
-
 struct cachefile *user_motd = NULL;
 struct cachefile *oper_motd = NULL;
 struct cacheline *emptyline = NULL;
@@ -58,16 +55,13 @@ char user_motd_changed[MAX_DATE_STRING];
  *
  * inputs	-
  * outputs	-
- * side effects - inits the file/line cache blockheaps, loads motds
+ * side effects - inits the emptyline, loads motds
  */
 void
 init_cache(void)
 {
-	cachefile_heap = BlockHeapCreate(sizeof(struct cachefile), CACHEFILE_HEAP_SIZE);
-	cacheline_heap = BlockHeapCreate(sizeof(struct cacheline), CACHELINE_HEAP_SIZE);
-
 	/* allocate the emptyline */
-	emptyline = BlockHeapAlloc(cacheline_heap);
+	emptyline = MyMalloc(sizeof(struct cacheline));
 	emptyline->data[0] = ' ';
 	emptyline->data[1] = '\0';
 	user_motd_changed[0] = '\0';
@@ -113,7 +107,7 @@ cache_file(const char *filename, const char *shortname, int flags)
 				 local_tm->tm_min);
 	}
 
-	cacheptr = BlockHeapAlloc(cachefile_heap);
+	cacheptr = MyMalloc(sizeof(struct cachefile));
 
 	strlcpy(cacheptr->name, shortname, sizeof(cacheptr->name));
 	cacheptr->flags = flags;
@@ -126,7 +120,7 @@ cache_file(const char *filename, const char *shortname, int flags)
 
 		if(!EmptyString(line))
 		{
-			lineptr = BlockHeapAlloc(cacheline_heap);
+			lineptr = MyMalloc(sizeof(struct cacheline));
 			strlcpy(lineptr->data, line, sizeof(lineptr->data));
 			dlinkAddTail(lineptr, &lineptr->linenode, &cacheptr->contents);
 		}
@@ -193,10 +187,10 @@ free_cachefile(struct cachefile *cacheptr)
 	DLINK_FOREACH_SAFE(ptr, next_ptr, cacheptr->contents.head)
 	{
 		if(ptr->data != emptyline)
-			BlockHeapFree(cacheline_heap, ptr->data);
+			MyFree(ptr->data);
 	}
 
-	BlockHeapFree(cachefile_heap, cacheptr);
+	MyFree(cacheptr);
 }
 
 /* load_help()
