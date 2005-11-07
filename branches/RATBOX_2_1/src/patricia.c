@@ -25,10 +25,6 @@
 #include "patricia.h"
 #include "balloc.h"
 
-static BlockHeap *prefix_heap;
-static BlockHeap *node_heap;
-static BlockHeap *patricia_heap;
-
 /* Enable both of these to debug patricia.c
  * #define NOTYET 1
  * #define PATRICIA_DEBUG 1
@@ -41,9 +37,7 @@ static BlockHeap *patricia_heap;
 void
 init_patricia(void)
 {
-	prefix_heap = BlockHeapCreate(sizeof(prefix_t), PREFIX_HEAP_COUNT);
-	node_heap = BlockHeapCreate(sizeof(patricia_node_t), NODE_HEAP_COUNT);
-	patricia_heap = BlockHeapCreate(sizeof(patricia_tree_t), PATRICIA_HEAP_COUNT);
+	return;
 }
 
 /* prefix_tochar
@@ -129,7 +123,7 @@ New_Prefix2(int family, void *dest, int bitlen, prefix_t * prefix)
 		default_bitlen = 128;
 		if(prefix == NULL)
 		{
-			prefix = BlockHeapAlloc(prefix_heap);
+			prefix = MyMalloc(sizeof(prefix_t));
 			dynamic_allocated++;
 		}
 		memcpy(&prefix->add.sin6, dest, 16);
@@ -140,7 +134,7 @@ New_Prefix2(int family, void *dest, int bitlen, prefix_t * prefix)
 	{
 		if(prefix == NULL)
 		{
-			prefix = BlockHeapAlloc(prefix_heap);
+			prefix = MyMalloc(sizeof(prefix_t));			
 			dynamic_allocated++;
 		}
 		memcpy(&prefix->add.sin, dest, 4);
@@ -264,7 +258,7 @@ Deref_Prefix(prefix_t * prefix)
 	assert(prefix->ref_count >= 0);
 	if(prefix->ref_count <= 0)
 	{
-		BlockHeapFree(prefix_heap, prefix);
+		MyFree(prefix);
 		return;
 	}
 }
@@ -280,7 +274,7 @@ static int num_active_patricia = 0;
 patricia_tree_t *
 New_Patricia(int maxbits)
 {
-	patricia_tree_t *patricia = BlockHeapAlloc(patricia_heap);
+	patricia_tree_t *patricia = MyMalloc(sizeof(patricia_tree_t));
 
 	patricia->maxbits = maxbits;
 	patricia->head = NULL;
@@ -322,7 +316,7 @@ Clear_Patricia(patricia_tree_t * patricia, void_fn_t func)
 			{
 				assert(Xrn->data == NULL);
 			}
-			BlockHeapFree(node_heap, Xrn);
+			MyFree(Xrn);
 			patricia->num_active_node--;
 
 			if(l)
@@ -348,7 +342,7 @@ Clear_Patricia(patricia_tree_t * patricia, void_fn_t func)
 		}
 	}
 	assert(patricia->num_active_node == 0);
-	BlockHeapFree(patricia_heap, patricia);
+	MyFree(patricia);
 }
 
 
@@ -575,7 +569,7 @@ patricia_lookup(patricia_tree_t * patricia, prefix_t * prefix)
 
 	if(patricia->head == NULL)
 	{
-		node = BlockHeapAlloc(node_heap);
+		node = MyMalloc(sizeof(patricia_node_t)); 
 		node->bit = prefix->bitlen;
 		node->prefix = Ref_Prefix(prefix);
 		node->parent = NULL;
@@ -699,7 +693,7 @@ patricia_lookup(patricia_tree_t * patricia, prefix_t * prefix)
 		return (node);
 	}
 
-	new_node = BlockHeapAlloc(node_heap);
+	new_node = MyMalloc(sizeof(patricia_node_t)); 
 	new_node->bit = prefix->bitlen;
 	new_node->prefix = Ref_Prefix(prefix);
 	new_node->parent = NULL;
@@ -763,7 +757,7 @@ patricia_lookup(patricia_tree_t * patricia, prefix_t * prefix)
 	}
 	else
 	{
-		glue = BlockHeapAlloc(node_heap);
+		glue = MyMalloc(sizeof(patricia_node_t));
 		glue->bit = differ_bit;
 		glue->prefix = NULL;
 		glue->parent = node->parent;
@@ -839,7 +833,7 @@ patricia_remove(patricia_tree_t * patricia, patricia_node_t * node)
 #endif /* PATRICIA_DEBUG */
 		parent = node->parent;
 		Deref_Prefix(node->prefix);
-		BlockHeapFree(node_heap, node);
+		MyFree(node);
 		patricia->num_active_node--;
 
 		if(parent == NULL)
@@ -881,7 +875,7 @@ patricia_remove(patricia_tree_t * patricia, patricia_node_t * node)
 			parent->parent->l = child;
 		}
 		child->parent = parent->parent;
-		BlockHeapFree(node_heap, parent);
+		MyFree(parent);
 		patricia->num_active_node--;
 		return;
 	}
@@ -902,7 +896,7 @@ patricia_remove(patricia_tree_t * patricia, patricia_node_t * node)
 	child->parent = parent;
 
 	Deref_Prefix(node->prefix);
-	BlockHeapFree(node_heap, node);
+	MyFree(node);
 	patricia->num_active_node--;
 
 	if(parent == NULL)
