@@ -1,3 +1,12 @@
+leeh        2005/11/08 19:39:21 UTC	(20051108_4-21120)
+  Log:
+  - remove unused CIPHERKEYLEN
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/include/client.h (File Modified) 
+
+
 leeh        2005/11/08 19:37:52 UTC	(20051108_3-21118)
   Log:
   - remove "up" from struct Server, reference client_p->servptr->name instead
