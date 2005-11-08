@@ -718,7 +718,7 @@ burst_TS5(struct Client *client_p)
 		}
 
 		sendto_one(client_p, "NICK %s %d %ld %s %s %s %s :%s",
-			   target_p->name, target_p->servptr->serv->hopcount + 1,
+			   target_p->name, target_p->hopcount + 1,
 			   (long) target_p->tsinfo, ubuf,
 			   target_p->username, target_p->host,
 			   target_p->servptr->name, target_p->info);
@@ -844,7 +844,7 @@ burst_TS6(struct Client *client_p)
 		if(has_id(target_p))
 			sendto_one(client_p, ":%s UID %s %d %ld %s %s %s %s %s :%s",
 				   target_p->servptr->id, target_p->name,
-				   target_p->servptr->serv->hopcount + 1, 
+				   target_p->hopcount + 1, 
 				   (long) target_p->tsinfo, ubuf,
 				   target_p->username, target_p->host,
 				   IsIPSpoof(target_p) ? "0" : target_p->sockhost,
@@ -852,7 +852,7 @@ burst_TS6(struct Client *client_p)
 		else
 			sendto_one(client_p, "NICK %s %d %ld %s %s %s %s :%s",
 					target_p->name,
-					target_p->servptr->serv->hopcount + 1,
+					target_p->hopcount + 1,
 					(long) target_p->tsinfo,
 					ubuf,
 					target_p->username, target_p->host,
@@ -1109,7 +1109,6 @@ server_estab(struct Client *client_p)
 	/* doesnt duplicate client_p->serv if allocated this struct already */
 	make_server(client_p);
 
-	client_p->serv->hopcount = 0;
 	client_p->serv->caps = client_p->localClient->caps;
 
 	if(client_p->localClient->fullcaps)
@@ -1214,12 +1213,12 @@ server_estab(struct Client *client_p)
 		if(has_id(client_p) && has_id(target_p))
 			sendto_one(client_p, ":%s SID %s %d %s :%s%s",
 				   target_p->servptr->id, target_p->name,
-				   target_p->servptr->serv->hopcount + 1, target_p->id,
+				   target_p->hopcount + 1, target_p->id,
 				   IsHidden(target_p) ? "(H) " : "", target_p->info);
 		else
 			sendto_one(client_p, ":%s SERVER %s %d :%s%s",
 				   target_p->servptr->name,
-				   target_p->name, target_p->servptr->serv->hopcount + 1,
+				   target_p->name, target_p->hopcount + 1,
 				   IsHidden(target_p) ? "(H) " : "", target_p->info);
 
 		if(IsCapable(client_p, CAP_ENCAP) && 
