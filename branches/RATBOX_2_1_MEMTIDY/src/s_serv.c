@@ -1108,7 +1108,6 @@ server_estab(struct Client *client_p)
 	add_to_client_hash(client_p->name, client_p);
 	/* doesnt duplicate client_p->serv if allocated this struct already */
 	make_server(client_p);
-	client_p->serv->up = me.name;
 	client_p->serv->upid = me.id;
 
 	client_p->serv->caps = client_p->localClient->caps;
@@ -1219,7 +1218,7 @@ server_estab(struct Client *client_p)
 				   IsHidden(target_p) ? "(H) " : "", target_p->info);
 		else
 			sendto_one(client_p, ":%s SERVER %s %d :%s%s",
-				   target_p->serv->up,
+				   target_p->servptr->name,
 				   target_p->name, target_p->hopcount + 1,
 				   IsHidden(target_p) ? "(H) " : "", target_p->info);
 
@@ -1551,7 +1550,6 @@ serv_connect(struct server_conf *server_p, struct Client *by)
 	{
 		strcpy(client_p->serv->by, "AutoConn.");
 	}
-	client_p->serv->up = me.name;
 	client_p->serv->upid = me.id;
 	SetConnecting(client_p);
 	dlinkAddTail(client_p, &client_p->node, &global_client_list);

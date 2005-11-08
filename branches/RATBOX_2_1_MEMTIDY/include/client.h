@@ -74,7 +74,6 @@ struct User
 
 struct Server
 {
-	const char *up;		/* Pointer to scache name */
 	const char *upid;
 	char by[NICKLEN];
 	dlink_list servers;

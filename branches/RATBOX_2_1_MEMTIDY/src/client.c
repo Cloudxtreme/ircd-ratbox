@@ -1407,8 +1407,8 @@ exit_remote_server(struct Client *client_p, struct Client *source_p, struct Clie
 	static char comment1[(HOSTLEN*2)+2];
 	struct Client *target_p;
 	
-	if((source_p->serv) && (source_p->serv->up))
-		 strcpy(comment1, source_p->serv->up);
+	if(source_p->servptr)
+		 strcpy(comment1, source_p->servptr->name);
 	else
 		strcpy(comment1, "<Unknown>");
 	
@@ -1507,8 +1507,8 @@ exit_local_server(struct Client *client_p, struct Client *source_p, struct Clien
 
 	close_connection(source_p);
 	
-	if((source_p->serv) && (source_p->serv->up))
-		 strcpy(comment1, source_p->serv->up);
+	if(source_p->servptr)
+		 strcpy(comment1, source_p->servptr->name);
 	else
 		strcpy(comment1, "<Unknown>");
 	

@@ -388,8 +388,6 @@ ms_server(struct Client *client_p, struct Client *source_p, int parc, const char
 
 	set_server_gecos(target_p, info);
 
-	target_p->serv->up = find_or_add(source_p->name);
-
 	if(has_id(source_p))
 		target_p->serv->upid = source_p->id;
 
@@ -525,8 +523,6 @@ ms_sid(struct Client *client_p, struct Client *source_p, int parc, const char *p
 	target_p->hopcount = atoi(parv[2]);
 	strcpy(target_p->id, parv[3]);
 	set_server_gecos(target_p, parv[4]);
-
-	target_p->serv->up = find_or_add(source_p->name);
 
 	if(has_id(source_p))
 		target_p->serv->upid = source_p->id;
