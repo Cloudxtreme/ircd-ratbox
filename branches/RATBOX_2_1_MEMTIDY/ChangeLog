@@ -1,3 +1,17 @@
+androsyn    2005/11/08 21:04:24 UTC	(20051108_8-21132)
+  Log:
+  Add proper stdint/inttypes checking.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/aclocal.m4 (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/configure.ac (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/include/memory.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/include/setup.h.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/include/stdinc.h (File Modified) 
+
+
 leeh        2005/11/08 21:01:45 UTC	(20051108_7-21130)
   Log:
   - remove pacing of /away, there are far more productive things to flood
