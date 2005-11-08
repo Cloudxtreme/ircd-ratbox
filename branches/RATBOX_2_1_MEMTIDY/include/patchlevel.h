@@ -25,7 +25,7 @@
  */
 
 #ifndef PATCHLEVEL
-#define PATCHLEVEL   "ircd-ratbox-2.1.7"
+#define PATCHLEVEL   "ircd-ratbox-2.1.7+memcleanup"
 #define PATCHLEVEL_NUM	0201070500
 
 /* patchlevel numbers:
