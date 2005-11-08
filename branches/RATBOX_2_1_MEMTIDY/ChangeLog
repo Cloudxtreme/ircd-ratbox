@@ -1,3 +1,12 @@
+leeh        2005/11/08 21:10:15 UTC	(20051108_9-21134)
+  Log:
+  - make targinfo[2] uint8_t rather than int.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/include/client.h (File Modified) 
+
+
 androsyn    2005/11/08 21:04:24 UTC	(20051108_8-21132)
   Log:
   Add proper stdint/inttypes checking.
