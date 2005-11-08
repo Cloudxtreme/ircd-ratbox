@@ -1,3 +1,29 @@
+leeh        2005/11/08 20:41:20 UTC	(20051108_6-21128)
+  Log:
+  - remove "server" from struct User, we can reference servptr->name where its
+    needed.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/core/m_join.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/core/m_kill.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/core/m_message.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/core/m_nick.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/m_etrace.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/m_gline.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/m_kline.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/m_locops.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/m_resv.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/m_user.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/m_who.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/m_whois.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/m_xline.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/s_serv.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/s_user.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/whowas.c (File Modified) 
+
+
 leeh        2005/11/08 19:41:45 UTC	(20051108_5-21122)
   Log:
   - remove "upid" from struct Server
