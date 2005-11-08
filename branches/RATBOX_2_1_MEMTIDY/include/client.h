@@ -73,7 +73,6 @@ struct User
 
 struct Server
 {
-	const char *upid;
 	char by[NICKLEN];
 	dlink_list servers;
 	dlink_list users;
