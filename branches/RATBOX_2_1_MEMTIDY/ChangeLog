@@ -1,3 +1,18 @@
+leeh        2005/11/08 22:28:36 UTC	(20051108_13-21142)
+  Log:
+  - actually, I need to think about hopcount a bit more :)
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/core/m_nick.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/core/m_server.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/m_links.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/m_who.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/s_serv.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/s_user.c (File Modified) 
+
+
 leeh        2005/11/08 22:09:05 UTC	(20051108_12-21140)
   Log:
   - move hopcount from struct Client into struct Server
