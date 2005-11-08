@@ -783,8 +783,6 @@ release_client_state(struct Client *client_p)
 	}
 	if(client_p->serv)
 	{
-		if(client_p->serv->user != NULL)
-			free_user(client_p->serv->user, client_p);
 		if(client_p->serv->fullcaps)
 			MyFree(client_p->serv->fullcaps);
 		MyFree(client_p->serv);
@@ -1887,7 +1885,6 @@ make_user(struct Client *client_p)
 	if(!user)
 	{
 		user = (struct User *) BlockHeapAlloc(user_heap);
-		user->refcnt = 1;
 		client_p->user = user;
 	}
 	return user;
@@ -1926,34 +1923,29 @@ make_server(struct Client *client_p)
 void
 free_user(struct User *user, struct Client *client_p)
 {
-	if(--user->refcnt <= 0)
+	if(user->away)
+		MyFree((char *) user->away);
+	/*
+	 * sanity check
+	 */
+	if(user->invited.head || user->channel.head)
 	{
-		if(user->away)
-			MyFree((char *) user->away);
-		/*
-		 * sanity check
-		 */
-		if(user->refcnt < 0 || user->invited.head || user->channel.head)
-		{
-			sendto_realops_flags(UMODE_ALL, L_ALL,
-					     "* %#lx user (%s!%s@%s) %#lx %#lx %#lx %lu %d *",
-					     (unsigned long) client_p,
-					     client_p ? client_p->
-					     name : "<noname>",
-					     client_p->username,
-					     client_p->host,
-					     (unsigned long) user,
-					     (unsigned long) user->invited.head,
-					     (unsigned long) user->channel.head, 
-					     dlink_list_length(&user->channel),
-					     user->refcnt);
-			s_assert(!user->refcnt);
-			s_assert(!user->invited.head);
-			s_assert(!user->channel.head);
-		}
-
-		BlockHeapFree(user_heap, user);
+		sendto_realops_flags(UMODE_ALL, L_ALL,
+				     "* %#lx user (%s!%s@%s) %#lx %#lx %#lx %lu *",
+				     (unsigned long) client_p,
+				     client_p ? client_p->
+				     name : "<noname>",
+				     client_p->username,
+				     client_p->host,
+				     (unsigned long) user,
+				     (unsigned long) user->invited.head,
+				     (unsigned long) user->channel.head, 
+				     dlink_list_length(&user->channel));
+		s_assert(!user->invited.head);
+		s_assert(!user->channel.head);
 	}
+
+	BlockHeapFree(user_heap, user);
 }
 
 void
