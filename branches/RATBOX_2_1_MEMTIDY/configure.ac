@@ -389,29 +389,7 @@ AC_CHECK_FUNCS([strlcat strlcpy])
 
 fi
 
-AC_CHECK_TYPE([u_int32_t], [],
-[
-	AC_CHECK_TYPE([uint32_t],
-	[
-		AC_DEFINE(u_int32_t, [uint32_t], [If system does not define u_int32_t, define a reasonable substitute.])
-	],
-	[
-		AC_MSG_WARN([system has no u_int32_t or uint32_t, default to unsigned long int])
-		AC_DEFINE(u_int32_t, [unsigned long int], [If system does not define u_int32_t, define to unsigned long int here.])
-	])
-])
-
-AC_CHECK_TYPE([u_int16_t], [],
-[
-	AC_CHECK_TYPE([uint16_t],
-	[
-		AC_DEFINE(u_int16_t, [uint16_t], [If system does not define u_int16_t, define a usable substitute])
-	],
-	[
-		AC_MSG_WARN([system has no u_int16_t or uint16_t, default to unsigned short int])
-		AC_DEFINE(u_int16_t, [unsigned short int], [If system does not define u_int16_t, define a usable substitute.])
-	])
-])
+AX_CREATE_STDINT_H([include/_stdint.h])
 
 AC_CHECK_TYPE([in_port_t], [],
 [AC_DEFINE(in_port_t, [u_int16_t], [If system does not define in_port_t, define it to what it should be.])],
@@ -422,8 +400,6 @@ AC_CHECK_TYPE([sa_family_t], [],
 [AC_DEFINE(sa_family_t, [u_int16_t], [If system does not define sa_family_t, define it here.])],
 [[#include <sys/types.h>
 #include <sys/socket.h>]])
-
-AC_CHECK_TYPES([uintptr_t])
 
 dnl check for various functions...
 AC_CHECK_FUNCS([socketpair vsnprintf mmap gettimeofday strdup strndup ])

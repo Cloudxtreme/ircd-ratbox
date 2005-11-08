@@ -139,7 +139,7 @@ extern int errno;
 # define __noreturn
 #endif
 
-
+#include "_stdint.h"
 
 #ifdef strdupa
 #define LOCAL_COPY(s) strdupa(s) 

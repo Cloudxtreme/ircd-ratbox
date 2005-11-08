@@ -156,9 +156,6 @@
 /* Define to 1 if you have the <sys/wait.h> header file. */
 #undef HAVE_SYS_WAIT_H
 
-/* Define to 1 if the system has the type `uintptr_t'. */
-#undef HAVE_UINTPTR_T
-
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
@@ -237,6 +234,21 @@
 /* Suffix for shared libraries on this platform. */
 #undef SHARED_SUFFIX
 
+/* The size of a `char', as computed by sizeof. */
+#undef SIZEOF_CHAR
+
+/* The size of a `int', as computed by sizeof. */
+#undef SIZEOF_INT
+
+/* The size of a `long', as computed by sizeof. */
+#undef SIZEOF_LONG
+
+/* The size of a `short', as computed by sizeof. */
+#undef SIZEOF_SHORT
+
+/* The size of a `void*', as computed by sizeof. */
+#undef SIZEOF_VOIDP
+
 /* Define to 1 if sockaddr has a 'sa_len' member. */
 #undef SOCKADDR_IN_HAS_LEN
 
@@ -306,9 +318,3 @@
 
 /* If we don't have a real socklen_t, unsigned int is good enough. */
 #undef socklen_t
-
-/* If system does not define u_int16_t, define a usable substitute. */
-#undef u_int16_t
-
-/* If system does not define u_int32_t, define to unsigned long int here. */
-#undef u_int32_t
