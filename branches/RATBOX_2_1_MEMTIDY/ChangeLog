@@ -1,3 +1,14 @@
+leeh        2005/11/08 19:41:45 UTC	(20051108_5-21122)
+  Log:
+  - remove "upid" from struct Server
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/core/m_server.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/s_serv.c (File Modified) 
+
+
 leeh        2005/11/08 19:39:21 UTC	(20051108_4-21120)
   Log:
   - remove unused CIPHERKEYLEN
