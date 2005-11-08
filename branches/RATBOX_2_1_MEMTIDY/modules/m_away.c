@@ -101,20 +101,6 @@ m_away(struct Client *client_p, struct Client *source_p, int parc, const char *p
 	}
 
 	/* Marking as away */
-
-	if(MyConnect(source_p))
-	{
-		if(!IsOper(source_p) &&
-		   (CurrentTime - source_p->localClient->last_away) < ConfigFileEntry.pace_wait)
-		{
-			sendto_one(source_p, form_str(RPL_LOAD2HI), 
-				   me.name, source_p->name, "AWAY");
-			return 0;
-		}
-
-		source_p->localClient->last_away = CurrentTime;
-	}
-
 	awy2 = LOCAL_COPY(parv[1]);
 	if(strlen(awy2) > AWAYLEN)
 		awy2[AWAYLEN] = '\0';

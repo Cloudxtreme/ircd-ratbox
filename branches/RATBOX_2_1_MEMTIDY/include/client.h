@@ -227,7 +227,6 @@ struct LocalUser
 
 	struct ZipStats zipstats;
 
-	time_t last_away;	/* Away since... */
 	time_t last;
 
 	/* challenge stuff */
