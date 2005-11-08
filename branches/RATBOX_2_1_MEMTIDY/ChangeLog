@@ -1,3 +1,17 @@
+leeh        2005/11/08 19:37:52 UTC	(20051108_3-21118)
+  Log:
+  - remove "up" from struct Server, reference client_p->servptr->name instead
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/core/m_server.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/modules/m_links.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/client.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/ircd.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/s_serv.c (File Modified) 
+
+
 leeh        2005/11/08 19:16:22 UTC	(20051108_2-21116)
   Log:
   - remove ->user in struct Server, its unused
