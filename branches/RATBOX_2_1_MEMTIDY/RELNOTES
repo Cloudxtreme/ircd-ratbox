@@ -1,0 +1,135 @@
+
+This is the current version of the 'stable' tree of ircd-ratbox.  This code
+is suitable for all servers.
+
+If you are upgrading from 2.0, you must read doc/whats-new-2.1.txt
+If you are upgrading from 1.x, you must read doc/whats-new-2.1.txt and
+doc/whats-new-2.0.txt
+
+-- ircd-ratbox-2.1.7
+- fix UID leak in INVITE
+- fix a core and an overflow in MONITOR
+
+-- ircd-ratbox-2.1.6
+- updates to the help files
+- fix shared {};/cluster {}; flags not being initialised to 0
+- fix a servlink bug that could cause a connect to fail
+- use TS6 form for a few more commands
+- dont remove oper umodes when remote clients deoper
+- fix some protocol stuff being sent in TS5 only
+- disallow UID targets in a few more places
+- fix global capabilities applying to local server
+- fix blank whoises being sent out sometimes
+- remove an unused variable in struct ConfItem
+- fix a remotely triggerable core in trace
+- port over missing TS6 invites
+- fix TS6 server introductions not calling the server introduced hook
+- non-efnet: store username users are logged in as always, not just when
+  we're a hub
+
+-- ircd-ratbox-2.1.5
+- fix a buffer overflow and an unterminated buffer when TS6 forces us
+  to remove bans
+- fix potential junk SJOIN generation when splitting it into multiple
+  lines
+- make servlink check for an uncompressed ERROR
+
+-- ircd-ratbox-2.1.4
+- fix minor time bug which occurs on december 31st
+- dont drop a servers link when we get a malformed WHOIS
+- disallow commas in channel keys
+- fix compile problem with abort_list
+- fix build on darwin
+- fix compilation with gcc4
+- userhost was only allowing 4 targets instead of 5
+- invalidate channel ban cache on nickchange
+- add TARGMAX to 005, detailing maximum targets for messages
+- fix counting of clients on accept list when adding users
+- use ID instead of name when bursting SJOIN to TS6 servers
+- lower id in struct User, which was one byte bigger than it needs to be
+
+-- ircd-ratbox-2.1.3
+- removed sendq_eob as it just doesnt work on efnet
+- dont allow MONITOR from an unregistered client
+- add some uniqueness into the auth process for bopm
+- fix resvs to check whether target server is us properly
+- fix a core in cidr channel ban matching
+- raise max temptime to a year
+- fix cores when we receive extra params to NICK/UID
+- remove no_oper_resvs, add resv_exempt auth flag
+- fix flattened links
+- clean up the accept code, and dont clear a users own list of accepted
+  clients on nickchange
+- non-efnet:
+  - make services {}; blocks be displayed on stats U
+  - make services {}; blocks apply on rehash, you must now have only ONE
+    service {}; block, but you may have multiple name=""; entries within.
+  - only show services logged in info for local clients
+
+-- ircd-ratbox-2.1.2
+- fix missing end comment tag in example confs
+- fix display problem with unauthorised conn notice
+- remove some unused defines from INFO
+- fix tabs for spaces in some helpfiles
+- add in missing links_delay conf option
+- fix cores under amd64
+- disallow bans beginning with ':' over BMASK
+- disallow bans with a space in chm_ban()
+- stop counting hidden opers in stats p count output
+- match() params of remote unresv were inverted, causing it to never match
+- fix possibility of clients setting blank keys
+- fix UID problems with trace
+- raise default topiclen to 160
+- add in forced nick change for ratbox-services, when compiled with
+  --enable-services
+
+-- ircd-ratbox-2.1.1
+- remove an 005 token to hack around the parser bug
+- exempt users messaging themselves from target change
+- disallow messaging towards UIDs
+- add in doc/tgchange.txt
+- move stats L back to RPL_STATSLINKINFO
+- fix some minor auth problems
+- properly store ipv6 ips when we're compiled for v4 only
+- fix propagation of xline/resv
+- sync remote kline reasons with form used for local klines
+
+-- ircd-ratbox-2.1.0
+- no changes
+
+-- ircd-ratbox-2.1.0beta2
+- fix a few compile warnings
+- added multi-prefix clicap, for showing "@+" in NAMES/WHO replies
+- remove split_delay, make split servers now work on how many servers have
+  issued EOB, rather than how many exist.
+- server-side notify lists.  See doc/monitor.txt
+- fix undline core
+- remove an unwanted space from beginning of second 005
+- fix a potential core with the patricia when removing classes
+- when we're handling global NAMES, dont output channels whose users are all
+  invisible
+
+-- ircd-ratbox-2.1.0beta1
+- No release notes, see doc/whats-new-2.1.txt
+
+--------------------------------------------------------------------------------
+
+BUGS: Major bugs in this release are listed in BUGS
+
+BUG REPORTS: If you run this code and encounter problems, you must report
+the bug by EMAIL to ircd-ratbox@lists.ratbox.org
+
+Please include a gdb backtrace and keep the core file, binaries and 
+modules in case the developers need them.
+
+DISCUSSION: There is a mailing list for discussion of ratbox issues,
+ To subscribe, visit:
+      http://lists.ratbox.org/cgi-bin/mailman/listinfo/ircd-ratbox
+
+You may also (if youre lucky) find us on #ratbox@EFNet
+
+Other files recommended for reading: BUGS, README.FIRST, INSTALL
+
+--------------------------------------------------------------------------------
+$Id$
+
