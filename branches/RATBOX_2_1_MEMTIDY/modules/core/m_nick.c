@@ -948,7 +948,6 @@ register_client(struct Client *client_p, struct Client *server,
 	source_p = make_client(client_p);
 	user = make_user(source_p);
 
-	source_p->hopcount = atoi(parv[2]);
 	source_p->tsinfo = newts;
 
 	strcpy(source_p->name, nick);

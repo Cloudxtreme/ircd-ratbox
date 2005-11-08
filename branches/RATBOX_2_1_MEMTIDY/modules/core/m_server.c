@@ -205,7 +205,6 @@ mr_server(struct Client *client_p, struct Client *source_p, int parc, const char
 
 	strlcpy(client_p->name, name, sizeof(client_p->name));
 	set_server_gecos(client_p, info);
-	client_p->hopcount = hop;
 	server_estab(client_p);
 
 	return 0;
@@ -382,7 +381,7 @@ ms_server(struct Client *client_p, struct Client *source_p, int parc, const char
 
 	target_p = make_client(client_p);
 	make_server(target_p);
-	target_p->hopcount = hop;
+	target_p->serv->hopcount = hop;
 
 	strlcpy(target_p->name, name, sizeof(target_p->name));
 
@@ -399,7 +398,7 @@ ms_server(struct Client *client_p, struct Client *source_p, int parc, const char
 
 	sendto_server(client_p, NULL, NOCAPS, NOCAPS,
 		      ":%s SERVER %s %d :%s%s",
-		      source_p->name, target_p->name, target_p->hopcount + 1,
+		      source_p->name, target_p->name, target_p->serv->hopcount + 1,
 		      IsHidden(target_p) ? "(H) " : "", target_p->info);
 
 	sendto_realops_flags(UMODE_EXTERNAL, L_ALL,
@@ -517,7 +516,7 @@ ms_sid(struct Client *client_p, struct Client *source_p, int parc, const char *p
 	make_server(target_p);
 
 	strlcpy(target_p->name, parv[1], sizeof(target_p->name));
-	target_p->hopcount = atoi(parv[2]);
+	target_p->serv->hopcount = atoi(parv[2]);
 	strcpy(target_p->id, parv[3]);
 	set_server_gecos(target_p, parv[4]);
 
@@ -532,12 +531,12 @@ ms_sid(struct Client *client_p, struct Client *source_p, int parc, const char *p
 
 	sendto_server(client_p, NULL, CAP_TS6, NOCAPS,
 		      ":%s SID %s %d %s :%s%s",
-		      source_p->id, target_p->name, target_p->hopcount + 1,
+		      source_p->id, target_p->name, target_p->serv->hopcount + 1,
 		      target_p->id,
 		      IsHidden(target_p) ? "(H) " : "", target_p->info);
 	sendto_server(client_p, NULL, NOCAPS, CAP_TS6,
 		      ":%s SERVER %s %d :%s%s",
-		      source_p->name, target_p->name, target_p->hopcount + 1,
+		      source_p->name, target_p->name, target_p->serv->hopcount + 1,
 		      IsHidden(target_p) ? "(H) " : "", target_p->info);
 
 	sendto_realops_flags(UMODE_EXTERNAL, L_ALL,

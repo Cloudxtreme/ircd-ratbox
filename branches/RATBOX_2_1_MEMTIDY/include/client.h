@@ -77,6 +77,7 @@ struct Server
 	dlink_list users;
 	int caps;		/* capabilities bit-field */
 	char *fullcaps;
+	int hopcount;		/* number of servers to this 0 = local */
 };
 
 struct SlinkRpl
@@ -117,7 +118,6 @@ struct Client
 	unsigned int flags;	/* client flags */
 	unsigned int flags2;	/* ugh. overflow */
 
-	int hopcount;		/* number of servers to this 0 = local */
 	unsigned short status;	/* Client type */
 	unsigned char handler;	/* Handler index */
 

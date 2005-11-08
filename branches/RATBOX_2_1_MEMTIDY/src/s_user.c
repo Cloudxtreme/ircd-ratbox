@@ -602,7 +602,7 @@ introduce_client(struct Client *client_p, struct Client *source_p, struct User *
 		sendto_server(client_p, NULL, CAP_TS6, NOCAPS,
 			      ":%s UID %s %d %ld %s %s %s %s %s :%s",
 			      source_p->servptr->id, nick,
-			      source_p->hopcount + 1,
+			      source_p->servptr->serv->hopcount + 1,
 			      (long) source_p->tsinfo, ubuf,
 			      source_p->username, source_p->host,
 			      IsIPSpoof(source_p) ? "0" : sockhost,
@@ -610,7 +610,7 @@ introduce_client(struct Client *client_p, struct Client *source_p, struct User *
 
 		sendto_server(client_p, NULL, NOCAPS, CAP_TS6,
 			      "NICK %s %d %ld %s %s %s %s :%s",
-			      nick, source_p->hopcount + 1,
+			      nick, source_p->servptr->serv->hopcount + 1,
 			      (long) source_p->tsinfo,
 			      ubuf, source_p->username, source_p->host,
 			      source_p->servptr->name, source_p->info);
@@ -618,7 +618,7 @@ introduce_client(struct Client *client_p, struct Client *source_p, struct User *
 	else
 		sendto_server(client_p, NULL, NOCAPS, NOCAPS,
 			      "NICK %s %d %ld %s %s %s %s :%s",
-			      nick, source_p->hopcount + 1,
+			      nick, source_p->servptr->serv->hopcount + 1,
 			      (long) source_p->tsinfo,
 			      ubuf, source_p->username, source_p->host,
 			      source_p->servptr->name, source_p->info);
