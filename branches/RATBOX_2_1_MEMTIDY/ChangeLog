@@ -1,3 +1,12 @@
+leeh        2005/11/08 18:59:58 UTC	(20051108_1-21114)
+  Log:
+  - alter patchlevel
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/include/patchlevel.h (File Modified) 
+
+
 leeh        2005/11/08 18:57:48 UTC	(20051108_0-21112)
   Log:
   - create a new branch for memory cleanups
