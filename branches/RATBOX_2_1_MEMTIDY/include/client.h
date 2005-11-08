@@ -63,7 +63,6 @@ struct User
 	dlink_list channel;	/* chain of channel pointer blocks */
 	dlink_list invited;	/* chain of invite pointer blocks */
 	char *away;		/* pointer to away message */
-	const char *server;	/* pointer to scached server name */
 
 #ifdef ENABLE_SERVICES
 	char suser[NICKLEN+1];
