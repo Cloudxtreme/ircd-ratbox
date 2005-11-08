@@ -1,3 +1,13 @@
+leeh        2005/11/08 21:24:00 UTC	(20051108_10-21136)
+  Log:
+  - remove pointless users_last from struct Channel
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/include/channel.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/channel.c (File Modified) 
+
+
 leeh        2005/11/08 21:10:15 UTC	(20051108_9-21134)
   Log:
   - make targinfo[2] uint8_t rather than int.
