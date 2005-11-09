@@ -213,7 +213,7 @@ read_ctrl_packet(int fd, void *data)
 {
 	struct Client *server = data;
 	struct LocalUser *lserver = server->localClient;
-	struct SlinkRpl *reply;
+	struct servlink_data *reply;
 	int length = 0;
 	unsigned char tmp[2];
 	unsigned char *len = tmp;
@@ -226,7 +226,7 @@ read_ctrl_packet(int fd, void *data)
 	if(IsAnyDead(server))
 		return;
 
-	reply = &lserver->slinkrpl;
+	reply = lserver->slink;
 
 
 	if(!reply->command)

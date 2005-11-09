@@ -1073,6 +1073,8 @@ server_estab(struct Client *client_p)
 	/* Hand the server off to servlink now */
 	if(IsCapable(client_p, CAP_ZIP))
 	{
+		client_p->localClient->slink = MyMalloc(sizeof(struct servlink_data));
+
 		if(fork_server(client_p) < 0)
 		{
 			sendto_realops_flags(UMODE_ALL, L_ALL,

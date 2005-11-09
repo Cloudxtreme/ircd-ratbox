@@ -79,7 +79,7 @@ struct Server
 	char *fullcaps;
 };
 
-struct SlinkRpl
+struct servlink_data
 {
 	int command;
 	int datalen;
@@ -221,7 +221,7 @@ struct LocalUser
 				   control fd used for sending commands
 				   to servlink */
 
-	struct SlinkRpl slinkrpl;	/* slink reply being parsed */
+	struct servlink_data *slink;	/* slink reply being parsed */
 	unsigned char *slinkq;	/* sendq for control data */
 	int slinkq_ofs;		/* ofset into slinkq */
 	int slinkq_len;		/* length remaining after slinkq_ofs */
