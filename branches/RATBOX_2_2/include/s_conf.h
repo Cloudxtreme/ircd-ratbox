@@ -158,66 +158,67 @@ struct config_file_entry
 	char *fname_ioerrorlog;
 
 	unsigned char compression_level;
+
+	int anti_nick_flood;
+	int anti_spam_exit_message_time;
+	int burst_away;
+	int caller_id_wait;
+	int client_exit;
+	int client_flood;
+	int connect_timeout;
+	int default_floodcount;
+	int default_invisible;
+	int disable_auth;
 	int disable_fake_channels;
+	int dline_with_reason;
 	int dot_in_ip6_addr;
 	int dots_in_ident;
 	int failed_oper_notice;
-	int anti_nick_flood;
-	int anti_spam_exit_message_time;
-	int max_accept;
-	int max_monitor;
-	int max_nick_time;
-	int max_nick_changes;
-	int ts_max_delta;
-	int ts_warn_delta;
-	int dline_with_reason;
-	int kline_with_reason;
-	int kline_delay;
-	int warn_no_nline;
-	int nick_delay;
-	int non_redundant_klines;
-	int stats_e_disabled;
-	int stats_c_oper_only;
-	int stats_y_oper_only;
-	int stats_h_oper_only;
-	int stats_o_oper_only;
-	int stats_k_oper_only;
-	int stats_i_oper_only;
-	int stats_P_oper_only;
-	int map_oper_only;
-	int operspy_admin_only;
-	int pace_wait;
-	int pace_wait_simple;
-	int short_motd;
-	int default_invisible;
-	int no_oper_flood;
 	int glines;
 	int gline_time;
 	int gline_min_cidr;
 	int gline_min_cidr6;
-	int idletime;
 	int hide_server;
 	int hide_error_messages;
-	int client_exit;
-	int oper_only_umodes;
-	int oper_umodes;
+	int idletime;
+	int kline_delay;
+	int kline_with_reason;
+	int map_oper_only;
+	int max_accept;
+	int max_monitor;
+	int max_nick_time;
+	int max_nick_changes;
 	int max_targets;
-	int caller_id_wait;
 	int min_nonwildcard;
 	int min_nonwildcard_simple;
-	int default_floodcount;
-	int client_flood;
-	int use_egd;
+	int nick_delay;
+	int no_oper_flood;
+	int non_redundant_klines;
+	int oper_only_umodes;
+	int oper_umodes;
+	int operspy_admin_only;
+	int pace_wait;
+	int pace_wait_simple;
 	int ping_cookie;
-	int tkline_expire_notices;
-	int use_whois_actually;
-	int disable_auth;
-	int connect_timeout;
-	int burst_away;
-	int reject_ban_time;
 	int reject_after_count;
+	int reject_ban_time;
 	int reject_duration;
+	int short_motd;
+	int stats_c_oper_only;
+	int stats_e_disabled;
+	int stats_h_oper_only;
+	int stats_i_oper_only;
+	int stats_k_oper_only;
+	int stats_o_oper_only;
+	int stats_P_oper_only;
+	int stats_y_oper_only;
 	int target_change;
+	int tkline_expire_notices;
+	int ts_max_delta;
+	int ts_warn_delta;
+	int use_egd;
+	int use_whois_actually;
+	int warn_no_nline;
 #ifdef IPV6
 	int fallback_to_ip6_int;
 #endif
@@ -225,9 +226,10 @@ struct config_file_entry
 
 struct config_channel_entry
 {
-	int use_except;
-	int use_invex;
-	int use_knock;
+	int burst_topicwho;
+	int default_split_server_count;
+	int default_split_user_count;
+	int invite_ops_only;
 	int knock_delay;
 	int knock_delay_channel;
 	int max_bans;
@@ -235,19 +237,18 @@ struct config_channel_entry
 	int no_create_on_split;
 	int no_join_on_split;
 	int quiet_on_ban;
-	int default_split_server_count;
-	int default_split_user_count;
-	int burst_topicwho;
-	int invite_ops_only;
+	int use_except;
+	int use_invex;
+	int use_knock;
 };
 
 struct config_server_hide
 {
+	int disable_hidden;
+	int hidden;
 	int flatten_links;
 	int links_delay;
 	int links_disabled;
-	int hidden;
-	int disable_hidden;
 };
 
 struct server_info
