@@ -69,7 +69,6 @@ struct ConfItem
 	char *user;		/* user part of user@host */
 	int port;
 	time_t hold;		/* Hold action until this time (calendar time) */
-	char *className;	/* Name of class */
 	struct Class *c_class;	/* Class of connection */
 	patricia_node_t *pnode;	/* Our patricia node */
 };
@@ -368,7 +367,7 @@ extern int rehash(int);
 extern void rehash_bans(int);
 
 extern int conf_add_server(struct ConfItem *, int);
-extern void conf_add_class_to_conf(struct ConfItem *);
+extern void conf_add_class_to_conf(struct ConfItem *, const char *name);
 extern void conf_add_me(struct ConfItem *);
 extern void conf_add_class(struct ConfItem *, int);
 extern void conf_add_d_conf(struct ConfItem *);
