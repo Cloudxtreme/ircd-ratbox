@@ -1,3 +1,12 @@
+leeh        2005/11/09 21:57:29 UTC	(20051109_12-21169)
+  Log:
+  - remove 2.1 stuff from CL
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/ChangeLog (File Modified) 
+
+
 leeh        2005/11/09 21:53:57 UTC	(20051109_11-21167)
   Log:
   - order the config variables alphabetically
