@@ -1,3 +1,16 @@
+leeh        2005/11/09 19:52:24 UTC	(20051109_5-21154)
+  Log:
+  - rename struct SlinkRpl to struct servlink_data, and make it dynamically
+    allocated
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/client.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/packet.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/s_serv.c (File Modified) 
+
+
 leeh        2005/11/09 19:43:16 UTC	(20051109_4-21152)
   Log:
   - remove some unused bitmasks from client.h
