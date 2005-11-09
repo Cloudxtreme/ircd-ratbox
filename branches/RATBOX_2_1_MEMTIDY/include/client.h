@@ -351,10 +351,7 @@ struct exit_client_hook
 #define FLAGS_DEAD	   0x0002	/* Local socket is dead--Exiting soon */
 #define FLAGS_KILLED       0x0004	/* Prevents "QUIT" from being sent for this */
 #define FLAGS_CLOSING      0x0020	/* set when closing to suppress errors */
-#define FLAGS_CHKACCESS    0x0040	/* ok to check clients access if set */
 #define FLAGS_GOTID        0x0080	/* successful ident lookup achieved */
-#define FLAGS_NEEDID       0x0100	/* I-lines say must use ident return */
-#define FLAGS_NORMALEX     0x0400	/* Client exited normally */
 #define FLAGS_SENDQEX      0x0800	/* Sendq exceeded */
 #define FLAGS_SERVLINK     0x10000	/* servlink has servlink process */
 #define FLAGS_MARK	   0x20000	/* marked client */
@@ -400,7 +397,6 @@ struct exit_client_hook
 #define FLAGS2_EXEMPTKLINE      0x0200000
 #define FLAGS2_EXEMPTFLOOD      0x0400000
 #define FLAGS2_NOLIMIT          0x0800000
-#define FLAGS2_IDLE_LINED       0x1000000
 #define FLAGS2_CLICAP		0x2000000
 #define FLAGS2_PING_COOKIE      0x4000000
 #define FLAGS2_IP_SPOOFING      0x8000000
@@ -421,17 +417,12 @@ struct exit_client_hook
 		      UMODE_OPERSPY | UMODE_CCONNEXT | UMODE_SERVICE | \
 		      UMODE_DEAF)
 
-#define FLAGS_ID     (FLAGS_NEEDID | FLAGS_GOTID)
-
 #define CLICAP_MULTI_PREFIX	0x0001
 
 /*
  * flags macros.
  */
 #define IsPerson(x)             (IsClient(x) && (x)->user)
-#define DoAccess(x)             ((x)->flags & FLAGS_CHKACCESS)
-#define SetAccess(x)            ((x)->flags |= FLAGS_CHKACCESS)
-#define ClearAccess(x)          ((x)->flags &= ~FLAGS_CHKACCESS)
 #define HasServlink(x)          ((x)->flags &  FLAGS_SERVLINK)
 #define SetServlink(x)          ((x)->flags |= FLAGS_SERVLINK)
 #define MyConnect(x)		((x)->flags & FLAGS_MYCONNECT)
@@ -493,9 +484,6 @@ struct exit_client_hook
 #define IsService(x)		((x)->umodes & UMODE_SERVICE)
 #define IsDeaf(x)		((x)->umodes & UMODE_DEAF)
 
-#define SetNeedId(x)            ((x)->flags |= FLAGS_NEEDID)
-#define IsNeedId(x)             (((x)->flags & FLAGS_NEEDID) != 0)
-
 #define SetGotId(x)             ((x)->flags |= FLAGS_GOTID)
 #define IsGotId(x)              (((x)->flags & FLAGS_GOTID) != 0)
 
@@ -520,9 +508,6 @@ struct exit_client_hook
 #define SetExemptResv(x)	((x)->flags2 |= FLAGS2_EXEMPTRESV)
 #define IsIPSpoof(x)            ((x)->flags2 & FLAGS2_IP_SPOOFING)
 #define SetIPSpoof(x)           ((x)->flags2 |= FLAGS2_IP_SPOOFING)
-
-#define SetIdlelined(x)         ((x)->flags2 |= FLAGS2_IDLE_LINED)
-#define IsIdlelined(x)          ((x)->flags2 & FLAGS2_IDLE_LINED)
 
 #define IsFloodDone(x)          ((x)->flags2 & FLAGS2_FLOODDONE)
 #define SetFloodDone(x)         ((x)->flags2 |= FLAGS2_FLOODDONE)

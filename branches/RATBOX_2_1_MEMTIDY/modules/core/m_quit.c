@@ -58,8 +58,6 @@ m_quit(struct Client *client_p, struct Client *source_p, int parc, const char *p
 	char *comment = LOCAL_COPY((parc > 1 && parv[1]) ? parv[1] : client_p->name);
 	char reason[REASONLEN + 1];
 
-	source_p->flags |= FLAGS_NORMALEX;
-
 	if(strlen(comment) > (size_t) REASONLEN)
 		comment[REASONLEN] = '\0';
 
@@ -91,7 +89,6 @@ ms_quit(struct Client *client_p, struct Client *source_p, int parc, const char *
 {
 	char *comment = LOCAL_COPY((parc > 1 && parv[1]) ? parv[1] : client_p->name);
 
-	source_p->flags |= FLAGS_NORMALEX;
 	if(strlen(comment) > (size_t) REASONLEN)
 		comment[REASONLEN] = '\0';
 

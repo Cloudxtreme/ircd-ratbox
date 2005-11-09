@@ -283,7 +283,6 @@ check_pings_list(dlink_list * list)
 			if(!IsExemptKline(client_p) &&
 			   GlobalSetOptions.idletime &&
 			   !IsOper(client_p) &&
-			   !IsIdlelined(client_p) &&
 			   ((CurrentTime - client_p->localClient->last) > GlobalSetOptions.idletime))
 			{
 				struct ConfItem *aconf;
