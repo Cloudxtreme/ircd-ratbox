@@ -1,3 +1,12 @@
+leeh        2005/11/09 19:23:49 UTC	(20051109_1-21146)
+  Log:
+  - that if() is pointless, as MyFree() will check anyway
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1_MEMTIDY/src/newconf.c (File Modified) 
+
+
 leeh        2005/11/09 19:22:08 UTC	(20051109_0-21144)
   Log:
   - remove "className" from struct ConfItem, every auth should always have
