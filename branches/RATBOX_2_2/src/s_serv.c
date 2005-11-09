@@ -214,12 +214,12 @@ collect_zipstats(void *unused)
 		if(IsCapable(target_p, CAP_ZIP))
 		{
 			/* only bother if we haven't already got something queued... */
-			if(!target_p->localClient->slinkq)
+			if(!target_p->localClient->slink->slinkq)
 			{
-				target_p->localClient->slinkq = MyMalloc(1);	/* sigh.. */
-				target_p->localClient->slinkq[0] = SLINKCMD_ZIPSTATS;
-				target_p->localClient->slinkq_ofs = 0;
-				target_p->localClient->slinkq_len = 1;
+				target_p->localClient->slink->slinkq = MyMalloc(1);	/* sigh.. */
+				target_p->localClient->slink->slinkq[0] = SLINKCMD_ZIPSTATS;
+				target_p->localClient->slink->slinkq_ofs = 0;
+				target_p->localClient->slink->slinkq_len = 1;
 				send_queued_slink_write(target_p->localClient->ctrlfd, target_p);
 			}
 		}
@@ -1306,9 +1306,9 @@ start_io(struct Client *server)
 	/* start io */
 	iobuf[c++] = SLINKCMD_INIT;
 
-	server->localClient->slinkq = iobuf;
-	server->localClient->slinkq_ofs = 0;
-	server->localClient->slinkq_len = c;
+	server->localClient->slink->slinkq = iobuf;
+	server->localClient->slink->slinkq_ofs = 0;
+	server->localClient->slink->slinkq_len = c;
 
 	/* schedule a write */
 	send_queued_slink_write(server->localClient->ctrlfd, server);

@@ -81,6 +81,10 @@ struct Server
 
 struct servlink_data
 {
+	unsigned char *slinkq;	/* sendq for control data */
+	int slinkq_ofs;		/* ofset into slinkq */
+	int slinkq_len;		/* length remaining after slinkq_ofs */
+	
 	int command;
 	int datalen;
 	int gotdatalen;
@@ -222,9 +226,6 @@ struct LocalUser
 				   to servlink */
 
 	struct servlink_data *slink;	/* slink reply being parsed */
-	unsigned char *slinkq;	/* sendq for control data */
-	int slinkq_ofs;		/* ofset into slinkq */
-	int slinkq_len;		/* length remaining after slinkq_ofs */
 
 	struct ZipStats zipstats;
 

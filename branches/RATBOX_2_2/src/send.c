@@ -244,11 +244,11 @@ send_queued_slink_write(int fd, void *data)
 		return;
 
 	/* Next, lets try to write some data */
-	if(to->localClient->slinkq)
+	if(to->localClient->slink->slinkq)
 	{
 		retlen = write(to->localClient->ctrlfd,
-			      to->localClient->slinkq + to->localClient->slinkq_ofs,
-			      to->localClient->slinkq_len);
+			      to->localClient->slink->slinkq + to->localClient->slink->slinkq_ofs,
+			      to->localClient->slink->slinkq_len);
 
 		if(retlen < 0)
 		{
@@ -267,22 +267,22 @@ send_queued_slink_write(int fd, void *data)
 		}
 		else
 		{
-			to->localClient->slinkq_len -= retlen;
+			to->localClient->slink->slinkq_len -= retlen;
 
-			s_assert(to->localClient->slinkq_len >= 0);
-			if(to->localClient->slinkq_len)
-				to->localClient->slinkq_ofs += retlen;
+			s_assert(to->localClient->slink->slinkq_len >= 0);
+			if(to->localClient->slink->slinkq_len)
+				to->localClient->slink->slinkq_ofs += retlen;
 			else
 			{
-				to->localClient->slinkq_ofs = 0;
-				MyFree(to->localClient->slinkq);
-				to->localClient->slinkq = NULL;
+				to->localClient->slink->slinkq_ofs = 0;
+				MyFree(to->localClient->slink->slinkq);
+				to->localClient->slink->slinkq = NULL;
 			}
 		}
 	}
 
 	/* if we have any more data, reschedule a write */
-	if(to->localClient->slinkq_len)
+	if(to->localClient->slink->slinkq_len)
 		comm_setselect(to->localClient->ctrlfd, FDLIST_IDLECLIENT,
 			       COMM_SELECT_WRITE|COMM_SELECT_RETRY, send_queued_slink_write, to, 0);
 }
