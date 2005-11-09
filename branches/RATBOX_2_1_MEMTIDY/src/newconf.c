@@ -793,11 +793,8 @@ conf_begin_auth(struct TopConf *tc)
 	if(yy_aconf)
 		free_conf(yy_aconf);
 
-	if(yy_aconf_class)
-	{
-		MyFree(yy_aconf_class);
-		yy_aconf_class = NULL;
-	}
+	MyFree(yy_aconf_class);
+	yy_aconf_class = NULL;
 
 	DLINK_FOREACH_SAFE(ptr, next_ptr, yy_aconf_list.head)
 	{
