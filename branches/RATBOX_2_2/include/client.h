@@ -232,7 +232,6 @@ struct LocalUser
 	time_t last;
 
 	/* challenge stuff */
-	char *response;
 	char *auth_oper;
 
 	/* clients allowed to talk through +g */

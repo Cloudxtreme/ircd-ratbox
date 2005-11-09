@@ -105,10 +105,10 @@ m_challenge(struct Client *client_p, struct Client *source_p, int parc, const ch
 	if(*parv[1] == '+')
 	{
 		/* Ignore it if we aren't expecting this... -A1kmm */
-		if(!source_p->localClient->response)
+		if(!source_p->localClient->passwd)
 			return 0;
 
-		if(irccmp(source_p->localClient->response, ++parv[1]))
+		if(irccmp(source_p->localClient->passwd, ++parv[1]))
 		{
 			sendto_one(source_p, form_str(ERR_PASSWDMISMATCH), me.name, source_p->name);
 			ilog(L_FOPER, "FAILED OPER (%s) by (%s!%s@%s)",
@@ -149,16 +149,16 @@ m_challenge(struct Client *client_p, struct Client *source_p, int parc, const ch
 		     source_p->localClient->auth_oper, source_p->name, 
 		     source_p->username, source_p->host);
 
-		MyFree(source_p->localClient->response);
+		MyFree(source_p->localClient->passwd);
 		MyFree(source_p->localClient->auth_oper);
-		source_p->localClient->response = NULL;
+		source_p->localClient->passwd = NULL;
 		source_p->localClient->auth_oper = NULL;
 		return 0;
 	}
 
-	MyFree(source_p->localClient->response);
+	MyFree(source_p->localClient->passwd);
 	MyFree(source_p->localClient->auth_oper);
-	source_p->localClient->response = NULL;
+	source_p->localClient->passwd = NULL;
 	source_p->localClient->auth_oper = NULL;
 
 	oper_p = find_oper_conf(source_p->username, source_p->host, 
@@ -185,7 +185,7 @@ m_challenge(struct Client *client_p, struct Client *source_p, int parc, const ch
 		return 0;
 	}
 
-	if(!generate_challenge(&challenge, &(source_p->localClient->response), oper_p->rsa_pubkey))
+	if(!generate_challenge(&challenge, &(source_p->localClient->passwd), oper_p->rsa_pubkey))
 	{
 		sendto_one(source_p, form_str(RPL_RSACHALLENGE), 
 			   me.name, source_p->name, challenge);
