@@ -79,19 +79,6 @@ struct Server
 	char *fullcaps;
 };
 
-struct servlink_data
-{
-	unsigned char *slinkq;	/* sendq for control data */
-	int slinkq_ofs;		/* ofset into slinkq */
-	int slinkq_len;		/* length remaining after slinkq_ofs */
-	
-	int command;
-	int datalen;
-	int gotdatalen;
-	int readdata;
-	unsigned char *data;
-};
-
 struct ZipStats
 {
 	unsigned long in;
@@ -104,6 +91,21 @@ struct ZipStats
 	unsigned long outK_wire;
 	double in_ratio;
 	double out_ratio;
+};
+
+struct servlink_data
+{
+	unsigned char *slinkq;	/* sendq for control data */
+	int slinkq_ofs;		/* ofset into slinkq */
+	int slinkq_len;		/* length remaining after slinkq_ofs */
+	
+	int command;
+	int datalen;
+	int gotdatalen;
+	int readdata;
+	unsigned char *data;
+
+	struct ZipStats zipstats;
 };
 
 struct Client
@@ -226,8 +228,6 @@ struct LocalUser
 				   to servlink */
 
 	struct servlink_data *slink;	/* slink reply being parsed */
-
-	struct ZipStats zipstats;
 
 	time_t last;
 

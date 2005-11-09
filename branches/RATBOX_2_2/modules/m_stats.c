@@ -1127,7 +1127,7 @@ stats_ziplinks (struct Client *source_p)
 			 * -jmallett, 04/27/2002
 			 */
 			struct ZipStats zipstats;
-			memcpy (&zipstats, &target_p->localClient->zipstats,
+			memcpy (&zipstats, &target_p->localClient->slink->zipstats,
 				sizeof (struct ZipStats)); 
 			sendto_one_numeric(source_p, RPL_STATSDEBUG,
 					    "Z :ZipLinks stats for %s send[%.2f%% compression "

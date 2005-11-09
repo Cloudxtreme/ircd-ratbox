@@ -147,7 +147,7 @@ slink_zipstats(unsigned int rpl, unsigned int len, unsigned char *data, struct C
 	 * regression for most of our installed SPARC base.
 	 * -jmallett, 04/27/2002
 	 */
-	memcpy(&zipstats, &server_p->localClient->zipstats, sizeof(struct ZipStats));
+	memcpy(&zipstats, &server_p->localClient->slink->zipstats, sizeof(struct ZipStats));
 
 	in |= (data[i++] << 24);
 	in |= (data[i++] << 16);
@@ -199,7 +199,7 @@ slink_zipstats(unsigned int rpl, unsigned int len, unsigned char *data, struct C
 	else
 		zipstats.out_ratio = 0;
 
-	memcpy(&server_p->localClient->zipstats, &zipstats, sizeof(struct ZipStats));
+	memcpy(&server_p->localClient->slink->zipstats, &zipstats, sizeof(struct ZipStats));
 }
 
 void
