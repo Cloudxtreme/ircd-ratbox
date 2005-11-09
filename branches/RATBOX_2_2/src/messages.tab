@@ -746,7 +746,7 @@ static  const char *  replies[] = {
 /* 721 RPL_OMOTD */		":%s 721 %s :%s",
 /* 722 RPL_ENDOFOMOTD */	":%s 722 %s :End of OPER MOTD",
 /* 723 ERR_NOPRIVS */		":%s 723 %s %s :Insufficient oper privs",
-/* 724 RPL_TESTMASK */		":%s 724 %s %s@%s %d %d :Local/remote clients match",
+/* 724 RPL_TESTMASK */		":%s 724 %s %s!%s@%s %d %d :Local/remote clients match",
 /* 725 RPL_TESTLINE */		":%s 725 %s %c %ld %s :%s",
 /* 726 RPL_NOTESTLINE */	":%s 726 %s %s :No matches",
 /* 727 */	NULL,
