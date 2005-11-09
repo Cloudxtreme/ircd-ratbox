@@ -95,15 +95,10 @@ struct ConfItem
 
 /* Generic flags... */
 /* access flags... */
-#define CONF_FLAGS_DO_IDENTD            0x00000001
-#define CONF_FLAGS_LIMIT_IP             0x00000002
 #define CONF_FLAGS_NO_TILDE             0x00000004
 #define CONF_FLAGS_NEED_IDENTD          0x00000008
-#define CONF_FLAGS_PASS_IDENTD          0x00000010
-#define CONF_FLAGS_NOMATCH_IP           0x00000020
 #define CONF_FLAGS_EXEMPTKLINE          0x00000040
 #define CONF_FLAGS_NOLIMIT              0x00000080
-#define CONF_FLAGS_IDLE_LINED           0x00000100
 #define CONF_FLAGS_SPOOF_IP             0x00000200
 #define CONF_FLAGS_SPOOF_NOTICE		0x00000400
 #define CONF_FLAGS_REDIR                0x00000800
@@ -114,21 +109,13 @@ struct ConfItem
 #define CONF_FLAGS_EXEMPTSHIDE		0x00010000
 #define CONF_FLAGS_EXEMPTJUPE		0x00020000	/* exempt from resv generating warnings */
 /* server flags */
-#define CONF_FLAGS_ALLOW_AUTO_CONN      0x00040000
-#define CONF_FLAGS_LAZY_LINK            0x00080000
 #define CONF_FLAGS_ENCRYPTED            0x00100000
-#define CONF_FLAGS_COMPRESSED           0x00200000
 #define CONF_FLAGS_TEMPORARY            0x00400000
-#define CONF_FLAGS_TB			0x00800000
-#define CONF_FLAGS_VHOSTED		0x01000000
 
 
 /* Macros for struct ConfItem */
-#define IsLimitIp(x)            ((x)->flags & CONF_FLAGS_LIMIT_IP)
 #define IsNoTilde(x)            ((x)->flags & CONF_FLAGS_NO_TILDE)
 #define IsNeedIdentd(x)         ((x)->flags & CONF_FLAGS_NEED_IDENTD)
-#define IsPassIdentd(x)         ((x)->flags & CONF_FLAGS_PASS_IDENTD)
-#define IsNoMatchIp(x)          ((x)->flags & CONF_FLAGS_NOMATCH_IP)
 #define IsConfExemptKline(x)    ((x)->flags & CONF_FLAGS_EXEMPTKLINE)
 #define IsConfExemptLimits(x)   ((x)->flags & CONF_FLAGS_NOLIMIT)
 #define IsConfExemptGline(x)    ((x)->flags & CONF_FLAGS_EXEMPTGLINE)
@@ -137,14 +124,9 @@ struct ConfItem
 #define IsConfExemptShide(x)	((x)->flags & CONF_FLAGS_EXEMPTSHIDE)
 #define IsConfExemptJupe(x)	((x)->flags & CONF_FLAGS_EXEMPTJUPE)
 #define IsConfExemptResv(x)	((x)->flags & CONF_FLAGS_EXEMPTRESV)
-#define IsConfIdlelined(x)      ((x)->flags & CONF_FLAGS_IDLE_LINED)
-#define IsConfDoIdentd(x)       ((x)->flags & CONF_FLAGS_DO_IDENTD)
 #define IsConfDoSpoofIp(x)      ((x)->flags & CONF_FLAGS_SPOOF_IP)
 #define IsConfSpoofNotice(x)    ((x)->flags & CONF_FLAGS_SPOOF_NOTICE)
 #define IsConfEncrypted(x)      ((x)->flags & CONF_FLAGS_ENCRYPTED)
-#define IsConfCompressed(x)     ((x)->flags & CONF_FLAGS_COMPRESSED)
-#define IsConfVhosted(x)	((x)->flags & CONF_FLAGS_VHOSTED)
-#define IsConfTburst(x)		((x)->flags & CONF_FLAGS_TB)
 
 /* flag definitions for opers now in client.h */
 

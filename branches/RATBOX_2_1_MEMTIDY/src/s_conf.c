@@ -338,9 +338,6 @@ verify_access(struct Client *client_p, const char *username)
 		}
 
 
-		if(IsConfDoIdentd(aconf))
-			SetNeedId(client_p);
-
 		/* Thanks for spoof idea amm */
 		if(IsConfDoSpoofIp(aconf))
 		{
