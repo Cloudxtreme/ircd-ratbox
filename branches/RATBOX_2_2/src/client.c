@@ -200,7 +200,6 @@ free_local_client(struct Client *client_p)
 	}
 
 	MyFree(client_p->localClient->fullcaps);
-	MyFree(client_p->localClient->auth_oper);
 	MyFree(client_p->localClient->opername);
 	MyFree(client_p->localClient->slink);
 

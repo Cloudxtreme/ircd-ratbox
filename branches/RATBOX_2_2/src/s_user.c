@@ -1152,6 +1152,7 @@ oper_up(struct Client *source_p, struct oper_conf *oper_p)
 	SetExemptKline(source_p);
 
 	source_p->flags2 |= oper_p->flags;
+	MyFree(source_p->localClient->opername);
 	DupString(source_p->localClient->opername, oper_p->name);
 
 	dlinkAddAlloc(source_p, &oper_list);

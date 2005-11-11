@@ -112,7 +112,7 @@ m_challenge(struct Client *client_p, struct Client *source_p, int parc, const ch
 		{
 			sendto_one(source_p, form_str(ERR_PASSWDMISMATCH), me.name, source_p->name);
 			ilog(L_FOPER, "FAILED OPER (%s) by (%s!%s@%s)",
-			     source_p->localClient->auth_oper, source_p->name,
+			     source_p->localClient->opername, source_p->name,
 			     source_p->username, source_p->host);
 
 			if(ConfigFileEntry.failed_oper_notice)
@@ -125,14 +125,14 @@ m_challenge(struct Client *client_p, struct Client *source_p, int parc, const ch
 
 		oper_p = find_oper_conf(source_p->username, source_p->host, 
 					source_p->sockhost, 
-					source_p->localClient->auth_oper);
+					source_p->localClient->opername);
 
 		if(oper_p == NULL)
 		{
 			sendto_one(source_p, form_str(ERR_NOOPERHOST), 
 				   me.name, source_p->name);
 			ilog(L_FOPER, "FAILED OPER (%s) by (%s!%s@%s)",
-			     source_p->localClient->auth_oper, source_p->name,
+			     oper_p->name, source_p->name,
 			     source_p->username, source_p->host);
 
 			if(ConfigFileEntry.failed_oper_notice)
@@ -146,20 +146,18 @@ m_challenge(struct Client *client_p, struct Client *source_p, int parc, const ch
 		oper_up(source_p, oper_p);
 
 		ilog(L_OPERED, "OPER %s by %s!%s@%s",
-		     source_p->localClient->auth_oper, source_p->name, 
+		     source_p->localClient->opername, source_p->name, 
 		     source_p->username, source_p->host);
 
 		MyFree(source_p->localClient->passwd);
-		MyFree(source_p->localClient->auth_oper);
 		source_p->localClient->passwd = NULL;
-		source_p->localClient->auth_oper = NULL;
 		return 0;
 	}
 
 	MyFree(source_p->localClient->passwd);
-	MyFree(source_p->localClient->auth_oper);
+	MyFree(source_p->localClient->opername);
 	source_p->localClient->passwd = NULL;
-	source_p->localClient->auth_oper = NULL;
+	source_p->localClient->opername = NULL;
 
 	oper_p = find_oper_conf(source_p->username, source_p->host, 
 				source_p->sockhost, parv[1]);
@@ -191,7 +189,7 @@ m_challenge(struct Client *client_p, struct Client *source_p, int parc, const ch
 			   me.name, source_p->name, challenge);
 	}
 
-	DupString(source_p->localClient->auth_oper, oper_p->name);
+	DupString(source_p->localClient->opername, oper_p->name);
 	MyFree(challenge);
 	return 0;
 }

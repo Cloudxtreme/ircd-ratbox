@@ -218,6 +218,7 @@ struct LocalUser
 	 * XXX - there is no reason to save this, it should be checked when it's
 	 * received and not stored, this is not used after registration
 	 */
+	/* its used for challenge nowadays --fl */
 	char *passwd;
 	char *opername;
 	char *fullcaps;
@@ -228,9 +229,6 @@ struct LocalUser
 	struct servlink_data *slink;	/* slink reply being parsed */
 
 	time_t last;
-
-	/* challenge stuff */
-	char *auth_oper;
 
 	/* clients allowed to talk through +g */
 	dlink_list allow_list;
