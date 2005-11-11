@@ -152,7 +152,6 @@ make_client(struct Client *from)
 		client_p->localClient->lasttime = client_p->localClient->firsttime = CurrentTime;
 
 		client_p->localClient->fd = -1;
-		client_p->localClient->ctrlfd = -1;
 
 		/* as good a place as any... */
 		dlinkAdd(client_p, &client_p->localClient->tnode, &unknown_list);
@@ -1492,10 +1491,10 @@ exit_local_server(struct Client *client_p, struct Client *source_p, struct Clien
 			   source_p->name, comment);
 	}
 	
-	if(source_p->localClient->ctrlfd >= 0)
+	if(source_p->localClient->slink && source_p->localClient->slink->ctrlfd >= 0)
 	{
-		comm_close(source_p->localClient->ctrlfd);
-		source_p->localClient->ctrlfd = -1;
+		comm_close(source_p->localClient->slink->ctrlfd);
+		source_p->localClient->slink->ctrlfd = -1;
 	}
 
 	if(source_p->servptr && source_p->servptr->serv)
@@ -2085,13 +2084,10 @@ close_connection(struct Client *client_p)
 		client_p->localClient->fd = -1;
 	}
 
-	if(HasServlink(client_p))
+	if(client_p->localClient->slink && client_p->localClient->slink->ctrlfd > -1)
 	{
-		if(client_p->localClient->fd > -1)
-		{
-			comm_close(client_p->localClient->ctrlfd);
-			client_p->localClient->ctrlfd = -1;
-		}
+		comm_close(client_p->localClient->slink->ctrlfd);
+		client_p->localClient->slink->ctrlfd = -1;
 	}
 
 	linebuf_donebuf(&client_p->localClient->buf_sendq);
@@ -2105,8 +2101,6 @@ close_connection(struct Client *client_p)
 	ClearMyConnect(client_p);
 	SetIOError(client_p);
 }
-
-
 
 void
 error_exit_client(struct Client *client_p, int error)

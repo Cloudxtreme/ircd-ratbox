@@ -246,7 +246,7 @@ send_queued_slink_write(int fd, void *data)
 	/* Next, lets try to write some data */
 	if(to->localClient->slink->slinkq)
 	{
-		retlen = write(to->localClient->ctrlfd,
+		retlen = write(to->localClient->slink->ctrlfd,
 			      to->localClient->slink->slinkq + to->localClient->slink->slinkq_ofs,
 			      to->localClient->slink->slinkq_len);
 
@@ -283,8 +283,10 @@ send_queued_slink_write(int fd, void *data)
 
 	/* if we have any more data, reschedule a write */
 	if(to->localClient->slink->slinkq_len)
-		comm_setselect(to->localClient->ctrlfd, FDLIST_IDLECLIENT,
-			       COMM_SELECT_WRITE|COMM_SELECT_RETRY, send_queued_slink_write, to, 0);
+		comm_setselect(to->localClient->slink->ctrlfd, 
+				FDLIST_IDLECLIENT,
+				COMM_SELECT_WRITE|COMM_SELECT_RETRY, 
+				send_queued_slink_write, to, 0);
 }
 
 /* sendto_one()

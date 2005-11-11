@@ -95,6 +95,8 @@ struct ZipStats
 
 struct servlink_data
 {
+	int ctrlfd;		/* servlinks control fd */
+
 	unsigned char *slinkq;	/* sendq for control data */
 	int slinkq_ofs;		/* ofset into slinkq */
 	int slinkq_len;		/* length remaining after slinkq_ofs */
@@ -222,10 +224,6 @@ struct LocalUser
 
 	int caps;		/* capabilities bit-field */
 	int fd;			/* >= 0, for local clients */
-
-	int ctrlfd;		/* For servers:
-				   control fd used for sending commands
-				   to servlink */
 
 	struct servlink_data *slink;	/* slink reply being parsed */
 

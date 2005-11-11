@@ -211,17 +211,16 @@ collect_zipstats(void *unused)
 	DLINK_FOREACH(ptr, serv_list.head)
 	{
 		target_p = ptr->data;
-		if(IsCapable(target_p, CAP_ZIP))
+
+		/* need ziplinks and nothing queued.. */
+		if(IsCapable(target_p, CAP_ZIP) &&
+		   !target_p->localClient->slink->slinkq)
 		{
-			/* only bother if we haven't already got something queued... */
-			if(!target_p->localClient->slink->slinkq)
-			{
-				target_p->localClient->slink->slinkq = MyMalloc(1);	/* sigh.. */
-				target_p->localClient->slink->slinkq[0] = SLINKCMD_ZIPSTATS;
-				target_p->localClient->slink->slinkq_ofs = 0;
-				target_p->localClient->slink->slinkq_len = 1;
-				send_queued_slink_write(target_p->localClient->ctrlfd, target_p);
-			}
+			target_p->localClient->slink->slinkq = MyMalloc(1);	/* sigh.. */
+			target_p->localClient->slink->slinkq[0] = SLINKCMD_ZIPSTATS;
+			target_p->localClient->slink->slinkq_ofs = 0;
+			target_p->localClient->slink->slinkq_len = 1;
+			send_queued_slink_write(target_p->localClient->slink->ctrlfd, target_p);
 		}
 	}
 }
@@ -1074,6 +1073,7 @@ server_estab(struct Client *client_p)
 	if(IsCapable(client_p, CAP_ZIP))
 	{
 		client_p->localClient->slink = MyMalloc(sizeof(struct servlink_data));
+		client_p->localClient->slink->ctrlfd = -1;
 
 		if(fork_server(client_p) < 0)
 		{
@@ -1143,7 +1143,7 @@ server_estab(struct Client *client_p)
 		 * client_p->name + 64
 		 */
 		comm_note(client_p->localClient->fd, "slink data: %s", client_p->name);
-		comm_note(client_p->localClient->ctrlfd, "slink ctrl: %s", client_p->name);
+		comm_note(client_p->localClient->slink->ctrlfd, "slink ctrl: %s", client_p->name);
 	}
 	else
 		comm_note(client_p->localClient->fd, "Server: %s", client_p->name);
@@ -1311,7 +1311,7 @@ start_io(struct Client *server)
 	server->localClient->slink->slinkq_len = c;
 
 	/* schedule a write */
-	send_queued_slink_write(server->localClient->ctrlfd, server);
+	send_queued_slink_write(server->localClient->slink->ctrlfd, server);
 }
 
 /*
@@ -1403,7 +1403,7 @@ fork_server(struct Client *server)
 		close(data_fds[1]);
 		
 		s_assert(server->localClient);
-		server->localClient->ctrlfd = ctrl_fds[0];
+		server->localClient->slink->ctrlfd = ctrl_fds[0];
 		server->localClient->fd = data_fds[0];
 
 		if(!comm_set_nb(server->localClient->fd))
@@ -1414,7 +1414,7 @@ fork_server(struct Client *server)
 					errno);
 		}
 
-		if(!comm_set_nb(server->localClient->ctrlfd))
+		if(!comm_set_nb(server->localClient->slink->ctrlfd))
 		{
 			report_error(NONB_ERROR_MSG,
 					get_server_name(server, SHOW_IP),
@@ -1422,10 +1422,10 @@ fork_server(struct Client *server)
 					errno);
 		}
 
-		comm_open(server->localClient->ctrlfd, FD_SOCKET, NULL);
+		comm_open(server->localClient->slink->ctrlfd, FD_SOCKET, NULL);
 		comm_open(server->localClient->fd, FD_SOCKET, NULL);
 
-		read_ctrl_packet(server->localClient->ctrlfd, server);
+		read_ctrl_packet(server->localClient->slink->ctrlfd, server);
 		read_packet(server->localClient->fd, server);
 	}
 
