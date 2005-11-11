@@ -1,3 +1,15 @@
+leeh        2005/11/11 12:00:13 UTC	(20051111_2-21177)
+  Log:
+  - remove auth_oper from LocalUser, overload it into opername.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_challenge.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_user.c (File Modified) 
+
+
 leeh        2005/11/11 11:51:03 UTC	(20051111_1-21175)
   Log:
   - move ctrlfd from LocalUser -> servlink_data
