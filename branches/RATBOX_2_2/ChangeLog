@@ -1,3 +1,15 @@
+leeh        2005/11/11 11:51:03 UTC	(20051111_1-21175)
+  Log:
+  - move ctrlfd from LocalUser -> servlink_data
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_serv.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/send.c (File Modified) 
+
+
 leeh        2005/11/11 11:50:12 UTC	(20051111_0-21173)
   Log:
   - s/host/hostname
