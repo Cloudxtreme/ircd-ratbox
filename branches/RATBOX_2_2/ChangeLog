@@ -1,3 +1,12 @@
+leeh        2005/11/11 11:50:12 UTC	(20051111_0-21173)
+  Log:
+  - s/host/hostname
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_testmask.c (File Modified) 
+
+
 leeh        2005/11/09 22:00:34 UTC	(20051109_13-21171)
   Log:
   - require user/host to be non-empty
