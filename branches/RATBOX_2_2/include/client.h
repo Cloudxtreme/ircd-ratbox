@@ -348,7 +348,6 @@ struct exit_client_hook
 #define FLAGS_KILLED       0x0004	/* Prevents "QUIT" from being sent for this */
 #define FLAGS_CLOSING      0x0020	/* set when closing to suppress errors */
 #define FLAGS_GOTID        0x0080	/* successful ident lookup achieved */
-#define FLAGS_SENDQEX      0x0800	/* Sendq exceeded */
 #define FLAGS_SERVLINK     0x10000	/* servlink has servlink process */
 #define FLAGS_MARK	   0x20000	/* marked client */
 #define FLAGS_HIDDEN       0x40000	/* hidden server */
@@ -546,7 +545,7 @@ extern struct Client *next_client(struct Client *, const char *);
 #define accept_message(s, t) ((s) == (t) || (dlinkFind((s), &((t)->localClient->allow_list))))
 extern void del_all_accepts(struct Client *client_p);
 
-extern void dead_link(struct Client *client_p);
+extern void dead_link(struct Client *client_p, int sendqex);
 extern int show_ip(struct Client *source_p, struct Client *target_p);
 
 extern void initUser(void);
