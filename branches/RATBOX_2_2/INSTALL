@@ -8,6 +8,9 @@ ircd-ratbox installation guide
    doc/.  These contain the important notes for changes between major
    versions.
 
+   The RELNOTES file contains the list of features and fixes since the
+   previous releases.
+
 2. Run the configure script.  By default it will attempt to install into
    /usr/local/ircd.  If you want it to install into this directory, then as
    root you must first:

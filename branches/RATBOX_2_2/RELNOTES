@@ -112,24 +112,5 @@ doc/whats-new-2.0.txt
 -- ircd-ratbox-2.1.0beta1
 - No release notes, see doc/whats-new-2.1.txt
 
---------------------------------------------------------------------------------
-
-BUGS: Major bugs in this release are listed in BUGS
-
-BUG REPORTS: If you run this code and encounter problems, you must report
-the bug by EMAIL to ircd-ratbox@lists.ratbox.org
-
-Please include a gdb backtrace and keep the core file, binaries and 
-modules in case the developers need them.
-
-DISCUSSION: There is a mailing list for discussion of ratbox issues,
- To subscribe, visit:
-      http://lists.ratbox.org/cgi-bin/mailman/listinfo/ircd-ratbox
-
-You may also (if youre lucky) find us on #ratbox@EFNet
-
-Other files recommended for reading: BUGS, README.FIRST, INSTALL
-
---------------------------------------------------------------------------------
 $Id$
 
