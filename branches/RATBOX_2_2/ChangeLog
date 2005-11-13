@@ -1,3 +1,13 @@
+leeh        2005/11/13 22:16:05 UTC	(20051113_5-21191)
+  Log:
+  - rename README.FIRST to README
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/README (File Added) 
+	ircd-ratbox/branches/RATBOX_2_2/README.FIRST (File Deleted) 
+
+
 leeh        2005/11/13 22:15:22 UTC	(20051113_4-21189)
   Log:
   - remove BUGS
