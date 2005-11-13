@@ -1,3 +1,17 @@
+leeh        2005/11/13 22:15:22 UTC	(20051113_4-21189)
+  Log:
+  - remove BUGS
+  - move the tail end of RELNOTES and rework it to be a new README.FIRST
+  - note RELNOTES in INSTALL
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/BUGS (File Deleted) 
+	ircd-ratbox/branches/RATBOX_2_2/INSTALL (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/README.FIRST (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/RELNOTES (File Modified) 
+
+
 leeh        2005/11/13 22:01:09 UTC	(20051113_3-21187)
   Log:
   - update the testmask help
