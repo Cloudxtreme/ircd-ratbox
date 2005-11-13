@@ -21,20 +21,23 @@ ircd-ratbox installation guide
    the --prefix option:
      ./configure --prefix=/home/leeh/ircd
 
-   If you are on a "small" network, namely less than 5000 users you should
-   pass the --enable-smallnet option to reduce memory usage:
-     ./configure --enable-smallnet
+   ircd-ratbox will automatically pick the best IO subsystem for use.
 
-   If you wish ipv6 support, pass the --enable-ipv6 option:
-     ./configure --enable-ipv6
+   If you are on a "small" network, namely less than 5000 users, pass:
+     --enable-smallnet
 
-   You should also configure how many clients your server will support with
-   the --with-maxclients option:
-     ./configure --with-maxclients=NUMBER
+   If you want ipv6 support:
+     --enable-ipv6
 
-   If you wish support for ratbox-services, you should pass the
-   --enable-services option:
-     ./configure --enable-services
+   You should also configure how many clients your server will support:
+     --with-maxclients=NUMBER
+
+   If you wish support for ratbox-services:
+     --enable-services
+
+   If your nick length or topic lengths are not 9 and 160 respectively:
+     --enable-nicklen=LENGTH
+     --enable-topiclen=LENGTH
 
    See ./configure --help for more options.  Naturally options should be
    combined so configure is only run once.
