@@ -1,3 +1,12 @@
+leeh        2005/11/13 21:38:23 UTC	(20051113_0-21181)
+  Log:
+  - sync info up to the config
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_info.c (File Modified) 
+
+
 leeh        2005/11/12 12:57:00 UTC	(20051112_0-21179)
   Log:
   - remove FLAGS_SENDQEX, simply pass it as an argument to dead_link()
