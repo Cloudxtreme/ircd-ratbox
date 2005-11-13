@@ -1,3 +1,12 @@
+leeh        2005/11/13 21:55:25 UTC	(20051113_1-21183)
+  Log:
+  - a shiny new INSTALL document
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/INSTALL (File Modified) 
+
+
 leeh        2005/11/13 21:38:23 UTC	(20051113_0-21181)
   Log:
   - sync info up to the config
