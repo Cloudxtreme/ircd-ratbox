@@ -215,13 +215,13 @@ count_memory(struct Client *source_p)
 		target_p = ptr->data;
 		if(MyConnect(target_p))
 		{
+			users_invited_count += dlink_list_length(&target_p->localClient->invited);
 			local_client_conf_count++;
 		}
 
 		if(target_p->user)
 		{
 			users_counted++;
-			users_invited_count += dlink_list_length(&target_p->user->invited);
 			user_channels += dlink_list_length(&target_p->user->channel);
 			if(target_p->user->away)
 			{

@@ -62,7 +62,6 @@ struct User
 {
 	char nick[NICKLEN];
 	dlink_list channel;	/* chain of channel pointer blocks */
-	dlink_list invited;	/* chain of invite pointer blocks */
 	char *away;		/* pointer to away message */
 
 #ifdef ENABLE_SERVICES
@@ -233,6 +232,9 @@ struct LocalUser
 	struct servlink_data *slink;	/* slink reply being parsed */
 
 	time_t last;
+
+	/* list of channels theyve been invited to */
+	dlink_list invited;
 
 	/* clients allowed to talk through +g */
 	dlink_list allow_list;

@@ -467,7 +467,7 @@ void
 del_invite(struct Channel *chptr, struct Client *who)
 {
 	dlinkFindDestroy(who, &chptr->invites);
-	dlinkFindDestroy(chptr, &who->user->invited);
+	dlinkFindDestroy(chptr, &who->localClient->invited);
 }
 
 /* is_banned()
@@ -583,7 +583,7 @@ can_join(struct Client *source_p, struct Channel *chptr, char *key)
 
 	if(chptr->mode.mode & MODE_INVITEONLY)
 	{
-		DLINK_FOREACH(lp, source_p->user->invited.head)
+		DLINK_FOREACH(lp, source_p->localClient->invited.head)
 		{
 			if(lp->data == chptr)
 				break;

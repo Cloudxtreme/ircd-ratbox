@@ -1305,8 +1305,6 @@ static inline void
 exit_generic_client(struct Client *client_p, struct Client *source_p, struct Client *from,
 		   const char *comment)
 {
-	dlink_node *ptr, *next_ptr;
-
 	sendto_common_channels_local(source_p, ":%s!%s@%s QUIT :%s",
 				     source_p->name,
 				     source_p->username, source_p->host, comment);
@@ -1315,12 +1313,6 @@ exit_generic_client(struct Client *client_p, struct Client *source_p, struct Cli
 
 	/* Should not be in any channels now */
 	s_assert(source_p->user->channel.head == NULL);
-
-	/* Clean up invitefield */
-	DLINK_FOREACH_SAFE(ptr, next_ptr, source_p->user->invited.head)
-	{
-		del_invite(ptr->data, source_p);
-	}
 
 	/* Clean up allow lists */
 	del_all_accepts(source_p);
@@ -1542,6 +1534,7 @@ static int
 exit_local_client(struct Client *client_p, struct Client *source_p, struct Client *from,
 		  const char *comment)
 {
+	dlink_node *ptr, *next_ptr;
 	unsigned long on_for;
 
 	exit_generic_client(client_p, source_p, from, comment);
@@ -1554,6 +1547,12 @@ exit_local_client(struct Client *client_p, struct Client *source_p, struct Clien
 
 	if(IsOper(source_p))
 		dlinkFindDestroy(source_p, &oper_list);
+
+	/* Clean up invitefield */
+	DLINK_FOREACH_SAFE(ptr, next_ptr, source_p->localClient->invited.head)
+	{
+		del_invite(ptr->data, source_p);
+	}
 
 	sendto_realops_flags(UMODE_CCONN, L_ALL,
 			     "Client exiting: %s (%s@%s) [%s] [%s]",
@@ -1925,20 +1924,18 @@ free_user(struct User *user, struct Client *client_p)
 	/*
 	 * sanity check
 	 */
-	if(user->invited.head || user->channel.head)
+	if(user->channel.head)
 	{
 		sendto_realops_flags(UMODE_ALL, L_ALL,
-				     "* %#lx user (%s!%s@%s) %#lx %#lx %#lx %lu *",
+				     "* %#lx user (%s!%s@%s) %#lx %#lx %lu *",
 				     (unsigned long) client_p,
 				     client_p ? client_p->
 				     name : "<noname>",
 				     client_p->username,
 				     client_p->host,
 				     (unsigned long) user,
-				     (unsigned long) user->invited.head,
 				     (unsigned long) user->channel.head, 
 				     dlink_list_length(&user->channel));
-		s_assert(!user->invited.head);
 		s_assert(!user->channel.head);
 	}
 
