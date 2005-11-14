@@ -1,3 +1,13 @@
+androsyn    2005/11/14 19:18:41 UTC	(20051114_4-21203)
+  Log:
+  add prebuilt versions of the lexer/parser
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/lex.yy.c (File Added) 
+	ircd-ratbox/branches/RATBOX_2_2/src/y.tab.c (File Added) 
+	ircd-ratbox/branches/RATBOX_2_2/src/y.tab.h (File Added) 
+
+
 leeh        2005/11/14 19:08:20 UTC	(20051114_3-21201)
   Log:
   - make ->name in struct Client a simple const char *, for servers it points
