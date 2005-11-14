@@ -605,7 +605,7 @@ remove_our_modes(struct Channel *chptr, struct Client *source_p)
 	struct membership *msptr;
 	dlink_node *ptr;
 	char lmodebuf[MODEBUFLEN];
-	char *lpara[MAXMODEPARAMS];
+	const char *lpara[MAXMODEPARAMS];
 	int count = 0;
 	int i;
 

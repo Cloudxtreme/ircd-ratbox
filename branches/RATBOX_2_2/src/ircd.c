@@ -264,9 +264,6 @@ set_time(void)
 	if(gettimeofday(&newtime, NULL) == -1)
 	{
 		ilog(L_MAIN, "Clock Failure (%d)", errno);
-		sendto_realops_flags(UMODE_ALL, L_ALL,
-				     "Clock Failure (%d), TS can be corrupted", errno);
-
 		restart("Clock Failure");
 	}
 #else
@@ -474,6 +471,8 @@ setup_corefile(void)
 int
 main(int argc, char *argv[])
 {
+	static const char ircd_default_name[] = "ircd.ratbox";
+
 	/* Check to see if the user is running us as root, which is a nono */
 	if(geteuid() == 0)
 	{
@@ -501,6 +500,12 @@ main(int argc, char *argv[])
 	memset(&me, 0, sizeof(me));
 	memset(&meLocalUser, 0, sizeof(meLocalUser));
 	me.localClient = &meLocalUser;
+
+	/* some parts of startup will try to send out messages to opers,
+	 * which will include me.name, which at this point is NULL.  Set it
+	 * to something to prevent a core. --fl
+	 */
+	me.name = ircd_default_name;
 
 	/* Make sure all lists are zeroed */
 	memset(&unknown_list, 0, sizeof(unknown_list));
@@ -624,7 +629,7 @@ main(int argc, char *argv[])
 		ilog(L_MAIN, "No server name specified in serverinfo block.");
 		exit(EXIT_FAILURE);
 	}
-	strlcpy(me.name, ServerInfo.name, sizeof(me.name));
+	me.name = find_or_add(ServerInfo.name);
 
 	if(ServerInfo.sid[0] == '\0')
 	{

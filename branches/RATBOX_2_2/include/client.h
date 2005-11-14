@@ -60,6 +60,7 @@ struct LocalUser;
  */
 struct User
 {
+	char nick[NICKLEN];
 	dlink_list channel;	/* chain of channel pointer blocks */
 	dlink_list invited;	/* chain of invite pointer blocks */
 	char *away;		/* pointer to away message */
@@ -130,7 +131,10 @@ struct Client
 	int hopcount;		/* number of servers to this 0 = local */
 
 	/* client->name is the unique name for a client nick or host */
-	char name[HOSTLEN + 1];
+	/* note for users, this points to ->nick in struct User, for servers
+	 * this points to the scache --fl
+	 */
+	const char *name;
 
 	/* 
 	 * client->username is the username from ident or the USER message, 

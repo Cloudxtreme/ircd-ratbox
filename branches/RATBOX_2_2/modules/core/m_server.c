@@ -203,7 +203,7 @@ mr_server(struct Client *client_p, struct Client *source_p, int parc, const char
 	 * C:line in client_p->name
 	 */
 
-	strlcpy(client_p->name, name, sizeof(client_p->name));
+	client_p->name = find_or_add(name);
 	set_server_gecos(client_p, info);
 	client_p->hopcount = hop;
 	server_estab(client_p);
@@ -384,8 +384,7 @@ ms_server(struct Client *client_p, struct Client *source_p, int parc, const char
 	make_server(target_p);
 	target_p->hopcount = hop;
 
-	strlcpy(target_p->name, name, sizeof(target_p->name));
-
+	target_p->name = find_or_add(name);
 	set_server_gecos(target_p, info);
 
 	target_p->servptr = source_p;
@@ -516,7 +515,7 @@ ms_sid(struct Client *client_p, struct Client *source_p, int parc, const char *p
 	target_p = make_client(client_p);
 	make_server(target_p);
 
-	strlcpy(target_p->name, parv[1], sizeof(target_p->name));
+	target_p->name = find_or_add(parv[1]);
 	target_p->hopcount = atoi(parv[2]);
 	strcpy(target_p->id, parv[3]);
 	set_server_gecos(target_p, parv[4]);

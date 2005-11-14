@@ -97,7 +97,7 @@ m_ison(struct Client *client_p, struct Client *source_p, int parc, const char *p
 				if((current_insert_point + (len + 5)) < (buf + sizeof(buf)))
 				{
 					memcpy((void *) current_insert_point,
-					       (void *) target_p->name, len);
+					       (const void *) target_p->name, len);
 					current_insert_point += len;
 					*current_insert_point++ = ' ';
 				}

@@ -48,12 +48,12 @@
 static char *sender;
 
 /* parv[0] == source, and parv[LAST] == NULL */
-static char *para[MAXPARA + 2];
+static const char *para[MAXPARA + 2];
 
 static void cancel_clients(struct Client *, struct Client *, char *);
 static void remove_unknown(struct Client *, char *, char *);
 
-static void do_numeric(char[], struct Client *, struct Client *, int, char **);
+static void do_numeric(char[], struct Client *, struct Client *, int, const char **);
 
 static int handle_command(struct Message *, struct Client *, struct Client *, int, const char**);
 
@@ -68,7 +68,7 @@ static char buffer[1024];
 
 
 static inline int
-string_to_array(char *string, char **parv)
+string_to_array(char *string, const char **parv)
 {
 	char *p, *buf = string;
 	int x = 1;
@@ -641,7 +641,7 @@ remove_unknown(struct Client *client_p, char *lsender, char *lbuffer)
  *      a ping pong error message...
  */
 static void
-do_numeric(char numeric[], struct Client *client_p, struct Client *source_p, int parc, char *parv[])
+do_numeric(char numeric[], struct Client *client_p, struct Client *source_p, int parc, const char *parv[])
 {
 	struct Client *target_p;
 	struct Channel *chptr;

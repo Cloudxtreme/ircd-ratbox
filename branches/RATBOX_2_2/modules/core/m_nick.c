@@ -142,7 +142,7 @@ mr_nick(struct Client *client_p, struct Client *source_p, int parc, const char *
 	if((target_p = find_client(nick)) == NULL)
 		set_initial_nick(client_p, source_p, nick);
 	else if(source_p == target_p)
-		strcpy(source_p->name, nick);
+		strcpy(source_p->user->nick, nick);
 	else
 		sendto_one(source_p, form_str(ERR_NICKNAMEINUSE), me.name, "*", nick);
 
@@ -603,8 +603,13 @@ set_initial_nick(struct Client *client_p, struct Client *source_p, char *nick)
 	source_p->tsinfo = CurrentTime;
 	if(!EmptyString(source_p->name))
 		del_from_client_hash(source_p->name, source_p);
+	else
+	{
+		make_user(source_p);
+		source_p->name = source_p->user->nick;
+	}
 
-	strcpy(source_p->name, nick);
+	strcpy(source_p->user->nick, nick);
 	add_to_client_hash(nick, source_p);
 
 	/* fd_desc is long enough */
@@ -664,7 +669,7 @@ change_local_nick(struct Client *client_p, struct Client *source_p, char *nick)
 				source_p->host, nick);
 
 	/* send the nick change to servers.. */
-	if(source_p->user)
+	if(IsPerson(source_p))
 	{
 		add_history(source_p, 1);
 
@@ -676,7 +681,7 @@ change_local_nick(struct Client *client_p, struct Client *source_p, char *nick)
 
 	/* Finally, add to hash */
 	del_from_client_hash(source_p->name, source_p);
-	strcpy(source_p->name, nick);
+	strcpy(source_p->user->nick, nick);
 	add_to_client_hash(nick, source_p);
 
 	if(!samenick)
@@ -739,7 +744,7 @@ change_remote_nick(struct Client *client_p, struct Client *source_p,
 	if((nd = hash_find_nd(nick)))
 		free_nd_entry(nd);
 
-	strcpy(source_p->name, nick);
+	strcpy(source_p->user->nick, nick);
 	add_to_client_hash(nick, source_p);
 
 	if(!samenick)
@@ -951,7 +956,8 @@ register_client(struct Client *client_p, struct Client *server,
 	source_p->hopcount = atoi(parv[2]);
 	source_p->tsinfo = newts;
 
-	strcpy(source_p->name, nick);
+	source_p->name = source_p->user->nick;
+	strcpy(source_p->user->nick, nick);
 	strlcpy(source_p->username, parv[5], sizeof(source_p->username));
 	strlcpy(source_p->host, parv[6], sizeof(source_p->host));
 
