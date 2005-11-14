@@ -1,3 +1,15 @@
+leeh        2005/11/14 17:35:23 UTC	(20051114_1-21197)
+  Log:
+  - replace some checks for sptr->name[0] with !EmptyString(sptr->name)
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_cap.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_pong.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_user.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_whois.c (File Modified) 
+
+
 leeh        2005/11/14 17:34:14 UTC	(20051114_0-21195)
   Log:
   - add TESTMASKGECOS, to test a given gecos mask in the same manner as
