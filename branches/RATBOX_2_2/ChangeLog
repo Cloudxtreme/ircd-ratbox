@@ -1,3 +1,15 @@
+leeh        2005/11/14 17:34:14 UTC	(20051114_0-21195)
+  Log:
+  - add TESTMASKGECOS, to test a given gecos mask in the same manner as
+    testmask
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/numeric.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_testmask.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/messages.tab (File Modified) 
+
+
 leeh        2005/11/13 22:18:17 UTC	(20051113_6-21193)
   Log:
   - move Hybrid-team into doc/
