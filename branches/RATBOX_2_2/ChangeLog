@@ -1,3 +1,21 @@
+leeh        2005/11/14 19:08:20 UTC	(20051114_3-21201)
+  Log:
+  - make ->name in struct Client a simple const char *, for servers it points
+    to the scache, for users it points to the new ->nick in struct User.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_join.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_nick.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_server.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_sjoin.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_ison.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/ircd.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/parse.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_serv.c (File Modified) 
+
+
 leeh        2005/11/14 18:06:08 UTC	(20051114_2-21199)
   Log:
   - add a bitmask for clients who have sent USER, test this instead of
