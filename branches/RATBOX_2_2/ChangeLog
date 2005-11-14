@@ -1,3 +1,17 @@
+leeh        2005/11/14 21:02:43 UTC	(20051114_5-21205)
+  Log:
+  - we only store channel invites for local users, so move it from struct User
+    to struct LocalUser
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_invite.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/channel.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_stats.c (File Modified) 
+
+
 androsyn    2005/11/14 19:18:41 UTC	(20051114_4-21203)
   Log:
   add prebuilt versions of the lexer/parser
