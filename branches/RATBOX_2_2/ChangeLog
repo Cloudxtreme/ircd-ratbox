@@ -1,3 +1,17 @@
+leeh        2005/11/14 18:06:08 UTC	(20051114_2-21199)
+  Log:
+  - add a bitmask for clients who have sent USER, test this instead of
+    sptr->user
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_nick.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_cap.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_pong.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_user.c (File Modified) 
+
+
 leeh        2005/11/14 17:35:23 UTC	(20051114_1-21197)
   Log:
   - replace some checks for sptr->name[0] with !EmptyString(sptr->name)
