@@ -601,7 +601,7 @@ set_initial_nick(struct Client *client_p, struct Client *source_p, char *nick)
 
 	/* This had to be copied here to avoid problems.. */
 	source_p->tsinfo = CurrentTime;
-	if(source_p->name[0])
+	if(!EmptyString(source_p->name))
 		del_from_client_hash(source_p->name, source_p);
 
 	strcpy(source_p->name, nick);
@@ -610,7 +610,7 @@ set_initial_nick(struct Client *client_p, struct Client *source_p, char *nick)
 	/* fd_desc is long enough */
 	comm_note(client_p->localClient->fd, "Nick: %s", nick);
 
-	if(source_p->user)
+	if(HasSentUser(source_p))
 	{
 		strlcpy(buf, source_p->username, sizeof(buf));
 

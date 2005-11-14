@@ -346,6 +346,7 @@ struct exit_client_hook
 #define FLAGS_PINGSENT     0x0001	/* Unreplied ping sent */
 #define FLAGS_DEAD	   0x0002	/* Local socket is dead--Exiting soon */
 #define FLAGS_KILLED       0x0004	/* Prevents "QUIT" from being sent for this */
+#define FLAGS_SENTUSER     0x0008	/* sent the USER command */
 #define FLAGS_CLOSING      0x0020	/* set when closing to suppress errors */
 #define FLAGS_GOTID        0x0080	/* successful ident lookup achieved */
 #define FLAGS_SERVLINK     0x10000	/* servlink has servlink process */
@@ -444,6 +445,8 @@ struct exit_client_hook
 #define IsTGChange(x)		((x)->flags & FLAGS_TGCHANGE)
 #define SetTGChange(x)		((x)->flags |= FLAGS_TGCHANGE)
 #define ClearTGChange(x)	((x)->flags &= ~FLAGS_TGCHANGE)
+#define HasSentUser(x)		((x)->flags & FLAGS_SENTUSER)
+#define SetSentUser(x)		((x)->flags |= FLAGS_SENTUSER)
 
 /* oper flags */
 #define MyOper(x)               (MyConnect(x) && IsOper(x))

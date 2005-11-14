@@ -319,7 +319,7 @@ cap_end(struct Client *source_p, const char *arg)
 
 	source_p->flags2 &= ~FLAGS2_CLICAP;
 
-	if(!EmptyString(source_p->name) && source_p->user)
+	if(!EmptyString(source_p->name) && HasSentUser(source_p))
 	{
 		char buf[USERLEN+1];
 		strlcpy(buf, source_p->username, sizeof(buf));
