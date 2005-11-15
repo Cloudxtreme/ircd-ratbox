@@ -76,6 +76,7 @@ static EVH check_pings;
 
 static BlockHeap *client_heap = NULL;
 static BlockHeap *lclient_heap = NULL;
+static BlockHeap *user_heap;
 
 static char current_uid[IDLEN];
 
@@ -117,6 +118,7 @@ init_client(void)
 	 */
 	client_heap = BlockHeapCreate(sizeof(struct Client), CLIENT_HEAP_SIZE);
 	lclient_heap = BlockHeapCreate(sizeof(struct LocalUser), LCLIENT_HEAP_SIZE);
+	user_heap = BlockHeapCreate(sizeof(struct User), USER_HEAP_SIZE);
 	eventAddIsh("check_pings", check_pings, NULL, 30);
 	eventAddIsh("free_exited_clients", &free_exited_clients, NULL, 4);
 	eventAddIsh("exit_aborted_clients", exit_aborted_clients, NULL, 1);
@@ -1844,24 +1846,6 @@ show_ip(struct Client *source_p, struct Client *target_p)
 
 	/* This should never happen */
 	return 0;
-}
-
-/*
- * initUser
- *
- * inputs	- none
- * outputs	- none
- *
- * side effects - Creates a block heap for struct Users
- *
- */
-static BlockHeap *user_heap;
-void
-initUser(void)
-{
-	user_heap = BlockHeapCreate(sizeof(struct User), USER_HEAP_SIZE);
-	if(!user_heap)
-		outofmemory();
 }
 
 /*
