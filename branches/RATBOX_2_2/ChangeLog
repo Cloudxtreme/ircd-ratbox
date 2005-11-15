@@ -1,3 +1,14 @@
+androsyn    2005/11/15 16:04:43 UTC	(20051115_0-21209)
+  Log:
+  <jilles> - show real errno if we fail to connect to a server
+  <jilles> - don't disclose server ip on irc
+  
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/s_serv.c (File Modified) 
+
+
 leeh        2005/11/14 21:02:43 UTC	(20051114_5-21205)
   Log:
   - we only store channel invites for local users, so move it from struct User
