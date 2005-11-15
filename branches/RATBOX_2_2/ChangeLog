@@ -1,3 +1,15 @@
+leeh        2005/11/15 21:18:10 UTC	(20051115_1-21223)
+  Log:
+  - merge initUser() into init_client()
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/s_conf.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/ircd.c (File Modified) 
+
+
 androsyn    2005/11/15 16:04:43 UTC	(20051115_0-21209)
   Log:
   <jilles> - show real errno if we fail to connect to a server
