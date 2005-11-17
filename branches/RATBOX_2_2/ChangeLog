@@ -1,3 +1,17 @@
+leeh        2005/11/17 20:53:33 UTC	(20051117_0-21231)
+  Log:
+  - rework the hostmask hash so that we apply CONF_SKIPUSER in
+    add_conf_by_address() instead of |0x1 when searching.
+  
+    This allows us to evade match() for *@host klines, as well as just dlines
+    and elines, falling back to a simple bitmask check.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_stats.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/hostmask.c (File Modified) 
+
+
 leeh        2005/11/15 21:18:10 UTC	(20051115_1-21223)
   Log:
   - merge initUser() into init_client()
