@@ -346,7 +346,7 @@ stats_tdeny (struct Client *source_p)
 	{
 		for (arec = atable[i]; arec; arec = arec->next)
 		{
-			if(arec->type == CONF_DLINE)
+			if(arec->type & CONF_DLINE)
 			{
 				aconf = arec->aconf;
 
@@ -383,7 +383,7 @@ stats_deny (struct Client *source_p)
 	{
 		for (arec = atable[i]; arec; arec = arec->next)
 		{
-			if(arec->type == CONF_DLINE)
+			if(arec->type & CONF_DLINE)
 			{
 				aconf = arec->aconf;
 
@@ -428,7 +428,7 @@ stats_exempt(struct Client *source_p)
 	{
 		for (arec = atable[i]; arec; arec = arec->next)
 		{
-			if(arec->type == CONF_EXEMPTDLINE)
+			if(arec->type & CONF_EXEMPTDLINE)
 			{
 				aconf = arec->aconf;
 				get_printable_conf (aconf, &name, &host, &pass,
