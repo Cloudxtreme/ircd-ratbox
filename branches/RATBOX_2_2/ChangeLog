@@ -1,3 +1,13 @@
+leeh        2005/11/17 21:05:54 UTC	(20051117_2-21235)
+  Log:
+  - add some comments about CONF_SKIPUSER
+  - remove some unused bitmasks
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/s_conf.h (File Modified) 
+
+
 leeh        2005/11/17 20:54:26 UTC	(20051117_1-21233)
   Log:
   - fix up the test for when we apply CONF_SKIPUSER
