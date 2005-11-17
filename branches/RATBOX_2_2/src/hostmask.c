@@ -419,7 +419,7 @@ add_conf_by_address(const char *address, int type, const char *username, struct 
 	arec->precedence = prec_value--;
 	arec->type = type;
 
-	if(username && username[0] == '*' && username[1] == '\0')
+	if(EmptyString(username) || (username[0] == '*' && username[1] == '\0'))
 		arec->type |= CONF_SKIPUSER;
 }
 
