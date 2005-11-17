@@ -1335,16 +1335,9 @@ stats_l_client(struct Client *source_p, struct Client *target_p,
 				 (CurrentTime - target_p->localClient->lasttime) : 0,
 				IsOper(source_p) ? show_capabilities(target_p) : "-");
 	}
-
-	else if(IsIPSpoof(target_p))
+	else if(!show_ip(source_p, target_p))
 	{
 		sendto_one_numeric(source_p, RPL_STATSLINKINFO, Lformat,
-#ifndef HIDE_SPOOF_IPS
-				   IsOper(source_p) ?
-				    (IsUpper(statchar) ?
-				     get_client_name(target_p, SHOW_IP) :
-				     get_client_name(target_p, HIDE_IP)) :
-#endif
 				    get_client_name(target_p, MASK_IP),
 				    (int) linebuf_len(&target_p->localClient->buf_sendq),
 				    (int) target_p->localClient->sendM,
@@ -1356,7 +1349,6 @@ stats_l_client(struct Client *source_p, struct Client *target_p,
 				     (CurrentTime - target_p->localClient->lasttime) : 0,
 				    "-");
 	}
-
 	else
 	{
 		sendto_one_numeric(source_p, RPL_STATSLINKINFO, Lformat,
