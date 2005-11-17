@@ -72,8 +72,18 @@ struct ConfItem
 	struct Class *c_class;	/* Class of connection */
 };
 
-#define CONF_ILLEGAL            0x80000000
-#define CONF_SKIPUSER		0x0001	/* username is "*" -- skip match() */
+/* CONF_SKIPUSER is used solely in hostmask.c and never applied to a struct
+ * ConfItem.  It signals to the lookup code that a match() on the username
+ * will always return true -- notably because its empty or "*".  This allows
+ * us to fall back to a bitmask test, instead of jumping into match().
+ *
+ * EFNet profiling showed that match() was called 937million times from
+ * hostmask.c, making it the most used function by a huge factor.  The sheer
+ * number of calls makes this special case worthwhile.
+ *
+ * Its a Good Idea. --fl
+ */
+#define CONF_SKIPUSER		0x0001
 #define CONF_CLIENT             0x0002
 #define CONF_KILL               0x0040
 #define CONF_XLINE		0x0080
@@ -81,13 +91,11 @@ struct ConfItem
 #define CONF_RESV_NICK		0x0200
 #define CONF_RESV		(CONF_RESV_CHANNEL | CONF_RESV_NICK)
 
-#define CONF_CLASS              0x0400
-#define CONF_LISTEN_PORT        0x1000
-#define CONF_EXEMPTKLINE        0x4000
-#define CONF_NOLIMIT            0x8000
 #define CONF_GLINE             0x10000
 #define CONF_DLINE             0x20000
 #define CONF_EXEMPTDLINE      0x100000
+
+#define CONF_ILLEGAL            0x80000000
 
 #define IsIllegal(x)    ((x)->status & CONF_ILLEGAL)
 
