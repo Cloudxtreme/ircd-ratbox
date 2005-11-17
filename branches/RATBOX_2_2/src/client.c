@@ -1744,108 +1744,27 @@ del_all_accepts(struct Client *client_p)
 	}
 }
 
-/*
- * show_ip() - asks if the true IP shoudl be shown when source is
- *             askin for info about target 
- *
- * Inputs	- source_p who is asking
- *		- target_p who do we want the info on
- * Output	- returns 1 if clear IP can be showed, otherwise 0
- * Side Effects	- none
- *
- *
- * Truth tables, one if source_p is local to target_p and one if not. 
- * Key:
- *  x  Show IP
- *  -  Don't show IP
- *  ?  Ask IsIPSpoof()
- */
-
-static char show_ip_local[7][7] = {
-	/*Target:        A   O   L   H   S   C   E */
-	/*Source: */
-	/*Admin */ {'x', 'x', 'x', 'x', 'x', 'x', '-'},
-	/*Oper */ {'-', '?', 'x', '?', '?', '?', '-'},
-	/*Luser */ {'-', '-', '?', '-', '-', '-', '-'},
-	/*Handshaker */ {'-', '-', '-', '-', '-', '-', '-'},
-	/*Server */ {'-', '-', '-', '-', '-', '-', '-'},
-	/*Connecting */ {'-', '-', '-', '-', '-', '-', '-'},
-	/*Else */ {'-', '-', '-', '-', '-', '-', '-'}
-};
-
-static char show_ip_remote[7][7] = {
-	/*Target:        A   O   L   H   S   C   E */
-	/*Source: */
-	/*Admin */ {'?', '?', '?', '?', '?', '-', '-'},
-	/*Oper */ {'-', '?', '?', '?', '?', '-', '-'},
-	/*Luser */ {'-', '-', '?', '-', '-', '-', '-'},
-	/*Handshake */ {'-', '-', '-', '-', '-', '-', '-'},
-	/*Server */ {'-', '-', '-', '-', '-', '-', '-'},
-	/*Connecting */ {'-', '-', '-', '-', '-', '-', '-'},
-	/*Else */ {'-', '-', '-', '-', '-', '-', '-'}
-};
-
 int
 show_ip(struct Client *source_p, struct Client *target_p)
 {
-	int s, t, res;
-
-	if(IsAdmin(source_p))
-		s = 0;
-	else if(IsOper(source_p))
-		s = 1;
-	else if(IsClient(source_p))
-		s = 2;
-	else if(IsHandshake(source_p))
-		s = 3;
-	else if(IsServer(source_p))
-		s = 4;
-	else if(IsConnecting(source_p))
-		s = 5;
-	else
-		s = 6;
-
-	if(IsAdmin(target_p))
-		t = 0;
-	else if(IsOper(target_p))
-		t = 1;
-	else if(IsClient(target_p))
-		t = 2;
-	else if(IsHandshake(target_p))
-		t = 3;
-	else if(IsServer(target_p))
-		t = 4;
-	else if(IsConnecting(target_p))
-		t = 5;
-	else
-		t = 6;
-
-	if(MyClient(source_p) && MyClient(target_p))
-		res = show_ip_local[s][t];
-	else
-		res = show_ip_remote[s][t];
-
-	if(res == '-')
-		return 0;
-
-#ifdef HIDE_SPOOF_IPS
-	if(IsIPSpoof(target_p))
-		return 0;
-#endif
-
-#ifdef HIDE_SERVERS_IPS
 	if(IsAnyServer(target_p))
-		return 0;
+	{
+#ifndef HIDE_SERVERS_IPS
+		if(IsOper(source_p))
+			return 1;
 #endif
-
-	if(res == '?')
-		return !IsIPSpoof(target_p);
-
-	if(res == 'x')
+		return 0;
+	}
+	else if(IsIPSpoof(target_p))
+	{
+#ifndef HIDE_SPOOF_IPS
+		if(MyOper(source_p))
+			return 1;
+#endif
+		return 0;
+	}
+	else
 		return 1;
-
-	/* This should never happen */
-	return 0;
 }
 
 /*
