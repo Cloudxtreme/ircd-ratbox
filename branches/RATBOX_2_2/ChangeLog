@@ -1,3 +1,12 @@
+leeh        2005/11/20 16:40:19 UTC	(20051120_0-21259)
+  Log:
+  - remove ms_topic(), its a lazylink remnant
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_topic.c (File Modified) 
+
+
 leeh        2005/11/17 22:20:23 UTC	(20051117_4-21239)
   Log:
   - make etrace and stats use show_ip() rather than #ifdef HIDE_SPOOF_IPS
