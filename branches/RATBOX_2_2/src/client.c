@@ -956,7 +956,6 @@ get_server_name(struct Client *target_p, int showip)
 	if(!MyConnect(target_p) || !irccmp(target_p->name, target_p->host))
 		return target_p->name;
 
-#ifdef HIDE_SERVERS_IPS
 	if(EmptyString(target_p->name))
 	{
 		ircsnprintf(nbuf, sizeof(nbuf), "[%s@255.255.255.255]",
@@ -965,27 +964,6 @@ get_server_name(struct Client *target_p, int showip)
 	}
 	else
 		return target_p->name;
-#endif
-
-	switch (showip)
-	{
-		case SHOW_IP:
-			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@%s]",
-				target_p->name, target_p->username, 
-				target_p->sockhost);
-			break;
-
-		case MASK_IP:
-			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@255.255.255.255]",
-				target_p->name, target_p->username);
-
-		default:
-			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@%s]",
-				target_p->name, target_p->username,
-				target_p->host);
-	}
-
-	return nbuf;
 }
 	
 /* log_client_name()
@@ -1749,10 +1727,6 @@ show_ip(struct Client *source_p, struct Client *target_p)
 {
 	if(IsAnyServer(target_p))
 	{
-#ifndef HIDE_SERVERS_IPS
-		if(IsOper(source_p))
-			return 1;
-#endif
 		return 0;
 	}
 	else if(IsIPSpoof(target_p))

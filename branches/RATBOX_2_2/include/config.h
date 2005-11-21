@@ -71,13 +71,6 @@
 #define PPATH    ETCPATH "/ircd.pid"	/* pid file */
 #define OPATH    ETCPATH "/opers.motd"	/* oper MOTD file */
 
-/* HIDE_SERVERS_IPS
- *
- * If this is undefined, anyone can see a servers ip.  If it is defined,
- * noone can.
- */
-#define  HIDE_SERVERS_IPS
-
 /* HIDE_SPOOF_IPS
  *
  * If this is undefined, opers will be allowed to see the real IP of spoofed
