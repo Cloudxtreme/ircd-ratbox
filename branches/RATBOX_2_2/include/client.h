@@ -554,8 +554,9 @@ extern struct Client *next_client(struct Client *, const char *);
 #define accept_message(s, t) ((s) == (t) || (dlinkFind((s), &((t)->localClient->allow_list))))
 extern void del_all_accepts(struct Client *client_p);
 
-extern void dead_link(struct Client *client_p, int sendqex);
-extern int show_ip(struct Client *source_p, struct Client *target_p);
+void dead_link(struct Client *client_p, int sendqex);
+int show_ip(struct Client *source_p, struct Client *target_p);
+int show_ip_conf(struct ConfItem *aconf, struct Client *target_p);
 
 extern void free_user(struct User *, struct Client *);
 extern struct User *make_user(struct Client *);

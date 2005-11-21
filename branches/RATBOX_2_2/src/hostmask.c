@@ -604,12 +604,10 @@ report_auth(struct Client *client_p)
 						   &classname);
 
 				sendto_one_numeric(client_p, RPL_STATSILINE, 
-						   form_str(RPL_STATSILINE),
-						   name, show_iline_prefix(client_p, aconf, user),
-#ifdef HIDE_SPOOF_IPS
-						   IsConfDoSpoofIp(aconf) ? "255.255.255.255" :
-#endif
-						   host, port, classname);
+						form_str(RPL_STATSILINE),
+						name, show_iline_prefix(client_p, aconf, user),
+						show_ip_conf(aconf, client_p) ? host : "255.255.255.255",
+						port, classname);
 			}
 }
 
