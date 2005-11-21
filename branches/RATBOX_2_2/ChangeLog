@@ -1,3 +1,17 @@
+leeh        2005/11/21 19:45:08 UTC	(20051121_3-21275)
+  Log:
+  - hardcode hiding servers ips, theres no good reason to disable it.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/config.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/config.h.dist (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_connect.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_stats.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_serv.c (File Modified) 
+
+
 leeh        2005/11/21 19:39:16 UTC	(20051121_2-21273)
   Log:
   - USE_LOGFILE doesnt do anything at all
