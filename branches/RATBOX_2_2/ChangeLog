@@ -1,3 +1,18 @@
+leeh        2005/11/21 20:10:49 UTC	(20051121_4-21277)
+  Log:
+  - replace various calls to get_server_name() with a simple client_p->name
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_error.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_server.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_stats.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_svinfo.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/parse.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_serv.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/send.c (File Modified) 
+
+
 leeh        2005/11/21 19:45:08 UTC	(20051121_3-21275)
   Log:
   - hardcode hiding servers ips, theres no good reason to disable it.
