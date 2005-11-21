@@ -71,14 +71,6 @@
 #define PPATH    ETCPATH "/ircd.pid"	/* pid file */
 #define OPATH    ETCPATH "/opers.motd"	/* oper MOTD file */
 
-/* IGNORE_BOGUS_TS
- * Ignore bogus timestamps from other servers. Yes this will desync
- * the network, but it will allow chanops to resync with a valid non TS 0
- *
- * This should be enabled network wide, or not at all.
- */
-#undef  IGNORE_BOGUS_TS
-
 /* HIDE_SERVERS_IPS
  *
  * If this is undefined, anyone can see a servers ip.  If it is defined,

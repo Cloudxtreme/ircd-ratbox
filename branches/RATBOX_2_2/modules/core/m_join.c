@@ -404,15 +404,6 @@ ms_join(struct Client *client_p, struct Client *source_p, int parc, const char *
 	oldts = chptr->channelts;
 	oldmode = &chptr->mode;
 
-#ifdef IGNORE_BOGUS_TS
-	if(newts < 800000000)
-	{
-		sendto_realops_flags(UMODE_DEBUG, L_ALL,
-				     "*** Bogus TS %ld on %s ignored from %s",
-				     (long) newts, chptr->chname, client_p->name);
-		newts = (oldts == 0) ? oldts : 800000000;
-	}
-#else
 	/* making a channel TS0 */
 	if(!isnew && !newts && oldts)
 	{
@@ -423,7 +414,6 @@ ms_join(struct Client *client_p, struct Client *source_p, int parc, const char *
 				     "Server %s changing TS on %s from %ld to 0",
 				     source_p->name, chptr->chname, (long) oldts);
 	}
-#endif
 
 	if(isnew)
 		chptr->channelts = newts;
