@@ -577,17 +577,15 @@ cancel_clients(struct Client *client_p, struct Client *source_p, char *cmd)
 		sendto_realops_flags(UMODE_DEBUG, L_ALL,
 				     "Message for %s[%s] from %s",
 				     source_p->name, source_p->from->name,
-				     get_server_name(client_p, SHOW_IP));
+				     client_p->name);
 	}
 	else
 	{
 		sendto_realops_flags(UMODE_DEBUG, L_ALL,
 				     "Message for %s[%s@%s!%s] from %s (TS, ignored)",
-				     source_p->name,
-				     source_p->username,
-				     source_p->host,
-				     source_p->from->name,
-				     get_server_name(client_p, SHOW_IP));
+				     source_p->name, source_p->username,
+				     source_p->host, source_p->from->name,
+				     client_p->name);
 	}
 }
 
@@ -612,7 +610,7 @@ remove_unknown(struct Client *client_p, char *lsender, char *lbuffer)
 	{
 		sendto_realops_flags(UMODE_DEBUG, L_ALL,
 				     "Unknown prefix (%s) from %s, Squitting %s",
-				     lbuffer, get_server_name(client_p, SHOW_IP), lsender);
+				     lbuffer, client_p->name, lsender);
 
 		sendto_one(client_p,
 			   ":%s SQUIT %s :(Unknown prefix (%s) from %s)",

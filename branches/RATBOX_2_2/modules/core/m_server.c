@@ -88,8 +88,6 @@ mr_server(struct Client *client_p, struct Client *source_p, int parc, const char
 	 */
 	if(!DoesTS(client_p))
 	{
-		sendto_realops_flags(UMODE_ALL, L_ALL, "Link %s dropped, non-TS server",
-				     get_server_name(client_p, HIDE_IP));
 		exit_client(client_p, client_p, client_p, "Non-TS server");
 		return 0;
 	}
@@ -266,7 +264,7 @@ ms_server(struct Client *client_p, struct Client *source_p, int parc, const char
 
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Link %s cancelled, server %s already exists",
-				     get_server_name(client_p, SHOW_IP), name);
+				     client_p->name, name);
 
 		exit_client(client_p, client_p, &me, "Server Exists");
 		return 0;
@@ -286,7 +284,7 @@ ms_server(struct Client *client_p, struct Client *source_p, int parc, const char
 		sendto_one(client_p, "ERROR :Nickname %s already exists!", name);
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Link %s cancelled: Server/nick collision on %s",
-				     get_server_name(client_p, HIDE_IP), name);
+				     client_p->name, name);
 		exit_client(client_p, client_p, client_p, "Nick as Server");
 		return 0;
 	}
@@ -350,7 +348,7 @@ ms_server(struct Client *client_p, struct Client *source_p, int parc, const char
 	{
 		/* OOOPs nope can't HUB */
 		sendto_realops_flags(UMODE_ALL, L_ALL, "Non-Hub link %s introduced %s.",
-				     get_server_name(client_p, HIDE_IP), name);
+				     client_p->name, name);
 
 		exit_client(NULL, client_p, &me, "No matching hub_mask.");
 		return 0;
@@ -362,7 +360,7 @@ ms_server(struct Client *client_p, struct Client *source_p, int parc, const char
 		/* OOOPs nope can't HUB this leaf */
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Link %s introduced leafed server %s.",
-				     get_server_name(client_p, HIDE_IP), name);
+				     client_p->name, name);
 
 		exit_client(NULL, client_p, &me, "Leafed Server.");
 		return 0;
@@ -374,7 +372,7 @@ ms_server(struct Client *client_p, struct Client *source_p, int parc, const char
 	{
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Link %s introduced server with invalid servername %s",
-				     get_server_name(client_p, HIDE_IP), name);
+				     client_p->name, name);
 
 		exit_client(NULL, client_p, &me, "Invalid servername introduced.");
 		return 0;
@@ -434,7 +432,7 @@ ms_sid(struct Client *client_p, struct Client *source_p, int parc, const char *p
 		sendto_one(client_p, "ERROR :Server %s already exists", parv[1]);
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Link %s cancelled, server %s already exists",
-				     get_server_name(client_p, SHOW_IP), parv[1]);
+				     client_p->name, parv[1]);
 		exit_client(NULL, client_p, &me, "Server Exists");
 		return 0;
 	}
@@ -445,7 +443,7 @@ ms_sid(struct Client *client_p, struct Client *source_p, int parc, const char *p
 		sendto_one(client_p, "ERROR :SID %s already exists", parv[3]);
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Link %s cancelled, SID %s already exists",
-				     get_server_name(client_p, SHOW_IP), parv[3]);
+				     client_p->name, parv[3]);
 		exit_client(NULL, client_p, &me, "Server Exists");
 		return 0;
 	}
@@ -455,7 +453,7 @@ ms_sid(struct Client *client_p, struct Client *source_p, int parc, const char *p
 		sendto_one(client_p, "ERROR :Invalid servername");
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Link %s cancelled, servername %s invalid",
-				     get_server_name(client_p, SHOW_IP), parv[1]);
+				     client_p->name, parv[1]);
 		exit_client(NULL, client_p, &me, "Bogus server name");
 		return 0;
 	}
@@ -466,7 +464,7 @@ ms_sid(struct Client *client_p, struct Client *source_p, int parc, const char *p
 		sendto_one(client_p, "ERROR :Invalid SID");
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Link %s cancelled, SID %s invalid",
-				     get_server_name(client_p, SHOW_IP), parv[3]);
+				     client_p->name, parv[3]);
 		exit_client(NULL, client_p, &me, "Bogus SID");
 		return 0;
 	}
@@ -495,7 +493,7 @@ ms_sid(struct Client *client_p, struct Client *source_p, int parc, const char *p
 		sendto_one(client_p, "ERROR :No matching hub_mask");
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Non-Hub link %s introduced %s.",
-				     get_server_name(client_p, SHOW_IP), parv[1]);
+				     client_p->name, parv[1]);
 		exit_client(NULL, client_p, &me, "No matching hub_mask.");
 		return 0;
 	}
@@ -506,7 +504,7 @@ ms_sid(struct Client *client_p, struct Client *source_p, int parc, const char *p
 		sendto_one(client_p, "ERROR :Matching leaf_mask");
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Link %s introduced leafed server %s.",
-				     get_server_name(client_p, SHOW_IP), parv[1]);
+				     client_p->name, parv[1]);
 		exit_client(NULL, client_p, &me, "Leafed Server.");
 		return 0;
 	}

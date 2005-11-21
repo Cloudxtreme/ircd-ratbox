@@ -1120,8 +1120,7 @@ server_estab(struct Client *client_p)
 	/* Show the real host/IP to admins */
 	sendto_realops_flags(UMODE_ALL, L_ALL,
 			"Link with %s established: (%s) link",
-			get_server_name(client_p, SHOW_IP),
-			show_capabilities(client_p));
+			client_p->name, show_capabilities(client_p));
 
 	ilog(L_SERVER, "Link with %s established: (%s) link",
 	     log_client_name(client_p, SHOW_IP), show_capabilities(client_p));
@@ -1479,10 +1478,10 @@ serv_connect(struct server_conf *server_p, struct Client *by)
 	{
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Server %s already present from %s",
-				     server_p->name, get_server_name(client_p, SHOW_IP));
+				     server_p->name, client_p->name);
 		if(by && IsPerson(by) && !MyClient(by))
 			sendto_one_notice(by, ":Server %s already present from %s",
-					  server_p->name, get_server_name(client_p, SHOW_IP));
+					  server_p->name, client_p->name);
 		return 0;
 	}
 
@@ -1516,7 +1515,7 @@ serv_connect(struct server_conf *server_p, struct Client *by)
 	if(!comm_set_buffers(client_p->localClient->fd, READBUF_SIZE))
 	{
 		report_error(SETBUF_ERROR_MSG,
-				get_server_name(client_p, SHOW_IP),
+				client_p->name,
 				log_client_name(client_p, SHOW_IP),
 				errno);
 	}
@@ -1647,13 +1646,12 @@ serv_connect_callback(int fd, int status, void *data)
 		 */
 		if(status == COMM_ERR_TIMEOUT)
 			sendto_realops_flags(UMODE_ALL, L_ALL,
-					"Error connecting to %s[%s]: %s",
-					client_p->name, "255.255.255.255",
-					comm_errstr(status));
+					"Error connecting to %s[255.255.255.255]: %s",
+					client_p->name, comm_errstr(status));
 		else
 			sendto_realops_flags(UMODE_ALL, L_ALL,
-					"Error connecting to %s[%s]: %s (%s)",
-					client_p->name, "255.255.255.255",
+					"Error connecting to %s[255.255.255.255]: %s (%s)",
+					client_p->name, 
 					comm_errstr(status), strerror(comm_get_sockerr(fd)));
 
 		exit_client(client_p, client_p, &me, comm_errstr(status));
@@ -1665,7 +1663,7 @@ serv_connect_callback(int fd, int status, void *data)
 	if((server_p = client_p->localClient->att_sconf) == NULL)
 	{
 		sendto_realops_flags(UMODE_ALL, L_ALL, "Lost connect{} block for %s",
-				get_server_name(client_p, HIDE_IP));
+				client_p->name);
 		exit_client(client_p, client_p, &me, "Lost connect{} block");
 		return;
 	}
