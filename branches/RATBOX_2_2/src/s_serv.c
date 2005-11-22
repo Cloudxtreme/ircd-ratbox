@@ -1059,8 +1059,8 @@ server_estab(struct Client *client_p)
 
 	if(!comm_set_buffers(client_p->localClient->fd, READBUF_SIZE))
 		report_error(SETBUF_ERROR_MSG, 
-			     get_server_name(client_p, SHOW_IP), 
-			     log_client_name(client_p, SHOW_IP), errno);
+				client_p->name,
+				log_client_name(client_p, SHOW_IP), errno);
 
 	/* Hand the server off to servlink now */
 	if(IsCapable(client_p, CAP_ZIP))
@@ -1072,7 +1072,7 @@ server_estab(struct Client *client_p)
 		{
 			sendto_realops_flags(UMODE_ALL, L_ALL,
 					     "Warning: fork failed for server %s -- check servlink_path (%s)",
-					     get_server_name(client_p, HIDE_IP),
+					     client_p->name,
 					     ConfigFileEntry.servlink_path);
 			return exit_client(client_p, client_p, client_p, "Fork failed");
 		}
@@ -1401,7 +1401,7 @@ fork_server(struct Client *server)
 		if(!comm_set_nb(server->localClient->fd))
 		{
 			report_error(NONB_ERROR_MSG,
-					get_server_name(server, SHOW_IP),
+					server->name,
 					log_client_name(server, SHOW_IP),
 					errno);
 		}
@@ -1409,7 +1409,7 @@ fork_server(struct Client *server)
 		if(!comm_set_nb(server->localClient->slink->ctrlfd))
 		{
 			report_error(NONB_ERROR_MSG,
-					get_server_name(server, SHOW_IP),
+					server->name,
 					log_client_name(server, SHOW_IP),
 					errno);
 		}

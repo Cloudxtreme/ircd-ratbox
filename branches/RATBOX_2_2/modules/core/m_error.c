@@ -72,13 +72,13 @@ m_error(struct Client *client_p, struct Client *source_p, int parc, const char *
 	if(IsAnyServer(client_p) && ConfigFileEntry.hide_error_messages < 2)
 	{
 		sendto_realops_flags(UMODE_ALL, L_ADMIN,
-				"ERROR :from %s -- %s",
-				get_server_name(client_p, HIDE_IP), para);
+				"ERROR :from %s[@255.255.255.255] -- %s",
+				EmptyString(client_p->name) ? "" : client_p->name, para);
 
 		if(!ConfigFileEntry.hide_error_messages)
 			sendto_realops_flags(UMODE_ALL, L_OPER,
-					"ERROR :from %s -- %s",
-					get_server_name(client_p, HIDE_IP), para);
+					"ERROR :from %s[@255.255.255.255] -- %s",
+					EmptyString(client_p->name) ? "" : client_p->name, para);
 	}
 
 	exit_client(client_p, source_p, source_p, "ERROR");

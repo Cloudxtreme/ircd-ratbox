@@ -100,20 +100,29 @@ mr_server(struct Client *client_p, struct Client *source_p, int parc, const char
 
 	/* Now we just have to call check_server and everything should be
 	 * check for us... -A1kmm. */
+	/* Note: the notices we send out in this switch() are fairly
+	 * retarded.  We havent set a servers name yet, and we can never
+	 * send out a servers ips so we instead send a legacy 
+	 * [@255.255.255.255].
+	 *
+	 * Its not particularly nice, but its done that way to avoid
+	 * changing notices clients may already parse.
+	 * 
+	 * *hides* --anfl
+	 */
 	switch (check_server(name, client_p))
 	{
 	case -1:
 		if(ConfigFileEntry.warn_no_nline)
 		{
 			sendto_realops_flags(UMODE_ALL, L_ALL,
-					"Unauthorised server connection attempt from %s: "
+					"Unauthorised server connection attempt from [@255.255.255.255]: "
 					"No entry for servername %s",
-					get_server_name(client_p, HIDE_IP),
 					name);
-
-			ilog(L_SERVER, "Access denied, No N line for server %s",
-			     log_client_name(client_p, SHOW_IP));
 		}
+
+		ilog(L_SERVER, "Access denied, No N line for server %s",
+		     log_client_name(client_p, SHOW_IP));
 
 		exit_client(client_p, client_p, client_p, "Invalid servername.");
 		return 0;
@@ -122,9 +131,9 @@ mr_server(struct Client *client_p, struct Client *source_p, int parc, const char
 
 	case -2:
 		sendto_realops_flags(UMODE_ALL, L_ALL,
-				"Unauthorised server connection attempt from %s: "
+				"Unauthorised server connection attempt from [@255.255.255.255]: "
 				"Bad password for server %s", 
-				get_server_name(client_p, HIDE_IP), name);
+				name);
 
 		ilog(L_SERVER, "Access denied, invalid password for server %s",
 		     log_client_name(client_p, SHOW_IP));
@@ -136,9 +145,9 @@ mr_server(struct Client *client_p, struct Client *source_p, int parc, const char
 
 	case -3:
 		sendto_realops_flags(UMODE_ALL, L_ALL,
-				     "Unauthorised server connection attempt from %s: "
+				     "Unauthorised server connection attempt from [@255.255.255.255]: "
 				     "Invalid host for server %s", 
-				     get_server_name(client_p, HIDE_IP), name);
+				     name);
 
 		ilog(L_SERVER, "Access denied, invalid host for server %s",
 		     log_client_name(client_p, SHOW_IP));
@@ -151,8 +160,8 @@ mr_server(struct Client *client_p, struct Client *source_p, int parc, const char
 		/* servername is > HOSTLEN */
 	case -4:
 		sendto_realops_flags(UMODE_ALL, L_ALL,
-				     "Invalid servername %s from %s",
-				     name, get_server_name(client_p, HIDE_IP));
+				     "Invalid servername %s from [@255.255.255.255]",
+				     name);
 		ilog(L_SERVER, "Access denied, invalid servername from %s",
 		     log_client_name(client_p, SHOW_IP));
 
@@ -176,8 +185,8 @@ mr_server(struct Client *client_p, struct Client *source_p, int parc, const char
 		 * connect - A1kmm.
 		 */
 		sendto_realops_flags(UMODE_ALL, L_ALL,
-				     "Attempt to re-introduce server %s from %s",
-				     name, get_server_name(client_p, HIDE_IP));
+				     "Attempt to re-introduce server %s from [@255.255.255.255]",
+				     name);
 
 		sendto_one(client_p, "ERROR :Server already exists.");
 		exit_client(client_p, client_p, client_p, "Server Exists");
@@ -187,9 +196,8 @@ mr_server(struct Client *client_p, struct Client *source_p, int parc, const char
 	if(has_id(client_p) && (target_p = find_id(client_p->id)) != NULL)
 	{
 		sendto_realops_flags(UMODE_ALL, L_ALL,
-				     "Attempt to re-introduce SID %s from %s%s",
-				     client_p->id, name,
-				     get_server_name(client_p, HIDE_IP));
+				     "Attempt to re-introduce SID %s from %s[@255.255.255.255]",
+				     client_p->id, name);
 
 		sendto_one(client_p, "ERROR :SID already exists.");
 		exit_client(client_p, client_p, client_p, "SID Exists");

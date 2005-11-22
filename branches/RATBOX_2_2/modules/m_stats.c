@@ -1319,7 +1319,7 @@ stats_l_client(struct Client *source_p, struct Client *target_p,
 	if(IsAnyServer(target_p))
 	{
 		sendto_one_numeric(source_p, RPL_STATSLINKINFO, Lformat,
-				get_server_name(target_p, SHOW_IP),
+				target_p->name,
 				(int) linebuf_len(&target_p->localClient->buf_sendq),
 				(int) target_p->localClient->sendM,
 				(int) target_p->localClient->sendK,

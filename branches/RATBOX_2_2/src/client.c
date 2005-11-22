@@ -323,7 +323,7 @@ check_pings_list(dlink_list * list)
 				{
 					sendto_realops_flags(UMODE_ALL, L_ALL,
 							     "No response from %s, closing link",
-							     get_server_name(client_p, HIDE_IP));
+							     client_p->name);
 					ilog(L_SERVER,
 					     "No response from %s, closing link",
 					     log_client_name(client_p, HIDE_IP));
@@ -945,27 +945,6 @@ get_client_name(struct Client *client, int showip)
 	return client->name;
 }
 
-const char *
-get_server_name(struct Client *target_p, int showip)
-{
-	static char nbuf[HOSTLEN * 2 + USERLEN + 5];
-
-	if(target_p == NULL)
-		return NULL;
-
-	if(!MyConnect(target_p) || !irccmp(target_p->name, target_p->host))
-		return target_p->name;
-
-	if(EmptyString(target_p->name))
-	{
-		ircsnprintf(nbuf, sizeof(nbuf), "[%s@255.255.255.255]",
-				target_p->username);
-		return nbuf;
-	}
-	else
-		return target_p->name;
-}
-	
 /* log_client_name()
  *
  * This version is the same as get_client_name, but doesnt contain the
@@ -1240,7 +1219,7 @@ exit_aborted_clients(void *unused)
  	 	if(IsAnyServer(abt->client))
  	 	 	sendto_realops_flags(UMODE_ALL, L_ALL,
   	 	 	                     "Closing link to %s: %s",
-   	 	 	                     get_server_name(abt->client, HIDE_IP), abt->notice);
+   	 	 	                     abt->client->name, abt->notice);
 
 		/* its no longer on abort list - we *must* remove
 		 * FLAGS_CLOSING otherwise exit_client() will not run --fl
@@ -1732,7 +1711,10 @@ show_ip(struct Client *source_p, struct Client *target_p)
 	else if(IsIPSpoof(target_p))
 	{
 #ifndef HIDE_SPOOF_IPS
-		if(MyOper(source_p))
+		/* source == NULL indicates message is being sent
+		 * to local opers.
+		 */
+		if(source_p == NULL || MyOper(source_p))
 			return 1;
 #endif
 		return 0;
@@ -2016,7 +1998,7 @@ error_exit_client(struct Client *client_p, int error)
 		{
 			sendto_realops_flags(UMODE_ALL, L_ALL,
 					     "Server %s closed the connection",
-					     get_server_name(client_p, SHOW_IP));
+					     client_p->name);
 
 			ilog(L_SERVER, "Server %s closed the connection",
 			     log_client_name(client_p, SHOW_IP));
@@ -2024,7 +2006,7 @@ error_exit_client(struct Client *client_p, int error)
 		else
 		{
 			report_error("Lost connection to %s: %d",
-					get_server_name(client_p, SHOW_IP),
+					client_p->name,
 					log_client_name(client_p, SHOW_IP),
 					current_error);
 		}
