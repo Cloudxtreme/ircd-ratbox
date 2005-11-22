@@ -341,16 +341,15 @@ verify_access(struct Client *client_p, const char *username)
 		{
 			char *p;
 
+			/* show_ip() depends on this --fl */
+			SetIPSpoof(client_p);
+
 			if(IsConfSpoofNotice(aconf))
 			{
 				sendto_realops_flags(UMODE_ALL, L_ALL,
 						"%s spoofing: %s as %s",
 						client_p->name,
-#ifdef HIDE_SPOOF_IPS
-						aconf->name,
-#else
-						client_p->host,
-#endif
+						show_ip(NULL, client_p) ? client_p->host : aconf->name,
 						aconf->name);
 			}
 
@@ -368,8 +367,6 @@ verify_access(struct Client *client_p, const char *username)
 			}
 			else
 				strlcpy(client_p->host, aconf->name, sizeof(client_p->host));
-
-			SetIPSpoof(client_p);
 		}
 		return (attach_iline(client_p, aconf));
 	}
