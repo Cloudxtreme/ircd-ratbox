@@ -71,13 +71,6 @@
 #define PPATH    ETCPATH "/ircd.pid"	/* pid file */
 #define OPATH    ETCPATH "/opers.motd"	/* oper MOTD file */
 
-/* HIDE_SPOOF_IPS
- *
- * If this is undefined, opers will be allowed to see the real IP of spoofed
- * users in /trace etc.  If this is defined they will be shown a masked IP.
- */
-#define HIDE_SPOOF_IPS
-
 /* TS6_ONLY
  *
  * If this is defined only TS6 servers may link to the network.  See

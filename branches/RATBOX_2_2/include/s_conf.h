@@ -187,6 +187,7 @@ struct config_file_entry
 	int gline_min_cidr;
 	int gline_min_cidr6;
 	int hide_server;
+	int hide_spoof_ips;
 	int hide_error_messages;
 	int idletime;
 	int kline_delay;

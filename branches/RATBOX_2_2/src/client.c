@@ -915,10 +915,9 @@ get_client_name(struct Client *client, int showip)
 		if(!irccmp(client->name, client->host))
 			return client->name;
 
-#ifdef HIDE_SPOOF_IPS
-		if(showip == SHOW_IP && IsIPSpoof(client))
+		if(ConfigFileEntry.hide_spoof_ips && 
+		   showip == SHOW_IP && IsIPSpoof(client))
 			showip = MASK_IP;
-#endif
 
 		/* And finally, let's get the host information, ip or name */
 		switch (showip)
@@ -1705,13 +1704,13 @@ show_ip(struct Client *source_p, struct Client *target_p)
 	}
 	else if(IsIPSpoof(target_p))
 	{
-#ifndef HIDE_SPOOF_IPS
 		/* source == NULL indicates message is being sent
 		 * to local opers.
 		 */
-		if(source_p == NULL || MyOper(source_p))
+		if(!ConfigFileEntry.hide_spoof_ips && 
+		   (source_p == NULL || MyOper(source_p)))
 			return 1;
-#endif
+
 		return 0;
 	}
 	else
@@ -1723,10 +1722,8 @@ show_ip_conf(struct ConfItem *aconf, struct Client *source_p)
 {
 	if(IsConfDoSpoofIp(aconf))
 	{
-#ifndef HIDE_SPOOF_IPS
-		if(MyOper(source_p))
+		if(!ConfigFileEntry.hide_spoof_ips && MyOper(source_p))
 			return 1;
-#endif
 
 		return 0;
 	}
