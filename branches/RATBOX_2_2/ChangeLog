@@ -1,3 +1,14 @@
+leeh        2005/11/22 21:01:30 UTC	(20051122_6-21295)
+  Log:
+  - add CHANTRACE command, with operspy support -- oper only.
+    Will output the members of a channel (if youre a member, or use operspy)
+    in ETRACE format.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_etrace.c (File Modified) 
+
+
 leeh        2005/11/22 20:36:43 UTC	(20051122_5-21293)
   Log:
   - remove an unused struct
