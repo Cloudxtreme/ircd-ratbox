@@ -1,3 +1,12 @@
+leeh        2005/11/22 21:11:22 UTC	(20051122_7-21297)
+  Log:
+  - handle "chantrace !" properly.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_etrace.c (File Modified) 
+
+
 leeh        2005/11/22 21:01:30 UTC	(20051122_6-21295)
   Log:
   - add CHANTRACE command, with operspy support -- oper only.
