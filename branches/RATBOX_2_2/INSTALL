@@ -11,6 +11,8 @@ ircd-ratbox installation guide
    The RELNOTES file contains the list of features and fixes since the
    previous releases.
 
+   The README file contains important notes you should read.
+
 2. Run the configure script.  By default it will attempt to install into
    /usr/local/ircd.  If you want it to install into this directory, then as
    root you must first:
@@ -35,7 +37,7 @@ ircd-ratbox installation guide
    You should also configure how many clients your server will support:
      --with-maxclients=NUMBER
 
-   If you wish support for ratbox-services:
+   If you wish support for ratbox-services read doc/services.txt and pass:
      --enable-services
 
    If your nick length or topic lengths are not 9 and 160 respectively:
