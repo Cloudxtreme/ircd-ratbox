@@ -1,3 +1,14 @@
+leeh        2005/12/03 12:10:58 UTC	(20051203_0-21335)
+  Log:
+  - add help for chantrace/testmaskgecos
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/chantrace (File Added) 
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/operspy (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/testmaskgecos (File Added) 
+
+
 leeh        2005/11/27 18:43:58 UTC	(20051127_0-21319)
   Log:
   - make CANTRACE output servername instead of channel
