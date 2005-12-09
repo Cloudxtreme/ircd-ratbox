@@ -1,3 +1,12 @@
+leeh        2005/12/09 21:01:55 UTC	(20051209_5-21349)
+  Log:
+  - fix QUIT for unregistered clients
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_quit.c (File Modified) 
+
+
 leeh        2005/12/09 19:39:53 UTC	(20051209_4-21347)
   Log:
   - deny ", in permanent xlines, as this breaks the parser.
