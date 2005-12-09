@@ -192,6 +192,8 @@ parse_resv(struct Client *source_p, const char *name,
 
 	if(IsChannelName(name))
 	{
+		const char *p;
+
 		if(hash_find_resv(name))
 		{
 			sendto_one_notice(source_p,
@@ -205,6 +207,17 @@ parse_resv(struct Client *source_p, const char *name,
 			sendto_one_notice(source_p, ":Invalid RESV length: %s",
 					  name);
 			return;
+		}
+
+		for(p = name; *p; p++)
+		{
+			if(!IsChanChar(*p))
+			{
+				sendto_one_notice(source_p,
+						":Invalid character '%c' in resv",
+						*p);
+				return;
+			}
 		}
 
 		if(strchr(reason, '"'))
