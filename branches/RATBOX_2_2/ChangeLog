@@ -1,3 +1,13 @@
+leeh        2005/12/09 14:05:30 UTC	(20051209_0-21339)
+  Log:
+  - ms_kill() should be using find_person(), not find_client()
+    otherwise it can generate a core.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_kill.c (File Modified) 
+
+
 leeh        2005/12/03 12:26:39 UTC	(20051203_1-21337)
   Log:
   - update some of our documentation
