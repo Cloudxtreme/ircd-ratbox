@@ -203,7 +203,7 @@ ms_kill(struct Client *client_p, struct Client *source_p, int parc, const char *
 		path = s;
 	}
 
-	if((target_p = find_client(user)) == NULL)
+	if((target_p = find_person(user)) == NULL)
 	{
 		/*
 		 * If the user has recently changed nick, but only if its 
@@ -220,12 +220,6 @@ ms_kill(struct Client *client_p, struct Client *source_p, int parc, const char *
 		sendto_one_notice(source_p, ":KILL changed from %s to %s",
 				  user, target_p->name);
 		chasing = 1;
-	}
-
-	if(IsServer(target_p) || IsMe(target_p))
-	{
-		sendto_one_numeric(source_p, ERR_CANTKILLSERVER, form_str(ERR_CANTKILLSERVER));
-		return 0;
 	}
 
 	if(MyConnect(target_p))
