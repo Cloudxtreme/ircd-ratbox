@@ -583,7 +583,7 @@ mangle_wildcard_to_cidr(const char *text)
 	{
 		if(n3 == NULL || (!strcmp(n3, splat) && !strcmp(n4, splat)))
 		{
-			ircd_sprintf(buf, "%s.0.0.0/8", n1);
+			ircsprintf(buf, "%s.0.0.0/8", n1);
 			return buf;
 		}
 	}
@@ -595,7 +595,7 @@ mangle_wildcard_to_cidr(const char *text)
 	{
 		if(n4 == NULL || !strcmp(n4, splat))
 		{
-			ircd_sprintf(buf, "%s.%s.0.0/16", n1, n2);
+			ircsprintf(buf, "%s.%s.0.0/16", n1, n2);
 			return buf;
 		}
 	}
@@ -605,7 +605,7 @@ mangle_wildcard_to_cidr(const char *text)
 
 	if(n4 == NULL || !strcmp(n4, splat))
 	{
-		ircd_sprintf(buf, "%s.%s.%s.0/24", n1, n2, n3);
+		ircsprintf(buf, "%s.%s.%s.0/24", n1, n2, n3);
 		return buf;
 	}
 	
@@ -677,13 +677,13 @@ valid_user_host(struct Client *source_p, const char *luser, const char *lhost)
 
 	for(p = luser; *p; p++)
 	{
-		if(!IsUserChar(*p))
+		if(!IsUserChar(*p) && !IsKWildChar(*p))
 			return 0;
 	}
 
 	for(p = lhost; *p; p++)
 	{
-		if(!IsHostChar(*p))
+		if(!IsHostChar(*p) && !IsKWildChar(*p))
 			return 0;
 	}
 
