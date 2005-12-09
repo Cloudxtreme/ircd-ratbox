@@ -1,3 +1,13 @@
+leeh        2005/12/09 14:11:40 UTC	(20051209_2-21343)
+  Log:
+  - s/ircd_sprintf/ircsprintf for 2.2
+  - better allow kwildchars in a kline
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_kline.c (File Modified) 
+
+
 leeh        2005/12/09 14:08:23 UTC	(20051209_1-21341)
   Log:
   - disallow any klines that contain characters that cant actually appear in a
