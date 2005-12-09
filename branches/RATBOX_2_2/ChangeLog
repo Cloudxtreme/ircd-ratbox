@@ -1,3 +1,13 @@
+leeh        2005/12/09 14:08:23 UTC	(20051209_1-21341)
+  Log:
+  - disallow any klines that contain characters that cant actually appear in a
+    clients username or hostname.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_kline.c (File Modified) 
+
+
 leeh        2005/12/09 14:05:30 UTC	(20051209_0-21339)
   Log:
   - ms_kill() should be using find_person(), not find_client()
