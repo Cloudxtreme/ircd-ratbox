@@ -1,3 +1,12 @@
+leeh        2005/12/09 14:31:41 UTC	(20051209_3-21345)
+  Log:
+  - check resvs against channels are valid channel names
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_resv.c (File Modified) 
+
+
 leeh        2005/12/09 14:11:40 UTC	(20051209_2-21343)
   Log:
   - s/ircd_sprintf/ircsprintf for 2.2
