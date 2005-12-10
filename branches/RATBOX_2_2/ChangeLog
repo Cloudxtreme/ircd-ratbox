@@ -1,3 +1,12 @@
+leeh        2005/12/10 13:44:31 UTC	(20051210_0-21351)
+  Log:
+  - need to allow '/' as a kline wildcard character..
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/match.c (File Modified) 
+
+
 leeh        2005/12/09 21:01:55 UTC	(20051209_5-21349)
   Log:
   - fix QUIT for unregistered clients
