@@ -1,3 +1,13 @@
+androsyn    2005/12/13 16:05:12 UTC	(20051213_0-21379)
+  Log:
+  Make get_client_name() and log_client_name() deal with ->name possibly
+  being NULL
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+
+
 leeh        2005/12/10 13:44:31 UTC	(20051210_0-21351)
   Log:
   - need to allow '/' as a kline wildcard character..
