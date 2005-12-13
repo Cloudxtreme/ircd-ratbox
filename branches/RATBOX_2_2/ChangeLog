@@ -1,3 +1,12 @@
+leeh        2005/12/13 16:13:45 UTC	(20051213_1-21381)
+  Log:
+  - revert that, need a different fix
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+
+
 androsyn    2005/12/13 16:05:12 UTC	(20051213_0-21379)
   Log:
   Make get_client_name() and log_client_name() deal with ->name possibly
