@@ -905,19 +905,15 @@ const char *
 get_client_name(struct Client *client, int showip)
 {
 	static char nbuf[HOSTLEN * 2 + USERLEN + 5];
-	const char *name = "";
-	s_assert(NULL != client);
 
+	s_assert(NULL != client);
 	if(client == NULL)
 		return NULL;
 
-	if(client->name != NULL)
-		name = client->name;
-
 	if(MyConnect(client))
 	{
-		if(!irccmp(name, client->host))
-			return name;
+		if(!irccmp(client->name, client->host))
+			return client->name;
 
 		if(ConfigFileEntry.hide_spoof_ips && 
 		   showip == SHOW_IP && IsIPSpoof(client))
@@ -928,16 +924,16 @@ get_client_name(struct Client *client, int showip)
 		{
 		case SHOW_IP:
 			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@%s]", 
-				   name, client->username, 
+				   client->name, client->username, 
 				   client->sockhost);
 			break;
 		case MASK_IP:
 			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@255.255.255.255]",
-				   name, client->username);
+				   client->name, client->username);
 			break;
 		default:
 			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@%s]",
-				   name, client->username, client->host);
+				   client->name, client->username, client->host);
 		}
 		return nbuf;
 	}
@@ -945,7 +941,7 @@ get_client_name(struct Client *client, int showip)
 	/* As pointed out by Adel Mezibra 
 	 * Neph|l|m@EFnet. Was missing a return here.
 	 */
-	return name;
+	return client->name;
 }
 
 /* log_client_name()
@@ -957,39 +953,35 @@ const char *
 log_client_name(struct Client *target_p, int showip)
 {
 	static char nbuf[HOSTLEN * 2 + USERLEN + 5];
-	const char *name = "";
 
 	if(target_p == NULL)
 		return NULL;
 
-	if(target_p->name != NULL)
-		name = target_p->name;
-	
 	if(MyConnect(target_p))
 	{
-		if(irccmp(name, target_p->host) == 0)
-			return name;
+		if(irccmp(target_p->name, target_p->host) == 0)
+			return target_p->name;
 
 		switch (showip)
 		{
 		case SHOW_IP:
-			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@%s]", name,
+			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@%s]", target_p->name,
 				   target_p->username, target_p->sockhost);
 			break;
 
 		case MASK_IP:
 			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@255.255.255.255]",
-				   name, target_p->username);
+				   target_p->name, target_p->username);
 
 		default:
-			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@%s]", name,
+			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@%s]", target_p->name,
 				   target_p->username, target_p->host);
 		}
 
 		return nbuf;
 	}
 
-	return name;
+	return target_p->name;
 }
 
 static void
