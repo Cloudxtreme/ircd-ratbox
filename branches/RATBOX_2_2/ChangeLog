@@ -1,3 +1,14 @@
+leeh        2005/12/13 19:26:01 UTC	(20051213_2-21385)
+  Log:
+  - s_auth.c shouldnt be using get_client_name() or log_client_name()
+  - sending out the ip when we run out of fds is pointless
+  - remove a spurious %m in a message
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/s_auth.c (File Modified) 
+
+
 leeh        2005/12/13 16:13:45 UTC	(20051213_1-21381)
   Log:
   - revert that, need a different fix
