@@ -247,17 +247,18 @@ start_auth_query(struct AuthRequest *auth)
 	family = auth->client->localClient->ip.ss_family;
 	if((fd = comm_socket(family, SOCK_STREAM, 0, "ident")) == -1)
 	{
-		report_error("creating auth stream socket %s:%s",
-			     get_client_name(auth->client, SHOW_IP), 
-			     log_client_name(auth->client, SHOW_IP), errno);
+		sendto_realops_flags(UMODE_DEBUG, L_ALL,
+				"Error creating auth stream socket: %s",
+				strerror(errno));
+		ilog(L_IOERROR, "creating auth stream socket %s: %s",
+			auth->client->sockhost, strerror(errno));
 		++ServerStats->is_abad;
 		return 0;
 	}
 	if((MAXCONNECTIONS - 10) < fd)
 	{
 		sendto_realops_flags(UMODE_ALL, L_ALL,
-				     "Can't allocate fd for auth on %s",
-				     get_client_name(auth->client, SHOW_IP));
+				     "Can't allocate fd for auth");
 		comm_close(fd);
 		return 0;
 	}
@@ -477,8 +478,8 @@ auth_connect_callback(int fd, int error, void *data)
 	   || getpeername(auth->client->localClient->fd,
 			  (struct sockaddr *) &them, (socklen_t *) & tlen))
 	{
-		ilog(L_IOERROR, "auth get{sock,peer}name error for %s:%m",
-		     log_client_name(auth->client, SHOW_IP));
+		ilog(L_IOERROR, "auth get{sock,peer}name error for %s",
+		     auth->client->sockhost);
 		auth_error(auth);
 		return;
 	}
