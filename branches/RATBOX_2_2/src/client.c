@@ -1700,18 +1700,17 @@ show_ip(struct Client *source_p, struct Client *target_p)
 {
 	if(IsAnyServer(target_p))
 	{
-#ifndef HIDE_SERVERS_IPS
-		if(IsOper(source_p))
-			return 1;
-#endif
 		return 0;
 	}
 	else if(IsIPSpoof(target_p))
 	{
-#ifndef HIDE_SPOOF_IPS
-		if(MyOper(source_p))
+		/* source == NULL indicates message is being sent
+		 * to local opers.
+		 */
+		if(!ConfigFileEntry.hide_spoof_ips && 
+		   (source_p == NULL || MyOper(source_p)))
 			return 1;
-#endif
+
 		return 0;
 	}
 	else
