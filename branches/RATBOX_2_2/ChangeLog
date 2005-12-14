@@ -1,3 +1,11 @@
+androsyn    2005/12/14 16:13:36 UTC	(20051214_0-21460)
+  Log:
+  make show_ip less brain damaged
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+
+
 leeh        2005/12/13 19:26:01 UTC	(20051213_2-21385)
   Log:
   - s_auth.c shouldnt be using get_client_name() or log_client_name()
