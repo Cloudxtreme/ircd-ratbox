@@ -1,3 +1,14 @@
+androsyn    2005/12/14 21:39:08 UTC	(20051214_2-21500)
+  Log:
+  add support for printing configure args in -version
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/configure.ac (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/setup.h.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/ircd.c (File Modified) 
+
+
 androsyn    2005/12/14 16:16:33 UTC	(20051214_1-21462)
   Log:
   wrong tree..revert last commit
