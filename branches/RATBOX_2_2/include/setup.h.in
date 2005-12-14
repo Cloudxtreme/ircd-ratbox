@@ -228,6 +228,9 @@
 /* Path to /dev/null */
 #undef PATH_DEVNULL
 
+/* configure arguments */
+#undef RATBOX_CONFIGURE_OPTS
+
 /* This is the type of IO loop we are using */
 #undef SELECT_TYPE
 
