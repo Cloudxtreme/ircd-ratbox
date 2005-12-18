@@ -1524,6 +1524,7 @@ conf_report_error(const char *fmt, ...)
 
 	if (testing_conf)
 	{
+		conf_parse_failure++;
 		fprintf(stderr, "\"%s\", line %d: %s\n", current_file, lineno + 1, msg);
 		return;
 	}

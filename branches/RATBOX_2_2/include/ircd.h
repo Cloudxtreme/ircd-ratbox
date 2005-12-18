@@ -77,6 +77,7 @@ extern int dorehashbans;
 extern int doremotd;
 extern int kline_queued;
 extern int server_state_foreground;
+int conf_parse_failure;
 
 extern struct Client me;
 extern dlink_list global_client_list;
