@@ -1,3 +1,16 @@
+leeh        2005/12/18 20:25:20 UTC	(20051218_1-21508)
+  Log:
+  - make -conftest output on stderr only the errors it finds, or nothing at
+    all otherwise.
+  - make -conftest exit(0) when there are no errors, exit(1) when there is
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/ircd.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/ircd.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/newconf.c (File Modified) 
+
+
 leeh        2005/12/18 10:16:09 UTC	(20051218_0-21506)
   Log:
   - fix mr_pong() to handle a user who doesnt have a nick
