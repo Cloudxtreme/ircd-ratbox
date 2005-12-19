@@ -1,3 +1,12 @@
+leeh        2005/12/19 18:57:37 UTC	(20051219_0-21510)
+  Log:
+  - m_error() shouldnt use log_client_name() either
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_error.c (File Modified) 
+
+
 leeh        2005/12/18 20:25:20 UTC	(20051218_1-21508)
   Log:
   - make -conftest output on stderr only the errors it finds, or nothing at
