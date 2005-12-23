@@ -1015,7 +1015,7 @@ register_client(struct Client *client_p, struct Client *server,
 
 			DLINK_FOREACH(ptr, service_list.head)
 			{
-				if(!irccmp((const char *) ptr->data, user->server))
+				if(!irccmp((const char *) ptr->data, source_p->servptr->name))
 				{
 					hit++;
 					break;
