@@ -224,11 +224,12 @@ static const char *IpQuadTab[] = {
  */
 
 const char *
-inetntoa(const char *in)
+inetntoa(struct in_addr in)
 {
 	static char buf[16];
 	char *bufptr = buf;
-	const unsigned char *a = (const unsigned char *) in;
+	const unsigned char *a = (const unsigned char *) &in;
+
 	const char *n;
 
 	n = IpQuadTab[*a++];
@@ -295,7 +296,7 @@ inet_ntop4(const unsigned char *src, char *dst, unsigned int size)
 {
 	if(size < 16)
 		return NULL;
-	return strcpy(dst, inetntoa((const char *) src));
+	return strcpy(dst, inetntoa(*(struct in_addr *)src));
 }
 
 /* const char *

@@ -298,7 +298,7 @@ static adns_status cs_inaddr(vbuf *vb, const void *datap) {
   const struct in_addr *rr= datap;
   const char *ia;
 
-  ia= inet_ntoa(*rr); assert(ia);
+  ia= inetntoa(*rr); assert(ia);
   CSP_ADDSTR(ia);
   return adns_s_ok;
 }
@@ -351,7 +351,7 @@ static adns_status csp_addr(vbuf *vb, const adns_rr_addr *rrp) {
   switch (rrp->addr.sa.sa_family) {
   case AF_INET:
     CSP_ADDSTR("INET ");
-    ia= inet_ntoa(rrp->addr.inet.sin_addr); assert(ia);
+    ia= inetntoa(rrp->addr.inet.sin_addr); assert(ia);
     CSP_ADDSTR(ia);
     break;
 #ifdef IPV6

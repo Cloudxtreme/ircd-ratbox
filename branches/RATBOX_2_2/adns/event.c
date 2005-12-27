@@ -423,7 +423,7 @@ int adns_processreadable(adns_state ads, int fd, const struct timeval *now) {
 	   serv++);
       if (serv >= ads->nservers) {
 	adns__warn(ads,-1,0,"datagram received from unknown nameserver %s",
-		   inet_ntoa(udpaddr.sin_addr));
+		   inetntoa(udpaddr.sin_addr));
 	continue;
       }
       adns__procdgram(ads,udpbuf,r,serv,0,*now);

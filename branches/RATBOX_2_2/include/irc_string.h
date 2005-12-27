@@ -75,7 +75,7 @@ extern char *canonize(char *);
 /*
  * inetntoa - optimized inet_ntoa
  */
-const char *inetntoa(const char *in_addr);
+const char *inetntoa(struct in_addr in_addr);
 
 /* 
  * inetntop() 

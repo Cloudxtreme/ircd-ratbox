@@ -51,13 +51,13 @@ static void addserver(adns_state ads, struct in_addr addr) {
   	addr.s_addr = htonl(INADDR_LOOPBACK);
   for (i=0; i<ads->nservers; i++) {
     if (ads->servers[i].addr.s_addr == addr.s_addr) {
-      adns__debug(ads,-1,0,"duplicate nameserver %s ignored",inet_ntoa(addr));
+      adns__debug(ads,-1,0,"duplicate nameserver %s ignored",inetntoa(addr));
       return;
     }
   }
   
   if (ads->nservers>=MAXSERVERS) {
-    adns__diag(ads,-1,0,"too many nameservers, ignoring %s",inet_ntoa(addr));
+    adns__diag(ads,-1,0,"too many nameservers, ignoring %s",inetntoa(addr));
     return;
   }
 
@@ -114,7 +114,7 @@ static void ccf_nameserver(adns_state ads, const char *fn, int lno, const char *
     configparseerr(ads,fn,lno,"invalid nameserver address `%s'",buf);
     return;
   }
-  adns__debug(ads,-1,0,"using nameserver %s",inet_ntoa(ia));
+  adns__debug(ads,-1,0,"using nameserver %s",inetntoa(ia));
   addserver(ads,ia);
 }
 
