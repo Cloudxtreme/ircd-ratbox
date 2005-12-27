@@ -1,3 +1,17 @@
+androsyn    2005/12/27 17:20:55 UTC	(20051227_0-21528)
+  Log:
+  change inet_ntoa usage in adns to inetntoa.  eliminates need for -lnsl on solaris. make install-sh executable
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/adns/event.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/adns/general.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/adns/setup.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/adns/types.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/irc_string.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/install-sh  (Property Modified)
+	ircd-ratbox/branches/RATBOX_2_2/src/irc_string.c (File Modified) 
+
+
 jilles      2005/12/23 20:14:22 UTC	(20051223_0-21526)
   Log:
   Unbreak compile with --enable-services.
