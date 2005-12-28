@@ -1,3 +1,11 @@
+androsyn    2005/12/28 13:47:21 UTC	(20051228_2-21536)
+  Log:
+  remove an unused variable
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_whois.c (File Modified) 
+
+
 androsyn    2005/12/28 13:44:39 UTC	(20051228_1-21534)
   Log:
   fix iodebug compile.  does anyone actually use this? :P
