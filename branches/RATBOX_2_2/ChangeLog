@@ -1,3 +1,12 @@
+androsyn    2005/12/28 13:36:07 UTC	(20051228_0-21532)
+  Log:
+  - fix the completely and totally braindead openssl version detection
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/configure.ac (File Modified) 
+
+
 androsyn    2005/12/27 17:20:55 UTC	(20051227_0-21528)
   Log:
   change inet_ntoa usage in adns to inetntoa.  eliminates need for -lnsl on solaris. make install-sh executable
