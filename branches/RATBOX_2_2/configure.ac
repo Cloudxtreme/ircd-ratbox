@@ -494,7 +494,7 @@ if test "$cf_enable_openssl" != no; then
 		AC_LANG_PROGRAM(
 	    	[#include <openssl/opensslv.h>
 		#include <stdlib.h>],
-		[[if ( (OPENSSL_VERSION_NUMBER & 0x00906000) == 0x00906000)
+		[[if ( OPENSSL_VERSION_NUMBER >= 0x00906000)
 		exit(0); else exit(1);]]),
 	cf_openssl_version_ok=yes,
 	cf_openssl_version_ok=no,
@@ -503,9 +503,6 @@ if test "$cf_enable_openssl" != no; then
 	if test "$cf_openssl_version_ok" = yes; then
 		AC_MSG_RESULT(found)
 
-		dnl Work around pmake/gmake conditional incompatibilities
-		AC_SUBST(ENCSPEED, encspeed)
-		
 		dnl Do all the HAVE_LIBCRYPTO magic -- and check for ciphers
 		CPPFLAGS="$CPPFLAGS $SSL_LIBS"
 		AC_CHECK_LIB(crypto, RSA_free)
