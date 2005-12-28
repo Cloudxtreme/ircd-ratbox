@@ -310,7 +310,6 @@ read_ctrl_packet(int fd, void *data)
 	hdata.client = server;
 	hdata.arg1 = NULL;
 	hdata.arg2 = reply->command;
-	hdata.data = NULL;
 	call_hook(h_iorecvctrl_id, &hdata);
 #endif
 
