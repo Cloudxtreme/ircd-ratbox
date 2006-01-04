@@ -227,7 +227,7 @@ me_rsfnc(struct Client *client_p, struct Client *source_p,
 			target_p->name, parv[2], (long) target_p->tsinfo);
 
 	del_from_client_hash(target_p->name, target_p);
-	strcpy(target_p->name, parv[2]);
+	strcpy(target_p->user->nick, parv[2]);
 	add_to_client_hash(target_p->name, target_p);
 
 	monitor_signon(target_p);

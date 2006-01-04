@@ -50,10 +50,10 @@ cat >> static_modules.c <<EOF
 void load_static_modules(void)
 {
 	int x;
-	int *mapi_version;
+	const int *mapi_version;
 	for(x = 0; mapi_headers[x] != NULL; x++)
 	{
-		mapi_version = (int *)mapi_headers[x];
+		mapi_version = (const int *)mapi_headers[x];
 		if(MAPI_MAGIC(*mapi_version) != MAPI_MAGIC_HDR)
 		{
 			ilog(L_MAIN, "Error: linked in module without a MAPI header..giving up");
@@ -63,7 +63,7 @@ void load_static_modules(void)
 		{
 			case 1:
 			{
-				struct mapi_mheader_av1 *mheader = (struct mapi_mheader_av1*)mapi_version;
+				const struct mapi_mheader_av1 *mheader = (const struct mapi_mheader_av1*)mapi_version;
 				if (mheader->mapi_register && (mheader->mapi_register() == -1))
 				{
 					ilog(L_MAIN, "Error: linked in module failed loading..giving up");
