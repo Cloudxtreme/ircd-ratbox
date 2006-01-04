@@ -853,6 +853,7 @@ Optional Features:
   --enable-kqueue         Force kqueue() usage.
   --enable-devpoll        Force usage of /dev/poll.
   --enable-epoll          Force sys_epoll usage (Linux only).
+  --enable-rtsigio        Force RT sigio usage (Linux only).
   --enable-assert         Enable assert(). Choose between soft(warnings) and
                           hard(aborts the daemon)
   --enable-iodebug        Enable IO Debugging hooks
@@ -9830,6 +9831,17 @@ if test "${enable_epoll+set}" = set; then
         SELECT_TYPE_EXPLICIT="epoll"
   else
         use_epoll=no
+  fi
+
+fi;
+
+# Check whether --enable-rtsigio or --disable-rtsigio was given.
+if test "${enable_rtsigio+set}" = set; then
+  enableval="$enable_rtsigio"
+   if test $enableval = yes; then
+        SELECT_TYPE_EXPLICIT="sigio"
+  else
+        use_rtsigio=no
   fi
 
 fi;

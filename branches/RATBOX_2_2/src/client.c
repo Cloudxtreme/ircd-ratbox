@@ -122,6 +122,7 @@ init_client(void)
 	eventAddIsh("check_pings", check_pings, NULL, 30);
 	eventAddIsh("free_exited_clients", &free_exited_clients, NULL, 4);
 	eventAddIsh("exit_aborted_clients", exit_aborted_clients, NULL, 1);
+	eventAdd("flood_recalc", flood_recalc, NULL, 1);
 }
 
 

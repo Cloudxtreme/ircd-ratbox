@@ -49,7 +49,7 @@
 
 extern PF read_ctrl_packet;
 extern PF read_packet;
-extern PF flood_recalc;
+extern void flood_recalc(void *);
 extern void flood_endgrace(struct Client *);
 
 #endif /* INCLUDED_packet_h */

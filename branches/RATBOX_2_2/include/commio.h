@@ -30,7 +30,7 @@
 #include "setup.h"
 #include "config.h"
 #include "ircd_defs.h"
-
+#include "tools.h"
 /* Callback for completed IO events */
 typedef void PF(int fd, void *);
 
@@ -92,6 +92,16 @@ extern int number_fd;
 
 struct Client;
 
+struct timeout_data
+{
+        fde_t *F;
+        dlink_node node;
+        time_t timeout;
+        PF *timeout_handler;
+        void *timeout_data;
+};
+
+
 struct _fde
 {
 	/* New-school stuff, again pretty much ripped from squid */
@@ -108,12 +118,8 @@ struct _fde
 	void *read_data;
 	PF *write_handler;
 	void *write_data;
-	PF *timeout_handler;
-	void *timeout_data;
-	time_t timeout;
-	PF *flush_handler;
-	void *flush_data;
-	time_t flush_timeout;
+	struct timeout_data *timeout;
+
 	struct DNSQuery *dns_query;
 	struct
 	{
@@ -178,7 +184,6 @@ extern int comm_get_sockerr(int);
 extern int ignoreErrno(int ierrno);
 
 extern void comm_settimeout(int fd, time_t, PF *, void *);
-extern void comm_setflush(int fd, time_t, PF *, void *);
 extern void comm_checktimeouts(void *);
 extern void comm_connect_tcp(int fd, const char *, u_short,
 			     struct sockaddr *, int, CNCB *, void *, int, int);
@@ -188,11 +193,12 @@ extern int comm_accept(int fd, struct sockaddr *pn, socklen_t *addrlen);
 
 /* These must be defined in the network IO loop code of your choice */
 extern void comm_setselect(int fd, fdlist_t list, unsigned int type,
-			   PF * handler, void *client_data, time_t timeout);
+			   PF * handler, void *client_data);
 extern void init_netio(void);
 extern int read_message(time_t, unsigned char);
 extern int comm_select(unsigned long);
 extern int disable_sock_options(int);
+extern int comm_setup_fd(int fd);
 #ifdef IPV6
 extern void mangle_mapped_sockaddr(struct sockaddr *in);
 #else

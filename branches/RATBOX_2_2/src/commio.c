@@ -58,6 +58,9 @@
 #define INADDR_NONE ((unsigned int) 0xffffffff)
 #endif
 
+/* 3.x compat macro */
+#define find_fd(x) (&fd_table[x]) 
+
 const char *const NONB_ERROR_MSG = "set_non_blocking failed for %s:%s";
 const char *const SETBUF_ERROR_MSG = "set_sock_buffers failed for server %s:%s";
 
@@ -70,6 +73,7 @@ static const char *comm_err_str[] = { "Comm OK", "Error during bind()",
 fde_t *fd_table = NULL;
 
 static void fdlist_update_biggest(int fd, int opening);
+static dlink_list timeout_list;
 
 /* Highest FD and number of open FDs .. */
 int highest_fd = -1;		/* Its -1 because we haven't started yet -- adrian */
@@ -193,7 +197,9 @@ comm_set_nb(int fd)
 {
 	int nonb = 0;
 	int res;
-
+	if(comm_setup_fd(fd))
+		return 1;
+	
 	nonb |= O_NONBLOCK;
 	res = fcntl(fd, F_GETFL, 0);
 	if(-1 == res || fcntl(fd, F_SETFL, res | nonb) == -1)
@@ -240,40 +246,32 @@ ignoreErrno(int ierrno)
 void
 comm_settimeout(int fd, time_t timeout, PF * callback, void *cbdata)
 {
-	fde_t *F;
-	s_assert(fd >= 0);
-	F = &fd_table[fd];
-	s_assert(F->flags.open);
+        fde_t *F;
+        struct timeout_data *td;
+        s_assert(fd >= 0);
+        F = find_fd(fd);
+        s_assert(F->flags.open);
+        td = F->timeout;
 
-	F->timeout = CurrentTime + (timeout / 1000);
-	F->timeout_handler = callback;
-	F->timeout_data = cbdata;
+        if(callback == NULL) /* user wants to remove */
+        {
+                if(td == NULL)
+                        return;
+                dlinkDelete(&td->node, &timeout_list);
+                MyFree(td);
+                F->timeout = NULL;
+                return;
+        }
+
+        if(F->timeout == NULL)
+                td = F->timeout = MyMalloc(sizeof(struct timeout_data));
+      
+        td->F = F;
+        td->timeout = CurrentTime + (timeout / 1000);
+        td->timeout_handler = callback;
+        td->timeout_data = cbdata;
+        dlinkAdd(td, &td->node, &timeout_list);
 }
-
-
-/*
- * comm_setflush() - set a flush function
- *
- * A flush function is simply a function called if found during
- * comm_timeouts(). Its basically a second timeout, except in this case
- * I'm too lazy to implement multiple timeout functions! :-)
- * its kinda nice to have it seperate, since this is designed for
- * flush functions, and when comm_close() is implemented correctly
- * with close functions, we _actually_ don't call comm_close() here ..
- */
-void
-comm_setflush(int fd, time_t timeout, PF * callback, void *cbdata)
-{
-	fde_t *F;
-	s_assert(fd >= 0);
-	F = &fd_table[fd];
-	s_assert(F->flags.open);
-
-	F->flush_timeout = CurrentTime + (timeout / 1000);
-	F->flush_handler = callback;
-	F->flush_data = cbdata;
-}
-
 
 /*
  * comm_checktimeouts() - check the socket timeouts
@@ -285,40 +283,31 @@ comm_setflush(int fd, time_t timeout, PF * callback, void *cbdata)
 void
 comm_checktimeouts(void *notused)
 {
-	int fd;
-	PF *hdl;
-	void *data;
-	fde_t *F;
-	for (fd = 0; fd <= highest_fd; fd++)
-	{
-		F = &fd_table[fd];
-		if(!F->flags.open)
-			continue;
-		if(F->flags.closing)
-			continue;
+        dlink_node *ptr, *next;
+        struct timeout_data *td;
+        fde_t *F;
+        PF *hdl; 
+        void *data;
+ 
+        DLINK_FOREACH_SAFE(ptr, next, timeout_list.head)
+        {
+                td = ptr->data;
+                F = td->F;
+                if(F == NULL || F->flags.closing || !F->flags.open)
+                        continue;
 
-		/* check flush functions */
-		if(F->flush_handler &&
-		   F->flush_timeout > 0 && F->flush_timeout < CurrentTime)
-		{
-			hdl = F->flush_handler;
-			data = F->flush_data;
-			comm_setflush(F->fd, 0, NULL, NULL);
-			hdl(F->fd, data);
-		}
-
-		/* check timeouts */
-		if(F->timeout_handler &&
-		   F->timeout > 0 && F->timeout < CurrentTime)
-		{
-			/* Call timeout handler */
-			hdl = F->timeout_handler;
-			data = F->timeout_data;
-			comm_settimeout(F->fd, 0, NULL, NULL);
-			hdl(F->fd, data);
-		}
-	}
+                if(td->timeout < CurrentTime)
+                {
+                        hdl = td->timeout_handler;
+                        data = td->timeout_data;  
+                        dlinkDelete(&td->node, &timeout_list);
+                        F->timeout = NULL;
+                        MyFree(td);
+                        hdl(F->fd, data);
+                }               
+        }
 }
+
 
 /*
  * void comm_connect_tcp(int fd, const char *host, u_short port,
@@ -526,7 +515,7 @@ comm_connect_tryconnect(int fd, void *notused)
 		else if(ignoreErrno(errno))
 			/* Ignore error? Reschedule */
 			comm_setselect(F->fd, FDLIST_SERVER, COMM_SELECT_WRITE|COMM_SELECT_RETRY,
-				       comm_connect_tryconnect, NULL, 0);
+				       comm_connect_tryconnect, NULL);
 		else
 			/* Error? Fail with COMM_ERR_CONNECT */
 			comm_connect_callback(F->fd, COMM_ERR_CONNECT);
@@ -761,8 +750,7 @@ comm_close(int fd)
 		s_assert(F->read_handler == NULL);
 		s_assert(F->write_handler == NULL);
 	}
-	comm_setselect(F->fd, FDLIST_NONE, COMM_SELECT_WRITE | COMM_SELECT_READ, NULL, NULL, 0);
-	comm_setflush(F->fd, 0, NULL, NULL);
+	comm_setselect(F->fd, FDLIST_NONE, COMM_SELECT_WRITE | COMM_SELECT_READ, NULL, NULL);
 	
 	if (F->dns_query != NULL)
 	{

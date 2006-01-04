@@ -1,11 +1,12 @@
 /*
  *  ircd-ratbox: A slightly useful ircd.
- *  s_bsd_poll.c: POSIX poll() compatible network routines.
+ *  sigio.c: Linux Realtime SIGIO compatible network routines.
  *
  *  Copyright (C) 1990 Jarkko Oikarinen and University of Oulu, Co Center
  *  Copyright (C) 1996-2002 Hybrid Development Team
  *  Copyright (C) 2001 Adrian Chadd <adrian@creative.net.au>
- *  Copyright (C) 2002-2005 ircd-ratbox development team
+ *  Copyright (C) 2002 Aaron Sethman <androsyn@ratbox.org>
+ *  Copyright (C) 2002 ircd-ratbox development team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,11 +23,17 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
  *  USA
  *
- *  $Id$
+ *  $Id: sigio.c 21361 2005-12-12 19:30:47Z androsyn $
  */
+
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE 1		/* Needed for F_SETSIG */
+#endif
+
 
 #include "config.h"
 #include "stdinc.h"
+#include <signal.h>
 #include <sys/poll.h>
 
 #include "commio.h"
@@ -48,6 +55,7 @@
 #include "send.h"
 #include "memory.h"
 
+
 /* I hate linux -- adrian */
 #ifndef POLLRDNORM
 #define POLLRDNORM POLLIN
@@ -66,13 +74,28 @@ typedef struct _pollfd_list pollfd_list_t;
 
 pollfd_list_t pollfd_list;
 static void poll_update_pollfds(int, short, PF *);
-static unsigned long last_count = 0; 
-static unsigned long empty_count = 0;
 
-int 
-comm_setup_fd(int fd)
+static int sigio_signal;
+static int sigio_is_screwed = 0;	/* We overflowed our sigio queue */
+static sigset_t our_sigset;
+static void poll_update_pollfds(int, short, PF *);
+
+#define find_fd(x) (&fd_table[x])
+
+/* 
+ * static void mask_our_signal(int s)
+ *
+ * Input: Signal to block
+ * Output: None
+ * Side Effects:  Block the said signal
+ */
+static void
+mask_our_signal(int s)
 {
-	return 0;
+	sigemptyset(&our_sigset);
+	sigaddset(&our_sigset, s);
+	sigaddset(&our_sigset, SIGIO);
+	sigprocmask(SIG_BLOCK, &our_sigset, NULL);
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -167,6 +190,43 @@ init_netio(void)
 		pollfd_list.pollfds[fd].fd = -1;
 	}
 	pollfd_list.maxindex = 0;
+        sigio_signal = SIGRTMIN;
+	sigio_is_screwed = 1; /* Start off with poll first.. */
+	mask_our_signal(sigio_signal);
+}
+
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+/* Public functions */
+
+
+/*
+ * void setup_sigio_fd(int fd)
+ * 
+ * Input: File descriptor
+ * Output: None
+ * Side Effect: Sets the FD up for SIGIO
+ */
+int
+comm_setup_fd(int fd)
+{
+	fde_t *F = find_fd(fd);
+	int flags = 0;
+	flags = fcntl(fd, F_GETFL, 0);
+	if(flags == -1)
+		return 0;
+	flags |= O_ASYNC | O_NONBLOCK;
+	if(fcntl(fd, F_SETFL, flags) == -1)
+		return 0;
+	
+	if(fcntl(fd, F_SETSIG, sigio_signal) == -1)
+		return 0;
+
+	if(fcntl(fd, F_SETOWN, getpid()) == -1)
+		return 0;
+
+	F->flags.nonblocking = 1;
+	return 1;
 }
 
 /*
@@ -197,24 +257,7 @@ comm_setselect(int fd, fdlist_t list, unsigned int type, PF * handler,
 	}
 }
 
-static void
-irc_sleep(unsigned long useconds)
-{     
-#ifdef HAVE_NANOSLEEP    
-        struct timespec t;
-        t.tv_sec = useconds / (unsigned long) 1000000;
-        t.tv_nsec = (useconds % (unsigned long) 1000000) * 1000;
-        nanosleep(&t, (struct timespec *) NULL);
-#else    
-        struct timeval t;        
-        t.tv_sec = 0;    
-        t.tv_usec = useconds;
-        select(0, NULL, NULL, NULL, &t);
-#endif
-        return;
-}
-
-/* int comm_select_fdlist(unsigned long delay)
+/* int comm_select(unsigned long delay)
  * Input: The maximum time to delay.
  * Output: Returns -1 on error, 0 on success.
  * Side-effects: Deregisters future interest in IO and calls the handlers
@@ -230,29 +273,86 @@ irc_sleep(unsigned long useconds)
 int
 comm_select(unsigned long delay)
 {
-	int num;
+	int num = 0;
+	int revents = 0;
+	int sig;
 	int fd;
 	int ci;
-	unsigned long ndelay;
 	PF *hdl;
+	fde_t *F;
+	void *data;
+	struct siginfo si;
+	struct timespec timeout;
 
-	if(last_count > 0)
+	timeout.tv_sec = (delay / 1000);
+	timeout.tv_nsec = (delay % 1000) * 1000000;
+
+	for (;;)
 	{
-		empty_count = 0;
-		ndelay = 0;
+		if(!sigio_is_screwed)
+		{
+			if((sig = sigtimedwait(&our_sigset, &si, &timeout)) > 0)
+			{
+				if(sig == SIGIO)
+				{
+					ilog(L_IOERROR, "Kernel RT Signal queue overflowed.  Is /proc/sys/kernel/rtsig-max too small?");
+					sigio_is_screwed = 1;
+					break;
+				}
+
+				fd = si.si_fd;
+				pollfd_list.pollfds[fd].revents |= si.si_band;
+				revents = pollfd_list.pollfds[fd].revents;
+				num++;
+				F = &fd_table[fd];
+				if(!F->flags.open || F->fd < 0)
+					continue;
+
+				set_time();
+				if(revents & (POLLRDNORM | POLLIN | POLLHUP | POLLERR))
+				{
+					hdl = F->read_handler;
+					data = F->read_data;
+					F->read_handler = NULL;
+					F->read_data = NULL;
+					poll_update_pollfds(fd, POLLIN, NULL);
+					if(hdl)
+						hdl(F->fd, data);
+				}
+
+				if(revents & (POLLWRNORM | POLLOUT | POLLHUP | POLLERR))
+				{
+					hdl = F->write_handler;
+					data = F->write_data;
+					F->write_handler = NULL;
+					F->write_data = NULL;
+					poll_update_pollfds(fd, POLLOUT, NULL);
+					if(hdl)
+						hdl(F->fd, data);
+				}
+			}
+			else
+				break;
+
+		}
+		else
+			break;
 	}
-	else {
-		ndelay = ++empty_count * 15000 ;
-		if(ndelay > delay * 1000)
-			ndelay = delay * 1000;	
+
+	if(!sigio_is_screwed)	/* We don't need to proceed */
+	{
+		set_time();
+		return 0;
 	}
-	
+
+	signal(sigio_signal, SIG_IGN);
+	signal(sigio_signal, SIG_DFL);
+	sigio_is_screwed = 0;
+
 	for (;;)
 	{
 		/* XXX kill that +1 later ! -- adrian */
-		if(ndelay > 0)
-			irc_sleep(ndelay); 
-		last_count = num = poll(pollfd_list.pollfds, pollfd_list.maxindex + 1, 0);
+		num = poll(pollfd_list.pollfds, pollfd_list.maxindex + 1, delay);
 		if(num >= 0)
 			break;
 		if(ignoreErrno(errno))

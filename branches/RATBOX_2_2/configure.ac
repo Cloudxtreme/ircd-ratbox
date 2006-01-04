@@ -595,6 +595,14 @@ AC_ARG_ENABLE(epoll, AC_HELP_STRING([--enable-epoll],[Force sys_epoll usage (Lin
   fi
 ],)
 
+AC_ARG_ENABLE(rtsigio, AC_HELP_STRING([--enable-rtsigio],[Force RT sigio usage (Linux only).]),
+[ if test $enableval = yes; then
+        SELECT_TYPE_EXPLICIT="sigio"
+  else
+        use_rtsigio=no
+  fi
+],)
+
 dnl **********************************************************************
 dnl Check for --with-confdir
 dnl **********************************************************************

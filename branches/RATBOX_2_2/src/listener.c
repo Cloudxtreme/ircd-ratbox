@@ -47,9 +47,8 @@
 #endif
 
 #if defined(NO_IN6ADDR_ANY) && defined(IPV6)
-static const struct in6_addr in6addr_any =
-{ { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 } } };
-#endif 
+static const struct in6_addr in6addr_any = { {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}} };
+#endif
 
 static PF accept_connection;
 
@@ -82,7 +81,7 @@ free_listener(struct Listener *listener)
 	else
 	{
 		struct Listener *prev = ListenerPollList;
-		for (; prev; prev = prev->next)
+		for(; prev; prev = prev->next)
 		{
 			if(listener == prev->next)
 			{
@@ -114,10 +113,10 @@ get_listener_name(const struct Listener *listener)
 
 #ifdef IPV6
 	if(listener->addr.ss_family == AF_INET6)
-		port = ntohs(((const struct sockaddr_in6 *)&listener->addr)->sin6_port);
+		port = ntohs(((const struct sockaddr_in6 *) &listener->addr)->sin6_port);
 	else
 #endif
-		port = ntohs(((const struct sockaddr_in *)&listener->addr)->sin_port);	
+		port = ntohs(((const struct sockaddr_in *) &listener->addr)->sin_port);
 
 	ircsnprintf(buf, sizeof(buf), "%s[%s/%u]", me.name, listener->name, port);
 	return buf;
@@ -134,18 +133,19 @@ show_ports(struct Client *source_p)
 {
 	struct Listener *listener = 0;
 
-	for (listener = ListenerPollList; listener; listener = listener->next)
+	for(listener = ListenerPollList; listener; listener = listener->next)
 	{
-		sendto_one_numeric(source_p, RPL_STATSPLINE, 
-				   form_str(RPL_STATSPLINE), 'P',
+		sendto_one_numeric(source_p, RPL_STATSPLINE, form_str(RPL_STATSPLINE), 'P',
 #ifdef IPV6
-			   ntohs(listener->addr.ss_family == AF_INET ? ((struct sockaddr_in *)&listener->addr)->sin_port :
-			   	 ((struct sockaddr_in6 *)&listener->addr)->sin6_port),
+				   ntohs(listener->addr.ss_family ==
+					 AF_INET ? ((struct sockaddr_in *) &listener->addr)->
+					 sin_port : ((struct sockaddr_in6 *) &listener->addr)->
+					 sin6_port),
 #else
-			   ntohs(((struct sockaddr_in *)&listener->addr)->sin_port),
+				   ntohs(((struct sockaddr_in *) &listener->addr)->sin_port),
 #endif
-			   IsOperAdmin(source_p) ? listener->name : me.name,
-			   listener->ref_count, (listener->active) ? "active" : "disabled");
+				   IsOperAdmin(source_p) ? listener->name : me.name,
+				   listener->ref_count, (listener->active) ? "active" : "disabled");
 	}
 }
 
@@ -171,42 +171,42 @@ inetport(struct Listener *listener)
 	/*
 	 * At first, open a new socket
 	 */
-	
+
 	fd = comm_socket(listener->addr.ss_family, SOCK_STREAM, 0, "Listener socket");
 
 #ifdef IPV6
 	if(listener->addr.ss_family == AF_INET6)
 	{
-		struct sockaddr_in6 *in6 = (struct sockaddr_in6 *)&listener->addr;
+		struct sockaddr_in6 *in6 = (struct sockaddr_in6 *) &listener->addr;
 		if(!IN6_ARE_ADDR_EQUAL(&in6->sin6_addr, &in6addr_any))
 		{
-			inetntop(AF_INET6, &in6->sin6_addr, listener->vhost, sizeof(listener->vhost));
+			inetntop(AF_INET6, &in6->sin6_addr, listener->vhost,
+				 sizeof(listener->vhost));
 			listener->name = listener->vhost;
 		}
-	} else
+	}
+	else
 #endif
 	{
-		struct sockaddr_in *in = (struct sockaddr_in *)&listener->addr;
+		struct sockaddr_in *in = (struct sockaddr_in *) &listener->addr;
 		if(in->sin_addr.s_addr != INADDR_ANY)
 		{
 			inetntop(AF_INET, &in->sin_addr, listener->vhost, sizeof(listener->vhost));
 			listener->name = listener->vhost;
-		}	
+		}
 	}
 
 
 	if(fd == -1)
 	{
 		report_error("opening listener socket %s:%s",
-			     get_listener_name(listener), 
-			     get_listener_name(listener), errno);
+			     get_listener_name(listener), get_listener_name(listener), errno);
 		return 0;
 	}
 	else if((HARD_FDLIMIT - 10) < fd)
 	{
 		report_error("no more connections left for listener %s:%s",
-			     get_listener_name(listener), 
-			     get_listener_name(listener), errno);
+			     get_listener_name(listener), get_listener_name(listener), errno);
 		comm_close(fd);
 		return 0;
 	}
@@ -217,8 +217,7 @@ inetport(struct Listener *listener)
 	if(setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, (char *) &opt, sizeof(opt)))
 	{
 		report_error("setting SO_REUSEADDR for listener %s:%s",
-			     get_listener_name(listener), 
-			     get_listener_name(listener), errno);
+			     get_listener_name(listener), get_listener_name(listener), errno);
 		comm_close(fd);
 		return 0;
 	}
@@ -231,17 +230,15 @@ inetport(struct Listener *listener)
 	if(bind(fd, (struct sockaddr *) &listener->addr, GET_SS_LEN(listener->addr)))
 	{
 		report_error("binding listener socket %s:%s",
-			     get_listener_name(listener), 
-			     get_listener_name(listener), errno);
+			     get_listener_name(listener), get_listener_name(listener), errno);
 		comm_close(fd);
 		return 0;
 	}
 
 	if(listen(fd, RATBOX_SOMAXCONN))
 	{
-		report_error("listen failed for %s:%s", 
-			     get_listener_name(listener), 
-			     get_listener_name(listener), errno);
+		report_error("listen failed for %s:%s",
+			     get_listener_name(listener), get_listener_name(listener), errno);
 		comm_close(fd);
 		return 0;
 	}
@@ -260,47 +257,47 @@ find_listener(struct irc_sockaddr_storage *addr)
 	struct Listener *listener = NULL;
 	struct Listener *last_closed = NULL;
 
-	for (listener = ListenerPollList; listener; listener = listener->next)
+	for(listener = ListenerPollList; listener; listener = listener->next)
 	{
 		if(addr->ss_family != listener->addr.ss_family)
 			continue;
-		
-		switch(addr->ss_family)
+
+		switch (addr->ss_family)
 		{
-			case AF_INET:
+		case AF_INET:
 			{
-				struct sockaddr_in *in4 = (struct sockaddr_in *)addr;
-				struct sockaddr_in *lin4 = (struct sockaddr_in *)&listener->addr;
-				if(in4->sin_addr.s_addr == lin4->sin_addr.s_addr && 
-					in4->sin_port == lin4->sin_port )
+				struct sockaddr_in *in4 = (struct sockaddr_in *) addr;
+				struct sockaddr_in *lin4 = (struct sockaddr_in *) &listener->addr;
+				if(in4->sin_addr.s_addr == lin4->sin_addr.s_addr &&
+				   in4->sin_port == lin4->sin_port)
 				{
 					if(listener->fd == -1)
 						last_closed = listener;
 					else
-						return(listener);
+						return (listener);
 				}
 				break;
 			}
 #ifdef IPV6
-			case AF_INET6:
+		case AF_INET6:
 			{
-				struct sockaddr_in6 *in6 = (struct sockaddr_in6 *)addr;
-				struct sockaddr_in6 *lin6 =(struct sockaddr_in6 *)&listener->addr;
+				struct sockaddr_in6 *in6 = (struct sockaddr_in6 *) addr;
+				struct sockaddr_in6 *lin6 = (struct sockaddr_in6 *) &listener->addr;
 				if(IN6_ARE_ADDR_EQUAL(&in6->sin6_addr, &lin6->sin6_addr) &&
-				  in6->sin6_port == lin6->sin6_port)
+				   in6->sin6_port == lin6->sin6_port)
 				{
 					if(listener->fd == -1)
 						last_closed = listener;
 					else
-						return(listener);
+						return (listener);
 				}
 				break;
-				
+
 			}
 #endif
 
-			default:
-				break;
+		default:
+			break;
 		}
 	}
 	return last_closed;
@@ -331,47 +328,51 @@ add_listener(int port, const char *vhost_ip, int family)
 	{
 		if(family == AF_INET)
 		{
-			if(inetpton(family, vhost_ip, &((struct sockaddr_in *)&vaddr)->sin_addr) <= 0)
+			if(inetpton(family, vhost_ip, &((struct sockaddr_in *) &vaddr)->sin_addr) <=
+			   0)
 				return;
-		} 
+		}
 #ifdef IPV6
 		else
 		{
-			if(inetpton(family, vhost_ip, &((struct sockaddr_in6 *)&vaddr)->sin6_addr) <= 0)
+			if(inetpton(family, vhost_ip, &((struct sockaddr_in6 *) &vaddr)->sin6_addr)
+			   <= 0)
 				return;
-		
+
 		}
 #endif
-	} else
-	{
-		switch(family)
-		{
-			case AF_INET:
-				((struct sockaddr_in *)&vaddr)->sin_addr.s_addr = INADDR_ANY;
-				break;
-#ifdef IPV6
-			case AF_INET6:
-				memcpy(&((struct sockaddr_in6 *)&vaddr)->sin6_addr, &in6addr_any, sizeof(struct in6_addr));
-				break;
-			default:
-				return;
-#endif
-		} 
 	}
-	switch(family)
+	else
 	{
+		switch (family)
+		{
 		case AF_INET:
-			SET_SS_LEN(vaddr, sizeof(struct sockaddr_in));
-			((struct sockaddr_in *)&vaddr)->sin_port = htons(port);
+			((struct sockaddr_in *) &vaddr)->sin_addr.s_addr = INADDR_ANY;
 			break;
 #ifdef IPV6
 		case AF_INET6:
-			SET_SS_LEN(vaddr, sizeof(struct sockaddr_in6));
-			((struct sockaddr_in6 *)&vaddr)->sin6_port = htons(port);
+			memcpy(&((struct sockaddr_in6 *) &vaddr)->sin6_addr, &in6addr_any,
+			       sizeof(struct in6_addr));
 			break;
-#endif
 		default:
-			break;
+			return;
+#endif
+		}
+	}
+	switch (family)
+	{
+	case AF_INET:
+		SET_SS_LEN(vaddr, sizeof(struct sockaddr_in));
+		((struct sockaddr_in *) &vaddr)->sin_port = htons(port);
+		break;
+#ifdef IPV6
+	case AF_INET6:
+		SET_SS_LEN(vaddr, sizeof(struct sockaddr_in6));
+		((struct sockaddr_in6 *) &vaddr)->sin6_port = htons(port);
+		break;
+#endif
+	default:
+		break;
 	}
 	if((listener = find_listener(&vaddr)))
 	{
@@ -427,7 +428,7 @@ close_listeners()
 	/*
 	 * close all 'extra' listening ports we have
 	 */
-	for (listener = ListenerPollList; listener; listener = listener_next)
+	for(listener = ListenerPollList; listener; listener = listener_next)
 	{
 		listener_next = listener->next;
 		close_listener(listener);
@@ -460,14 +461,15 @@ add_connection(struct Listener *listener, int fd, struct sockaddr *sai)
 	 * copy address to 'sockhost' as a string, copy it to host too
 	 * so we have something valid to put into error messages...
 	 */
-	inetntop_sock((struct sockaddr *)&new_client->localClient->ip, new_client->sockhost, 
-		sizeof(new_client->sockhost));
+	inetntop_sock((struct sockaddr *) &new_client->localClient->ip, new_client->sockhost,
+		      sizeof(new_client->sockhost));
 
 
 	strlcpy(new_client->host, new_client->sockhost, sizeof(new_client->host));
 
 #ifdef IPV6
-	if(new_client->localClient->ip.ss_family == AF_INET6 && ConfigFileEntry.dot_in_ip6_addr == 1)
+	if(new_client->localClient->ip.ss_family == AF_INET6
+	   && ConfigFileEntry.dot_in_ip6_addr == 1)
 	{
 		strlcat(new_client->host, ".", sizeof(new_client->host));
 	}
@@ -479,7 +481,7 @@ add_connection(struct Listener *listener, int fd, struct sockaddr *sai)
 	++listener->ref_count;
 
 	if(check_reject(new_client))
-		return; 
+		return;
 	start_auth(new_client);
 }
 
@@ -493,92 +495,100 @@ accept_connection(int pfd, void *data)
 	socklen_t addrlen = sizeof(sai);
 	int fd;
 	struct Listener *listener = data;
-    struct ConfItem *aconf;
-    char buf[BUFSIZE];
-    
+	struct ConfItem *aconf;
+	char buf[BUFSIZE];
+
 	s_assert(listener != NULL);
 	if(listener == NULL)
 		return;
-	/*
-	 * There may be many reasons for error return, but
-	 * in otherwise correctly working environment the
-	 * probable cause is running out of file descriptors
-	 * (EMFILE, ENFILE or others?). The man pages for
-	 * accept don't seem to list these as possible,
-	 * although it's obvious that it may happen here.
-	 * Thus no specific errors are tested at this
-	 * point, just assume that connections cannot
-	 * be accepted until some old is closed first.
-	 */
 
-	fd = comm_accept(listener->fd, (struct sockaddr *)&sai, &addrlen);
 
-	/* This needs to be done here, otherwise we break dlines */
-	mangle_mapped_sockaddr((struct sockaddr *)&sai);
-
-	if(fd < 0)
+	for(;;)			/* loop until something breaks us out */
 	{
-		/* Re-register a new IO request for the next accept .. */
-		comm_setselect(listener->fd, FDLIST_SERVICE,
-			       COMM_SELECT_READ, accept_connection, listener, 0);
-		return;
-	}
-	/*
-	 * check for connection limit
-	 */
-	if((MAXCONNECTIONS - 10) < fd)
-	{
-		++ServerStats->is_ref;
+
 		/*
-		 * slow down the whining to opers bit
+		 * There may be many reasons for error return, but
+		 * in otherwise correctly working environment the
+		 * probable cause is running out of file descriptors
+		 * (EMFILE, ENFILE or others?). The man pages for
+		 * accept don't seem to list these as possible,
+		 * although it's obvious that it may happen here.
+		 * Thus no specific errors are tested at this
+		 * point, just assume that connections cannot
+		 * be accepted until some old is closed first.
 		 */
-		if((last_oper_notice + 20) <= CurrentTime)
+
+		fd = comm_accept(listener->fd, (struct sockaddr *) &sai, &addrlen);
+
+		/* This needs to be done here, otherwise we break dlines */
+		mangle_mapped_sockaddr((struct sockaddr *) &sai);
+
+		if(fd < 0)
 		{
-			sendto_realops_flags(UMODE_ALL, L_ALL,
-					     "All connections in use. (%s)",
-					     get_listener_name(listener));
-			last_oper_notice = CurrentTime;
+			/* Re-register a new IO request for the next accept .. */
+			comm_setselect(listener->fd, FDLIST_SERVICE,
+				       COMM_SELECT_READ, accept_connection, listener);
+			return;
+		}
+		/*
+		 * check for connection limit
+		 */
+		if((MAXCONNECTIONS - 10) < fd)
+		{
+			++ServerStats->is_ref;
+			/*
+			 * slow down the whining to opers bit
+			 */
+			if((last_oper_notice + 20) <= CurrentTime)
+			{
+				sendto_realops_flags(UMODE_ALL, L_ALL,
+						     "All connections in use. (%s)",
+						     get_listener_name(listener));
+				last_oper_notice = CurrentTime;
+			}
+
+			write(fd, "ERROR :All connections in use\r\n", 32);
+			comm_close(fd);
+			/* Re-register a new IO request for the next accept .. */
+			comm_setselect(listener->fd, FDLIST_SERVICE,
+				       COMM_SELECT_READ, accept_connection, listener);
+			return;
 		}
 
-		write(fd, "ERROR :All connections in use\r\n", 32);
-		comm_close(fd);
-		/* Re-register a new IO request for the next accept .. */
-		comm_setselect(listener->fd, FDLIST_SERVICE,
-			       COMM_SELECT_READ, accept_connection, listener, 0);
-		return;
+		/* Do an initial check we aren't connecting too fast or with too many
+		 * from this IP... */
+		if((aconf = conf_connect_allowed((struct sockaddr *) &sai, sai.ss_family)) != NULL)
+		{
+			ServerStats->is_ref++;
+
+			if(ConfigFileEntry.dline_with_reason)
+			{
+				if(ircsnprintf
+				   (buf, sizeof(buf), "ERROR :*** Banned: %s\r\n",
+				    aconf->passwd) >= (sizeof(buf) - 1))
+				{
+					buf[sizeof(buf) - 3] = '\r';
+					buf[sizeof(buf) - 2] = '\n';
+					buf[sizeof(buf) - 1] = '\0';
+				}
+			}
+			else
+				ircsprintf(buf, "ERROR :You have been D-lined.\r\n");
+
+			write(fd, buf, strlen(buf));
+			comm_close(fd);
+
+			/* Re-register a new IO request for the next accept .. */
+			comm_setselect(listener->fd, FDLIST_SERVICE,
+				       COMM_SELECT_READ, accept_connection, listener);
+			return;
+		}
+
+		ServerStats->is_ac++;
+		add_connection(listener, fd, (struct sockaddr *) &sai);
+
 	}
-
-	/* Do an initial check we aren't connecting too fast or with too many
-	 * from this IP... */
-	if((aconf = conf_connect_allowed((struct sockaddr *)&sai, sai.ss_family)) != NULL)
-	{
-		ServerStats->is_ref++;
-
-        if(ConfigFileEntry.dline_with_reason)
-        {
-            if (ircsnprintf(buf, sizeof(buf), "ERROR :*** Banned: %s\r\n", aconf->passwd) >= (sizeof(buf)-1))
-            {
-                buf[sizeof(buf) - 3] = '\r';
-                buf[sizeof(buf) - 2] = '\n';
-                buf[sizeof(buf) - 1] = '\0';
-            }
-        }
-        else
-           ircsprintf(buf, "ERROR :You have been D-lined.\r\n");
-        
-        write(fd, buf, strlen(buf));
-		comm_close(fd);
-
-		/* Re-register a new IO request for the next accept .. */
-		comm_setselect(listener->fd, FDLIST_SERVICE,
-			       COMM_SELECT_READ, accept_connection, listener, 0);
-		return;
-	}
-
-	ServerStats->is_ac++;
-	add_connection(listener, fd, (struct sockaddr *)&sai);
-
 	/* Re-register a new IO request for the next accept .. */
 	comm_setselect(listener->fd, FDLIST_SERVICE, COMM_SELECT_READ,
-		       accept_connection, listener, 0);
+		       accept_connection, listener);
 }

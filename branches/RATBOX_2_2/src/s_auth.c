@@ -152,7 +152,6 @@ release_auth_client(struct AuthRequest *auth)
 	 *     -- adrian
 	 */
 	client->localClient->allow_read = MAX_FLOOD;
-	comm_setflush(client->localClient->fd, 1000, flood_recalc, client);
 	dlinkAddTail(client, &client->node, &global_client_list);
 	read_packet(client->localClient->fd, client);
 }
@@ -519,7 +518,7 @@ read_auth_reply(int fd, void *data)
 
 	if(len < 0 && ignoreErrno(errno))
 	{
-		comm_setselect(fd, FDLIST_IDLECLIENT, COMM_SELECT_READ, read_auth_reply, auth, 0);
+		comm_setselect(fd, FDLIST_IDLECLIENT, COMM_SELECT_READ, read_auth_reply, auth);
 		return;
 	}
 

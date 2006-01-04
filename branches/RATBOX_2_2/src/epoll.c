@@ -68,7 +68,12 @@ _syscall4(int, epoll_wait, int, epfd, struct epoll_event *, pevents,
 
 #endif /* HAVE_EPOLL_CTL */
 
-
+int 
+comm_setup_fd(int fd)
+{
+        return 0;
+}
+        
 /*
  * init_netio
  *
@@ -97,7 +102,7 @@ init_netio(void)
  */
 void
 comm_setselect(int fd, fdlist_t list, unsigned int type, PF * handler,
-	       void *client_data, time_t timeout)
+	       void *client_data)
 {
 	struct epoll_event ep_event;
 	fde_t *F = &fd_table[fd];
@@ -128,9 +133,6 @@ comm_setselect(int fd, fdlist_t list, unsigned int type, PF * handler,
 		F->write_handler = handler;
 		F->write_data = client_data;
 	}
-
-	if(timeout)
-		F->timeout = CurrentTime + (timeout / 1000);
 
 	if(old_flags == 0 && F->pflags == 0)
 		return;

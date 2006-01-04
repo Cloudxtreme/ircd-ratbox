@@ -218,7 +218,7 @@ send_queued_write(int fd, void *data)
 		flags = COMM_SELECT_WRITE;
 	if(linebuf_len(&to->localClient->buf_sendq))
 	comm_setselect(fd, FDLIST_IDLECLIENT, flags,
-			       send_queued_write, to, 0);
+			       send_queued_write, to);
 }
 
 /* send_queued_slink_write()
@@ -283,7 +283,7 @@ send_queued_slink_write(int fd, void *data)
 		comm_setselect(to->localClient->slink->ctrlfd, 
 				FDLIST_IDLECLIENT,
 				COMM_SELECT_WRITE|COMM_SELECT_RETRY, 
-				send_queued_slink_write, to, 0);
+				send_queued_slink_write, to);
 }
 
 /* sendto_one()

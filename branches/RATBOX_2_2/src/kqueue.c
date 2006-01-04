@@ -72,6 +72,12 @@ static int kqmax;		/* max structs to buffer */
 static int kqoff;		/* offset into the buffer */
 
 
+int 
+comm_setup_fd(int fd)
+{
+        return 0;
+}
+        
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 /* Private functions */
 
@@ -170,7 +176,7 @@ init_netio(void)
  */
 void
 comm_setselect(int fd, fdlist_t list, unsigned int type, PF * handler,
-	       void *client_data, time_t timeout)
+	       void *client_data)
 {
 	fde_t *F = &fd_table[fd];
 	s_assert(fd >= 0);
@@ -191,9 +197,6 @@ comm_setselect(int fd, fdlist_t list, unsigned int type, PF * handler,
 		F->write_handler = handler;
 		F->write_data = client_data;
 	}
-	if(timeout)
-		F->timeout = CurrentTime + (timeout / 1000);
-
 }
 
 /*

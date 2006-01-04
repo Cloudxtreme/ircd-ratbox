@@ -223,10 +223,10 @@ dns_select(void)
 	{
 		fd = pollfds[i].fd;
 		if(pollfds[i].events & ADNS_POLLIN)
-			comm_setselect(fd, FDLIST_SERVER, COMM_SELECT_READ, dns_readable, NULL, 0);
+			comm_setselect(fd, FDLIST_SERVER, COMM_SELECT_READ, dns_readable, NULL);
 		if(pollfds[i].events & ADNS_POLLOUT)
 			comm_setselect(fd, FDLIST_SERVICE, COMM_SELECT_WRITE,
-				       dns_writeable, NULL, 0);
+				       dns_writeable, NULL);
 	}
 }
 

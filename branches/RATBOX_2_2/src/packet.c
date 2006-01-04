@@ -172,37 +172,40 @@ flood_endgrace(struct Client *client_p)
  * once a second on any given client. We then attempt to flush some data.
  */
 void
-flood_recalc(int fd, void *data)
+flood_recalc(void *data)
 {
-	struct Client *client_p = data;
-	struct LocalUser *lclient_p = client_p->localClient;
+        dlink_node *ptr, *next;
+        struct Client *client_p;
 
-	/* This can happen in the event that the client detached. */
-	if(!lclient_p)
-		return;
+        DLINK_FOREACH_SAFE(ptr, next, lclient_list.head)
+        {
+                client_p = ptr->data;
 
-	/* allow a bursting client their allocation per second, allow
-	 * a client whos flooding an extra 2 per second
-	 */
-	if(IsFloodDone(client_p))
-		lclient_p->sent_parsed -= 2;
-	else
-		lclient_p->sent_parsed = 0;
+                if(IsMe(client_p))
+                        continue;
 
-	if(lclient_p->sent_parsed < 0)
-		lclient_p->sent_parsed = 0;
+                if(client_p->localClient == NULL)
+                        continue;
+                
+                if(IsFloodDone(client_p))
+                        client_p->localClient->sent_parsed -= 2;
+                else
+                        client_p->localClient->sent_parsed = 0;
 
-	if(--lclient_p->actually_read < 0)
-		lclient_p->actually_read = 0;
+                if(client_p->localClient->sent_parsed < 0)
+                        client_p->localClient->sent_parsed = 0;
+  
+                if(--client_p->localClient->actually_read < 0)
+                        client_p->localClient->actually_read = 0;
+   
+                parse_client_queued(client_p);
+                
+                if(IsAnyDead(client_p))
+                        continue;
 
-	parse_client_queued(client_p);
-
-	if(IsAnyDead(client_p))
-		return;
-
-	/* and finally, reset the flood check */
-	comm_setflush(fd, 1000, flood_recalc, client_p);
+        }
 }
+                                                                                                                                                                                                                                                                                                                                                                                                     
 
 /*
  * read_ctrl_packet - Read a 'packet' of data from a servlink control
@@ -326,7 +329,7 @@ read_ctrl_packet(int fd, void *data)
 
       nodata:
 	/* If we get here, we need to register for another COMM_SELECT_READ */
-	comm_setselect(fd, FDLIST_SERVER, COMM_SELECT_READ, read_ctrl_packet, server, 0);
+	comm_setselect(fd, FDLIST_SERVER, COMM_SELECT_READ, read_ctrl_packet, server);
 }
 
 /*
@@ -359,7 +362,7 @@ read_packet(int fd, void *data)
 		if((length == -1) && ignoreErrno(errno))
 		{
 			comm_setselect(client_p->localClient->fd, FDLIST_IDLECLIENT,
-				       COMM_SELECT_READ, read_packet, client_p, 0);
+				       COMM_SELECT_READ, read_packet, client_p);
 			return;
 		}
 		error_exit_client(client_p, length);
@@ -413,12 +416,12 @@ read_packet(int fd, void *data)
 	if(PARSE_AS_SERVER(client_p))
 	{
 		comm_setselect(client_p->localClient->fd, FDLIST_SERVER, COMM_SELECT_READ,
-			      read_packet, client_p, 0);
+			      read_packet, client_p);
 	}
 	else
 	{
 		comm_setselect(client_p->localClient->fd, FDLIST_IDLECLIENT,
-			       COMM_SELECT_READ, read_packet, client_p, 0);
+			       COMM_SELECT_READ, read_packet, client_p);
 	}
 }
 
