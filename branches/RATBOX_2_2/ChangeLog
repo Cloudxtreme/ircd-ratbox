@@ -1,3 +1,15 @@
+leeh        2006/01/04 22:07:54 UTC	(20060104_3-21574)
+  Log:
+  - remove rsa_respond and mkkeypair, moved to respond tree
+  - update README
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/tools/README (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/tools/mkkeypair (File Deleted) 
+	ircd-ratbox/branches/RATBOX_2_2/tools/rsa_respond/ (File Deleted) 
+
+
 androsyn    2006/01/04 22:07:13 UTC	(20060104_2-21572)
   Log:
   - Readd rtsigio
