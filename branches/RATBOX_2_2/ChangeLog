@@ -1,3 +1,15 @@
+leeh        2006/01/04 19:42:17 UTC	(20060104_0-21564)
+  Log:
+  - fix some const issues in irc_string.c and static_modules.c.SH
+  - fix RSFNC to account for the ->name changes
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_services.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/static_modules.c.SH (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/irc_string.c (File Modified) 
+
+
 leeh        2006/01/03 13:19:41 UTC	(20060103_0-21544)
   Log:
   - fix bug where temporary nick resvs had a 60x longer expiration time than
