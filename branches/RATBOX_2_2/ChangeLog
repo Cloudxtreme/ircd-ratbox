@@ -1,3 +1,31 @@
+androsyn    2006/01/04 22:07:13 UTC	(20060104_2-21572)
+  Log:
+  - Readd rtsigio
+  - Backport the new comm timeout code
+  - Backport new flood_recalc code
+  
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/configure.ac (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/commio.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/packet.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/adns.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/commio.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/devpoll.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/epoll.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/kqueue.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/listener.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/packet.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/poll.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/reject.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_auth.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/send.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/sigio.c (File Added) 
+
+
 leeh        2006/01/04 21:10:03 UTC	(20060104_1-21566)
   Log:
   - define RATBOX_PROFILE when we do a profile build, and force ircd into
