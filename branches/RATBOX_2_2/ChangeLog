@@ -1,3 +1,13 @@
+androsyn    2006/01/05 16:35:07 UTC	(20060105_0-21578)
+  Log:
+  - get rid of this poll_findslot nonsense and just put the fd in the same spot in the array as it is numbered
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/commio.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/poll.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/sigio.c (File Modified) 
+
+
 leeh        2006/01/04 22:07:54 UTC	(20060104_3-21574)
   Log:
   - remove rsa_respond and mkkeypair, moved to respond tree
