@@ -78,26 +78,6 @@ comm_setup_fd(int fd)
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 /* Private functions */
 
-/*
- * find a spare slot in the fd list. We can optimise this out later!
- *   -- adrian
- */
-static inline int
-poll_findslot(void)
-{
-	int i;
-	for (i = 0; i < MAXCONNECTIONS; i++)
-	{
-		if(pollfd_list.pollfds[i].fd == -1)
-		{
-			/* MATCH!!#$*&$ */
-			return i;
-		}
-	}
-	s_assert(1 == 0);
-	/* NOTREACHED */
-	return -1;
-}
 
 /*
  * set and clear entries in the pollfds[] array.
@@ -106,41 +86,31 @@ static void
 poll_update_pollfds(int fd, short event, PF * handler)
 {
 	fde_t *F = &fd_table[fd];
-	int comm_index;
-
-	if(F->comm_index < 0)
-	{
-		F->comm_index = poll_findslot();
-	}
-	comm_index = F->comm_index;
 
 	/* Update the events */
 	if(handler)
 	{
 		F->list = FDLIST_IDLECLIENT;
-		pollfd_list.pollfds[comm_index].events |= event;
-		pollfd_list.pollfds[comm_index].fd = fd;
+		pollfd_list.pollfds[fd].events |= event;
+		pollfd_list.pollfds[fd].fd = fd;
 		/* update maxindex here */
-		if(comm_index > pollfd_list.maxindex)
-			pollfd_list.maxindex = comm_index;
+		if(fd > pollfd_list.maxindex)
+			pollfd_list.maxindex = fd;
 	}
 	else
 	{
-		if(comm_index >= 0)
+		pollfd_list.pollfds[fd].events &= ~event;
+		if(pollfd_list.pollfds[fd].events == 0)
 		{
-			pollfd_list.pollfds[comm_index].events &= ~event;
-			if(pollfd_list.pollfds[comm_index].events == 0)
-			{
-				pollfd_list.pollfds[comm_index].fd = -1;
-				pollfd_list.pollfds[comm_index].revents = 0;
-				F->comm_index = -1;
-				F->list = FDLIST_NONE;
+			pollfd_list.pollfds[fd].fd = -1;
+			pollfd_list.pollfds[fd].revents = 0;
+			F->list = FDLIST_NONE;
 
-				/* update pollfd_list.maxindex here */
-				if(comm_index == pollfd_list.maxindex)
-					while (pollfd_list.maxindex >= 0 &&
-					       pollfd_list.pollfds[pollfd_list.maxindex].fd == -1)
-						pollfd_list.maxindex--;
+			/* update pollfd_list.maxindex here */
+			if(fd == pollfd_list.maxindex)
+			{
+				while (pollfd_list.maxindex >= 0 && pollfd_list.pollfds[pollfd_list.maxindex].fd == -1)
+					pollfd_list.maxindex--;
 			}
 		}
 	}
