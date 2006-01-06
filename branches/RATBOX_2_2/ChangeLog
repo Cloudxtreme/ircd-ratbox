@@ -1,3 +1,23 @@
+leeh        2006/01/06 18:41:24 UTC	(20060106_0-21588)
+  Log:
+  - run the compile through -Wunused-macros
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_mode.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_user.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/adns.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/balloc.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/class.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/commio.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/irc_string.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/listener.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/memory.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/patricia.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_conf.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/send.c (File Modified) 
+
+
 androsyn    2006/01/05 16:35:07 UTC	(20060105_0-21578)
   Log:
   - get rid of this poll_findslot nonsense and just put the fd in the same spot in the array as it is numbered
