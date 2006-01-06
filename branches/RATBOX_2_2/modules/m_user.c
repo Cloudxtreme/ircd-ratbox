@@ -37,8 +37,6 @@
 #include "modules.h"
 #include "sprintf_irc.h"
 
-#define UFLAGS  (FLAGS_INVISIBLE|FLAGS_WALLOP|FLAGS_SERVNOTICE)
-
 static int mr_user(struct Client *, struct Client *, int, const char **);
 
 struct Message user_msgtab = {

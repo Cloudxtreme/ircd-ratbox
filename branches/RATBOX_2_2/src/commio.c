@@ -729,7 +729,7 @@ comm_open(int fd, unsigned int type, const char *desc)
 	F->defer.handler = NULL;
 #endif
 	fdlist_update_biggest(fd, 1);
-	F->comm_index = -1;
+//	F->comm_index = -1;
 	F->list = FDLIST_NONE;
 	if(desc)
 		strlcpy(F->desc, desc, sizeof(F->desc));

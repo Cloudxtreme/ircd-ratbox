@@ -711,7 +711,6 @@ rehash_bans(int sig)
 
 #define YES     1
 #define NO      0
-#define UNSET  -1
 
 static void
 set_default_conf(void)

@@ -30,10 +30,6 @@
  * #define PATRICIA_DEBUG 1
  */
  
-#define PREFIX_HEAP_COUNT	1024
-#define NODE_HEAP_COUNT		1024
-#define PATRICIA_HEAP_COUNT	128
-
 void
 init_patricia(void)
 {

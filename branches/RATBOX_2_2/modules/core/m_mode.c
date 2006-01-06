@@ -67,15 +67,12 @@ mapi_clist_av1 mode_clist[] = { &mode_msgtab, &tmode_msgtab, &bmask_msgtab, NULL
 DECLARE_MODULE_AV1(mode, NULL, NULL, mode_clist, NULL, NULL, "$Revision$");
 
 /* bitmasks for error returns, so we send once per call */
-#define SM_ERR_NOTS             0x00000001	/* No TS on channel */
 #define SM_ERR_NOOPS            0x00000002	/* No chan ops */
 #define SM_ERR_UNKNOWN          0x00000004
-#define SM_ERR_RPL_C            0x00000008
 #define SM_ERR_RPL_B            0x00000010
 #define SM_ERR_RPL_E            0x00000020
 #define SM_ERR_NOTONCHANNEL     0x00000040	/* Not on channel */
 #define SM_ERR_RPL_I            0x00000100
-#define SM_ERR_RPL_D            0x00000200
 
 static void set_channel_mode(struct Client *, struct Client *,
 			     struct Channel *, struct membership *,
