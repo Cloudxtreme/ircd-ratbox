@@ -1,3 +1,14 @@
+leeh        2006/01/06 18:48:24 UTC	(20060106_1-21590)
+  Log:
+  - add -Wunused-function and -Wunused-variable to --enable-warnings, as these
+    are the two we actually care about..
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/configure.ac (File Modified) 
+
+
 leeh        2006/01/06 18:41:24 UTC	(20060106_0-21588)
   Log:
   - run the compile through -Wunused-macros
