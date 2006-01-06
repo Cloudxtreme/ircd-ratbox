@@ -10929,7 +10929,7 @@ fi
 # Check whether --enable-warnings or --disable-warnings was given.
 if test "${enable_warnings+set}" = set; then
   enableval="$enable_warnings"
-  IRC_CFLAGS="$IRC_CFLAGS -O0 -Wall -Werror -Wcast-qual -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wshadow -Wwrite-strings -W -Wno-unused -Wno-sign-compare"
+  IRC_CFLAGS="$IRC_CFLAGS -O0 -Wall -Werror -Wcast-qual -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wshadow -Wwrite-strings -W -Wno-unused -Wno-sign-compare -Wunused-function -Wunused-variable"
 fi;
 
 
