@@ -229,6 +229,9 @@ struct LocalUser
 	int caps;		/* capabilities bit-field */
 	int fd;			/* >= 0, for local clients */
 
+	/* time challenge response is valid for */
+	time_t chal_time;
+
 	struct servlink_data *slink;	/* slink reply being parsed */
 
 	time_t last;

@@ -25,6 +25,17 @@
  */
 
 #include "stdinc.h"
+
+#ifdef HAVE_LIBCRYPTO
+#include <openssl/pem.h>
+#include <openssl/rand.h>
+#include <openssl/rsa.h>
+#include <openssl/sha.h>
+#include <openssl/bn.h>
+#include <openssl/evp.h>
+#include <openssl/err.h>
+#endif
+
 #include "tools.h"
 #include "client.h"
 #include "common.h"
@@ -43,14 +54,24 @@
 #include "packet.h"
 #include "cache.h"
 
+#define CHALLENGE_WIDTH BUFSIZE - (NICKLEN + HOSTLEN + 12)
+#define CHALLENGE_EXPIRES	180	/* 180 seconds should be more than long enough */
+#define CHALLENGE_SECRET_LENGTH	128	/* how long our challenge secret should be */
+
 static int m_oper(struct Client *, struct Client *, int, const char **);
+static int m_challenge(struct Client *, struct Client *, int, const char **);
 
 struct Message oper_msgtab = {
 	"OPER", 0, 0, 0, MFLG_SLOW,
 	{mg_unreg, {m_oper, 3}, mg_ignore, mg_ignore, mg_ignore, {m_oper, 3}}
 };
+struct Message challenge_msgtab = {
+	"CHALLENGE", 0, 0, 0, MFLG_SLOW,
+	{mg_unreg, {m_challenge, 2}, mg_ignore, mg_ignore, mg_ignore, {m_challenge, 2}}
+};
 
-mapi_clist_av1 oper_clist[] = { &oper_msgtab, NULL };
+
+mapi_clist_av1 oper_clist[] = { &oper_msgtab, &challenge_msgtab, NULL };
 DECLARE_MODULE_AV1(oper, NULL, NULL, oper_clist, NULL, NULL, "$Revision$");
 
 static int match_oper_password(const char *password, struct oper_conf *oper_p);
@@ -168,3 +189,239 @@ match_oper_password(const char *password, struct oper_conf *oper_p)
 	else
 		return NO;
 }
+
+#ifndef HAVE_LIBCRYPTO
+static int
+m_challenge(struct Client *client_p, struct Client *source_p, int parc, const char *parv[])
+{
+	sendto_one(source_p, ":%s NOTICE %s :Challenge not implemented ",
+		   me.name, source_p->name);
+	return 0;
+}
+
+#else
+
+static int generate_challenge(char **r_challenge, char **r_response, RSA * rsa);
+
+static void
+cleanup_challenge(struct Client *target_p)
+{
+	if(target_p->localClient == NULL)
+		return;
+	
+	MyFree(target_p->localClient->passwd);
+	MyFree(target_p->localClient->opername);
+	target_p->localClient->passwd = NULL;
+	target_p->localClient->opername = NULL;
+	target_p->localClient->chal_time = 0;
+}
+
+/*
+ * m_challenge - generate RSA challenge for wouldbe oper
+ * parv[0] = sender prefix
+ * parv[1] = operator to challenge for, or +response
+ *
+ */
+
+static int
+m_challenge(struct Client *client_p, struct Client *source_p, int parc, const char *parv[])
+{
+	struct oper_conf *oper_p;
+	char *challenge;
+	char chal_line[CHALLENGE_WIDTH]; 
+	u_int8_t *b_response;
+	size_t cnt;
+
+	if(IsOper(source_p))
+	{
+		sendto_one(source_p, form_str(RPL_YOUREOPER), me.name, source_p->name);
+		send_oper_motd(source_p);
+		return 0;
+	}
+
+	if(*parv[1] == '+')
+	{
+		if(source_p->localClient->passwd == NULL)
+			return 0;
+
+		if((CurrentTime - source_p->localClient->chal_time) > CHALLENGE_EXPIRES)
+		{
+			sendto_one(source_p, form_str(ERR_PASSWDMISMATCH), me.name, source_p->name);
+			ilog(L_FOPER, "EXPIRED CHALLENGE (%s) by (%s!%s@%s)",
+			     source_p->localClient->opername, source_p->name,
+			     source_p->username, source_p->host);
+
+			if(ConfigFileEntry.failed_oper_notice)
+				sendto_realops_flags(UMODE_ALL, L_ALL,
+						     "Expired CHALLENGE attempt by %s (%s@%s)",
+						     source_p->name, source_p->username,
+						     source_p->host);
+			cleanup_challenge(source_p);
+			return 0;			
+		}
+
+		b_response = ircd_base64_decode((const unsigned char *)++parv[1], strlen(parv[1]));
+
+		if(memcmp(source_p->localClient->passwd, b_response, SHA_DIGEST_LENGTH))
+		{
+			sendto_one(source_p, form_str(ERR_PASSWDMISMATCH), me.name, source_p->name);
+			ilog(L_FOPER, "FAILED CHALLENGE (%s) by (%s!%s@%s)",
+			     source_p->localClient->opername, source_p->name,
+			     source_p->username, source_p->host);
+
+			if(ConfigFileEntry.failed_oper_notice)
+				sendto_realops_flags(UMODE_ALL, L_ALL,
+						     "Failed CHALLENGE attempt by %s (%s@%s)",
+						     source_p->name, source_p->username,
+						     source_p->host);
+
+			MyFree(b_response);
+			cleanup_challenge(source_p);
+			return 0;
+		}
+
+		MyFree(b_response);
+
+		oper_p = find_oper_conf(source_p->username, source_p->host, 
+					source_p->sockhost, 
+					source_p->localClient->opername);
+
+		if(oper_p == NULL)
+		{
+			sendto_one(source_p, form_str(ERR_NOOPERHOST), 
+				   me.name, source_p->name);
+			ilog(L_FOPER, "FAILED OPER (%s) by (%s!%s@%s)",
+			     source_p->localClient->opername, source_p->name,
+			     source_p->username, source_p->host);
+
+			if(ConfigFileEntry.failed_oper_notice)
+				sendto_realops_flags(UMODE_ALL, L_ALL,
+						     "Failed CHALLENGE attempt - host mismatch by %s (%s@%s)",
+						     source_p->name, source_p->username,
+						     source_p->host);
+			return 0;
+		}
+
+		oper_up(source_p, oper_p);
+
+		ilog(L_OPERED, "OPER %s by %s!%s@%s",
+		     source_p->localClient->opername, source_p->name, 
+		     source_p->username, source_p->host);
+
+		cleanup_challenge(source_p);
+		return 0;
+	}
+
+	cleanup_challenge(source_p);
+
+	oper_p = find_oper_conf(source_p->username, source_p->host, 
+				source_p->sockhost, parv[1]);
+
+	if(oper_p == NULL)
+	{
+		sendto_one(source_p, form_str(ERR_NOOPERHOST), me.name, source_p->name);
+		ilog(L_FOPER, "FAILED OPER (%s) by (%s!%s@%s)",
+		     parv[1], source_p->name,
+		     source_p->username, source_p->host);
+
+		if(ConfigFileEntry.failed_oper_notice)
+			sendto_realops_flags(UMODE_ALL, L_ALL,
+					     "Failed CHALLENGE attempt - host mismatch by %s (%s@%s)",
+					     source_p->name, source_p->username, source_p->host);
+		return 0;
+	}
+
+	if(!oper_p->rsa_pubkey)
+	{
+		sendto_one(source_p, ":%s NOTICE %s :I'm sorry, PK authentication "
+			   "is not enabled for your oper{} block.", me.name, parv[0]);
+		return 0;
+	}
+
+	if(!generate_challenge(&challenge, &(source_p->localClient->passwd), oper_p->rsa_pubkey))
+	{
+		char *chal = challenge;
+		source_p->localClient->chal_time = CurrentTime;
+		for(;;)
+		{
+			cnt = strlcpy(chal_line, chal, CHALLENGE_WIDTH);
+			sendto_one(source_p, form_str(RPL_RSACHALLENGE2), me.name, source_p->name, chal_line);
+			if(cnt > CHALLENGE_WIDTH)
+				chal += CHALLENGE_WIDTH - 1;
+			else
+				break;
+			
+		}
+		sendto_one(source_p, form_str(RPL_ENDOFRSACHALLENGE2), 
+			   me.name, source_p->name);
+	}
+
+	DupString(source_p->localClient->opername, oper_p->name);
+	MyFree(challenge);
+	return 0;
+}
+
+
+static int
+get_randomness(unsigned char *buf, int length)
+{
+	/* Seed OpenSSL PRNG with EGD enthropy pool -kre */
+	if(ConfigFileEntry.use_egd && (ConfigFileEntry.egdpool_path != NULL))
+	{
+		if(RAND_egd(ConfigFileEntry.egdpool_path) == -1)
+			return -1;
+	}
+
+	if(RAND_status())
+	{
+		if(RAND_bytes(buf, length) > 0)
+			return 1;
+	}
+	else
+	{
+		if(RAND_pseudo_bytes(buf, length) >= 0)
+			return 1;
+	}
+	return 0;
+}
+
+static int
+generate_challenge(char **r_challenge, char **r_response, RSA * rsa)
+{
+	SHA_CTX ctx;
+	unsigned char secret[CHALLENGE_SECRET_LENGTH], *tmp;
+	unsigned long length;
+	unsigned long e = 0;
+	unsigned long cnt = 0;
+	int ret;
+
+	if(!rsa)
+		return -1;
+	if(get_randomness(secret, CHALLENGE_SECRET_LENGTH))
+	{
+		SHA1_Init(&ctx);
+		SHA1_Update(&ctx, (u_int8_t *)secret, CHALLENGE_SECRET_LENGTH);
+		*r_response = MyMalloc(SHA_DIGEST_LENGTH);
+		SHA1_Final((u_int8_t *)*r_response, &ctx);
+
+		length = RSA_size(rsa);
+		tmp = MyMalloc(length);
+		ret = RSA_public_encrypt(CHALLENGE_SECRET_LENGTH, secret, tmp, rsa, RSA_PKCS1_OAEP_PADDING);
+
+		*r_challenge = (char *)ircd_base64_encode(tmp, ret);
+		MyFree(tmp);
+		if(ret >= 0)
+			return 0;
+	}
+
+	ERR_load_crypto_strings();
+	while ((cnt < 100) && (e = ERR_get_error()))
+	{
+		ilog(L_MAIN, "SSL error: %s", ERR_error_string(e, 0));
+		cnt++;
+	}
+
+	return (-1);
+}
+
+#endif /* HAVE_LIBCRYPTO */
