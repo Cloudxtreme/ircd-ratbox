@@ -1,3 +1,19 @@
+leeh        2006/01/07 19:44:44 UTC	(20060107_0-21592)
+  Log:
+  - import challenge from 3.0
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/irc_string.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/numeric.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_challenge.c (File Deleted) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_oper.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/irc_string.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/messages.tab (File Modified) 
+
+
 leeh        2006/01/06 18:48:24 UTC	(20060106_1-21590)
   Log:
   - add -Wunused-function and -Wunused-variable to --enable-warnings, as these
