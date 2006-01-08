@@ -221,9 +221,9 @@ struct LocalUser
 	 * XXX - there is no reason to save this, it should be checked when it's
 	 * received and not stored, this is not used after registration
 	 */
-	/* its used for challenge nowadays --fl */
 	char *passwd;
 	char *opername;
+	char *challenge;
 	char *fullcaps;
 
 	int caps;		/* capabilities bit-field */
