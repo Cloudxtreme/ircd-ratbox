@@ -905,7 +905,9 @@ find_chasing(struct Client *source_p, const char *user, int *chasing)
 const char *
 get_client_name(struct Client *client, int showip)
 {
+	static char empty_name[] = "";
 	static char nbuf[HOSTLEN * 2 + USERLEN + 5];
+	const char *name;
 
 	s_assert(NULL != client);
 	if(client == NULL)
@@ -913,8 +915,13 @@ get_client_name(struct Client *client, int showip)
 
 	if(MyConnect(client))
 	{
-		if(!irccmp(client->name, client->host))
-			return client->name;
+		if(EmptyString(client->name))
+			name = empty_name;
+		else
+			name = client->name;
+
+		if(!irccmp(name, client->host))
+			return name;
 
 		if(ConfigFileEntry.hide_spoof_ips && 
 		   showip == SHOW_IP && IsIPSpoof(client))
@@ -925,16 +932,16 @@ get_client_name(struct Client *client, int showip)
 		{
 		case SHOW_IP:
 			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@%s]", 
-				   client->name, client->username, 
+				   name, client->username, 
 				   client->sockhost);
 			break;
 		case MASK_IP:
 			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@255.255.255.255]",
-				   client->name, client->username);
+				   name, client->username);
 			break;
 		default:
 			ircsnprintf(nbuf, sizeof(nbuf), "%s[%s@%s]",
-				   client->name, client->username, client->host);
+				   name, client->username, client->host);
 		}
 		return nbuf;
 	}
