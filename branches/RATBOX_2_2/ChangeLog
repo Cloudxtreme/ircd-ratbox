@@ -1,3 +1,12 @@
+leeh        2006/01/08 16:15:19 UTC	(20060108_0-21596)
+  Log:
+  - remove a cast on MyFree()
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+
+
 leeh        2006/01/07 19:44:44 UTC	(20060107_0-21592)
   Log:
   - import challenge from 3.0
