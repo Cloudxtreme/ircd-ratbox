@@ -1,3 +1,15 @@
+leeh        2006/01/08 20:35:09 UTC	(20060108_3-21604)
+  Log:
+  - dont overload challenge into passwd field, give it back its own field.
+    We memset() passwd on exit, which we cant do with a challenge response.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_oper.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+
+
 leeh        2006/01/08 20:18:17 UTC	(20060108_2-21602)
   Log:
   - make get_client_name() support unknown users without a nick properly
