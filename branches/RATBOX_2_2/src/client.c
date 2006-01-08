@@ -1788,7 +1788,7 @@ void
 free_user(struct User *user, struct Client *client_p)
 {
 	if(user->away)
-		MyFree((char *) user->away);
+		MyFree(user->away);
 	/*
 	 * sanity check
 	 */
