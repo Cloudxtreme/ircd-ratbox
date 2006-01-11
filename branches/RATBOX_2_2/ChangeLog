@@ -1,3 +1,13 @@
+jilles      2006/01/11 23:23:47 UTC	(20060111_1-21636)
+  Log:
+  Revert src/irc_string.c part of r21588: it breaks IPV6 compile
+  at least on FreeBSD.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/irc_string.c (File Modified) 
+
+
 androsyn    2006/01/11 15:06:38 UTC	(20060111_0-21616)
   Log:
   get rid of s_zip.h
