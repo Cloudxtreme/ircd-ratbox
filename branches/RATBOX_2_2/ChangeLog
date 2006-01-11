@@ -1,3 +1,11 @@
+androsyn    2006/01/11 15:06:38 UTC	(20060111_0-21616)
+  Log:
+  get rid of s_zip.h
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/s_zip.h (File Deleted) 
+
+
 leeh        2006/01/08 20:35:09 UTC	(20060108_3-21604)
   Log:
   - dont overload challenge into passwd field, give it back its own field.
