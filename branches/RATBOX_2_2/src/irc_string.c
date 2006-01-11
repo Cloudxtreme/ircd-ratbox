@@ -42,6 +42,9 @@
 #endif
 #endif
 
+#ifndef INT16SZ
+#define INT16SZ 2
+#endif
 /*
  * myctime - This is like standard ctime()-function, but it zaps away
  *   the newline from the end of that string. Also, it takes
@@ -386,6 +389,8 @@ inetntoa(struct in_addr in)
  * ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
  * SOFTWARE.
  */
+
+#define SPRINTF(x) ((size_t)ircsprintf x)
 
 /*
  * WARNING: Don't even consider trying to compile this on a system where
