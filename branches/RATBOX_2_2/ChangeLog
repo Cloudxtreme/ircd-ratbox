@@ -1,3 +1,11 @@
+androsyn    2006/01/12 16:14:57 UTC	(20060112_0-21638)
+  Log:
+  - get rid of ndelay related garbage and just use a static sleep time
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/poll.c (File Modified) 
+
+
 jilles      2006/01/11 23:23:47 UTC	(20060111_1-21636)
   Log:
   Revert src/irc_string.c part of r21588: it breaks IPV6 compile
