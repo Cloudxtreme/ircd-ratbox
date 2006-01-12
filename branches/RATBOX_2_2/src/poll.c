@@ -66,8 +66,6 @@ typedef struct _pollfd_list pollfd_list_t;
 
 pollfd_list_t pollfd_list;
 static void poll_update_pollfds(int, short, PF *);
-static unsigned long last_count = 0; 
-static unsigned long empty_count = 0;
 
 int 
 comm_setup_fd(int fd)
@@ -203,26 +201,13 @@ comm_select(unsigned long delay)
 	int num;
 	int fd;
 	int ci;
-	unsigned long ndelay;
 	PF *hdl;
 
-	if(last_count > 0)
-	{
-		empty_count = 0;
-		ndelay = 0;
-	}
-	else {
-		ndelay = ++empty_count * 15000 ;
-		if(ndelay > delay * 1000)
-			ndelay = delay * 1000;	
-	}
-	
 	for (;;)
 	{
 		/* XXX kill that +1 later ! -- adrian */
-		if(ndelay > 0)
-			irc_sleep(ndelay); 
-		last_count = num = poll(pollfd_list.pollfds, pollfd_list.maxindex + 1, 0);
+		irc_sleep(delay * 1000); 
+		num = poll(pollfd_list.pollfds, pollfd_list.maxindex + 1, 0);
 		if(num >= 0)
 			break;
 		if(ignoreErrno(errno))
