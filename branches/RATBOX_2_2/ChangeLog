@@ -1,3 +1,24 @@
+androsyn    2006/01/13 15:58:24 UTC	(20060113_0-21648)
+  Log:
+  replace MAXCONNECTIONS/MASTER_MAX/HARD_FDLIMIT/IRCD_CODERS_ARE_NUTJOBS with maxconnections
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/defaults.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/ircd.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_set.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/commio.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/devpoll.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/ircd.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/listener.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/poll.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/restart.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_auth.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_serv.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/select.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/sigio.c (File Modified) 
+
+
 androsyn    2006/01/12 16:14:57 UTC	(20060112_0-21638)
   Log:
   - get rid of ndelay related garbage and just use a static sleep time
