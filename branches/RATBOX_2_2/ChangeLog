@@ -1,3 +1,12 @@
+androsyn    2006/01/13 16:33:18 UTC	(20060113_2-21654)
+  Log:
+  remove a few c++ style comments. i'm sure somebody will complain when they compile it with a ancient compiler
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/commio.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/patricia.c (File Modified) 
+
+
 leeh        2006/01/13 16:04:32 UTC	(20060113_1-21650)
   Log:
   - remove all the link_u and link_s crap, generate it on the fly in
