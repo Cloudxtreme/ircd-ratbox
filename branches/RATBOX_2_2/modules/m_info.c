@@ -86,6 +86,11 @@ struct InfoStruct
 /* *INDENT-OFF* */
 static struct InfoStruct info_table[] = {
 	/* --[  START OF TABLE  ]-------------------------------------------- */
+	{	"MAX_CONNECTIONS",
+		OUTPUT_DECIMAL,
+		&maxconnections,
+		"Max number connections"
+	},
 	{
 		"anti_nick_flood",
 		OUTPUT_BOOLEAN,
