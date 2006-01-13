@@ -1,3 +1,14 @@
+jilles      2006/01/13 18:23:41 UTC	(20060113_4-21660)
+  Log:
+  Make sure this compiles again and doesn't go into 100% cpu loop
+  doing nothing when connected to.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/m_info.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/ircd.c (File Modified) 
+
+
 androsyn    2006/01/13 16:34:14 UTC	(20060113_3-21656)
   Log:
   remove the max clients stuff from autoconf as well
