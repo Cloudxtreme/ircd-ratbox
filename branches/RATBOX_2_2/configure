@@ -875,8 +875,6 @@ Optional Packages:
   --with-nicklen=LENGTH   Set the nick length to LENGTH (default 9, max 50)
   --with-topiclen=NUMBER  Set the max topic length to NUMBER (default 120, max
                           390)
-  --with-maxclients=NUMBER
-                          Maximum number of connections the ircd can handle
 
 Some influential environment variables:
   CC          C compiler command
@@ -11141,25 +11139,6 @@ else
 fi;
 
 
-# Check whether --with-maxclients or --without-maxclients was given.
-if test "${with_maxclients+set}" = set; then
-  withval="$with_maxclients"
-  MAX_CLIENTS="$withval"
-else
-  MAX_CLIENTS=3000
-fi;
-
-
-if test "$MAX_CLIENTS" = yes; then
-	MAX_CLIENTS=3000
-fi
-
-if test $MAX_CLIENTS -gt 65536; then
-	MAX_CLIENTS=65536
-	{ echo "$as_me:$LINENO: WARNING: Max connections cannot be larger than 65536!" >&5
-echo "$as_me: WARNING: Max connections cannot be larger than 65536!" >&2;}
-fi
-
 
 cat >>confdefs.h <<_ACEOF
 #define TOPICLEN ${TOPICLEN}
@@ -11168,11 +11147,6 @@ _ACEOF
 
 cat >>confdefs.h <<_ACEOF
 #define NICKLEN (${NICKLEN}+1)
-_ACEOF
-
-
-cat >>confdefs.h <<_ACEOF
-#define MAX_CLIENTS ${MAX_CLIENTS}
 _ACEOF
 
 
@@ -14698,5 +14672,4 @@ echo
 echo "Configured limits:"
 echo "NICKLEN ................. $NICKLEN"
 echo "TOPICLEN ................ $TOPICLEN"
-echo "MAX_CLIENTS ............. $MAX_CLIENTS"
 echo
