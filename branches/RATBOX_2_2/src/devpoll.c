@@ -51,14 +51,12 @@
 #include "commio.h"
 #include "memory.h"
 
-#define POLL_LENGTH	HARD_FDLIMIT
-
-
 static void devpoll_update_events(int, short, PF *);
 static int dpfd;
 static short fdmask[POLL_LENGTH];
 static void devpoll_update_events(int, short, PF *);
 static void devpoll_write_update(int, int);
+static int maxfd;
 
 /* #define NOTYET 1 */
 
@@ -172,7 +170,9 @@ devpoll_update_events(int fd, short filter, PF * handler)
 void
 init_netio(void)
 {
-	memset(&fdmask, 0, sizeof(fdmask));
+        maxfd = getdtablesize() - 2; /* This makes more sense than HARD_FDLIMIT */
+	fdmask = ircd_malloc(sizeof(fdmask) * maxfd + 1);
+                
 	dpfd = open("/dev/poll", O_RDWR);
 	if(dpfd < 0)
 	{
@@ -233,7 +233,7 @@ int
 comm_select(unsigned long delay)
 {
 	int num, i;
-	struct pollfd pollfds[POLL_LENGTH];
+	struct pollfd pollfds[maxfd];
 	struct dvpoll dopoll;
 
 	do

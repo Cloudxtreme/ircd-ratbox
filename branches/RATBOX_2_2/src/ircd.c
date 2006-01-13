@@ -127,6 +127,8 @@ int split_users;
 int split_servers;
 int eob_count;
 
+int maxconnections;
+
 /*
  * get_vm_top - get the operating systems notion of the resident set size
  */
@@ -184,29 +186,16 @@ print_startup(int pid)
 static void
 init_sys(void)
 {
-#if defined(RLIMIT_FD_MAX) && defined(HAVE_SYS_RLIMIT_H)
-	struct rlimit limit;
+#if defined(RLIMIT_NOFILE) && defined(HAVE_SYS_RESOURCE_H)
+        struct rlimit limit;
 
-	if(!getrlimit(RLIMIT_FD_MAX, &limit))
-	{
-
-		if(limit.rlim_max < MAXCONNECTIONS)
-		{
-			fprintf(stderr, "ircd fd table too big\n");
-			fprintf(stderr, "Hard Limit: %ld IRC max: %d\n",
-				(long) limit.rlim_max, MAXCONNECTIONS);
-			fprintf(stderr, "Fix MAXCONNECTIONS\n");
-			exit(-1);
-		}
-
-		limit.rlim_cur = limit.rlim_max;	/* make soft limit the max */
-		if(setrlimit(RLIMIT_FD_MAX, &limit) == -1)
-		{
-			fprintf(stderr, "error setting max fd's to %ld\n", (long) limit.rlim_cur);
-			exit(EXIT_FAILURE);
-		}
-	}
+        if(!getrlimit(RLIMIT_NOFILE, &limit))
+        {
+                maxconnections = limit.rlim_cur - 10;
+                return;
+        }
 #endif /* RLIMIT_FD_MAX */
+        maxconnections = MAXCONNECTIONS;
 }
 
 static int

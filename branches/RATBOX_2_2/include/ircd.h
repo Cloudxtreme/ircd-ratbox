@@ -112,5 +112,6 @@ extern unsigned long get_maxrss(void);
 extern void set_time(void);
 
 extern int testing_conf;
+extern int maxconnections;
 
 #endif

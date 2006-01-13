@@ -58,7 +58,7 @@
 
 struct _pollfd_list
 {
-	struct pollfd pollfds[MAXCONNECTIONS];
+	struct pollfd *pollfds;
 	int maxindex;		/* highest FD number */
 };
 
@@ -129,8 +129,8 @@ void
 init_netio(void)
 {
 	int fd;
-
-	for (fd = 0; fd < MAXCONNECTIONS; fd++)
+	pollfd_list.pollfds = MyMalloc(sizeof(struct pollfd) * maxconnections);
+	for (fd = 0; fd < maxconnections; fd++)
 	{
 		pollfd_list.pollfds[fd].fd = -1;
 	}

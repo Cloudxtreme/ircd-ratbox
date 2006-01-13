@@ -120,7 +120,7 @@ comm_close_all(void)
 	/* XXX someone tell me why we care about 4 fd's ? */
 	/* XXX btw, fd 3 is used for profiler ! */
 
-	for (i = 4; i < MAXCONNECTIONS; ++i)
+	for (i = 4; i < maxconnections; ++i)
 	{
 		if(fd_table[i].flags.open)
 			comm_close(i);
@@ -549,7 +549,7 @@ comm_socket(int family, int sock_type, int proto, const char *note)
 {
 	int fd;
 	/* First, make sure we aren't going to run out of file descriptors */
-	if(number_fd >= MASTER_MAX)
+	if(number_fd >= maxconnections)
 	{
 		errno = ENFILE;
 		return -1;
@@ -608,7 +608,7 @@ int
 comm_accept(int fd, struct sockaddr *pn, socklen_t *addrlen)
 {
 	int newfd;
-	if(number_fd >= MASTER_MAX)
+	if(number_fd >= maxconnections)
 	{
 		errno = ENFILE;
 		return -1;
@@ -670,10 +670,6 @@ mangle_mapped_sockaddr(struct sockaddr *in)
 static void
 fdlist_update_biggest(int fd, int opening)
 {
-	if(fd < highest_fd)
-		return;
-	s_assert(fd < MAXCONNECTIONS);
-
 	if(fd > highest_fd)
 	{
 		/*  
@@ -703,7 +699,7 @@ fdlist_init(void)
 	if(!initialized)
 	{
 		/* Since we're doing this once .. */
-		fd_table = MyMalloc((MAXCONNECTIONS + 1) * sizeof(fde_t));
+		fd_table = MyMalloc((maxconnections + 1) * sizeof(fde_t));
 		initialized = 1;
 	}
 }

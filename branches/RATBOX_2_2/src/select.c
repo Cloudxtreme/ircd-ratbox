@@ -48,10 +48,6 @@
 #include "commio.h"
 #include "memory.h"
 
-
-#if HARD_FDLIMIT_ >= FD_SETSIZE
-#error HARD_FDLIMIT_ must be less than FD_SETSIZE(try using poll instead of select)
-#endif
 /*
  * Note that this is only a single list - multiple lists is kinda pointless
  * under select because the list size is a function of the highest FD :-)

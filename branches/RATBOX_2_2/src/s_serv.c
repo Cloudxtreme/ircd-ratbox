@@ -1354,7 +1354,7 @@ fork_server(struct Client *server)
 	else if(ret == 0)
 	{
 		/* set our fds as non blocking and close everything else */
-		for (i = 0; i < HARD_FDLIMIT; i++)
+		for (i = 0; i < maxconnections; i++)
 		{
 				
 

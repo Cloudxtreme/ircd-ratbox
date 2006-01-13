@@ -254,7 +254,7 @@ start_auth_query(struct AuthRequest *auth)
 		++ServerStats->is_abad;
 		return 0;
 	}
-	if((MAXCONNECTIONS - 10) < fd)
+	if((maxconnections - 10) < fd)
 	{
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Can't allocate fd for auth");
