@@ -70,9 +70,6 @@ Info MyInformation[] = {
 	{"RESVPATH", "NONE", 0, "Path to resv file"},
 #endif
 
-	{"HARD_FDLIMIT_", "", HARD_FDLIMIT_,
-	 "Maximum Number of File Descriptors Available"},
-
 #ifdef HPATH
 	{"HPATH", HPATH, 0, "Path to Operator Help Files"},
 #else
@@ -98,8 +95,6 @@ Info MyInformation[] = {
 #else
 	{"IPV6", "OFF", 0, "IPv6 Support"},
 #endif
-
-	{"MAX_CLIENTS", "", MAX_CLIENTS, "Default maximum Clients"},
 
 	{"JOIN_LEAVE_COUNT_EXPIRE_TIME", "", JOIN_LEAVE_COUNT_EXPIRE_TIME,
 	 "Anti SpamBot Parameter"},

@@ -328,7 +328,7 @@ initialize_global_set_options(void)
 	memset(&GlobalSetOptions, 0, sizeof(GlobalSetOptions));
 	/* memset( &ConfigFileEntry, 0, sizeof(ConfigFileEntry)); */
 
-	GlobalSetOptions.maxclients = MAX_CLIENTS;
+	GlobalSetOptions.maxclients = maxconnections - MAX_BUFFER;
 	GlobalSetOptions.autoconn = 1;
 
 	GlobalSetOptions.spam_time = MIN_JOIN_LEAVE_TIME;
@@ -554,6 +554,7 @@ main(int argc, char *argv[])
 		server_state_foreground = 1;
 
 	/* We need this to initialise the fd array before anything else */
+	init_sys();
 	fdlist_init();
 	if(!server_state_foreground)
 	{
@@ -576,7 +577,6 @@ main(int argc, char *argv[])
 
 	/* Init the event subsystem */
 	eventInit();
-	init_sys();
 
 	init_main_logfile();
 	initBlockHeap();
