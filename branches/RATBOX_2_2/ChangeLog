@@ -1,3 +1,13 @@
+leeh        2006/01/13 16:04:32 UTC	(20060113_1-21650)
+  Log:
+  - remove all the link_u and link_s crap, generate it on the fly in
+    report_this_status()
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_trace.c (File Modified) 
+
+
 androsyn    2006/01/13 15:58:24 UTC	(20060113_0-21648)
   Log:
   replace MAXCONNECTIONS/MASTER_MAX/HARD_FDLIMIT/IRCD_CODERS_ARE_NUTJOBS with maxconnections
