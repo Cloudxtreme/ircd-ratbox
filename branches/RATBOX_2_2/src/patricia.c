@@ -261,7 +261,7 @@ Deref_Prefix(prefix_t * prefix)
 
 /* } */
 
-// #define PATRICIA_DEBUG 1 
+/* #define PATRICIA_DEBUG 1 */
 
 static int num_active_patricia = 0;
 
