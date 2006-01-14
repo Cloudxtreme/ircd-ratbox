@@ -1,3 +1,13 @@
+jilles      2006/01/14 17:16:22 UTC	(20060114_2-21684)
+  Log:
+  Notify user and don't keep challenge state if generating the
+  challenge fails (e.g. old-style key).
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_oper.c (File Modified) 
+
+
 leeh        2006/01/14 16:13:54 UTC	(20060114_1-21682)
   Log:
   - test the length of the challenge response is SHA_DIGEST_LENGTH before we
