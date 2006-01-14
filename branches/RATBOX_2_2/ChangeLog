@@ -1,3 +1,16 @@
+jilles      2006/01/14 21:02:22 UTC	(20060114_4-21688)
+  Log:
+  Backport trunk r21680:
+  Remove old nextconnect variable. try_connections() calls
+  have been controlled by the event system for years.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/ircd.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/ircd.c (File Modified) 
+
+
 leeh        2006/01/14 20:55:28 UTC	(20060114_3-21686)
   Log:
   - dont build y.tab.c/lex.yy.c unless specifically requested by make parser
