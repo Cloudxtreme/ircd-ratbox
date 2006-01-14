@@ -88,7 +88,6 @@ extern time_t CurrentTime;
 #endif
 extern struct timeval SystemTime;
 #define CurrentTime SystemTime.tv_sec
-extern time_t nextconnect;
 extern int default_server_capabs;
 
 extern time_t startup_time;
