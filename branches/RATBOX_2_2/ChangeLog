@@ -1,3 +1,13 @@
+leeh        2006/01/14 16:13:54 UTC	(20060114_1-21682)
+  Log:
+  - test the length of the challenge response is SHA_DIGEST_LENGTH before we
+    do a memcmp() on it.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_oper.c (File Modified) 
+
+
 jilles      2006/01/14 13:05:15 UTC	(20060114_0-21678)
   Log:
   Backport trunk r21676:
