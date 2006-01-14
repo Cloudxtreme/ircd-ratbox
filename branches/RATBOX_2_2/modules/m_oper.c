@@ -355,10 +355,12 @@ m_challenge(struct Client *client_p, struct Client *source_p, int parc, const ch
 		}
 		sendto_one(source_p, form_str(RPL_ENDOFRSACHALLENGE2), 
 			   me.name, source_p->name);
+		MyFree(challenge);
+		DupString(source_p->localClient->opername, oper_p->name);
 	}
+	else
+		sendto_one_notice(source_p, ":Failed to generate challenge.");
 
-	DupString(source_p->localClient->opername, oper_p->name);
-	MyFree(challenge);
 	return 0;
 }
 
@@ -409,10 +411,15 @@ generate_challenge(char **r_challenge, char **r_response, RSA * rsa)
 		tmp = MyMalloc(length);
 		ret = RSA_public_encrypt(CHALLENGE_SECRET_LENGTH, secret, tmp, rsa, RSA_PKCS1_OAEP_PADDING);
 
-		*r_challenge = (char *)ircd_base64_encode(tmp, ret);
-		MyFree(tmp);
-		if(ret >= 0)
+		if (ret >= 0)
+		{
+			*r_challenge = (char *)ircd_base64_encode(tmp, ret);
+			MyFree(tmp);
 			return 0;
+		}
+		MyFree(tmp);
+		MyFree(*r_response);
+		*r_response = NULL;
 	}
 
 	ERR_load_crypto_strings();
