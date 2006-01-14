@@ -41,12 +41,14 @@ default:	all
 y.tab.o:	y.tab.c ircd_parser.y
 	${CC} ${CPPFLAGS} ${CFLAGS} -I. -c y.tab.c
 
+# Note GNU bison uses <file>.tab.c not y.tab.c
+y.tab.c:	ircd_parser.y
+	${YACC} -d ircd_parser.y
+
 lex.yy.o:	lex.yy.c ircd_lexer.l
 	${CC} ${CPPFLAGS} ${CFLAGS} -I. -c lex.yy.c
 
-# Note GNU bison uses <file>.tab.c not y.tab.c
-parser:	ircd_parser.y ircd_lexer.l
-	${YACC} -d ircd_parser.y
+lex.yy.c:	ircd_lexer.l
 	${LEX} ircd_lexer.l
 
 BASE_SRCS =                     \
@@ -142,7 +144,7 @@ depend:
 	${MKDEP} ${CPPFLAGS} ${BASE_SRCS} > .depend
 
 clean:
-	${RM} -f *.o *.exe *~ y.tab.* lex.yy.c ircd.core core ircd 
+	${RM} -f *.o *.exe *~ ircd.core core ircd 
 
 lint:
 	lint -aacgprxhH $(CPPFLAGS) -DIRCD_PREFIX=\"@prefix@\" $(SRCS) >>../lint.out
