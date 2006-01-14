@@ -1,3 +1,16 @@
+leeh        2006/01/14 23:34:59 UTC	(20060114_5-21698)
+  Log:
+  - remove HARD_FDLIMIT_ from config.h, its unused
+  - build y.tab.c and lex.yy.c when we need to, but dont remove them on make
+    clean
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/config.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/config.h.dist (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/Makefile.in (File Modified) 
+
+
 jilles      2006/01/14 21:02:22 UTC	(20060114_4-21688)
   Log:
   Backport trunk r21680:
