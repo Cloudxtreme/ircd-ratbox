@@ -1,3 +1,13 @@
+jilles      2006/01/18 22:56:08 UTC	(20060118_0-21713)
+  Log:
+  Backport trunk r21711:
+  Add m_error to core_module_table, so it is loaded by default.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/modules.c (File Modified) 
+
+
 leeh        2006/01/14 23:34:59 UTC	(20060114_5-21698)
   Log:
   - remove HARD_FDLIMIT_ from config.h, its unused
