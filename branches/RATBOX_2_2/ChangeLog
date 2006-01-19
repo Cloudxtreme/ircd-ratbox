@@ -1,3 +1,12 @@
+leeh        2006/01/19 22:36:10 UTC	(20060119_1-21727)
+  Log:
+  - add some logging when we drop servers in places where we only notify opers
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_server.c (File Modified) 
+
+
 leeh        2006/01/19 18:59:08 UTC	(20060119_0-21724)
   Log:
   - backport r21721
