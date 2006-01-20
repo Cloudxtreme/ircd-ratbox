@@ -1,3 +1,12 @@
+leeh        2006/01/20 19:12:33 UTC	(20060120_1-21731)
+  Log:
+  - update RELNOTES
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/RELNOTES (File Modified) 
+
+
 leeh        2006/01/20 19:09:22 UTC	(20060120_0-21729)
   Log:
   - add default_max_clients option to serverinfo {};, specifies the default
