@@ -1,3 +1,15 @@
+leeh        2006/01/20 19:36:53 UTC	(20060120_4-21741)
+  Log:
+  - update RELNOTES and whats-new-2.2.txt
+  - revved patchlevel to 2.2.0rc1
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/doc/whats-new-2.2.txt (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/patchlevel.h (File Modified) 
+
+
 leeh        2006/01/20 19:23:23 UTC	(20060120_3-21735)
   Log:
   - replace challenge.txt with the new one I wrote
