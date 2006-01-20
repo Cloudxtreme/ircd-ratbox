@@ -38,3 +38,4 @@ Misc
 - Regained rtsigio network subsystem support, primarily for linux 2.4
 - ircd -conftest option is now more "unix friendly"
 - Improved logging when we disallow a servers linking.
+- Server IP hiding is now hardcoded in.
