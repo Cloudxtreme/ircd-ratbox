@@ -34,7 +34,7 @@
 /*
  * First, set other fd limits based on values from user
  */
-#define MAXCONNECTIONS  3000 /* getrlimit hates you */
+#define MAXCONNECTIONS  65535 /* getrlimit hates you */
 
 /* class {} default values */
 #define DEFAULT_SENDQ 20000000	/* default max SendQ */

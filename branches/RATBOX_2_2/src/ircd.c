@@ -190,11 +190,19 @@ init_sys(void)
 
         if(!getrlimit(RLIMIT_NOFILE, &limit))
         {
-                maxconnections = limit.rlim_cur - 10;
+		maxconnections = limit.rlim_cur;
+
+		if(maxconnections <= MAX_BUFFER)
+		{
+			fprintf(stderr, "ERROR: Shell FD limits are too low.\n");
+			fprintf(stderr, "ERROR: ircd-ratbox reserves %d FDs, shell limits must be above this\n", MAX_BUFFER);
+			exit(EXIT_FAILURE);
+		}
+
                 return;
         }
 #endif /* RLIMIT_FD_MAX */
-        maxconnections = MAXCONNECTIONS;
+	maxconnections = MAXCONNECTIONS;
 }
 
 static int
@@ -327,8 +335,11 @@ initialize_global_set_options(void)
 	memset(&GlobalSetOptions, 0, sizeof(GlobalSetOptions));
 	/* memset( &ConfigFileEntry, 0, sizeof(ConfigFileEntry)); */
 
-	GlobalSetOptions.maxclients = maxconnections - MAX_BUFFER;
+	GlobalSetOptions.maxclients = ServerInfo.default_max_clients - MAX_BUFFER;
 	GlobalSetOptions.autoconn = 1;
+
+	if(GlobalSetOptions.maxclients > (maxconnections - MAX_BUFFER))
+		GlobalSetOptions.maxclients = maxconnections - MAX_BUFFER;
 
 	GlobalSetOptions.spam_time = MIN_JOIN_LEAVE_TIME;
 	GlobalSetOptions.spam_num = MAX_JOIN_LEAVE_COUNT;

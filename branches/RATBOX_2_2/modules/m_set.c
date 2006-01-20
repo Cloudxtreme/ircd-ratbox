@@ -247,11 +247,11 @@ quote_max(struct Client *source_p, int newval)
 {
 	if(newval > 0)
 	{
-		if(newval > maxconnections)
+		if(newval > maxconnections - MAX_BUFFER)
 		{
 			sendto_one(source_p,
 				   ":%s NOTICE %s :You cannot set MAXCLIENTS to > %d",
-				   me.name, source_p->name, maxconnections);
+				   me.name, source_p->name, maxconnections - MAX_BUFFER);
 			return;
 		}
 
