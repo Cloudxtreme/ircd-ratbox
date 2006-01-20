@@ -28,7 +28,8 @@ Oper
 - New CHANTRACE command, which will perform an ETRACE of a channel if you
   are a member.  Operspy capable.
 - Klines for user@1.2.3.* etc are now munged to CIDR.
-- New CHALLENGE system, see doc/challenge.txt for more information.
+- New CHALLENGE system, see doc/challenge.txt and
+  http://respond.ircd-ratbox.org for more information.
 
 Misc
 ----
