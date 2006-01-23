@@ -198,9 +198,6 @@ comm_select(unsigned long delay)
 			if(hdl) {
 				hdl(F->fd, data);
 			}
-			else
-				ilog(L_IOERROR, "epoll.c: NULL read handler called");
-
 		}
 
 
@@ -216,8 +213,6 @@ comm_select(unsigned long delay)
 			if(hdl) {
 				hdl(F->fd, data);
 			}
-			else
-				ilog(L_IOERROR, "epoll.c: NULL write handler called");
 		}
 		
 		if(F->flags.open == 0)
