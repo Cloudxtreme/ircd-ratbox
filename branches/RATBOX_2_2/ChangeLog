@@ -1,3 +1,11 @@
+androsyn    2006/01/23 18:13:31 UTC	(20060123_0-21772)
+  Log:
+  remove the NULL read/write handler log messages from epoll.c
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/epoll.c (File Modified) 
+
+
 leeh        2006/01/20 19:36:53 UTC	(20060120_4-21741)
   Log:
   - update RELNOTES and whats-new-2.2.txt
