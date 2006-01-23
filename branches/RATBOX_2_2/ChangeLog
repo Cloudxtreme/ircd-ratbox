@@ -1,3 +1,19 @@
+androsyn    2006/01/23 19:12:53 UTC	(20060123_1-21776)
+  Log:
+  get contrib to compile again
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/contrib/spy_admin_notice.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/contrib/spy_info_notice.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/contrib/spy_links_notice.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/contrib/spy_motd_notice.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/contrib/spy_stats_notice.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/contrib/spy_stats_p_notice.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/contrib/spy_trace_notice.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/contrib/spy_whois_notice.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/contrib/spy_whois_notice_global.c (File Modified) 
+
+
 androsyn    2006/01/23 18:13:31 UTC	(20060123_0-21772)
   Log:
   remove the NULL read/write handler log messages from epoll.c
