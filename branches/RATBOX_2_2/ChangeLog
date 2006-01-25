@@ -1,3 +1,16 @@
+androsyn    2006/01/25 21:58:53 UTC	(20060125_1-21788)
+  Log:
+  - backport MASKTRACE and new TESTMASK from trunk
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/irc_string.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_etrace.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_testmask.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/match.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/messages.tab (File Modified) 
+
+
 leeh        2006/01/25 20:46:52 UTC	(20060125_0-21784)
   Log:
   - fix log_client_name() so its safe for empty client_p->name
