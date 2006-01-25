@@ -40,7 +40,7 @@
 extern int match(const char *mask, const char *name);
 extern int match_esc(const char *mask, const char *name);
 extern int match_cidr(const char *mask, const char *name);
-
+extern int match_ips(const char *mask, const char *addr);
 /*
  * comp_with_mask - compares to IP address
  */

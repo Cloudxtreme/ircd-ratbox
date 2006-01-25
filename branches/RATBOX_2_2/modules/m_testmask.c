@@ -50,20 +50,18 @@
 
 static int mo_testmask(struct Client *client_p, struct Client *source_p,
 			int parc, const char *parv[]);
-static int mo_testmaskgecos(struct Client *client_p, struct Client *source_p,
-				int parc, const char *parv[]);
 
 struct Message testmask_msgtab = {
 	"TESTMASK", 0, 0, 0, MFLG_SLOW,
 	{mg_unreg, mg_not_oper, mg_ignore, mg_ignore, mg_ignore, {mo_testmask, 2}}
 };
-struct Message testmaskgecos_msgtab = {
-	"TESTMASKGECOS", 0, 0, 0, MFLG_SLOW,
-	{mg_unreg, mg_not_oper, mg_ignore, mg_ignore, mg_ignore, {mo_testmaskgecos, 2}}
-};
 
-mapi_clist_av1 testmask_clist[] = { &testmask_msgtab, &testmaskgecos_msgtab, NULL };
+mapi_clist_av1 testmask_clist[] = { &testmask_msgtab, NULL, NULL };
 DECLARE_MODULE_AV1(testmask, NULL, NULL, testmask_clist, NULL, NULL, "$Revision$");
+
+static const char *empty_sockhost = "255.255.255.255";
+static const char *spoofed_sockhost = "0";
+
 
 static int
 mo_testmask(struct Client *client_p, struct Client *source_p,
@@ -72,9 +70,9 @@ mo_testmask(struct Client *client_p, struct Client *source_p,
 	struct Client *target_p;
 	int lcount = 0;
 	int gcount = 0;
-	char *name;
-	char *username;
-	char *hostname;
+	char *name, *username, *hostname;
+	const char *sockhost;
+	char *gecos = NULL, *mangle_gecos = NULL;
 	dlink_node *ptr;
 
 	name = LOCAL_COPY(parv[1]);
@@ -106,6 +104,44 @@ mo_testmask(struct Client *client_p, struct Client *source_p,
 		return 0;
 	}
 
+	if(parc > 2 && !EmptyString(parv[2]))
+	{
+		gecos = LOCAL_COPY(parv[2]);
+		collapse_esc(gecos);
+                if(strstr(gecos, "\\s"))
+                {
+                        char *tmp = LOCAL_COPY(gecos);
+                        char *orig = tmp;
+                        char *new = tmp; 
+                        while(*orig)
+                        {
+                                if(*orig == '\\')
+                                {
+                                        if(*(orig + 1) == 's')
+                                        {
+                                                *new++ = ' ';
+                                                orig += 2;   
+                                        }
+                                        /* otherwise skip that and the escaped
+                                         * character after it, so we dont mistake
+                                         * \\s as \s --fl
+                                         */
+                                        else
+                                        {   
+                                                *new++ = *orig++;
+                                                *new++ = *orig++;
+                                        }
+                                }
+                                else
+                                        *new++ = *orig++;
+                        }
+
+                        *new = '\0';
+                        mangle_gecos = LOCAL_COPY(tmp);
+                } else
+                	mangle_gecos = gecos;
+	}
+
 	DLINK_FOREACH(ptr, global_client_list.head)
 	{
 		target_p = ptr->data;
@@ -113,10 +149,20 @@ mo_testmask(struct Client *client_p, struct Client *source_p,
 		if(!IsPerson(target_p))
 			continue;
 
+		if(EmptyString(target_p->sockhost))
+			sockhost = empty_sockhost;
+		else if(!show_ip(source_p, target_p))
+			sockhost = spoofed_sockhost;
+		else
+			sockhost = target_p->sockhost;
+
 		if(match(username, target_p->username) &&
-		   match(hostname, target_p->host))
+		   (match(hostname, target_p->host) || match_ips(hostname, sockhost)))
 		{
 			if(name && !match(name, target_p->name))
+				continue;
+
+			if(mangle_gecos && !match_esc(mangle_gecos, target_p->info))
 				continue;
 
 			if(MyClient(target_p))
@@ -126,42 +172,11 @@ mo_testmask(struct Client *client_p, struct Client *source_p,
 		}
 	}
 
-	sendto_one(source_p, form_str(RPL_TESTMASK),
-			me.name, source_p->name, 
-			name ? name : "*",
-			username, hostname, lcount, gcount);
-	return 0;
-}
-
-static int
-mo_testmaskgecos(struct Client *client_p, struct Client *source_p,
-			int parc, const char *parv[])
-{
-	struct Client *target_p;
-	int lcount = 0;
-	int gcount = 0;
-	dlink_node *ptr;
-
-	DLINK_FOREACH(ptr, global_client_list.head)
-	{
-		target_p = ptr->data;
-
-		if(!IsPerson(target_p))
-			continue;
-
-		if(match_esc(parv[1], target_p->info))
-		{
-			if(MyClient(target_p))
-				lcount++;
-			else
-				gcount++;
-		}
-	}
-
 	sendto_one(source_p, form_str(RPL_TESTMASKGECOS),
 			me.name, source_p->name, 
-			lcount, gcount, parv[1]);
-
+                               lcount, gcount, name ? name : "*",
+                               username, hostname, gecos ? gecos : "*");
 	return 0;
 }
+
 
