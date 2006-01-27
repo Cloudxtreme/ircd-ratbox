@@ -1,3 +1,14 @@
+jilles      2006/01/27 12:08:24 UTC	(20060127_0-21804)
+  Log:
+  Backport trunk r21790:
+  Fix listener name for wildcard bind. Assumes that serverinfo{}                  
+  is before listen{}.                                                             
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/listener.c (File Modified) 
+
+
 androsyn    2006/01/25 21:58:53 UTC	(20060125_1-21788)
   Log:
   - backport MASKTRACE and new TESTMASK from trunk
