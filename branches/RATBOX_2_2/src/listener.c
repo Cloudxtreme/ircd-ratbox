@@ -60,7 +60,7 @@ make_listener(struct irc_sockaddr_storage *addr)
 	struct Listener *listener = (struct Listener *) MyMalloc(sizeof(struct Listener));
 	s_assert(0 != listener);
 
-	listener->name = me.name;
+	listener->name = ServerInfo.name; /* me.name may not be valid yet -- jilles */
 	listener->fd = -1;
 	memcpy(&listener->addr, addr, sizeof(struct irc_sockaddr_storage));
 	listener->next = NULL;
