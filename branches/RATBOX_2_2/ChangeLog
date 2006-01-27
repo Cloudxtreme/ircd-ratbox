@@ -1,3 +1,22 @@
+jilles      2006/01/27 13:07:17 UTC	(20060127_1-21808)
+  Log:
+  (some from trunk r21806)
+  - add masktrace and unreject help files
+  - mention chantrace and masktrace operspy features in operspy help file
+  - remove obsolete eob and testmaskgecos help files
+  - regenerate index files
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/eob (File Deleted) 
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/index (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/masktrace (File Added) 
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/operspy (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/testmaskgecos (File Deleted) 
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/unreject (File Added) 
+	ircd-ratbox/branches/RATBOX_2_2/help/users/index (File Modified) 
+
+
 jilles      2006/01/27 12:08:24 UTC	(20060127_0-21804)
   Log:
   Backport trunk r21790:
