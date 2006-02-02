@@ -1,3 +1,15 @@
+jilles      2006/02/02 17:29:23 UTC	(20060202_0-21824)
+  Log:
+  Call cleanup_challenge() before oper_up(), so the real opername
+  is not cleared (which would cause a crash later).
+  
+  Needs to be merged to trunk.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_oper.c (File Modified) 
+
+
 jilles      2006/01/27 13:07:17 UTC	(20060127_1-21808)
   Log:
   (some from trunk r21806)
