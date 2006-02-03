@@ -1,3 +1,13 @@
+androsyn    2006/02/03 14:25:03 UTC	(20060203_0-21830)
+  Log:
+  do a match() against sockhost as well for testmask and masktrace
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_etrace.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_testmask.c (File Modified) 
+
+
 jilles      2006/02/02 17:29:23 UTC	(20060202_0-21824)
   Log:
   Call cleanup_challenge() before oper_up(), so the real opername
