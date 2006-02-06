@@ -1,3 +1,12 @@
+leeh        2006/02/06 20:10:02 UTC	(20060206_0-21838)
+  Log:
+  - fix match_esc() logic
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/match.c (File Modified) 
+
+
 androsyn    2006/02/03 14:25:03 UTC	(20060203_0-21830)
   Log:
   do a match() against sockhost as well for testmask and masktrace
