@@ -105,6 +105,8 @@ extern dlink_list global_serv_list;
 extern dlink_list oper_list;
 extern dlink_list dead_list;
 
+void ircd_shutdown(const char *reason);
+
 extern void get_current_bandwidth(struct Client *source_p, struct Client *target_p);
 
 extern unsigned long get_maxrss(void);

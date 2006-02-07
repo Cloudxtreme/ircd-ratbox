@@ -107,6 +107,25 @@ open_logfiles(void)
 }			
 
 void
+close_logfiles(void)
+{
+	int i;
+
+	if(log_main != NULL)
+		fclose(log_main);
+
+	/* log_main is handled above, so just do the rest */
+	for(i = 1; i < LAST_LOGFILE; i++)
+	{
+		if(*log_table[i].logfile != NULL)
+		{
+			fclose(*log_table[i].logfile);
+			*log_table[i].logfile = NULL;
+		}
+	}
+}
+
+void
 ilog(ilogfile dest, const char *format, ...)
 {
 	FILE *logfile = *log_table[dest].logfile;

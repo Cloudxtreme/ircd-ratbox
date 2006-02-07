@@ -128,6 +128,36 @@ int eob_count;
 
 int maxconnections;
 
+void
+ircd_shutdown(const char *reason)
+{
+	struct Client *target_p;
+	dlink_node *ptr;
+
+	DLINK_FOREACH(ptr, lclient_list.head)
+	{
+		target_p = ptr->data;
+
+		sendto_one(target_p,
+				":%s NOTICE %s :Server Terminating. %s",
+				me.name, target_p->name, reason);
+	}
+
+	DLINK_FOREACH(ptr, serv_list.head)
+	{
+		target_p = ptr->data;
+
+		sendto_one(target_p, ":%s ERROR :Server Terminating. %s",
+				me.name, reason);
+	}
+
+	ilog(L_MAIN, "Server Terminating. %s", reason);
+	close_logfiles();
+
+	unlink(pidFileName);
+	exit(0);
+}
+
 /*
  * get_vm_top - get the operating systems notion of the resident set size
  */
