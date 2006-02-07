@@ -427,6 +427,7 @@ try_connections(void *unused)
 	 */
 	sendto_realops_flags(UMODE_ALL, L_ALL,
 				"Connection to %s activated", server_p->name);
+	ilog(L_SERVER, "Connection to %s activated", server_p->name);
 
 	serv_connect(server_p, 0);
 }
@@ -998,6 +999,7 @@ server_estab(struct Client *client_p)
 		/* This shouldn't happen, better tell the ops... -A1kmm */
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Warning: Lost connect{} block for server %s!", host);
+		ilog(L_SERVER, "Warning: Lost connect{} block for server %s!", host);
 		return exit_client(client_p, client_p, client_p, "Lost connect{} block!");
 	}
 
@@ -1023,6 +1025,8 @@ server_estab(struct Client *client_p)
 		{
 			ServerStats->is_ref++;
 			sendto_one(client_p, "ERROR :I'm a leaf not a hub");
+			ilog(L_SERVER, "Link %s cancelled, I'm not a hub.",
+				client_p->name);
 			return exit_client(client_p, client_p, client_p, "I'm a leaf");
 		}
 	}
@@ -1074,6 +1078,8 @@ server_estab(struct Client *client_p)
 					     "Warning: fork failed for server %s -- check servlink_path (%s)",
 					     client_p->name,
 					     ConfigFileEntry.servlink_path);
+			ilog(L_SERVER, "Warning: fork failed for server %s -- check servlink_path (%s)",
+				client_p->name, ConfigFileEntry.servlink_path);
 			return exit_client(client_p, client_p, client_p, "Fork failed");
 		}
 		start_io(client_p);
@@ -1645,14 +1651,23 @@ serv_connect_callback(int fd, int status, void *data)
 		 * the others will.. --fl
 		 */
 		if(status == COMM_ERR_TIMEOUT)
+		{
 			sendto_realops_flags(UMODE_ALL, L_ALL,
 					"Error connecting to %s[255.255.255.255]: %s",
 					client_p->name, comm_errstr(status));
+			ilog(L_SERVER, "Error connecting to %s: %s",
+				client_p->name, comm_errstr(status));
+		}
 		else
+		{
 			sendto_realops_flags(UMODE_ALL, L_ALL,
 					"Error connecting to %s[255.255.255.255]: %s (%s)",
 					client_p->name, 
 					comm_errstr(status), strerror(comm_get_sockerr(fd)));
+			ilog(L_SERVER, "Error connecting to %s: %s (%s)",
+				client_p->name, comm_errstr(status),
+				strerror(comm_get_sockerr(fd)));
+		}
 
 		exit_client(client_p, client_p, &me, comm_errstr(status));
 		return;
@@ -1664,6 +1679,7 @@ serv_connect_callback(int fd, int status, void *data)
 	{
 		sendto_realops_flags(UMODE_ALL, L_ALL, "Lost connect{} block for %s",
 				client_p->name);
+		ilog(L_SERVER, "Lost connect{} block for %s", client_p->name);
 		exit_client(client_p, client_p, &me, "Lost connect{} block");
 		return;
 	}
@@ -1701,6 +1717,7 @@ serv_connect_callback(int fd, int status, void *data)
 	{
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "%s went dead during handshake", client_p->name);
+		ilog(L_SERVER, "%s went dead during handshake", client_p->name);
 		exit_client(client_p, client_p, &me, "Went dead during handshake");
 		return;
 	}
