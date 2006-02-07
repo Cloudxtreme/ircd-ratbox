@@ -1,3 +1,19 @@
+leeh        2006/02/07 19:29:02 UTC	(20060207_0-21852)
+  Log:
+  - add close_logfiles(), to close all open logfiles
+  - make both SIGTERM handler and mo_die() call new ircd_shutdown(), which
+    will notify users, close logfiles and remove pidfile
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/ircd.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/s_log.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_die.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/ircd.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/ircd_signal.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_log.c (File Modified) 
+
+
 leeh        2006/02/06 22:19:04 UTC	(20060206_1-21850)
   Log:
   - backport r21812
