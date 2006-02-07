@@ -1,3 +1,12 @@
+leeh        2006/02/07 19:38:15 UTC	(20060207_1-21854)
+  Log:
+  - add some more log entries for when we drop server connections
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/s_serv.c (File Modified) 
+
+
 leeh        2006/02/07 19:29:02 UTC	(20060207_0-21852)
   Log:
   - add close_logfiles(), to close all open logfiles
