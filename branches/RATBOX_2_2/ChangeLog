@@ -1,3 +1,16 @@
+leeh        2006/02/08 21:02:41 UTC	(20060208_1-21860)
+  Log:
+  - update testmask/masktrace help files, noting they take cidr masks
+  - update RELNOTES and whats-new-2.2.txt with latest changes
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/doc/whats-new-2.2.txt (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/masktrace (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/testmask (File Modified) 
+
+
 leeh        2006/02/08 20:37:05 UTC	(20060208_0-21858)
   Log:
   - keep RPL_TESTMASK next to numeric 724 and note it was used previously
