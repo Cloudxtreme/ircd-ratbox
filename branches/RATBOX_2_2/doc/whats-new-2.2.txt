@@ -23,10 +23,15 @@ Client
 
 Oper
 ----
-- TESTMASK can now take a [nick!]user@host mask.
-- New TESTMASKGECOS command, TESTMASK for gecos.
+- TESTMASK now takes: TESTMASK <[nick!]user@host> [:<gecos>]
+  Matching against all of the fields.
+- TESTMASK can now perform ip comparisons, eg TESTMASK *@192.168.0.0/16
 - New CHANTRACE command, which will perform an ETRACE of a channel if you
   are a member.  Operspy capable.
+- New MASKTRACE command, taking: MASKTRACE [!]<[nick!]user@host> [:<gecos>]
+  This essentially works like TESTMASK and is operspy capable.  In normal
+  usage it will actually list local clients matching the mask, when used
+  with operspy it will list all clients network wide.
 - Klines for user@1.2.3.* etc are now munged to CIDR.
 - New CHALLENGE system, see doc/challenge.txt and
   http://respond.ircd-ratbox.org for more information.
