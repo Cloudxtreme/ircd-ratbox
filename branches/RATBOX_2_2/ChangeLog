@@ -1,3 +1,12 @@
+leeh        2006/02/08 21:22:04 UTC	(20060208_2-21862)
+  Log:
+  - revved patchlevel to 2.2.0rc2
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/patchlevel.h (File Modified) 
+
+
 leeh        2006/02/08 21:02:41 UTC	(20060208_1-21860)
   Log:
   - update testmask/masktrace help files, noting they take cidr masks
