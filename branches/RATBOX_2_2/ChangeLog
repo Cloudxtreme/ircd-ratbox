@@ -1,3 +1,13 @@
+leeh        2006/02/13 18:56:20 UTC	(20060213_0-21868)
+  Log:
+  - backport r21866
+    - Respect ban exceptions in /knock.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_knock.c (File Modified) 
+
+
 leeh        2006/02/08 21:22:04 UTC	(20060208_2-21862)
   Log:
   - revved patchlevel to 2.2.0rc2
