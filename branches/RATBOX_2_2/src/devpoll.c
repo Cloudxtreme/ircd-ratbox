@@ -28,6 +28,7 @@
 #include "config.h"
 
 #include "stdinc.h"
+#include <poll.h>
 #include <sys/devpoll.h>
 
 #include "config.h"
@@ -54,7 +55,7 @@
 static void devpoll_update_events(int, short, PF *);
 static int dpfd;
 static short *fdmask;
-static pollfd *npollfds;
+static struct pollfd *npollfds;
 static void devpoll_update_events(int, short, PF *);
 static void devpoll_write_update(int, int);
 static int maxfd;
@@ -172,8 +173,8 @@ void
 init_netio(void)
 {
         maxfd = getdtablesize() - 2; /* This makes more sense than HARD_FDLIMIT */
-	fdmask = ircd_malloc(sizeof(fdmask) * maxfd + 1);
-        npollfds = ircd_malloc(sizeof(struct pollfd) * maxfd + 1);
+	fdmask = MyMalloc(sizeof(fdmask) * maxfd + 1);
+        npollfds = MyMalloc(sizeof(struct pollfd) * maxfd + 1);
                 
 	dpfd = open("/dev/poll", O_RDWR);
 	if(dpfd < 0)
