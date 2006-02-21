@@ -53,7 +53,8 @@
 
 static void devpoll_update_events(int, short, PF *);
 static int dpfd;
-static short fdmask[POLL_LENGTH];
+static short *fdmask;
+static pollfd *npollfds;
 static void devpoll_update_events(int, short, PF *);
 static void devpoll_write_update(int, int);
 static int maxfd;
@@ -172,6 +173,7 @@ init_netio(void)
 {
         maxfd = getdtablesize() - 2; /* This makes more sense than HARD_FDLIMIT */
 	fdmask = ircd_malloc(sizeof(fdmask) * maxfd + 1);
+        npollfds = ircd_malloc(sizeof(struct pollfd) * maxfd + 1);
                 
 	dpfd = open("/dev/poll", O_RDWR);
 	if(dpfd < 0)
@@ -233,7 +235,6 @@ int
 comm_select(unsigned long delay)
 {
 	int num, i;
-	struct pollfd pollfds[maxfd];
 	struct dvpoll dopoll;
 
 	do
@@ -241,8 +242,8 @@ comm_select(unsigned long delay)
 		for (;;)
 		{
 			dopoll.dp_timeout = delay;
-			dopoll.dp_nfds = POLL_LENGTH;
-			dopoll.dp_fds = &pollfds[0];
+			dopoll.dp_nfds = maxfd;
+			dopoll.dp_fds = npollfds;
 			num = ioctl(dpfd, DP_POLL, &dopoll);
 			if(num >= 0)
 				break;
