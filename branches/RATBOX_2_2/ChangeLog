@@ -1,3 +1,13 @@
+leeh        2006/02/22 18:11:11 UTC	(20060222_0-21878)
+  Log:
+  - remove default of needing identd to *@*
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/doc/example.conf (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/doc/example.efnet.conf (File Modified) 
+
+
 androsyn    2006/02/21 19:12:53 UTC	(20060221_1-21876)
   Log:
   really get the /dev/poll stuff working
