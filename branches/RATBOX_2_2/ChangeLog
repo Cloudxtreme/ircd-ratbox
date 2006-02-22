@@ -1,3 +1,13 @@
+leeh        2006/02/22 20:36:01 UTC	(20060222_1-21881)
+  Log:
+  - remove the special case for *\ that was messing up the logic in
+    match_esc()
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/match.c (File Modified) 
+
+
 leeh        2006/02/22 18:11:11 UTC	(20060222_0-21878)
   Log:
   - remove default of needing identd to *@*
