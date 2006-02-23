@@ -1,3 +1,13 @@
+jilles      2006/02/23 00:09:59 UTC	(20060223_0-21889)
+  Log:
+  Fix errno text in "Error connecting to %s: %s (%s)" serverlog.
+  We can only call comm_get_sockerr() once on an fd.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/s_serv.c (File Modified) 
+
+
 leeh        2006/02/22 20:36:01 UTC	(20060222_1-21881)
   Log:
   - remove the special case for *\ that was messing up the logic in
