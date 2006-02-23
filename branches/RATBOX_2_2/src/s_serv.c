@@ -1606,6 +1606,7 @@ serv_connect_callback(int fd, int status, void *data)
 {
 	struct Client *client_p = data;
 	struct server_conf *server_p;
+	char *errstr;
 
 	/* First, make sure its a real client! */
 	s_assert(client_p != NULL);
@@ -1660,13 +1661,14 @@ serv_connect_callback(int fd, int status, void *data)
 		}
 		else
 		{
+			errstr = strerror(comm_get_sockerr(fd));
 			sendto_realops_flags(UMODE_ALL, L_ALL,
 					"Error connecting to %s[255.255.255.255]: %s (%s)",
 					client_p->name, 
-					comm_errstr(status), strerror(comm_get_sockerr(fd)));
+					comm_errstr(status), errstr);
 			ilog(L_SERVER, "Error connecting to %s: %s (%s)",
 				client_p->name, comm_errstr(status),
-				strerror(comm_get_sockerr(fd)));
+				errstr);
 		}
 
 		exit_client(client_p, client_p, &me, comm_errstr(status));
