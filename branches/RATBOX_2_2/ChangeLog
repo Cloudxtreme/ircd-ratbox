@@ -1,3 +1,18 @@
+jilles      2006/03/05 22:49:05 UTC	(20060305_1-22003)
+  Log:
+  Global /who:
+  - make sure to clear all marks also if the who was aborted
+    because of too many matches (reverting r21999)
+  - give ERR_TOOMANYMATCHES if too many matches
+  - clarify comments
+  
+  Needs to be merged to trunk
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_who.c (File Modified) 
+
+
 leeh        2006/03/05 20:10:31 UTC	(20060305_0-21999)
   Log:
   - fix who_global() not clearing marks properly, and potentially showing
