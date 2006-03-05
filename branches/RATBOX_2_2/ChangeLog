@@ -1,3 +1,13 @@
+leeh        2006/03/05 20:10:31 UTC	(20060305_0-21999)
+  Log:
+  - fix who_global() not clearing marks properly, and potentially showing
+    clients twice if theyre -i and in a common channel
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_who.c (File Modified) 
+
+
 jilles      2006/02/23 00:09:59 UTC	(20060223_0-21889)
   Log:
   Fix errno text in "Error connecting to %s: %s (%s)" serverlog.
