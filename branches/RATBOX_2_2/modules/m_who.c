@@ -292,7 +292,7 @@ who_global(struct Client *source_p, const char *mask, int server_oper, int opers
 		if(!IsPerson(target_p))
 			continue;
 
-		if(IsInvisible(target_p) && !operspy)
+		if(IsMarked(target_p) || IsInvisible(target_p))
 		{
 			ClearMark(target_p);
 			continue;
