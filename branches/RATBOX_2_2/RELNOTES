@@ -5,6 +5,14 @@ If you are upgrading from 2.1, you must read doc/whats-new-2.2.txt
 If you are upgrading from 2.0, you must also read doc/whats-new-2.1.txt
 If you are upgrading from 1.x, you must also read doc/whats-new-2.0.txt
 
+-- ircd-ratbox-2.2.0rc3
+- respect chanmode +e in /knock
+- fix some solaris /dev/poll stuff
+- more logic fixes for match_esc()
+- fix some minor issues with a global who occasionally skipping clients
+- make /who return ERR_TOOMANYMATCHES when its limits reached
+- fix RSFNC to also collide unknown users
+
 -- ircd-ratbox-2.2.0rc2
 - Fix compilation of contrib/
 - Fix cores with unknown servers
