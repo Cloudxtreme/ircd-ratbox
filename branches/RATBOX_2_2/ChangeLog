@@ -1,3 +1,12 @@
+leeh        2006/03/13 20:48:49 UTC	(20060313_0-22129)
+  Log:
+  - update SVN-Access with right branch info for 'stable'
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/SVN-Access (File Modified) 
+
+
 jilles      2006/03/12 17:07:00 UTC	(20060312_0-22093)
   Log:
   User /quote help index was not sorted properly.
