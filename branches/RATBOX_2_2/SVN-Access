@@ -4,13 +4,13 @@ So, we've gone and switched to subversion.
 
 The ircd-ratbox subversion repository is available for anonymous access.
 
-One can checkout the stable tree(currently 2.0.x) as follows:
-
-svn co http://cvs.ratbox.org/svnroot/ircd-ratbox/branches/RATBOX_2_0
-
-Or the testing tree(2.1.x):
+One can checkout the stable tree(currently 2.1.x) as follows:
 
 svn co http://cvs.ratbox.org/svnroot/ircd-ratbox/branches/RATBOX_2_1
+
+Or the testing tree(2.2.x):
+
+svn co http://cvs.ratbox.org/svnroot/ircd-ratbox/branches/RATBOX_2_2
 
 Or if you prefer the bleeding edge stuff:
 
