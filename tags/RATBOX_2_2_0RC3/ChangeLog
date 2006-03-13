@@ -1,3 +1,12 @@
+leeh        2006/03/13 20:47:03 UTC	(20060313_0-22127)
+  Log:
+  - tag 2.2.0rc3
+  
+
+  Modified:
+	ircd-ratbox/tags/RATBOX_2_2_0RC3/ (File Added) 
+
+
 jilles      2006/03/12 17:07:00 UTC	(20060312_0-22093)
   Log:
   User /quote help index was not sorted properly.
