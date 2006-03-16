@@ -1,3 +1,14 @@
+androsyn    2006/03/16 16:30:53 UTC	(20060316_0-22165)
+  Log:
+  - use get_class_name() to get the class name.
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/s_conf.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_testline.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/class.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_conf.c (File Modified) 
+
+
 leeh        2006/03/13 20:48:49 UTC	(20060313_0-22129)
   Log:
   - update SVN-Access with right branch info for 'stable'
