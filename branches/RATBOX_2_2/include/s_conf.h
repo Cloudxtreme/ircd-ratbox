@@ -367,7 +367,7 @@ extern void parse_resv_file(FILE *);
 extern char *getfield(char *newline);
 
 extern char *get_oper_name(struct Client *client_p);
-const char *get_class_name(struct ConfItem *aconf);
+char *get_class_name(struct ConfItem *aconf);
 
 extern int yylex(void);
 

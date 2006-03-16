@@ -1087,12 +1087,12 @@ get_oper_name(struct Client *client_p)
 }
 
 /* returns class name */
-const char *
+char *
 get_class_name(struct ConfItem *aconf)
 {
 	static char zero[] = "default";
 
-	if(aconf == NULL || aconf->c_class == NULL || EmptyString(ConfClassName(aconf))
+	if(aconf == NULL || aconf->c_class == NULL || EmptyString(ConfClassName(aconf)))
 		return zero;
 	
 	return ConfClassName(aconf);
@@ -1119,7 +1119,6 @@ get_printable_conf(struct ConfItem *aconf, char **name, char **host,
 		   char **pass, char **user, int *port, char **classname)
 {
 	static char null[] = "<NULL>";
-	static char zero[] = "default";
 
 	*name = EmptyString(aconf->name) ? null : aconf->name;
 	*host = EmptyString(aconf->host) ? null : aconf->host;
