@@ -1,3 +1,12 @@
+androsyn    2006/03/16 16:38:27 UTC	(20060316_1-22167)
+  Log:
+  change get_class_name to be char instead of const char and remove an unused variable
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/s_conf.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_conf.c (File Modified) 
+
+
 androsyn    2006/03/16 16:30:53 UTC	(20060316_0-22165)
   Log:
   - use get_class_name() to get the class name.
