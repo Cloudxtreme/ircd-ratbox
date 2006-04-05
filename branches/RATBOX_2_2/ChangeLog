@@ -1,3 +1,14 @@
+leeh        2006/04/05 20:17:48 UTC	(20060405_0-22271)
+  Log:
+  - update RELNOTES
+  - revved patchlevel to 2.2.0
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/patchlevel.h (File Modified) 
+
+
 androsyn    2006/03/16 16:38:27 UTC	(20060316_1-22167)
   Log:
   change get_class_name to be char instead of const char and remove an unused variable
