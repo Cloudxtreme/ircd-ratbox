@@ -281,7 +281,7 @@ parse_resv(struct Client *source_p, const char *name,
 
 		if(temp_time > 0)
 		{
-			aconf->hold = CurrentTime + (temp_time * 60);
+			aconf->hold = CurrentTime + temp_time;
 
 			sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "%s added temporary %d min. RESV for [%s] [%s]",

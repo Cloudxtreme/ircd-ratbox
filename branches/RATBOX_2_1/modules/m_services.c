@@ -157,7 +157,7 @@ me_rsfnc(struct Client *client_p, struct Client *source_p,
 	if(!(source_p->flags & FLAGS_SERVICE))
 		return 0;
 
-	if((target_p = find_person(parv[1])) == NULL)
+	if((target_p = find_named_client(parv[1])) == NULL)
 		return 0;
 
 	if(!MyClient(target_p))
@@ -191,8 +191,10 @@ me_rsfnc(struct Client *client_p, struct Client *source_p,
 				me.name, exist_p->name);
 
 		exist_p->flags |= FLAGS_KILLED;
-		kill_client_serv_butone(NULL, exist_p, "%s (Nickname regained by services)",
-					me.name);
+
+		if(IsClient(exist_p))
+			kill_client_serv_butone(NULL, exist_p, "%s (Nickname regained by services)",
+						me.name);
 
 		snprintf(buf, sizeof(buf), "Killed (%s (Nickname regained by services))",
 			me.name);
