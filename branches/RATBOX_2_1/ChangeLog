@@ -1,3 +1,27 @@
+leeh        2006/05/06 19:18:36 UTC	(20060506_0-22387)
+  Log:
+  - backport some stuff
+    - r22041, RSFNC: consider unknowns also for detecting a collide,
+      otherwise we can get two clients with the same nick.
+    - r22095, User /quote help index was not sorted properly.
+    - r21881, remove the special case for *\ that was messing up the logic
+      in match_esc()
+    - r21868, respect ban exceptions in /knock.
+    - r21713, fix m_error not being loaded by default
+    - r21544, fix nick resvs having 60 times longer duration than expected
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/help/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/opers/index (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/help/users/index (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/modules/m_knock.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/modules/m_resv.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/modules/m_services.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/src/match.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/src/modules.c (File Modified) 
+
+
 androsyn    2005/11/07 04:06:33 UTC	(20051107_0-21098)
   Log:
   using a block heap for patricia tree is mostly pointless
