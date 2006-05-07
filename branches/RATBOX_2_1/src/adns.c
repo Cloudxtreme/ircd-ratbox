@@ -252,29 +252,21 @@ adns_gethost(const char *name, int aftype, struct DNSQuery *req)
 }
 
 /* int adns_getaddr(struct irc_inaddr *addr, int aftype,
- *                   struct DNSQuery *req, int arpa_type);
+ *                   struct DNSQuery *req);
  * Input: An address, an address family, a DNSQuery structure.
- *        arpa_type is used for deciding on using ip6.int or ip6.arpa
- *        0 is ip6.arpa and 1 is ip6.int, of course this applies to ipv6
- *        connections only and has no effect on ipv4.
  * Output: None
  * Side effects: Sets up a query entry and sends it to the DNS server to
  *               resolve an IP address to a domain name.
  */
 int
-adns_getaddr(struct sockaddr *addr, int aftype, struct DNSQuery *req, int arpa_type)
+adns_getaddr(struct sockaddr *addr, int aftype, struct DNSQuery *req)
 {
 	int result;
 	int flags = adns_r_ptr;
 	assert(dns_state->nservers > 0);
 #ifdef IPV6
 	if(addr->sa_family == AF_INET6)
-	{
-		if(arpa_type)
 			flags = adns_r_ptr_ip6;
-		else
-			flags = adns_r_ptr_ip6_old;
-	}
 #endif
 	result = adns_submit_reverse(dns_state,
 				    (struct sockaddr *) addr,
