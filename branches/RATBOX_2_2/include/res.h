@@ -47,7 +47,7 @@ void dns_readable(int fd, void *ptr);
 void dns_do_callbacks(void);
 void dns_select(void);
 int adns_gethost(const char *name, int aftype, struct DNSQuery *req);
-int adns_getaddr(struct sockaddr *addr, int aftype, struct DNSQuery *req, int arpa_type);
+int adns_getaddr(struct sockaddr *addr, int aftype, struct DNSQuery *req);
 void delete_adns_queries(struct DNSQuery *q);
 void report_adns_servers(struct Client *);
 #endif

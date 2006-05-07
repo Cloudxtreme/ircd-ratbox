@@ -362,7 +362,7 @@ start_auth(struct Client *client)
 
 	/* No DNS cache now, remember? -- adrian */
 	if(adns_getaddr((struct sockaddr *)&client->localClient->ip, client->localClient->ip.ss_family,
-		     &auth->dns_query, 1))
+		     &auth->dns_query))
 		sendheader(client, REPORT_FAIL_DNS);
 	else 
 		SetDNSPending(auth);
