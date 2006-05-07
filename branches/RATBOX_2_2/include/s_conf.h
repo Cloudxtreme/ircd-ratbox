@@ -221,9 +221,6 @@ struct config_file_entry
 	int use_egd;
 	int use_whois_actually;
 	int warn_no_nline;
-#ifdef IPV6
-	int fallback_to_ip6_int;
-#endif
 };
 
 struct config_channel_entry
