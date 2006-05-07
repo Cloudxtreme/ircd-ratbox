@@ -1,3 +1,15 @@
+leeh        2006/05/07 10:20:30 UTC	(20060507_1-22393)
+  Log:
+  - remove arpa_type from adns_getaddr()
+    - im not touching adns/ though ;-)
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/include/res.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/src/adns.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/src/s_auth.c (File Modified) 
+
+
 leeh        2006/05/07 10:13:24 UTC	(20060507_0-22391)
   Log:
   - port r22389, remove support for ip6.int as the 6bone is being phased out
