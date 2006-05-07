@@ -1,3 +1,16 @@
+leeh        2006/05/07 10:11:36 UTC	(20060507_0-22389)
+  Log:
+  - remove support for resolving ip6.int, the 6bone is being phased out so we
+    dont need this anymore.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/s_auth.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/s_conf.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/newconf.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_auth.c (File Modified) 
+
+
 leeh        2006/04/09 21:13:35 UTC	(20060409_0-22335)
   Log:
   - time for a new RPL_YOUREOPER
