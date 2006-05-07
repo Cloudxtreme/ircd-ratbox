@@ -1,3 +1,13 @@
+jilles      2006/05/07 14:16:49 UTC	(20060507_2-22403)
+  Log:
+  Fix backport of r22041: target must be a person but existing
+  user with the nick may be an unknown.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/modules/m_services.c (File Modified) 
+
+
 leeh        2006/05/07 10:20:30 UTC	(20060507_1-22393)
   Log:
   - remove arpa_type from adns_getaddr()
