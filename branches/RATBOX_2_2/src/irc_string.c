@@ -448,7 +448,7 @@ inet_ntop6(const unsigned char *src, char *dst, unsigned int size)
 		int base, len;
 	}
 	best, cur;
-	u_int words[IN6ADDRSZ / INT16SZ];
+	unsigned int words[IN6ADDRSZ / INT16SZ];
 	int i;
 
 	/*
@@ -654,7 +654,7 @@ inet_pton4(src, dst)
 
 		if(ch >= '0' && ch <= '9')
 		{
-			u_int new = *tp * 10 + (ch - '0');
+			unsigned int new = *tp * 10 + (ch - '0');
 
 			if(new > 255)
 				return (0);
@@ -706,7 +706,7 @@ inet_pton6(src, dst)
 	u_char tmp[IN6ADDRSZ], *tp, *endp, *colonp;
 	const char *curtok;
 	int ch, saw_xdigit;
-	u_int val;
+	unsigned int val;
 
 	tp = memset(tmp, '\0', IN6ADDRSZ);
 	endp = tp + IN6ADDRSZ;

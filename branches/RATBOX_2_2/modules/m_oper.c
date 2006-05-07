@@ -404,9 +404,9 @@ generate_challenge(char **r_challenge, char **r_response, RSA * rsa)
 	if(get_randomness(secret, CHALLENGE_SECRET_LENGTH))
 	{
 		SHA1_Init(&ctx);
-		SHA1_Update(&ctx, (u_int8_t *)secret, CHALLENGE_SECRET_LENGTH);
+		SHA1_Update(&ctx, (uint8_t *)secret, CHALLENGE_SECRET_LENGTH);
 		*r_response = MyMalloc(SHA_DIGEST_LENGTH);
-		SHA1_Final((u_int8_t *)*r_response, &ctx);
+		SHA1_Final((uint8_t *)*r_response, &ctx);
 
 		length = RSA_size(rsa);
 		tmp = MyMalloc(length);

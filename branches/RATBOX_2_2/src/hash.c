@@ -103,10 +103,10 @@ init_hash(void)
 }
 
 
-u_int32_t
+uint32_t
 fnv_hash_upper(const unsigned char *s, int bits)
 {
- 	u_int32_t h = FNV1_32_INIT;
+ 	uint32_t h = FNV1_32_INIT;
 
 	while (*s)
 	{
@@ -117,10 +117,10 @@ fnv_hash_upper(const unsigned char *s, int bits)
 	return h;
 }
 
-u_int32_t
+uint32_t
 fnv_hash(const unsigned char *s, int bits)
 {
- 	u_int32_t h = FNV1_32_INIT;
+ 	uint32_t h = FNV1_32_INIT;
 
 	while (*s)
 	{
@@ -131,10 +131,10 @@ fnv_hash(const unsigned char *s, int bits)
 	return h;
 }
 
-u_int32_t
+uint32_t
 fnv_hash_len(const unsigned char *s, int bits, int len)
 {
- 	u_int32_t h = FNV1_32_INIT;
+ 	uint32_t h = FNV1_32_INIT;
 	const unsigned char *x = s + len;
 	while (*s && s < x)
 	{
@@ -145,10 +145,10 @@ fnv_hash_len(const unsigned char *s, int bits, int len)
 	return h;
 }
 
-u_int32_t
+uint32_t
 fnv_hash_upper_len(const unsigned char *s, int bits, int len)
 {
- 	u_int32_t h = FNV1_32_INIT;
+ 	uint32_t h = FNV1_32_INIT;
 	const unsigned char *x = s + len;
 	while (*s && s < x)
 	{
@@ -163,7 +163,7 @@ fnv_hash_upper_len(const unsigned char *s, int bits, int len)
  *
  * hashes a nickname, first converting to lowercase
  */
-static u_int32_t
+static uint32_t
 hash_nick(const char *name)
 {
 	return fnv_hash_upper((const unsigned char *) name, U_MAX_BITS);
@@ -173,7 +173,7 @@ hash_nick(const char *name)
  *
  * hashes an id, case is kept
  */
-static u_int32_t
+static uint32_t
 hash_id(const char *name)
 {
 	return fnv_hash((const unsigned char *) name, U_MAX_BITS);
@@ -183,7 +183,7 @@ hash_id(const char *name)
  *
  * hashes a channel name, based on first 30 chars only for efficiency
  */
-static u_int32_t
+static uint32_t
 hash_channel(const char *name)
 {
 	return fnv_hash_upper_len((const unsigned char *) name, CH_MAX_BITS, 30);
@@ -194,7 +194,7 @@ hash_channel(const char *name)
  * hashes a hostname, based on first 30 chars only, as thats likely to
  * be more dynamic than rest.
  */
-static u_int32_t
+static uint32_t
 hash_hostname(const char *name)
 {
 	return fnv_hash_upper_len((const unsigned char *) name, HOST_MAX_BITS, 30);
@@ -204,7 +204,7 @@ hash_hostname(const char *name)
  *
  * hashes a resv channel name, based on first 30 chars only
  */
-static u_int32_t
+static uint32_t
 hash_resv(const char *name)
 {
 	return fnv_hash_upper_len((const unsigned char *) name, R_MAX_BITS, 30);

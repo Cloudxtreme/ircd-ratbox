@@ -43,7 +43,7 @@
 #define INET6_ADDRSTRLEN 46
 #endif
 
-/* typedef unsigned int u_int; */
+/* typedef unsigned int uint; */
 typedef void (*void_fn_t) ();
 #define prefix_touchar(prefix) ((u_char *)&(prefix)->add.sin)
 #define MAXLINE 1024
@@ -71,7 +71,7 @@ prefix_t;
 
 typedef struct _patricia_node_t
 {
-	u_int bit;		/* flag if this node used */
+	unsigned int bit;		/* flag if this node used */
 	prefix_t *prefix;	/* who we are in patricia tree */
 	struct _patricia_node_t *l, *r;	/* left and right children */
 	struct _patricia_node_t *parent;	/* may be used */
@@ -82,7 +82,7 @@ patricia_node_t;
 typedef struct _patricia_tree_t
 {
 	patricia_node_t *head;
-	u_int maxbits;		/* for IP, 32 bit addresses */
+	unsigned int maxbits;		/* for IP, 32 bit addresses */
 	int num_active_node;	/* for debug purpose */
 }
 patricia_tree_t;
