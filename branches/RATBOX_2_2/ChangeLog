@@ -1,3 +1,19 @@
+androsyn    2006/05/07 15:39:43 UTC	(20060507_2-22407)
+  Log:
+  fix some type related stuff
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/hash.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/irc_string.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/patricia.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_oper.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/hash.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/irc_string.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/match.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/patricia.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_serv.c (File Modified) 
+
+
 leeh        2006/05/07 10:23:50 UTC	(20060507_1-22395)
   Log:
   - remove arpa_type from adns_getaddr()
