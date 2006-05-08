@@ -25,8 +25,8 @@
  */
 
 #ifndef PATCHLEVEL
-#define PATCHLEVEL   "ircd-ratbox-2.1.7"
-#define PATCHLEVEL_NUM	0201070500
+#define PATCHLEVEL   "ircd-ratbox-2.1.8"
+#define PATCHLEVEL_NUM	0201080500
 
 /* patchlevel numbers:
  * <major><minor><point><status><statusnum>
