@@ -1,3 +1,11 @@
+androsyn    2006/05/08 12:25:00 UTC	(20060508_0-22413)
+  Log:
+  make CAP not core if there is no nickname set yet
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_cap.c (File Modified) 
+
+
 androsyn    2006/05/07 15:39:43 UTC	(20060507_2-22407)
   Log:
   fix some type related stuff
