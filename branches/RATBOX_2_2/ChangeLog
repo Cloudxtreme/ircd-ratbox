@@ -1,3 +1,12 @@
+leeh        2006/05/08 17:27:29 UTC	(20060508_1-22417)
+  Log:
+  - fix a user triggerable memleak
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_capab.c (File Modified) 
+
+
 androsyn    2006/05/08 12:25:00 UTC	(20060508_0-22413)
   Log:
   make CAP not core if there is no nickname set yet
