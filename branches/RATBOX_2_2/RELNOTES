@@ -5,6 +5,12 @@ If you are upgrading from 2.1, you must read doc/whats-new-2.2.txt
 If you are upgrading from 2.0, you must also read doc/whats-new-2.1.txt
 If you are upgrading from 1.x, you must also read doc/whats-new-2.0.txt
 
+-- ircd-ratbox-2.2.1
+- remove support for resolving ip6.int, people should be using .arpa
+- minor compile fixes for solaris
+- fix core in client capabilities
+- fix user triggerable memleak
+
 -- ircd-ratbox-2.2.0
 - fix core with stats e
 - sort user /quote help index properly
