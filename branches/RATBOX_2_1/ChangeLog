@@ -1,3 +1,12 @@
+leeh        2006/05/08 11:43:46 UTC	(20060508_0-22411)
+  Log:
+  - fix a user trippable memleak
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/modules/m_capab.c (File Modified) 
+
+
 jilles      2006/05/07 14:47:07 UTC	(20060507_3-22405)
   Log:
   Backport RATBOX_2_2 r21209:
