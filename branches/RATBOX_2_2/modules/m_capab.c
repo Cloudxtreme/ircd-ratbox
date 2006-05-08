@@ -66,6 +66,9 @@ mr_capab(struct Client *client_p, struct Client *source_p, int parc, const char 
 	if(client_p->localClient == NULL)
 		return 0;
 
+	if(client_p->user)
+		return 0;
+
 	/* CAP_TS6 is set in PASS, so is valid.. */
 	if((client_p->localClient->caps & ~CAP_TS6) != 0)
 	{
@@ -75,6 +78,7 @@ mr_capab(struct Client *client_p, struct Client *source_p, int parc, const char 
 	else
 		client_p->localClient->caps |= CAP_CAP;
 
+	MyFree(client_p->localClient->fullcaps);
 	DupString(client_p->localClient->fullcaps, parv[1]);
 
 	for (i = 1; i < parc; i++)
