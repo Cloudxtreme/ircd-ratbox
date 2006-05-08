@@ -1,3 +1,14 @@
+leeh        2006/05/08 14:51:47 UTC	(20060508_1-22415)
+  Log:
+  - update RELNOTES
+  - revved patchlevel to 2.1.8
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_1/include/patchlevel.h (File Modified) 
+
+
 leeh        2006/05/08 11:43:46 UTC	(20060508_0-22411)
   Log:
   - fix a user trippable memleak
