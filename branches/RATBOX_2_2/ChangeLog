@@ -1,3 +1,15 @@
+jilles      2006/05/12 19:44:15 UTC	(20060512_2-22463)
+  Log:
+  Backport trunk r22461:
+  Expand blah.blah and blah:blah to *!*@... instead of ...!*@* for bans.
+  (longstanding bug, && instead of ||...)
+  Allows stuff like /mode +b 127.0.0.1 to ban that IP.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_mode.c (File Modified) 
+
+
 jilles      2006/05/12 16:30:43 UTC	(20060512_1-22449)
   Log:
   Backport trunk r22447:
