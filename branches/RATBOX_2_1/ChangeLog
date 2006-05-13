@@ -1,3 +1,15 @@
+jilles      2006/05/13 21:24:50 UTC	(20060513_0-22481)
+  Log:
+  Backport trunk r22447:
+  Add service{} block to example.conf, commented out to
+  avoid trouble if ratbox-services support is not
+  compiled in.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/doc/example.conf (File Modified) 
+
+
 jilles      2006/05/12 15:55:54 UTC	(20060512_0-22443)
   Log:
   Backport trunk r22439:
