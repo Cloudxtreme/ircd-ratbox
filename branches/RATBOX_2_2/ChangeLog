@@ -1,3 +1,13 @@
+jilles      2006/05/17 14:11:02 UTC	(20060517_0-22535)
+  Log:
+  Backport trunk r22485:
+  Don't allow servers to QUIT (they should use SQUIT).
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_quit.c (File Modified) 
+
+
 jilles      2006/05/12 19:44:15 UTC	(20060512_2-22463)
   Log:
   Backport trunk r22461:
