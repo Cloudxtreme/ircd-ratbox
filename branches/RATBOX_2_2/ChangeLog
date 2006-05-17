@@ -1,3 +1,15 @@
+jilles      2006/05/17 14:52:16 UTC	(20060517_1-22543)
+  Log:
+  Default topiclen has been 160 for quite a while now,
+  update help text in configure.
+  (This was already correct in trunk.)
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/configure.ac (File Modified) 
+
+
 jilles      2006/05/17 14:11:02 UTC	(20060517_0-22535)
   Log:
   Backport trunk r22485:
