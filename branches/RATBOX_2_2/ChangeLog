@@ -1,3 +1,15 @@
+jilles      2006/05/17 17:34:08 UTC	(20060517_2-22561)
+  Log:
+  Backport trunk r22559:
+  Don't allow TB to set an empty topic.
+  This would be possible if a server sent bad protocol
+  and could cause a crash.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_tb.c (File Modified) 
+
+
 jilles      2006/05/17 14:52:16 UTC	(20060517_1-22543)
   Log:
   Default topiclen has been 160 for quite a while now,
