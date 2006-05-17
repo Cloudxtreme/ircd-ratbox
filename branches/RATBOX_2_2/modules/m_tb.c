@@ -38,6 +38,7 @@
 #include "common.h"
 #include "config.h"
 #include "ircd.h"
+#include "irc_string.h"
 #include "s_conf.h"
 #include "msg.h"
 #include "modules.h"
@@ -86,6 +87,9 @@ ms_tb(struct Client *client_p, struct Client *source_p, int parc, const char *pa
 		newtopic = parv[3];
 		newtopicwho = source_p->name;
 	}
+
+	if (EmptyString(newtopic))
+		return 0;
 
 	if(chptr->topic == NULL || chptr->topic_time > newtopicts)
 	{
