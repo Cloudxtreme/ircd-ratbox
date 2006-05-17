@@ -873,7 +873,7 @@ Optional Packages:
   --with-helpdir=DIR      Directory to install help files.
   --with-moduledir=DIR    Directory to install modules.
   --with-nicklen=LENGTH   Set the nick length to LENGTH (default 9, max 50)
-  --with-topiclen=NUMBER  Set the max topic length to NUMBER (default 120, max
+  --with-topiclen=NUMBER  Set the max topic length to NUMBER (default 160, max
                           390)
 
 Some influential environment variables:
