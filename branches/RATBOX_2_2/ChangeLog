@@ -1,3 +1,13 @@
+androsyn    2006/05/19 23:59:43 UTC	(20060519_1-22581)
+  Log:
+  remove execute properties from example.conf
+  
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/doc/example.conf  (Property Modified)
+
+
 androsyn    2006/05/19 20:50:15 UTC	(20060519_0-22575)
   Log:
   people can suck my nuts and upgrade glibc
