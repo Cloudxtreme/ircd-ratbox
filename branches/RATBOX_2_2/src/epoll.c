@@ -57,17 +57,6 @@ static struct epoll_event *pfd;
 static int pfd_size;
 
 
-#ifndef HAVE_EPOLL_CTL /* bah..glibc doesn't support epoll yet.. */
-#include <sys/epoll.h>
-#include <sys/syscall.h>
-
-_syscall1(int, epoll_create, int, maxfds);
-_syscall4(int, epoll_ctl, int, epfd, int, op, int, fd, struct epoll_event *, events);
-_syscall4(int, epoll_wait, int, epfd, struct epoll_event *, pevents,
-		 int, maxevents, int, timeout);
-
-#endif /* HAVE_EPOLL_CTL */
-
 int 
 comm_setup_fd(int fd)
 {
