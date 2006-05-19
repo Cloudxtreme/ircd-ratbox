@@ -1,3 +1,11 @@
+androsyn    2006/05/19 20:50:15 UTC	(20060519_0-22575)
+  Log:
+  people can suck my nuts and upgrade glibc
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/epoll.c (File Modified) 
+
+
 jilles      2006/05/17 17:34:08 UTC	(20060517_2-22561)
   Log:
   Backport trunk r22559:
