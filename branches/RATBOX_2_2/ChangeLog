@@ -1,3 +1,14 @@
+jilles      2006/05/20 20:24:37 UTC	(20060520_1-22587)
+  Log:
+  Revert part of r22583:
+  - There is no such auth{} flag restricted
+  - shared{} flag all does not include locops
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/doc/example.conf (File Modified) 
+
+
 androsyn    2006/05/20 00:31:34 UTC	(20060520_0-22583)
   Log:
   darix's cleanups of the example configs
