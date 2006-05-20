@@ -2011,7 +2011,7 @@ error_exit_client(struct Client *client_p, int error)
 		}
 		else
 		{
-			report_error("Lost connection to %s: %d",
+			report_error("Lost connection to %s: %s",
 					client_p->name,
 					log_client_name(client_p, SHOW_IP),
 					current_error);
