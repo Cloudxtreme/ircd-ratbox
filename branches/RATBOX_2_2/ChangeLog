@@ -1,3 +1,15 @@
+jilles      2006/05/20 23:31:59 UTC	(20060520_3-22597)
+  Log:
+  Backport trunk r22593:
+  Fix a long standing hybrid 7 bug: when getting a read error
+  on a server, report_error() is called with a %d instead of
+  a %s in the format string ("Lost connection" in +d).
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+
+
 jilles      2006/05/20 23:05:57 UTC	(20060520_2-22595)
   Log:
   Backport trunk r22591:
