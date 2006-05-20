@@ -1,3 +1,13 @@
+jilles      2006/05/20 23:05:57 UTC	(20060520_2-22595)
+  Log:
+  Backport trunk r22591:
+  Don't pace /list on a single channel.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_list.c (File Modified) 
+
+
 jilles      2006/05/20 20:24:37 UTC	(20060520_1-22587)
   Log:
   Revert part of r22583:
