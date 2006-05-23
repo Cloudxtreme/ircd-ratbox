@@ -35,6 +35,7 @@
 #include <zlib.h>
 #endif
 
+#include "stdinc.h"
 #include "servlink.h"
 #include "io.h"
 #include "control.h"
