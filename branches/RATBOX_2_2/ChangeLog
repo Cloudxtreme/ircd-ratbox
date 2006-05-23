@@ -1,3 +1,11 @@
+androsyn    2006/05/23 18:24:00 UTC	(20060523_1-22631)
+  Log:
+  put back the dynamic sleep delay crap for poll()
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/poll.c (File Modified) 
+
+
 androsyn    2006/05/23 17:47:03 UTC	(20060523_0-22629)
   Log:
   servlink/io.c needs stdinc for uint32_t
