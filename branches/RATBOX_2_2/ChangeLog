@@ -1,3 +1,11 @@
+androsyn    2006/05/23 17:47:03 UTC	(20060523_0-22629)
+  Log:
+  servlink/io.c needs stdinc for uint32_t
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/servlink/io.c (File Modified) 
+
+
 jilles      2006/05/20 23:31:59 UTC	(20060520_3-22597)
   Log:
   Backport trunk r22593:
