@@ -1,3 +1,11 @@
+androsyn    2006/05/24 15:45:19 UTC	(20060524_0-22643)
+  Log:
+  remove useless comm_socket in the /dev/zero mmap stuff
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_1/src/balloc.c (File Modified) 
+
+
 jilles      2006/05/13 21:24:50 UTC	(20060513_0-22481)
   Log:
   Backport trunk r22447:
