@@ -1,3 +1,14 @@
+androsyn    2006/05/24 15:27:55 UTC	(20060524_0-22639)
+  Log:
+  - move the daddr variable down into the non_redundant_klines block
+    gcc 4.x seems to miscompile the previous code on sparc generating SIGBUS
+    further down...
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_dline.c (File Modified) 
+
+
 androsyn    2006/05/23 18:24:00 UTC	(20060523_1-22631)
   Log:
   put back the dynamic sleep delay crap for poll()
