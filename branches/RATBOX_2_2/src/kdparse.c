@@ -76,7 +76,7 @@ parse_k_file(FILE * file)
 
 	while (fgets(line, sizeof(line), file))
 	{
-		if((p = strchr(line, '\n')) != NULL)
+		if((p = strpbrk(line, "\r\n")) != NULL)
 			*p = '\0';
 
 		if((*line == '\0') || (*line == '#'))
@@ -125,7 +125,7 @@ parse_d_file(FILE * file)
 
 	while (fgets(line, sizeof(line), file))
 	{
-		if((p = strchr(line, '\n')))
+		if((p = strpbrk(line, "\r\n")))
 			*p = '\0';
 
 		if((*line == '\0') || (line[0] == '#'))
@@ -159,7 +159,7 @@ parse_x_file(FILE * file)
 
 	while (fgets(line, sizeof(line), file))
 	{
-		if((p = strchr(line, '\n')))
+		if((p = strpbrk(line, "\r\n")))
 			*p = '\0';
 
 		if((*line == '\0') || (line[0] == '#'))
@@ -202,7 +202,7 @@ parse_resv_file(FILE * file)
 
 	while (fgets(line, sizeof(line), file))
 	{
-		if((p = strchr(line, '\n')))
+		if((p = strpbrk(line, "\r\n")))
 			*p = '\0';
 
 		if((*line == '\0') || (line[0] == '#'))
