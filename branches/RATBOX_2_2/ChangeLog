@@ -1,3 +1,12 @@
+jilles      2006/05/30 18:15:06 UTC	(20060530_0-22677)
+  Log:
+  get_client_name() fix
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+
+
 androsyn    2006/05/27 01:22:11 UTC	(20060527_0-22663)
   Log:
   deal with files that have lines terminated with either CR or LF in a useful way
