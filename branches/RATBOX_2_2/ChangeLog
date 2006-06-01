@@ -1,3 +1,12 @@
+jilles      2006/06/01 18:14:15 UTC	(20060601_0-22681)
+  Log:
+  End the flood grace period in CPRIVMSG/CNOTICE.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_cmessage.c (File Modified) 
+
+
 jilles      2006/05/30 18:15:06 UTC	(20060530_0-22677)
   Log:
   get_client_name() fix
