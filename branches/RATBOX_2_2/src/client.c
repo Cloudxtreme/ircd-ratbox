@@ -2013,10 +2013,11 @@ error_exit_client(struct Client *client_p, int error)
 		}
 		else
 		{
-			report_error("Lost connection to %s: %s",
-					client_p->name,
-					log_client_name(client_p, SHOW_IP),
-					current_error);
+			sendto_realops_flags(UMODE_ALL, L_ALL,
+					"Lost connection to %s: %s",
+					client_p->name, strerror(current_error));
+			ilog(L_SERVER, "Lost connection to %s: %s",
+				log_client_name(client_p, SHOW_IP), strerror(current_error));
 		}
 
 		sendto_realops_flags(UMODE_ALL, L_ALL,
