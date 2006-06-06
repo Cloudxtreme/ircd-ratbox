@@ -1,3 +1,12 @@
+leeh        2006/06/06 21:14:30 UTC	(20060606_1-22703)
+  Log:
+  - tag 2.2.2
+  
+
+  Modified:
+	ircd-ratbox/tags/RATBOX_2_2_2/ (File Added) 
+
+
 leeh        2006/06/06 20:55:03 UTC	(20060606_0-22701)
   Log:
   - this needs packet.h to compile
