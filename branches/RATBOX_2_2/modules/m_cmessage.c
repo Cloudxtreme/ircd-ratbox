@@ -41,6 +41,7 @@
 #include "hash.h"
 #include "send.h"
 #include "s_conf.h"
+#include "packet.h"
 
 static int m_cmessage(int, const char *, struct Client *, struct Client *, int, const char **);
 static int m_cprivmsg(struct Client *, struct Client *, int, const char **);
