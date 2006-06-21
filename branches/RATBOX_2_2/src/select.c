@@ -67,6 +67,12 @@ fd_set tmpwritefds;
 
 static void select_update_selectfds(int fd, short event, PF * handler);
 
+int 
+comm_setup_fd(int fd)
+{
+	return 0;
+}
+
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 /* Private functions */
 
@@ -117,9 +123,9 @@ init_netio(void)
  * This is a needed exported function which will be called to register
  * and deregister interest in a pending IO state for a given FD.
  */
-void
-comm_setselect(int fd, fdlist_t list, unsigned int type, PF * handler,
-	       void *client_data, time_t timeout)
+void 
+comm_setselect(int fd, fdlist_t list, unsigned int type,
+                           PF * handler, void *client_data)
 {
 	fde_t *F = &fd_table[fd];
 	s_assert(fd >= 0);
@@ -137,8 +143,6 @@ comm_setselect(int fd, fdlist_t list, unsigned int type, PF * handler,
 		F->write_data = client_data;
 		select_update_selectfds(fd, COMM_SELECT_WRITE, handler);
 	}
-	if(timeout)
-		F->timeout = CurrentTime + (timeout / 1000);
 }
 
 /*
