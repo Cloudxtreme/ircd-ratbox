@@ -1,3 +1,11 @@
+androsyn    2006/06/21 19:26:15 UTC	(20060621_0-22826)
+  Log:
+  get select() code to compile and work
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/select.c (File Modified) 
+
+
 leeh        2006/06/06 21:36:52 UTC	(20060606_2-22707)
   Log:
   - update RELNOTES
