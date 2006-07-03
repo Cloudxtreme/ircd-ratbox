@@ -1,3 +1,16 @@
+jilles      2006/07/03 22:14:01 UTC	(20060703_0-22844)
+  Log:
+  Backport trunk r22842:
+  Do not send RPL_USERNOTINCHANNEL remotely (MODE +-ov, KICK).
+  Sending them remotely causes UID leaks and is (IMHO) not very
+  useful as the command was successful on the local server.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_kick.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_mode.c (File Modified) 
+
+
 jilles      2006/07/02 20:51:11 UTC	(20060702_0-22840)
   Log:
   Backport trunk r22838:
