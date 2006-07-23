@@ -1,3 +1,12 @@
+leeh        2006/07/23 20:39:54 UTC	(20060723_2-22933)
+  Log:
+  - tag 2.2.3
+  
+
+  Modified:
+	ircd-ratbox/tags/RATBOX_2_2_3/ (File Added) 
+
+
 leeh        2006/07/23 20:33:49 UTC	(20060723_1-22931)
   Log:
   - helps if I alter the string version of the patchlevel..
