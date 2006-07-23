@@ -1,5 +1,5 @@
 
-This is the current version of the 'testing' tree of ircd-ratbox.
+This is the current version of the 'stable' tree of ircd-ratbox.
 
 If you are upgrading from 2.1, you must read doc/whats-new-2.2.txt
 If you are upgrading from 2.0, you must also read doc/whats-new-2.1.txt
