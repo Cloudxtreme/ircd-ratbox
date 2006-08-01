@@ -29,7 +29,7 @@ ircd-ratbox installation guide
    ircd-ratbox will automatically pick the best IO subsystem for use.
 
    If you are on a "small" network, namely less than 5000 users, pass:
-     --enable-smallnet
+     --enable-small-net
 
    If you want ipv6 support:
      --enable-ipv6
@@ -41,8 +41,8 @@ ircd-ratbox installation guide
      --enable-services
 
    If your nick length or topic lengths are not 9 and 160 respectively:
-     --enable-nicklen=LENGTH
-     --enable-topiclen=LENGTH
+     --with-nicklen=LENGTH
+     --with-topiclen=LENGTH
 
    See ./configure --help for more options.  Naturally options should be
    combined so configure is only run once.
