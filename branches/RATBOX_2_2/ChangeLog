@@ -1,3 +1,14 @@
+leeh        2006/08/01 20:04:16 UTC	(20060801_0-22952)
+  Log:
+  - regenerate index files
+  - fix INSTALL to correctly reflect configure arguments
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/INSTALL (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/index (File Modified) 
+
+
 leeh        2006/07/23 20:51:30 UTC	(20060723_2-22936)
   Log:
   - god damnit, I always forget to rename the branch in RELNOTES
