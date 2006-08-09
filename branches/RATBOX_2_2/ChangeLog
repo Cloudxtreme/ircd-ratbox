@@ -1,3 +1,12 @@
+jilles      2006/08/09 18:44:18 UTC	(20060809_0-22983)
+  Log:
+  Backport trunk r22981: update /info copyright year.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/version.c.SH (File Modified) 
+
+
 leeh        2006/08/01 20:04:16 UTC	(20060801_0-22952)
   Log:
   - regenerate index files
