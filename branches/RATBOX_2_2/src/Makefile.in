@@ -141,7 +141,7 @@ version.c: version.c.SH
 
 .PHONY: depend clean distclean
 depend:
-	${MKDEP} ${CPPFLAGS} ${BASE_SRCS} > .depend
+	${MKDEP} ${CPPFLAGS} ${BASE_SRCS} lex.yy.c > .depend
 
 clean:
 	${RM} -f *.o *.exe *~ ircd.core core ircd 
