@@ -1,3 +1,14 @@
+leeh        2006/08/22 10:15:07 UTC	(20060822_0-22994)
+  Log:
+  - via Rogue_F, need to make lex.yy.c part of make depend too
+  - rerun make depend in src/
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/.depend (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/Makefile.in (File Modified) 
+
+
 jilles      2006/08/09 18:44:18 UTC	(20060809_0-22983)
   Log:
   Backport trunk r22981: update /info copyright year.
