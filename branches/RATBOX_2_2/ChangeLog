@@ -1,3 +1,15 @@
+jilles      2006/08/23 13:08:35 UTC	(20060823_0-22996)
+  Log:
+  Add m_webirc module to contrib, allows showing real host of CGI:IRC users.
+  Differences to the version available on my web page for a while:
+  instructions on how to set it up.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/contrib/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/contrib/m_webirc.c (File Added) 
+
+
 leeh        2006/08/22 10:15:07 UTC	(20060822_0-22994)
   Log:
   - via Rogue_F, need to make lex.yy.c part of make depend too
