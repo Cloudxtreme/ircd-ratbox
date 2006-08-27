@@ -1,3 +1,13 @@
+jilles      2006/08/27 19:20:24 UTC	(20060827_0-23006)
+  Log:
+  send RPL_WHOISLOGGEDIN (330) in TS6 form if appropriate
+  (trunk r23004)
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_services.c (File Modified) 
+
+
 jilles      2006/08/23 13:08:35 UTC	(20060823_0-22996)
   Log:
   Add m_webirc module to contrib, allows showing real host of CGI:IRC users.
