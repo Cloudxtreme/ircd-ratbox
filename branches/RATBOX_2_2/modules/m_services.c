@@ -272,7 +272,8 @@ h_svc_whois(hook_data_client *data)
 	if(!EmptyString(data->target->user->suser))
 	{
 		sendto_one(data->client, form_str(RPL_WHOISLOGGEDIN),
-				me.name, data->client->name,
+				get_id(&me, data->client),
+				get_id(data->client, data->client),
 				data->target->name,
 				data->target->user->suser);
 	}
