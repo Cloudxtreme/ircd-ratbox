@@ -1,3 +1,14 @@
+jilles      2006/08/28 09:49:32 UTC	(20060828_0-23010)
+  Log:
+  backport trunk r23008:
+  kline help file: clarify a bit and remove some obsolete stuff
+  partly suggested by Olin
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/help/opers/kline (File Modified) 
+
+
 jilles      2006/08/27 19:20:24 UTC	(20060827_0-23006)
   Log:
   send RPL_WHOISLOGGEDIN (330) in TS6 form if appropriate
