@@ -1,3 +1,14 @@
+androsyn    2006/08/31 20:47:45 UTC	(20060831_0-23014)
+  Log:
+  Fix bug in WEBIRC to deal with hosts being longer than HOSTLEN.  We should use the IP and not
+  truncate the hostname.
+  
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/contrib/m_webirc.c (File Modified) 
+
+
 jilles      2006/08/28 09:49:32 UTC	(20060828_0-23010)
   Log:
   backport trunk r23008:
