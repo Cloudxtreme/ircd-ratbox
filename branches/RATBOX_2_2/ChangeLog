@@ -1,3 +1,14 @@
+leeh        2006/09/01 17:56:33 UTC	(20060901_0-23018)
+  Log:
+  - change the default redirs in the config so they aren't sending real users
+    to a real host
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/doc/example.conf (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/doc/example.efnet.conf (File Modified) 
+
+
 androsyn    2006/08/31 20:47:45 UTC	(20060831_0-23014)
   Log:
   Fix bug in WEBIRC to deal with hosts being longer than HOSTLEN.  We should use the IP and not
