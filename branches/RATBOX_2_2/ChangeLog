@@ -1,3 +1,11 @@
+androsyn    2006/09/05 15:17:49 UTC	(20060905_0-23029)
+  Log:
+  commit jilles change to fix some match_esc stupidness
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/match.c (File Modified) 
+
+
 leeh        2006/09/01 17:56:33 UTC	(20060901_0-23018)
   Log:
   - change the default redirs in the config so they aren't sending real users
