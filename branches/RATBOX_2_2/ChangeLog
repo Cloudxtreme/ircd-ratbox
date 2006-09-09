@@ -1,3 +1,14 @@
+leeh        2006/09/09 15:21:56 UTC	(20060909_0-23037)
+  Log:
+  - make find_channel_membership() choose the most optimal list to search to
+    make ircd more friendly when dealing with services thats in lots of
+    channels
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/channel.c (File Modified) 
+
+
 androsyn    2006/09/05 15:17:49 UTC	(20060905_0-23029)
   Log:
   commit jilles change to fix some match_esc stupidness
