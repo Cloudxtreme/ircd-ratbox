@@ -42,7 +42,6 @@ SRCS =                          \
   spy_motd_notice.c		\
   spy_stats_notice.c            \
   spy_stats_p_notice.c		\
-  spy_trace_notice.c		\
   spy_whois_notice.c            \
   spy_whois_notice_global.c	\
   example_module.c
