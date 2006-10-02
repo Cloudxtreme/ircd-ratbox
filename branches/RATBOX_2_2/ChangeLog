@@ -1,3 +1,11 @@
+androsyn    2006/10/02 14:15:21 UTC	(20061002_0-23083)
+  Log:
+  count escaped wildcards characters as non-wildcards
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/s_newconf.c (File Modified) 
+
+
 androsyn    2006/09/25 14:30:08 UTC	(20060925_0-23071)
   Log:
   Remove trace spy notice from being built automagically.  It seems to cause more problems than it solves
