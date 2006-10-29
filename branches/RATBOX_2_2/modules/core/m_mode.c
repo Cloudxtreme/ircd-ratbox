@@ -408,7 +408,7 @@ add_id(struct Client *source_p, struct Channel *chptr, const char *banid,
 	 */
 	if(MyClient(source_p))
 	{
-		if(chptr->num_mask >= ConfigChannel.max_bans)
+		if((dlink_list_length(&chptr->banlist) + dlink_list_length(&chptr->exceptlist) + dlink_list_length(&chptr->invexlist)) >= ConfigChannel.max_bans)
 		{
 			sendto_one(source_p, form_str(ERR_BANLISTFULL),
 				   me.name, source_p->name, chptr->chname, realban);
@@ -446,7 +446,6 @@ add_id(struct Client *source_p, struct Channel *chptr, const char *banid,
 	actualBan->when = CurrentTime;
 
 	dlinkAdd(actualBan, &actualBan->node, list);
-	chptr->num_mask++;
 
 	/* invalidate the can_send() cache */
 	if(mode_type == CHFL_BAN || mode_type == CHFL_EXCEPTION)
@@ -479,12 +478,6 @@ del_id(struct Channel *chptr, const char *banid, dlink_list *list,
 		{
 			dlinkDelete(&banptr->node, list);
 			free_ban(banptr);
-
-			/* num_mask should never be < 0 */
-			if(chptr->num_mask > 0)
-				chptr->num_mask--;
-			else
-				chptr->num_mask = 0;
 
 			/* invalidate the can_send() cache */
 			if(mode_type == CHFL_BAN || mode_type == CHFL_EXCEPTION)
