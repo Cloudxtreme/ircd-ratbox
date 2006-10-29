@@ -1,3 +1,14 @@
+leeh        2006/10/29 12:28:38 UTC	(20061029_0-23253)
+  Log:
+  - remove the cached storage of how many +beI there are, thereby fixing a
+    case where it can get desynced from reality
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/channel.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_mode.c (File Modified) 
+
+
 androsyn    2006/10/02 14:15:21 UTC	(20061002_0-23083)
   Log:
   count escaped wildcards characters as non-wildcards
