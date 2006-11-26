@@ -1,3 +1,13 @@
+jilles      2006/11/26 00:56:24 UTC	(20061126_0-23289)
+  Log:
+  Backport trunk r23287:
+  Change vx0's email address, requested by him on IRC.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/doc/Hybrid-team (File Modified) 
+
+
 leeh        2006/10/29 12:28:38 UTC	(20061029_0-23253)
   Log:
   - remove the cached storage of how many +beI there are, thereby fixing a
