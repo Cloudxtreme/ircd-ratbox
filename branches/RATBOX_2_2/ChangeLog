@@ -1,3 +1,14 @@
+jilles      2006/11/27 11:44:20 UTC	(20061127_0-23291)
+  Log:
+  Tweak \s code a little.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_etrace.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_testmask.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_xline.c (File Modified) 
+
+
 jilles      2006/11/26 00:56:24 UTC	(20061126_0-23289)
   Log:
   Backport trunk r23287:
