@@ -1,3 +1,14 @@
+leeh        2007/01/06 23:16:50 UTC	(20070106_0-23369)
+  Log:
+  - update RELNOTES
+  - revved patchlevel to 2.2.4
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/patchlevel.h (File Modified) 
+
+
 jilles      2006/11/27 11:44:20 UTC	(20061127_0-23291)
   Log:
   Tweak \s code a little.
