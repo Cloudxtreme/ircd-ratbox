@@ -1,3 +1,22 @@
+jilles      2007/01/22 18:12:25 UTC	(20070122_0-23507)
+  Log:
+  Change TS6 JOIN processing
+  - don't send out simple modes in TS6 JOIN and TS5 SJOIN when
+    a local user joins an existing channel
+  - don't send out simple modes in TS6 JOIN and TS5 SJOIN when
+    propagating a TS6 JOIN
+  - don't interpret simple modes in an incoming TS6 JOIN
+  
+  This is to avoid desyncs when certain mode changes (e.g. -im)
+  cross with joins. A downside is that simple modes will be
+  more desynched when a JOIN creates a channel or lowers TS,
+  but that's less important.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_join.c (File Modified) 
+
+
 leeh        2007/01/20 14:41:45 UTC	(20070120_0-23503)
   Log:
   - disable the check which allows a permanent kline to be set when a
