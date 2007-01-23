@@ -1,3 +1,20 @@
+jilles      2007/01/23 18:42:56 UTC	(20070123_0-23509)
+  Log:
+  Add support for receiving and propagating SAVE messages
+  (nick collision FNC). We never generate SAVE messages at
+  this time.
+  
+  From charybdis (jilles).
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/numeric.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/s_serv.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_nick.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/messages.tab (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_serv.c (File Modified) 
+
+
 jilles      2007/01/22 18:12:25 UTC	(20070122_0-23507)
   Log:
   Change TS6 JOIN processing
