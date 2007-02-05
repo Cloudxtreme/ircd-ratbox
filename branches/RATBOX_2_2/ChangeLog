@@ -1,3 +1,11 @@
+androsyn    2007/02/05 17:22:52 UTC	(20070205_0-23594)
+  Log:
+  fix modules/Makefile.in to link against IRCDLIBS
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/Makefile.in (File Modified) 
+
+
 jilles      2007/01/23 18:42:56 UTC	(20070123_0-23509)
   Log:
   Add support for receiving and propagating SAVE messages
