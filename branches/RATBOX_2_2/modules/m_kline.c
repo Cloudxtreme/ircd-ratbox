@@ -581,7 +581,7 @@ mangle_wildcard_to_cidr(const char *text)
 
 	if(n2 == NULL || !strcmp(n2, splat))
 	{
-		if(n3 == NULL || (!strcmp(n3, splat) && !strcmp(n4, splat)))
+		if(n3 == NULL || (!strcmp(n3, splat) && (n4 == NULL || !strcmp(n4, splat))))
 		{
 			ircsprintf(buf, "%s.0.0.0/8", n1);
 			return buf;
