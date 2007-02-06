@@ -1,3 +1,11 @@
+androsyn    2007/02/06 19:54:10 UTC	(20070206_2-23604)
+  Log:
+  change the ircsprintf calls to ircsnprintf out of a bit of paranoia
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_kline.c (File Modified) 
+
+
 androsyn    2007/02/06 19:48:35 UTC	(20070206_1-23602)
   Log:
   tweak the mangle_wildcard_to_cidr code a little..
