@@ -1,3 +1,11 @@
+androsyn    2007/02/06 18:33:55 UTC	(20070206_0-23598)
+  Log:
+  fix dumb bug in mangle_wildcard_to_cidr
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_kline.c (File Modified) 
+
+
 androsyn    2007/02/05 17:22:52 UTC	(20070205_0-23594)
   Log:
   fix modules/Makefile.in to link against IRCDLIBS
