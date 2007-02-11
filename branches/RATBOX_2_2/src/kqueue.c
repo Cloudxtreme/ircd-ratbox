@@ -121,7 +121,7 @@ kq_update_events(fde_t * F, short filter, PF * handler)
 
 		EV_SET(kep, (uintptr_t) F->fd, filter, kep_flags, 0, 0, (void *) F);
 
-		if(kqoff == kqmax)
+		if(++kqoff == kqmax)
 		{
 			int ret;
 
@@ -133,10 +133,6 @@ kq_update_events(fde_t * F, short filter, PF * handler)
 				return;
 			}
 			kqoff = 0;
-		}
-		else
-		{
-			kqoff++;
 		}
 	}
 }
