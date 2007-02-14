@@ -1,3 +1,14 @@
+leeh        2007/02/14 18:48:15 UTC	(20070214_0-23624)
+  Log:
+  - update TS6 specification to include the new rules for JOIN, namely that
+    the mode value must always be propagated as "+" and must never be
+    interpreted
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/doc/technical/ts6.txt (File Modified) 
+
+
 jilles      2007/02/11 19:36:19 UTC	(20070211_0-23610)
   Log:
   Backport trunk r23608:
