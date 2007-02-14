@@ -26,6 +26,8 @@ It is judged that the desync with sending the modes is worse than the desync
 by not sending them, as such the v8 specification dictates modes are not
 sent with a JOIN command server<->server.
 
+The v8 specification also clarifies that servers may issue TMODE.
+
 - Introduction -
 ----------------
 
@@ -281,16 +283,17 @@ not be possible without a desync, due to it being sent after
 SJOIN.
 
 - TMODE -
-	:<UID> TMODE <TS> <CHANNAME> <MODESTRING>
+	:<SID|UID> TMODE <TS> <CHANNAME> <MODESTRING>
 
 This command is used for clients issuing modes on a channel.
 
-<UID> is the UID of the client setting the mode.  <TS> is the
-current TS of the channel, <CHANNAME> is the channels name.
-<MODESTRING> is the raw mode the client is setting.
+<SID|UID> is either the UID of the client setting the mode, or the SID of
+the server setting the mode.  <TS> is the current TS of the channel, 
+<CHANNAME> is the channels name. <MODESTRING> is the raw mode the client is 
+setting.
 
 A server receiving a TMODE must apply simple channel TS rules to the TMODE.
 
-A TS6 server must translate MODEs issued by a local client into TMODE 
-to send to other TS6 capable servers.
+A TS6 server must translate MODEs issued by a local client, or received from
+a server into TMODE to send to other TS6 capable servers.
 
