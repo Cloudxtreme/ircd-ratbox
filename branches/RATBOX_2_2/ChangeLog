@@ -1,3 +1,11 @@
+androsyn    2007/02/28 00:18:16 UTC	(20070228_0-23678)
+  Log:
+  tweak the +f messages a bit
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/s_conf.c (File Modified) 
+
+
 androsyn    2007/02/27 20:37:34 UTC	(20070227_0-23674)
   Log:
   don't leak spoofed ip address on +f notices
