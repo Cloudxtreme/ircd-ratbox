@@ -1,3 +1,14 @@
+jilles      2007/03/28 14:07:26 UTC	(20070328_1-23734)
+  Log:
+  Backport trunk r23732:
+  For --enable-services, do not show channels when using
+  whois on a service (+S).
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_whois.c (File Modified) 
+
+
 jilles      2007/03/28 13:39:32 UTC	(20070328_0-23730)
   Log:
   Backport trunk r23728:
