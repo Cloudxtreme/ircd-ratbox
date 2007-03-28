@@ -1,3 +1,13 @@
+jilles      2007/03/28 13:39:32 UTC	(20070328_0-23730)
+  Log:
+  Backport trunk r23728:
+  Fix /who on channels with ** in their name.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_who.c (File Modified) 
+
+
 jilles      2007/02/28 00:36:35 UTC	(20070228_1-23682)
   Log:
   Backport trunk r23656:
