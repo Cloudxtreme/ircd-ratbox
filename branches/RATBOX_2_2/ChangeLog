@@ -1,3 +1,15 @@
+jilles      2007/04/17 21:40:12 UTC	(20070417_0-23833)
+  Log:
+  Backport trunk r23745:
+  Don't show the UID if a TS6 server sends a kick with
+  an empty or no comment. Note that ratbox never sends
+  such kicks, but csircd does.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_kick.c (File Modified) 
+
+
 jilles      2007/04/03 00:29:51 UTC	(20070403_0-23797)
   Log:
   Repair operspy who !#channel, broken by my ** fix.
