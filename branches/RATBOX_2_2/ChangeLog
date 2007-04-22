@@ -1,3 +1,13 @@
+leeh        2007/04/22 11:34:54 UTC	(20070422_0-23843)
+  Log:
+  - move the test for a user having tripped nickflood up a few lines, so that
+    if a user cannot change nick we do not penalise them any further.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_nick.c (File Modified) 
+
+
 jilles      2007/04/17 21:40:12 UTC	(20070417_0-23833)
   Log:
   Backport trunk r23745:
