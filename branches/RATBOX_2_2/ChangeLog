@@ -1,3 +1,14 @@
+leeh        2007/04/22 16:16:45 UTC	(20070422_3-23859)
+  Log:
+  - add capab SAVETS_100 to note we SAVE at TS 100, and warn when servers link
+    with SAVE but without SAVETS_100
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/s_serv.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_serv.c (File Modified) 
+
+
 jilles      2007/04/22 14:09:34 UTC	(20070422_2-23853)
   Log:
   Backport trunk r23851:
