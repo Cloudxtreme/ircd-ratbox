@@ -673,9 +673,6 @@ change_local_nick(struct Client *client_p, struct Client *source_p, char *nick,
 		if((source_p->localClient->last_nick_change + ConfigFileEntry.max_nick_time) < CurrentTime)
 			source_p->localClient->number_of_nick_changes = 0;
 
-		source_p->localClient->last_nick_change = CurrentTime;
-		source_p->localClient->number_of_nick_changes++;
-
 		if(ConfigFileEntry.anti_nick_flood && !IsOper(source_p) &&
 				source_p->localClient->number_of_nick_changes > ConfigFileEntry.max_nick_changes)
 		{
@@ -684,6 +681,9 @@ change_local_nick(struct Client *client_p, struct Client *source_p, char *nick,
 					nick, ConfigFileEntry.max_nick_time);
 			return;
 		}
+
+		source_p->localClient->last_nick_change = CurrentTime;
+		source_p->localClient->number_of_nick_changes++;
 	}
 
         samenick = irccmp(source_p->name, nick) ? 0 : 1;
