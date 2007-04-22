@@ -1,3 +1,13 @@
+jilles      2007/04/22 11:36:48 UTC	(20070422_1-23847)
+  Log:
+  Backport trunk r23845:
+  Force nickTS to increase when a local user changes their nick.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_nick.c (File Modified) 
+
+
 leeh        2007/04/22 11:34:54 UTC	(20070422_0-23843)
   Log:
   - move the test for a user having tripped nickflood up a few lines, so that
