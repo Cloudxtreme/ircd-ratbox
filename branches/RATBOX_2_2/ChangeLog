@@ -1,3 +1,13 @@
+jilles      2007/04/24 17:38:54 UTC	(20070424_1-23873)
+  Log:
+  Backport trunk r23871:
+  webirc bugfix
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/contrib/m_webirc.c (File Modified) 
+
+
 jilles      2007/04/24 15:48:34 UTC	(20070424_0-23869)
   Log:
   Backport trunk r23855,23857,23863:
