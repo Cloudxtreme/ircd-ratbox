@@ -1,3 +1,13 @@
+jilles      2007/04/24 15:48:34 UTC	(20070424_0-23869)
+  Log:
+  Backport trunk r23855,23857,23863:
+  SAVE documentation
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/doc/collision_fnc.txt (File Added) 
+
+
 leeh        2007/04/22 16:16:45 UTC	(20070422_3-23859)
   Log:
   - add capab SAVETS_100 to note we SAVE at TS 100, and warn when servers link
