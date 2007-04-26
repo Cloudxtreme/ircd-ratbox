@@ -5,6 +5,26 @@ If you are upgrading from 2.1, you must read doc/whats-new-2.2.txt
 If you are upgrading from 2.0, you must also read doc/whats-new-2.1.txt
 If you are upgrading from 1.x, you must also read doc/whats-new-2.0.txt
 
+-- ircd-ratbox-2.2.5
+- fix bug with connect {}; blocks and empty classnames
+- disable allowing permanent klines to be set over temporary klines, as it
+  did not sufficiently check there was also a permanent kline
+- alter TS6 logic slightly on channel joins to help avoid desyncs when
+  a mode is crossing the network in the opposite direction to a JOIN
+- support for receiving and propagating SAVE for future FNC support
+- fix wildcard-to-cidr code slightly
+- fix for kqueue potentially losing updates when it is under high load
+- fix leaking of spoofed ips on +f notices
+- fix invisible count being off when people oper up with a default +i umode
+- fix /who on channels with ** in their name
+- when using --enable-services, hide channels a service is in
+- alter KICK logic to avoid leaking UIDs when we receive a kick with no
+  reason
+- make anti-nickflood code nicer so it avoids trapping users in a situation
+  where everytime they attempt to change nick, it just makes the
+  anti-nickflood apply worse
+- minor bugfix to WEBIRC
+
 -- ircd-ratbox-2.2.4
 - Add m_webirc module to contrib, allows showing real host of CGI:IRC users.
 - send RPL_WHOISLOGGEDIN (330) in TS6 form if appropriate
