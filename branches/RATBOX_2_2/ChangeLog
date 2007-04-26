@@ -1,3 +1,14 @@
+leeh        2007/04/26 18:28:10 UTC	(20070426_0-23881)
+  Log:
+  - update RELNOTES
+  - revved patchlevel to 2.2.5
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/patchlevel.h (File Modified) 
+
+
 jilles      2007/04/24 17:38:54 UTC	(20070424_1-23873)
   Log:
   Backport trunk r23871:
