@@ -1,3 +1,12 @@
+leeh        2007/05/02 19:21:11 UTC	(20070502_0-23910)
+  Log:
+  - fix a minor memleak when freeing cached files
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/cache.c (File Modified) 
+
+
 leeh        2007/04/26 18:28:10 UTC	(20070426_0-23881)
   Log:
   - update RELNOTES
