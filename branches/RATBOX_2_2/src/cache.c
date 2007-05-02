@@ -188,7 +188,7 @@ free_cachefile(struct cachefile *cacheptr)
 	{
 		if(ptr->data != emptyline)
 			MyFree(ptr->data);
-		free_dlink_node(ptr);
+		dlinkDestroy(ptr, &cacheptr->contents);
 	}
 
 	MyFree(cacheptr);
