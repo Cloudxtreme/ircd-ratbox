@@ -47,7 +47,6 @@
 
 struct cachefile *user_motd = NULL;
 struct cachefile *oper_motd = NULL;
-struct cacheline *emptyline = NULL;
 dlink_list links_cache_list;
 char user_motd_changed[MAX_DATE_STRING];
 
@@ -55,15 +54,11 @@ char user_motd_changed[MAX_DATE_STRING];
  *
  * inputs	-
  * outputs	-
- * side effects - inits the emptyline, loads motds
+ * side effects - loads motds
  */
 void
 init_cache(void)
 {
-	/* allocate the emptyline */
-	emptyline = MyMalloc(sizeof(struct cacheline));
-	emptyline->data[0] = ' ';
-	emptyline->data[1] = '\0';
 	user_motd_changed[0] = '\0';
 
 	user_motd = cache_file(MPATH, "ircd.motd", 0);
@@ -118,14 +113,13 @@ cache_file(const char *filename, const char *shortname, int flags)
 		if((p = strpbrk(line, "\r\n")) != NULL)
 			*p = '\0';
 
-		if(!EmptyString(line))
-		{
-			lineptr = MyMalloc(sizeof(struct cacheline));
-			strlcpy(lineptr->data, line, sizeof(lineptr->data));
-			dlinkAddTail(lineptr, &lineptr->linenode, &cacheptr->contents);
-		}
+		lineptr = MyMalloc(sizeof(struct cacheline));
+		if(EmptyString(line))
+			strcpy(lineptr->data, " ");
 		else
-			dlinkAddTailAlloc(emptyline, &cacheptr->contents);
+			strlcpy(lineptr->data, line, sizeof(lineptr->data));
+
+		dlinkAddTail(lineptr, &lineptr->linenode, &cacheptr->contents);
 	}
 
 	fclose(in);
@@ -186,9 +180,7 @@ free_cachefile(struct cachefile *cacheptr)
 
 	DLINK_FOREACH_SAFE(ptr, next_ptr, cacheptr->contents.head)
 	{
-		if(ptr->data != emptyline)
-			MyFree(ptr->data);
-		dlinkDestroy(ptr, &cacheptr->contents);
+		MyFree(ptr->data);
 	}
 
 	MyFree(cacheptr);
