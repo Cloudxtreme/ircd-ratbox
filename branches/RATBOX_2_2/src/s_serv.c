@@ -57,6 +57,7 @@
 #include "channel.h"		/* chcap_usage_counts stuff... */
 #include "hook.h"
 #include "msg.h"
+#include "reject.h"
 
 extern char *crypt();
 
@@ -1101,6 +1102,7 @@ server_estab(struct Client *client_p)
 	set_chcap_usage_counts(client_p);
 
 	dlinkAdd(client_p, &client_p->lnode, &me.serv->servers);
+	del_unknown_ip(client_p);
 	dlinkMoveNode(&client_p->localClient->tnode, &unknown_list, &serv_list);
 	dlinkAddTailAlloc(client_p, &global_serv_list);
 

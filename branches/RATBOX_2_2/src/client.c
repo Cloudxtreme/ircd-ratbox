@@ -57,6 +57,7 @@
 #include "hook.h"
 #include "msg.h"
 #include "monitor.h"
+#include "reject.h"
 
 #define DEBUG_EXITED_CLIENTS
 
@@ -1348,6 +1349,7 @@ exit_unknown_client(struct Client *client_p, struct Client *source_p, struct Cli
 {
 	delete_auth_queries(source_p);
 	client_flush_input(source_p);
+	del_unknown_ip(source_p);
 	dlinkDelete(&source_p->localClient->tnode, &unknown_list);
 
 	if(!IsIOError(source_p))

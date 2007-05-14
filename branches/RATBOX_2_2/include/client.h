@@ -366,6 +366,7 @@ struct exit_client_hook
 #define FLAGS_IOERROR      0x200000	/* IO error */
 #define FLAGS_SERVICE	   0x400000
 #define FLAGS_TGCHANGE     0x800000	/* we're allowed to clear something */
+#define FLAGS_EXUNKNOWN	   0x1000000	/* too many unknowns exit.. */
 /* umodes, settable flags */
 
 #define UMODE_SERVNOTICE   0x0001	/* server notices such as kill */
@@ -456,6 +457,9 @@ struct exit_client_hook
 #define ClearTGChange(x)	((x)->flags &= ~FLAGS_TGCHANGE)
 #define HasSentUser(x)		((x)->flags & FLAGS_SENTUSER)
 #define SetSentUser(x)		((x)->flags |= FLAGS_SENTUSER)
+#define IsExUnknown(x)		((x)->flags & FLAGS_EXUNKNOWN)
+#define SetExUnknown(x)		((x)->flags |= FLAGS_EXUNKNOWN)
+
 
 /* oper flags */
 #define MyOper(x)               (MyConnect(x) && IsOper(x))

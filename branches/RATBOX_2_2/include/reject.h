@@ -36,5 +36,9 @@ int check_reject(struct Client *);
 void add_reject(struct Client *);
 void flush_reject(void);
 int remove_reject(const char *ip);
+
+int add_unknown_ip(struct Client *client_p);
+void del_unknown_ip(struct Client *client_p);
+
 #endif
 

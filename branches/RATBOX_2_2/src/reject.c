@@ -38,12 +38,16 @@ static patricia_tree_t *reject_tree;
 dlink_list delay_exit;
 static dlink_list reject_list;
 
+static patricia_tree_t *unknown_tree;
+
 struct reject_data
 {
 	dlink_node rnode;
 	time_t time;
 	unsigned int count;
 };
+
+static patricia_tree_t *unknown_tree;
 
 static void
 reject_exit(void *unused)
@@ -62,8 +66,12 @@ reject_exit(void *unused)
 		 * ends up on the dead_list and the abort_list --fl
 		 */
 		if(!IsIOError(client_p))
-			sendto_one(client_p, "ERROR :Closing Link: %s (*** Banned (cache))", client_p->host);
-
+		{
+			if(IsExUnknown(client_p))
+				sendto_one(client_p, "ERROR :Closing Link: %s (*** Too many unknown connections)", client_p->host);
+			else
+				sendto_one(client_p, "ERROR :Closing Link: %s (*** Banned (cache))", client_p->host);
+		}
  	  	close_connection(client_p);
         	SetDead(client_p);
         	dlinkAddAlloc(client_p, &dead_list);
@@ -98,6 +106,7 @@ void
 init_reject(void)
 {
 	reject_tree = New_Patricia(PATRICIA_BITS);
+	unknown_tree = New_Patricia(PATRICIA_BITS);
 	eventAdd("reject_exit", reject_exit, NULL, DELAYED_EXIT_TIME);
 	eventAdd("reject_expires", reject_expires, NULL, 60);
 }
@@ -203,3 +212,51 @@ remove_reject(const char *ip)
 	return 0;
 }
 
+
+int
+add_unknown_ip(struct Client *client_p)
+{
+	patricia_node_t *pnode;
+
+	if((pnode = match_ip(unknown_tree, (struct sockaddr *)&client_p->localClient->ip)) == NULL)
+	{
+		int bitlen = 32;
+#ifdef IPV6
+		if(client_p->localClient->ip.ss_family == AF_INET6)
+			bitlen = 128;
+#endif
+		pnode = make_and_lookup_ip(unknown_tree, (struct sockaddr *)&client_p->localClient->ip, bitlen);
+		pnode->data = (void *)0;
+	}
+
+	if((unsigned long)pnode->data >= ConfigFileEntry.max_unknown_ip)
+	{
+		SetExUnknown(client_p);
+		SetReject(client_p);
+		comm_setselect(client_p->localClient->fd, FDLIST_NONE, COMM_SELECT_WRITE | COMM_SELECT_READ, NULL, NULL);
+		SetClosing(client_p);
+		dlinkMoveNode(&client_p->localClient->tnode, &unknown_list, &delay_exit);
+		return 1;
+	}
+
+	pnode->data = (void *)((unsigned long)pnode->data + 1);
+
+	return 0;
+}
+
+void
+del_unknown_ip(struct Client *client_p)
+{
+	patricia_node_t *pnode;
+
+	if((pnode = match_ip(unknown_tree, (struct sockaddr *)&client_p->localClient->ip)) != NULL)
+	{
+		pnode->data = (void *)((unsigned long)pnode->data - 1);
+		if((unsigned long)pnode->data <= 0)
+		{
+			patricia_remove(unknown_tree, pnode);
+		}
+	}
+	/* well..this shouldn't happen */
+	s_assert(0);
+}
