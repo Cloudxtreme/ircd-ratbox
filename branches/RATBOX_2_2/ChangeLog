@@ -1,3 +1,24 @@
+leeh        2007/05/14 17:22:36 UTC	(20070514_0-23955)
+  Log:
+  - fix a potential DoS that could result in resource starvation
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/doc/example.conf (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/doc/example.efnet.conf (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/client.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/reject.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/s_conf.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/listener.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/newconf.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/packet.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/reject.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_conf.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_serv.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_user.c (File Modified) 
+
+
 androsyn    2007/05/05 17:48:54 UTC	(20070505_0-23918)
   Log:
   add patch from upstream adns that causes adns to spin if tcp connections fail immediately
