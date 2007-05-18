@@ -257,6 +257,9 @@ del_unknown_ip(struct Client *client_p)
 			patricia_remove(unknown_tree, pnode);
 		}
 	}
-	/* well..this shouldn't happen */
-	s_assert(0);
+
+	/* we can get here without a match when an exempt {}; causes
+	 * add_unknown_ip() to be skipped, together with interaction with
+	 * m_webirc.c --fl
+	 */
 }

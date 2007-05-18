@@ -41,6 +41,8 @@
 #include "memory.h"
 #include "s_auth.h"
 #include "reject.h"
+#include "s_conf.h"
+#include "hostmask.h"
 
 #ifndef INADDR_NONE
 #define INADDR_NONE ((unsigned int) 0xffffffff)
@@ -442,7 +444,7 @@ close_listeners()
  * any client list yet.
  */
 static void
-add_connection(struct Listener *listener, int fd, struct sockaddr *sai)
+add_connection(struct Listener *listener, int fd, struct sockaddr *sai, int exempt)
 {
 	struct Client *new_client;
 	s_assert(NULL != listener);
@@ -478,10 +480,13 @@ add_connection(struct Listener *listener, int fd, struct sockaddr *sai)
 	new_client->localClient->listener = listener;
 	++listener->ref_count;
 
-	if(check_reject(new_client))
-		return;
-	if(add_unknown_ip(new_client))
-		return;
+	if(!exempt)
+	{
+		if(check_reject(new_client))
+			return;
+		if(add_unknown_ip(new_client))
+			return;
+	}
 	
 	start_auth(new_client);
 }
@@ -556,9 +561,13 @@ accept_connection(int pfd, void *data)
 			return;
 		}
 
+
 		/* Do an initial check we aren't connecting too fast or with too many
 		 * from this IP... */
-		if((aconf = conf_connect_allowed((struct sockaddr *) &sai, sai.ss_family)) != NULL)
+		aconf = find_dline((struct sockaddr *) &sai, sai.ss_family);
+
+		/* check it wasn't an exempt */
+		if(aconf != NULL && (aconf->status & CONF_EXEMPTDLINE) == 0)
 		{
 			ServerStats->is_ref++;
 
@@ -586,7 +595,7 @@ accept_connection(int pfd, void *data)
 		}
 
 		ServerStats->is_ac++;
-		add_connection(listener, fd, (struct sockaddr *) &sai);
+		add_connection(listener, fd, (struct sockaddr *) &sai, aconf ? 1 : 0);
 
 	}
 	/* Re-register a new IO request for the next accept .. */
