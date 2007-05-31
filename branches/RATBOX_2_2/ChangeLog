@@ -1,3 +1,11 @@
+androsyn    2007/05/31 14:53:52 UTC	(20070531_0-23967)
+  Log:
+  minor mode documentation changes from dubkat
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/doc/modes.txt (File Modified) 
+
+
 jilles      2007/05/18 19:55:53 UTC	(20070518_1-23965)
   Log:
   m_webirc: call del_unknown_ip() otherwise the unknown will
