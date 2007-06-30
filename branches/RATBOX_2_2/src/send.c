@@ -43,6 +43,7 @@
 #include "s_log.h"
 #include "memory.h"
 #include "hook.h"
+#include "monitor.h"
 
 /* send the message to the link the target is attached to */
 #define send_linebuf(a,b) _send_linebuf((a->from ? a->from : a) ,b)
@@ -824,6 +825,40 @@ sendto_match_servs(struct Client *source_p, const char *mask, int cap,
 
 	linebuf_donebuf(&linebuf_id);
 	linebuf_donebuf(&linebuf_name);
+}
+
+/* sendto_monitor()
+ *
+ * inputs	- monitor nick to send to, format, va_args
+ * outputs	- message to local users monitoring the given nick
+ * side effects -
+ */
+void
+sendto_monitor(struct monitor *monptr, const char *pattern, ...)
+{
+	va_list args;
+	buf_head_t linebuf;
+	struct Client *target_p;
+	dlink_node *ptr;
+	dlink_node *next_ptr;
+	
+	linebuf_newbuf(&linebuf); 
+	
+	va_start(args, pattern);
+	linebuf_putmsg(&linebuf, pattern, &args, NULL);
+	va_end(args);
+
+	DLINK_FOREACH_SAFE(ptr, next_ptr, monptr->users.head)
+	{
+		target_p = ptr->data;
+
+		if(IsIOError(target_p))
+			continue;
+
+		_send_linebuf(target_p, &linebuf);
+	}
+
+	linebuf_donebuf(&linebuf);
 }
 
 /* sendto_anywhere()
