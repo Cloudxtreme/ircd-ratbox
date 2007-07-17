@@ -552,7 +552,8 @@ register_local_user(struct Client *client_p, struct Client *source_p, const char
 
 	monitor_signon(source_p);
 	user_welcome(source_p);
-	return (introduce_client(client_p, source_p, user, source_p->name));
+	introduce_client(client_p, source_p, user, source_p->name);
+	return 0
 }
 
 /*
