@@ -564,7 +564,7 @@ register_local_user(struct Client *client_p, struct Client *source_p, const char
  *		  of the net, either from a local client connect or
  *		  from a remote connect.
  */
-int
+void
 introduce_client(struct Client *client_p, struct Client *source_p, struct User *user, const char *nick)
 {
 	static char ubuf[12];
@@ -617,9 +617,6 @@ introduce_client(struct Client *client_p, struct Client *source_p, struct User *
 			      (long) source_p->tsinfo,
 			      ubuf, source_p->username, source_p->host,
 			      source_p->servptr->name, source_p->info);
-
-
-	return 0;
 }
 
 /* 
