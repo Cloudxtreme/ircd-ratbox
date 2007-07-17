@@ -1,3 +1,13 @@
+androsyn    2007/07/17 02:37:06 UTC	(20070717_0-23995)
+  Log:
+  introduce_client always returns 0, change to void
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/s_user.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/core/m_nick.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/s_user.c (File Modified) 
+
+
 jilles      2007/06/30 22:34:38 UTC	(20070630_0-23975)
   Log:
   Backport trunk r23973:
