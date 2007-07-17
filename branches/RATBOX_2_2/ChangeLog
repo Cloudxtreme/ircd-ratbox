@@ -1,3 +1,11 @@
+androsyn    2007/07/17 15:07:43 UTC	(20070717_2-24001)
+  Log:
+  add a missing semicolon
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/s_user.c (File Modified) 
+
+
 androsyn    2007/07/17 15:06:28 UTC	(20070717_1-23999)
   Log:
   don't try to use return value of introduce_client anymore
