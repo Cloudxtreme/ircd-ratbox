@@ -120,7 +120,7 @@ char *strip_tabs(char *dest, const unsigned char *src, size_t len);
 
 const char *myctime(time_t);
 
-#define EmptyString(x) (!(x) || (*(x) == '\0'))
+#define EmptyString(x) ((x == NULL) || (*(x) == '\0'))
 #define CheckEmpty(x) EmptyString(x) ? "" : x
 
 char *strtoken(char **save, char *str, const char *fs);
