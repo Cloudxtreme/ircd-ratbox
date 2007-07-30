@@ -125,11 +125,11 @@ static void	add_cur_list_cpt(conf_parm_t *new)
 	if (cur_list == NULL)
 	{
 		cur_list = MyMalloc(sizeof(conf_parm_t));
-		cur_list->type |= CF_FLIST;
 		cur_list->v.list = new;
 	}
 	else
 	{
+		cur_list->type |= CF_FLIST;
 		new->next = cur_list->v.list;
 		cur_list->v.list = new;
 	}
