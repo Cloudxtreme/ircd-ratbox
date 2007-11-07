@@ -1353,7 +1353,9 @@ exit_unknown_client(struct Client *client_p, struct Client *source_p, struct Cli
 	dlinkDelete(&source_p->localClient->tnode, &unknown_list);
 
 	if(!IsIOError(source_p))
-		sendto_one(source_p, "ERROR :Closing Link: 127.0.0.1 (%s)", comment);
+		sendto_one(source_p, "ERROR :Closing Link: %s (%s)",
+				source_p->user != NULL ? source_p->host : "127.0.0.1",
+				comment);
 
 	close_connection(source_p);
 
