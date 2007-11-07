@@ -1,3 +1,14 @@
+jilles      2007/11/07 17:40:44 UTC	(20071107_0-24473)
+  Log:
+  Backport trunk r23575:
+  Include real hostname in Closing Link message for unknown connections
+  that have sent NICK or USER, in particular banned users.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/client.c (File Modified) 
+
+
 jilles      2007/09/19 19:25:29 UTC	(20070919_0-24410)
   Log:
   Backport trunk r24408:
