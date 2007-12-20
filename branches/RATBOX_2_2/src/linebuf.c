@@ -494,10 +494,10 @@ linebuf_get(buf_head_t * bufhead, char *buf, int buflen, int partial, int raw)
 			cpylen--;
 		}
 	}
-	memcpy(buf, start, cpylen + 1);
+	memcpy(buf, start, cpylen);
 
 	/* convert CR/LF to NULL */
-	if(bufline->raw && !raw)
+	if(!raw)
 		buf[cpylen] = '\0';
 
 	s_assert(cpylen >= 0);
