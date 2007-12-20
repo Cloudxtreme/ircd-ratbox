@@ -1,3 +1,14 @@
+androsyn    2007/12/20 18:25:10 UTC	(20071220_0-24754)
+  Log:
+  Fix a really stupid off by one error when using linebuf_get in raw mode.  Also add the \0 regardless if the buffer is raw or not.
+  This bug has been hanging around for about 6 years.  Note that this bug is impossible to trigger in 2.2.x, just fixing it for the sake of sanity.
+  
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/linebuf.c (File Modified) 
+
+
 jilles      2007/11/07 17:40:44 UTC	(20071107_0-24473)
   Log:
   Backport trunk r23575:
