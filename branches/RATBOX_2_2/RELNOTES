@@ -5,6 +5,9 @@ If you are upgrading from 2.1, you must read doc/whats-new-2.2.txt
 If you are upgrading from 2.0, you must also read doc/whats-new-2.1.txt
 If you are upgrading from 1.x, you must also read doc/whats-new-2.0.txt
 
+-- ircd-ratbox-2.2.7.1
+- fixed a typo in the resv mask stuff :(
+
 -- ircd-ratbox-2.2.7
 - backport match_esc fixes from svn trunk
 - fix searching of duplicate xlines/resv when adding new ones
