@@ -619,9 +619,9 @@ struct ConfItem *
 find_nick_resv_mask(const char *name)
 {
 	struct ConfItem *aconf;
-	rb_dlink_node *ptr;
+	dlink_node *ptr;
 
-	RB_DLINK_FOREACH(ptr, resv_conf_list.head)
+	DLINK_FOREACH(ptr, resv_conf_list.head)
 	{
 		aconf = ptr->data;
 
