@@ -1,3 +1,13 @@
+androsyn    2008/01/11 19:44:20 UTC	(20080111_2-24902)
+  Log:
+  update RELNOTES and the like for 2.2.7
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/patchlevel.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/version.c.SH (File Modified) 
+
+
 androsyn    2008/01/11 19:02:50 UTC	(20080111_1-24900)
   Log:
   backport jilles match_esc fixes and make s_newconf.c compile again
