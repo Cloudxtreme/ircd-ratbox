@@ -5,6 +5,10 @@ If you are upgrading from 2.1, you must read doc/whats-new-2.2.txt
 If you are upgrading from 2.0, you must also read doc/whats-new-2.1.txt
 If you are upgrading from 1.x, you must also read doc/whats-new-2.0.txt
 
+-- ircd-ratbox-2.2.8
+- add a prototype that without makes the ircd dump core on xline on 64bit
+  platforms
+
 -- ircd-ratbox-2.2.7.1
 - fixed a typo in the resv mask stuff :(
 
