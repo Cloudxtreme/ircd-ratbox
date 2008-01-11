@@ -625,7 +625,7 @@ find_nick_resv_mask(const char *name)
 	{
 		aconf = ptr->data;
 
-		if(!irccmp(aconf->host, name))
+		if(!irccmp(aconf->name, name))
 			return aconf;
 	}
 
