@@ -1,3 +1,12 @@
+androsyn    2008/01/11 20:05:58 UTC	(20080111_4-24908)
+  Log:
+  bleh..update for 2.2.7.1 :(
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/patchlevel.h (File Modified) 
+
+
 androsyn    2008/01/11 20:04:29 UTC	(20080111_3-24906)
   Log:
   son of a bitch, messed that up
