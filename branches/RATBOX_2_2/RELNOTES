@@ -5,6 +5,18 @@ If you are upgrading from 2.1, you must read doc/whats-new-2.2.txt
 If you are upgrading from 2.0, you must also read doc/whats-new-2.1.txt
 If you are upgrading from 1.x, you must also read doc/whats-new-2.0.txt
 
+-- ircd-ratbox-2.2.7
+- backport match_esc fixes from svn trunk
+- fix searching of duplicate xlines/resv when adding new ones
+- include real hostname in Closing Link messages for unknown connections
+- fix parser to only take lists of options when asked for
+- fix config file line number reporting
+- change EmptyString() macro to work with gcc 4.2
+- make MONITOR reporting more efficient by replacing the target's nickname
+  with * as with server messages
+- make exempts apply to unregistered connections as well
+ 
+
 -- ircd-ratbox-2.2.6
 - upstream adns fix for when tcp connections fail immediately
 - minor memleak fix when rehashing helpfiles etc

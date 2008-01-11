@@ -4,7 +4,7 @@
  *
  *  Copyright (C) 1990 Jarkko Oikarinen and University of Oulu, Co Center
  *  Copyright (C) 1996-2002 Hybrid Development Team
- *  Copyright (C) 2002-2004 ircd-ratbox development team
+ *  Copyright (C) 2002-2008 ircd-ratbox development team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@
  */
 
 #ifndef PATCHLEVEL
-#define PATCHLEVEL   "ircd-ratbox-2.2.6"
-#define PATCHLEVEL_NUM	0202060500
+#define PATCHLEVEL   "ircd-ratbox-2.2.7"
+#define PATCHLEVEL_NUM	0202070500
 
 /* patchlevel numbers:
  * <major><minor><point><status><statusnum>
