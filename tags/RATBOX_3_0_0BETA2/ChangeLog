@@ -1,3 +1,12 @@
+androsyn    2008/04/09 18:26:45 UTC	(20080409_1-25211)
+  Log:
+  tag 3.0.0beta2
+  
+
+  Modified:
+	ircd-ratbox/tags/RATBOX_3_0_0BETA2/ (File Added) 
+
+
 androsyn    2008/04/09 18:24:36 UTC	(20080409_0-25209)
   Log:
   update patchlevel.h and RELNOTES for beta2
