@@ -146,6 +146,7 @@ ilog(ilogfile dest, const char *format, ...)
 	{
 		fclose(logfile);
 		*log_table[dest].logfile = NULL;
+		return;
 	}
 
 	fflush(logfile);
