@@ -1,3 +1,11 @@
+androsyn    2008/04/21 19:57:03 UTC	(20080421_0-25253)
+  Log:
+  backport from trunk - don't attempt to fflush a file we just closed
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/src/s_log.c (File Modified) 
+
+
 jilles      2008/02/07 20:45:23 UTC	(20080207_0-25060)
   Log:
   Fix a UID leak.
