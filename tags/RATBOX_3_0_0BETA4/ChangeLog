@@ -1,3 +1,11 @@
+androsyn    2008/05/14 18:17:16 UTC	(20080514_3-25373)
+  Log:
+  change the 3.0.0beta4 tag to grab the approriate libratbox tag
+
+  Modified:
+	ircd-ratbox/tags/RATBOX_3_0_0BETA4/  (Property Modified)
+
+
 androsyn    2008/05/14 18:09:29 UTC	(20080514_2-25368)
   Log:
   tag for beta4
