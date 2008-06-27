@@ -1,3 +1,11 @@
+androsyn    2008/06/27 17:04:28 UTC	(20080627_3-25619)
+  Log:
+  change libratbox external to use the tagged version
+
+  Modified:
+	ircd-ratbox/tags/RATBOX_3_0_0BETA7/  (Property Modified)
+
+
 androsyn    2008/06/27 17:03:35 UTC	(20080627_2-25617)
   Log:
   tag ircd-ratbox RATBOX_3_0_0BETA7
