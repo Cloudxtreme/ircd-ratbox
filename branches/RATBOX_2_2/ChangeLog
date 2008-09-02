@@ -1,3 +1,11 @@
+androsyn    2008/09/02 19:45:29 UTC	(20080902_0-25988)
+  Log:
+  add the majority_gline fix to 2.2
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_gline.c (File Modified) 
+
+
 leeh        2008/06/09 19:13:32 UTC	(20080609_0-25526)
   Log:
   - it's impossible to not have an info field in ms_server(), so remove the
