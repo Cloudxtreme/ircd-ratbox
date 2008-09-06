@@ -1,3 +1,11 @@
+androsyn    2008/09/06 15:07:39 UTC	(20080906_0-26024)
+  Log:
+  add a missing argument to LOAD2HI
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/contrib/m_mkpasswd.c (File Modified) 
+
+
 androsyn    2008/09/02 19:45:29 UTC	(20080902_0-25988)
   Log:
   add the majority_gline fix to 2.2
