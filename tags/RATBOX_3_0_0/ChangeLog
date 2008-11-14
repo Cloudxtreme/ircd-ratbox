@@ -1,3 +1,11 @@
+androsyn    2008/11/14 19:01:27 UTC	(20081114_2-26192)
+  Log:
+  tag ircd-ratbox RATBOX_3_0_0
+
+  Modified:
+	ircd-ratbox/tags/RATBOX_3_0_0/ (File Added) 
+
+
 androsyn    2008/11/14 19:00:43 UTC	(20081114_1-26188)
   Log:
   update RELNOTES and patchlevel.h
