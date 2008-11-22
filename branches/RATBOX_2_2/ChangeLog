@@ -1,3 +1,11 @@
+androsyn    2008/11/22 16:35:58 UTC	(20081122_0-26234)
+  Log:
+  sid should be defined as sid[4] not [3], somebody forgot space for the trailing \0
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/include/s_conf.h (File Modified) 
+
+
 androsyn    2008/09/06 15:07:39 UTC	(20080906_0-26024)
   Log:
   add a missing argument to LOAD2HI
