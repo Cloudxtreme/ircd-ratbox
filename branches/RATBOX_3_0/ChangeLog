@@ -1,3 +1,11 @@
+androsyn    2008/12/18 03:49:48 UTC	(20081218_0-26334)
+  Log:
+  tag ircd-ratbox RATBOX_3_0
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/ (File Added) 
+
+
 androsyn    2008/12/17 20:17:16 UTC	(20081217_2-26332)
   Log:
   get rid of the zip ready stuff
