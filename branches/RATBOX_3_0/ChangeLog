@@ -1,3 +1,12 @@
+androsyn    2008/12/22 00:04:42 UTC	(20081222_0-26351)
+  Log:
+  backport r26349 - change instances of mkpasswd to ratbox-mkpasswd
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/doc/example.conf (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/doc/example.efnet.conf (File Modified) 
+
+
 androsyn    2008/12/18 03:50:39 UTC	(20081218_1-26336)
   Log:
   change libratbox external to use the tagged version
