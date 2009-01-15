@@ -1,3 +1,11 @@
+androsyn    2009/01/15 23:15:55 UTC	(20090115_0-26401)
+  Log:
+  change strlcpy to rb_strlcpy
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/contrib/m_webirc.c (File Modified) 
+
+
 androsyn    2008/12/22 21:18:30 UTC	(20081222_1-26357)
   Log:
   get rid if unused version stuff that included libratbox info
