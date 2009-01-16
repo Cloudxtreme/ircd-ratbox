@@ -1,3 +1,21 @@
+jilles      2009/01/16 22:38:58 UTC	(20090116_0-26407)
+  Log:
+  Make it more likely that error messages on ssld connections get through.
+  When ssld reports a connection closure because of
+  "Remote host closed the connection" and the connection
+  is any server or a registered client, try a
+  read_packet() on the client.
+  This should mainly help LIBRB_USE_IOTYPE=poll which
+  iterates over the ready file descriptors in numerical
+  order, processing the ssld control connection before the
+  closing data connection.
+  backported r26397 from trunk
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/src/sslproc.c (File Modified) 
+
+
 androsyn    2009/01/15 23:15:55 UTC	(20090115_0-26401)
   Log:
   change strlcpy to rb_strlcpy
