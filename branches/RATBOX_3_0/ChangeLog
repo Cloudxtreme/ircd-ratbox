@@ -1,3 +1,11 @@
+androsyn    2009/02/07 18:58:33 UTC	(20090207_0-26449)
+  Log:
+  backport an off by one error bugfix with zipstats processing
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/src/sslproc.c (File Modified) 
+
+
 jilles      2009/01/16 22:38:58 UTC	(20090116_0-26407)
   Log:
   Make it more likely that error messages on ssld connections get through.
