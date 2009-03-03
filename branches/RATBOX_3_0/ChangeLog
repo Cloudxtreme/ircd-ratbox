@@ -1,3 +1,24 @@
+androsyn    2009/03/03 17:50:16 UTC	(20090303_1-26467)
+  Log:
+  Backport m_gungline from trunk and rerun automake
+  
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/bandb/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/bandb/sqlite3/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/contrib/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/help/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/Makefile.am (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/m_gungline.c (File Added) 
+	ircd-ratbox/branches/RATBOX_3_0/resolver/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/ssld/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/tools/Makefile.in (File Modified) 
+
+
 androsyn    2009/03/03 16:25:35 UTC	(20090303_0-26465)
   Log:
   backport r26463 from trunk - fix ssld issues on solaris and probably elsewhere too
