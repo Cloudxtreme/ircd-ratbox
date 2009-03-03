@@ -1,3 +1,11 @@
+androsyn    2009/03/03 16:25:35 UTC	(20090303_0-26465)
+  Log:
+  backport r26463 from trunk - fix ssld issues on solaris and probably elsewhere too
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/ssld/ssld.c (File Modified) 
+
+
 androsyn    2009/02/07 18:58:33 UTC	(20090207_0-26449)
   Log:
   backport an off by one error bugfix with zipstats processing
