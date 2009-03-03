@@ -1048,8 +1048,9 @@ mod_write_ctl(rb_fde_t *F, void *data)
 		if(retlen == 0 || (retlen < 0 && !rb_ignore_errno(errno)))
 			exit(0);
 
-		rb_setselect(ctl->F, RB_SELECT_WRITE, mod_write_ctl, ctl);
 	}
+	if(rb_dlink_list_length(&ctl->writeq) > 0)
+		rb_setselect(ctl->F, RB_SELECT_WRITE, mod_write_ctl, ctl);
 }
 
 
