@@ -1,3 +1,12 @@
+jilles      2009/03/26 22:31:35 UTC	(20090326_0-26483)
+  Log:
+  Add TS6 protocol document from trunk.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/doc/technical/ts6-protocol.txt (File Added) 
+
+
 androsyn    2009/03/23 15:18:40 UTC	(20090323_0-26479)
   Log:
   Backport r26469
