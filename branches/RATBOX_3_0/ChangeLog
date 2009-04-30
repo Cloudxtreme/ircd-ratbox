@@ -1,3 +1,13 @@
+jilles      2009/04/30 22:28:37 UTC	(20090430_0-26499)
+  Log:
+  Backport trunk r26497: Fix forward DNS resolution,
+  only used by connect::host with hostnames in it.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/resolver/resolver.c (File Modified) 
+
+
 androsyn    2009/03/27 17:31:31 UTC	(20090327_0-26485)
   Log:
   update patchlevel and RELNOTES
