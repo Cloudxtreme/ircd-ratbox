@@ -535,7 +535,13 @@ accept_ssld(rb_fde_t *F, struct sockaddr *addr, struct sockaddr *laddr, struct L
 {
 	ssl_ctl_t *ctl;
 	rb_fde_t *xF[2];
-	rb_socketpair(AF_UNIX, SOCK_STREAM, 0, &xF[0], &xF[1], "Incoming ssld Connection");
+	if(rb_socketpair(AF_UNIX, SOCK_STREAM, 0, &xF[0], &xF[1], "Incoming ssld Connection") == -1)
+	{
+                report_error("creating SSL/TLS socket pairs %s:%s",
+			     get_listener_name(listener), get_listener_name(listener), errno);
+		rb_close(F);
+		return;
+	} 
 	ctl = start_ssld_accept(F, xF[1], rb_get_fd(xF[0]));	/* this will close F for us */
 	add_connection(listener, xF[0], addr, laddr, ctl);
 }
