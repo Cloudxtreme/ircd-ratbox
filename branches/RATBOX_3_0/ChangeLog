@@ -1,3 +1,12 @@
+androsyn    2009/05/12 13:56:51 UTC	(20090512_1-26505)
+  Log:
+  check return values on rb_socketpair
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/src/s_serv.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/sslproc.c (File Modified) 
+
+
 androsyn    2009/05/12 13:20:16 UTC	(20090512_0-26501)
   Log:
   report errors and close the incoming connection if socketpair fails on ssl connections
