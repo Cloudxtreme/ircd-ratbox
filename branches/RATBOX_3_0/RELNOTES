@@ -14,6 +14,9 @@ If you are upgrading from 1.x, you must also read doc/whats-new-2.0.txt
 - fix forward dns resolution, only used by connect::host with hostnames
 - check return values on rb_socketpair that can cause a crash if 
   socketpair fails
+- add autoconf checks for -fstack-protector
+- add warnings for certain functions who's return values should always 
+  be checked
 
 -- ircd-ratbox-3.0.2
 - fix ssl+zip close detection
