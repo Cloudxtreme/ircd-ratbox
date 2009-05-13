@@ -1,3 +1,11 @@
+androsyn    2009/05/13 15:49:14 UTC	(20090513_4-26535)
+  Log:
+  fix double warning type messages
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/src/newconf.c (File Modified) 
+
+
 androsyn    2009/05/13 15:42:20 UTC	(20090513_3-26533)
   Log:
   fix a typo
