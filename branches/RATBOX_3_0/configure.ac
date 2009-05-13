@@ -81,6 +81,11 @@ AC_LANG(C)
 AM_CONDITIONAL([STATIC_MODULES], test "$enable_static" = "yes")
 AC_PROG_LIBTOOL
 
+GCC_STACK_PROTECT_LIB
+GCC_STACK_PROTECT_CC
+
+
+
 LIBTOOL="$LIBTOOL --silent"
 
 AC_CONFIG_SUBDIRS(libltdl libratbox)
