@@ -1,3 +1,13 @@
+androsyn    2009/05/14 22:34:30 UTC	(20090514_0-26539)
+  Log:
+  backport -r26537 - fix a CHALLENGE related core
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/include/struct.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/m_oper.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/client.c (File Modified) 
+
+
 androsyn    2009/05/13 15:49:14 UTC	(20090513_4-26535)
   Log:
   fix double warning type messages
