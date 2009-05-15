@@ -1,3 +1,12 @@
+androsyn    2009/05/15 22:06:13 UTC	(20090515_0-26541)
+  Log:
+  remove check for libssp
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/configure.ac (File Modified) 
+
+
 androsyn    2009/05/14 22:34:30 UTC	(20090514_0-26539)
   Log:
   backport -r26537 - fix a CHALLENGE related core
