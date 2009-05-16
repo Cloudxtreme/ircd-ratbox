@@ -445,7 +445,7 @@ m_challenge(struct Client *client_p, struct Client *source_p, int parc, const ch
 	}
 
 
-	if(!generate_challenge(&challenge, &(source_p->localClient->chal_resp), oper_p->rsa_pubkey))
+	if(!generate_challenge(&challenge, (char **)&(source_p->localClient->chal_resp), oper_p->rsa_pubkey))
 	{
 		char *chal = challenge;
 		source_p->localClient->chal_time = rb_current_time();
