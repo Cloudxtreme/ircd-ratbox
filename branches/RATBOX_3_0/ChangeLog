@@ -1,3 +1,12 @@
+androsyn    2009/05/20 21:09:04 UTC	(20090520_0-26553)
+  Log:
+  change type for chal_resp to uint8_t and eliminate some type casts
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/include/struct.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/m_oper.c (File Modified) 
+
+
 androsyn    2009/05/16 22:06:40 UTC	(20090516_0-26551)
   Log:
   type cast chal_resp
