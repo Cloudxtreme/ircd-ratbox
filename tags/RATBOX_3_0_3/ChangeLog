@@ -1,3 +1,11 @@
+androsyn    2009/05/21 18:36:26 UTC	(20090521_0-26561)
+  Log:
+  tag ircd-ratbox RATBOX_3_0_3
+
+  Modified:
+	ircd-ratbox/tags/RATBOX_3_0_3/ (File Added) 
+
+
 androsyn    2009/05/20 21:16:01 UTC	(20090520_0-26555)
   Log:
   change type for chal_resp to uint8_t and eliminate some type casts
