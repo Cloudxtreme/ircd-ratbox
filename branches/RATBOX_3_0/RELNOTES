@@ -17,6 +17,7 @@ If you are upgrading from 1.x, you must also read doc/whats-new-2.0.txt
 - add autoconf checks for -fstack-protector
 - add warnings for certain functions who's return values should always 
   be checked
+- fix a CHALLENGE related core dump
 
 -- ircd-ratbox-3.0.2
 - fix ssl+zip close detection
