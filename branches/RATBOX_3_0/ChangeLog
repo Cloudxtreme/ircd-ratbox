@@ -1,3 +1,12 @@
+androsyn    2009/05/21 18:44:40 UTC	(20090521_1-26565)
+  Log:
+  update again..ran the wrong script :/
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/include/patchlevel.h (File Modified) 
+
+
 androsyn    2009/05/21 18:35:25 UTC	(20090521_0-26557)
   Log:
   update patchlevel and release notes
