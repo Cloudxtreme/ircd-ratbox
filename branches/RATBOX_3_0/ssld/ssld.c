@@ -286,7 +286,12 @@ close_conn(conn_t * conn, int wait_plain, const char *fmt, ...)
 static conn_t *
 make_conn(mod_ctl_t * ctl, rb_fde_t *mod_fd, rb_fde_t *plain_fd)
 {
-	conn_t *conn = rb_malloc(sizeof(conn_t));
+	conn_t *conn; 
+	/* we need both, not just one..bail if NULL */
+	if(mod_fd == NULL || plain_fd == NULL)
+		return NULL;
+	
+	conn = rb_malloc(sizeof(conn_t));
 	conn->ctl = ctl;
 	conn->modbuf_out = rb_new_rawbuffer();
 	conn->plainbuf_out = rb_new_rawbuffer();
@@ -685,7 +690,13 @@ ssl_process_accept(mod_ctl_t * ctl, mod_ctl_buf_t * ctlb)
 	int32_t id;
 
 	conn = make_conn(ctl, ctlb->F[0], ctlb->F[1]);
-
+	if(conn == NULL)
+	{
+		/* give up.. */
+		rb_close(ctlb->F[0])
+		rb_close(ctlb->F[1]);
+		return;
+	}
 	id = buf_to_int32(&ctlb->buf[1]);
 
 	if(id >= 0)
@@ -709,6 +720,14 @@ ssl_process_connect(mod_ctl_t * ctl, mod_ctl_buf_t * ctlb)
 	conn_t *conn;
 	int32_t id;
 	conn = make_conn(ctl, ctlb->F[0], ctlb->F[1]);
+
+	if(conn == NULL)
+	{
+		/* give up.. */
+		rb_close(ctlb->F[0])
+		rb_close(ctlb->F[1]);
+		return;
+	}
 
 	id = buf_to_int32(&ctlb->buf[1]);
 
@@ -780,6 +799,15 @@ zlib_process(mod_ctl_t * ctl, mod_ctl_buf_t * ctlb)
 	int32_t id;
 
 	conn = make_conn(ctl, ctlb->F[0], ctlb->F[1]);
+
+	if(conn == NULL)
+	{
+		rb_close(ctlb->F[0])
+		rb_close(ctlb->F[1]);
+		return;
+	}
+
+
 	if(rb_get_type(conn->mod_fd) == RB_FD_UNKNOWN)
 		rb_set_type(conn->mod_fd, RB_FD_SOCKET);
 
@@ -871,6 +899,11 @@ send_nossl_support(mod_ctl_t * ctl, mod_ctl_buf_t * ctlb)
 	if(ctlb != NULL)
 	{
 		conn = make_conn(ctl, ctlb->F[0], ctlb->F[1]);
+		if(conn == NULL)
+		{
+			rb_close(ctlb->F[0]);
+			rb_close(ctlb->F[1]);
+		}
 		id = buf_to_int32(&ctlb->buf[1]);
 
 		if(id >= 0)
@@ -896,6 +929,11 @@ send_nozlib_support(mod_ctl_t * ctl, mod_ctl_buf_t * ctlb)
 	if(ctlb != NULL)
 	{
 		conn = make_conn(ctl, ctlb->F[0], ctlb->F[1]);
+		if(conn == NULL)
+		{
+			rb_close(ctlb->F[0]);
+			rb_close(ctlb->F[1]);
+		}
 		id = buf_to_int32(&ctlb->buf[1]);
 
 		if(id >= 0)
