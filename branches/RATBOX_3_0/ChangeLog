@@ -1,3 +1,12 @@
+leeh        2009/05/29 19:10:36 UTC	(20090529_0-26590)
+  Log:
+  - add in some missing semicolons
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/ssld/ssld.c (File Modified) 
+
+
 androsyn    2009/05/28 19:01:12 UTC	(20090528_0-26580)
   Log:
   improve error handling if we end up getting a NULL rb_fde_t
