@@ -693,7 +693,7 @@ ssl_process_accept(mod_ctl_t * ctl, mod_ctl_buf_t * ctlb)
 	if(conn == NULL)
 	{
 		/* give up.. */
-		rb_close(ctlb->F[0])
+		rb_close(ctlb->F[0]);
 		rb_close(ctlb->F[1]);
 		return;
 	}
@@ -724,7 +724,7 @@ ssl_process_connect(mod_ctl_t * ctl, mod_ctl_buf_t * ctlb)
 	if(conn == NULL)
 	{
 		/* give up.. */
-		rb_close(ctlb->F[0])
+		rb_close(ctlb->F[0]);
 		rb_close(ctlb->F[1]);
 		return;
 	}
@@ -802,7 +802,7 @@ zlib_process(mod_ctl_t * ctl, mod_ctl_buf_t * ctlb)
 
 	if(conn == NULL)
 	{
-		rb_close(ctlb->F[0])
+		rb_close(ctlb->F[0]);
 		rb_close(ctlb->F[1]);
 		return;
 	}
