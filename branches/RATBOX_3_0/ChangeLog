@@ -1,3 +1,14 @@
+androsyn    2009/06/05 15:02:08 UTC	(20090605_0-26592)
+  Log:
+  fix /rehash tdlines and /rehash bans so that both deal with dlines correctly
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/include/reject.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/m_rehash.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/bandbi.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/reject.c (File Modified) 
+
+
 leeh        2009/05/29 19:10:36 UTC	(20090529_0-26590)
   Log:
   - add in some missing semicolons
