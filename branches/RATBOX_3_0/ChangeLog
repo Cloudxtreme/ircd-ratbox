@@ -1,3 +1,35 @@
+androsyn    2009/07/23 19:15:31 UTC	(20090723_1-26630)
+  Log:
+  - Check to see if certain warning flags are supported by the compiler and use them all the time
+  - Add -fno-strict-aliasing to the list of flags passed, this seems to be needed for gcc 4.4 now
+    as we end up breaking strict aliasing rules when doing a lot of things
+  - Remove unneeded checks for rm etc as autoconf already checks these anyways
+  - Rerun libtoolize to get a newer version of libtool
+  - Rerun autotools
+  
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/aclocal.m4 (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/bandb/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/bandb/sqlite3/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/config.guess (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/config.sub (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/configure.ac (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/contrib/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/help/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/include/setup.h.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/install-sh (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/ltmain.sh (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/resolver/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/ssld/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/tools/Makefile.in (File Modified) 
+
+
 androsyn    2009/07/23 18:52:42 UTC	(20090723_0-26620)
   Log:
   remove an unneeded ifdef/include
