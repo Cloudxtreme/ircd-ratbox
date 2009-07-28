@@ -624,13 +624,13 @@ uninstall-am: uninstall-libcoreLTLIBRARIES
 
 version.c: version.c.SH ../CREDITS
 	$(SHELL) ./version.c.SH
-	cp version.c version.c.last
+	$(CP) version.c version.c.last
 
 version.lo: version.c ../include/patchlevel.h ../include/serno.h
 	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 install-exec-hook: install-libcoreLTLIBRARIES
-	@RB_RM@ -f version.c
+	$(RB_RM) -f version.c
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

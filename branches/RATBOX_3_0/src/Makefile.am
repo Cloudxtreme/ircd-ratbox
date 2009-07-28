@@ -11,7 +11,7 @@ BUILT_SOURCES = version.c
 
 version.c: version.c.SH ../CREDITS
 	$(SHELL) ./version.c.SH
-	cp version.c version.c.last
+	$(CP) version.c version.c.last
                 
 version.lo: version.c ../include/patchlevel.h ../include/serno.h
 	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
@@ -72,5 +72,5 @@ endif
 
 
 install-exec-hook: install-libcoreLTLIBRARIES
-	@RB_RM@ -f version.c
+	$(RB_RM) -f version.c
 
