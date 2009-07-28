@@ -72,5 +72,5 @@ endif
 
 
 install-exec-hook: install-libcoreLTLIBRARIES
-	rm -f version.c
+	@RB_RM@ -f version.c
 
