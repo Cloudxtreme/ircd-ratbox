@@ -1912,7 +1912,7 @@ uninstall-am: uninstall-coreLTLIBRARIES \
 # move the old module directory out of the way, stale modules cause massive
 # amounts of problems.
 @STATIC_MODULES_FALSE@	-@if test -d $(DESTDIR)$(moduledir)-old; then \
-@STATIC_MODULES_FALSE@		$(RM) -rf $(DESTDIR)$(moduledir)-old; \
+@STATIC_MODULES_FALSE@		@RB_RM@ -rf $(DESTDIR)$(moduledir)-old; \
 @STATIC_MODULES_FALSE@	fi
 @STATIC_MODULES_FALSE@	-@if test -d $(DESTDIR)$(moduledir); then \
 @STATIC_MODULES_FALSE@		echo "ircd: backing up modules"; \
