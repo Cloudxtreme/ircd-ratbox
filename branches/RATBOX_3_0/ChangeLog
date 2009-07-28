@@ -1,3 +1,11 @@
+androsyn    2009/07/28 16:59:44 UTC	(20090728_3-26644)
+  Log:
+  __EXTENSIONS__ is not needed here now as autoconf checks for this
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/src/dns.c (File Modified) 
+
+
 androsyn    2009/07/28 15:08:45 UTC	(20090728_2-26642)
   Log:
   a bit more build issue fixes
