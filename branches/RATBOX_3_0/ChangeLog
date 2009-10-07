@@ -1,3 +1,21 @@
+leeh        2009/10/07 20:43:14 UTC	(20091007_0-26688)
+  Log:
+  - add in new conf option for post_registration_delay, which basically stops
+    us parsing anything from clients until that delay has completed..
+  
+    *runs away from androsyn*
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/doc/example.conf (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/doc/example.efnet.conf (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/include/s_conf.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/newconf.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/packet.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/s_conf.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/s_user.c (File Modified) 
+
+
 androsyn    2009/07/28 16:59:44 UTC	(20090728_3-26644)
   Log:
   __EXTENSIONS__ is not needed here now as autoconf checks for this
