@@ -1,3 +1,12 @@
+jilles      2009/11/25 23:02:41 UTC	(20091125_1-26712)
+  Log:
+  merge r26706: ssld: Fix an fd leak when closing connections.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/ssld/ssld.c (File Modified) 
+
+
 jilles      2009/11/25 23:00:32 UTC	(20091125_0-26710)
   Log:
   merge r26704: ssld: Do not crash if not all fds in a message could be received.
