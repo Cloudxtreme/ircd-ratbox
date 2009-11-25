@@ -1,3 +1,13 @@
+jilles      2009/11/25 23:00:32 UTC	(20091125_0-26710)
+  Log:
+  merge r26704: ssld: Do not crash if not all fds in a message could be received.
+  Actually fill the mod_ctl_buf_t.nfds field.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/ssld/ssld.c (File Modified) 
+
+
 leeh        2009/10/07 20:43:14 UTC	(20091007_0-26688)
   Log:
   - add in new conf option for post_registration_delay, which basically stops
