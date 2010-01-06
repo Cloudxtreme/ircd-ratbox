@@ -1,3 +1,11 @@
+androsyn    2010/01/06 16:45:36 UTC	(20100106_0-26722)
+  Log:
+  add code to kick out debugging info for the mangled aconf->status bug when expiring dlines and not crash when it happens
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/src/s_conf.c (File Modified) 
+
+
 jilles      2009/11/25 23:05:33 UTC	(20091125_2-26714)
   Log:
   merge r26708: Add two more reasons why ssld_count>1 can be useful:
