@@ -1,3 +1,32 @@
+androsyn    2010/01/22 17:26:08 UTC	(20100122_0-26732)
+  Log:
+  Fix a bug with /quote help and rerun autoconf and friends too.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/aclocal.m4 (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/bandb/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/bandb/sqlite3/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/config.guess (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/config.sub (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/configure.ac (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/contrib/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/help/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/include/setup.h.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/install-sh (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/libltdl/config-h.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/libltdl/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/ltmain.sh (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/resolver/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/cache.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/ssld/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/tools/Makefile.in (File Modified) 
+
+
 androsyn    2010/01/06 16:45:36 UTC	(20100106_0-26722)
   Log:
   add code to kick out debugging info for the mangled aconf->status bug when expiring dlines and not crash when it happens
