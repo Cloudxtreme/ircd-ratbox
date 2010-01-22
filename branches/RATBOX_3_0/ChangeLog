@@ -1,3 +1,12 @@
+androsyn    2010/01/22 17:36:00 UTC	(20100122_1-26734)
+  Log:
+  update RELNOTES and patchlevel
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/include/patchlevel.h (File Modified) 
+
+
 androsyn    2010/01/22 17:26:08 UTC	(20100122_0-26732)
   Log:
   Fix a bug with /quote help and rerun autoconf and friends too.
