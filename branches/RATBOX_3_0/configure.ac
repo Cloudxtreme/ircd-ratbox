@@ -147,7 +147,7 @@ AC_HEADER_DIRENT
 AC_CHECK_HEADERS([sys/types.h sys/resource.h sys/param.h sys/stat.h sys/socket.h netinet/in.h arpa/inet.h errno.h stddef.h ])
 AC_HEADER_TIME
 
-AC_CHECK_FUNCS([snprintf])
+AC_CHECK_FUNCS([snprintf lstat stat])
 
 dnl Networking Functions
 dnl ====================
