@@ -1,3 +1,11 @@
+androsyn    2010/01/25 16:59:41 UTC	(20100125_1-26759)
+  Log:
+  tag ircd-ratbox RATBOX_3_0_6
+
+  Modified:
+	ircd-ratbox/tags/RATBOX_3_0_6/ (File Added) 
+
+
 androsyn    2010/01/25 16:48:08 UTC	(20100125_0-26750)
   Log:
   Fix a critical bug in /links handling and bump patchlevel and update RELNOTES
