@@ -1,3 +1,11 @@
+androsyn    2010/01/25 16:41:18 UTC	(20100125_1-26748)
+  Log:
+  tag ratbox 2.2.9
+
+  Modified:
+	ircd-ratbox/tags/RATBOX_2_2_9/ (File Added) 
+
+
 androsyn    2010/01/25 16:36:01 UTC	(20100125_0-26746)
   Log:
   add critical fixes for bugs in /quote HELP and /LINKS - thanks to spb@efnet for pointing these out. Also update RELNOTES and patchlevel.h for 2.2.9
