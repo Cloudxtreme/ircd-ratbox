@@ -87,19 +87,21 @@ clean_string(char *dest, const unsigned char *src, size_t len)
 	if(dest == NULL || src == NULL)
 		return NULL;
 
-	len -= 3;		/* allow for worst case, '^A\0' */
-
-	while (*src && (len > 0))
+	while (*src && (len > 1))
 	{
 		if(*src & 0x80)	/* if high bit is set */
 		{
 			*d++ = '.';
 			--len;
+			if(len <= 1)
+				break;
 		}
 		else if(!IsPrint(*src))	/* if NOT printable */
 		{
 			*d++ = '^';
 			--len;
+			if(len <= 1)
+				break;
 			*d++ = 0x40 + *src;	/* turn it into a printable */
 		}
 		else

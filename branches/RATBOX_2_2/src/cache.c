@@ -80,9 +80,21 @@ cache_file(const char *filename, const char *shortname, int flags)
 	struct cacheline *lineptr;
 	char line[BUFSIZE];
 	char *p;
-
+	struct stat st;
 	if((in = fopen(filename, "r")) == NULL)
 		return NULL;
+
+	/* check and make sure we have something that is a file... */
+	if(fstat(fileno(in), &st) == -1)
+	{
+		fclose(in);
+		return NULL;
+	}    
+	if(!S_ISREG(st.st_mode))
+	{
+		fclose(in);
+		return NULL;    
+	}
 
 	if(strcmp(shortname, "ircd.motd") == 0)
 	{
@@ -120,6 +132,12 @@ cache_file(const char *filename, const char *shortname, int flags)
 			strlcpy(lineptr->data, line, sizeof(lineptr->data));
 
 		dlinkAddTail(lineptr, &lineptr->linenode, &cacheptr->contents);
+	}
+
+	if(dlink_list_length(&cacheptr->contents) == 0) 
+	{
+		MyFree(cacheptr);
+		cacheptr = NULL;
 	}
 
 	fclose(in);
@@ -214,7 +232,8 @@ load_help(void)
 	{
 		ircsnprintf(filename, sizeof(filename), "%s/%s", HPATH, ldirent->d_name);
 		cacheptr = cache_file(filename, ldirent->d_name, HELP_OPER);
-		add_to_help_hash(cacheptr->name, cacheptr);
+		if(cacheptr != NULL)
+			add_to_help_hash(cacheptr->name, cacheptr);
 	}
 
 	closedir(helpfile_dir);
@@ -247,7 +266,8 @@ load_help(void)
 #endif
 
 		cacheptr = cache_file(filename, ldirent->d_name, HELP_USER);
-		add_to_help_hash(cacheptr->name, cacheptr);
+		if(cacheptr != NULL)
+			add_to_help_hash(cacheptr->name, cacheptr);
 	}
 
 	closedir(helpfile_dir);
