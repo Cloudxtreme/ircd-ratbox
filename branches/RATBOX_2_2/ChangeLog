@@ -1,3 +1,18 @@
+androsyn    2010/01/25 16:36:01 UTC	(20100125_0-26746)
+  Log:
+  add critical fixes for bugs in /quote HELP and /LINKS - thanks to spb@efnet for pointing these out. Also update RELNOTES and patchlevel.h for 2.2.9
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_2_2/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/include/patchlevel.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/modules/m_links.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/cache.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/irc_string.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/lex.yy.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/y.tab.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_2_2/src/y.tab.h (File Modified) 
+
+
 androsyn    2008/11/22 16:35:58 UTC	(20081122_0-26234)
   Log:
   sid should be defined as sid[4] not [3], somebody forgot space for the trailing \0
