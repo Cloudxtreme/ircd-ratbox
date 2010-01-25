@@ -1,3 +1,13 @@
+androsyn    2010/01/25 16:48:08 UTC	(20100125_0-26750)
+  Log:
+  Fix a critical bug in /links handling and bump patchlevel and update RELNOTES
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/include/patchlevel.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/m_links.c (File Modified) 
+
+
 androsyn    2010/01/22 17:36:00 UTC	(20100122_1-26734)
   Log:
   update RELNOTES and patchlevel
