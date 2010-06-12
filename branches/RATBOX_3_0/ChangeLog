@@ -1,3 +1,12 @@
+jilles      2010/06/12 22:53:07 UTC	(20100612_1-27037)
+  Log:
+  Update help index for gungline addition.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/help/opers/index (File Modified) 
+
+
 jilles      2010/06/12 22:52:16 UTC	(20100612_0-27035)
   Log:
   Backport r26495 from trunk: Add help file for gungline.
