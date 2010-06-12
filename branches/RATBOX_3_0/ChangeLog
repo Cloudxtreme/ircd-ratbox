@@ -1,3 +1,12 @@
+jilles      2010/06/12 22:52:16 UTC	(20100612_0-27035)
+  Log:
+  Backport r26495 from trunk: Add help file for gungline.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/help/opers/gungline (File Added) 
+
+
 androsyn    2010/01/25 16:48:08 UTC	(20100125_0-26750)
   Log:
   Fix a critical bug in /links handling and bump patchlevel and update RELNOTES
