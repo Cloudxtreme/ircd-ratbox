@@ -1,3 +1,14 @@
+androsyn    2010/11/03 16:41:10 UTC	(20101103_0-27119)
+  Log:
+  Clear out logfile names before rehashing the server.  
+  Without this, if an admin comments out a logfile and rehashes,
+  the server keeps logging to that file.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/src/s_conf.c (File Modified) 
+
+
 jilles      2010/06/12 22:53:07 UTC	(20100612_1-27037)
   Log:
   Update help index for gungline addition.
