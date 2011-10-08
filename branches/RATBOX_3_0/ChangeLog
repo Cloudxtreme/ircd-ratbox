@@ -1,3 +1,13 @@
+androsyn    2011/10/08 03:01:34 UTC	(20111008_0-27205)
+  Log:
+  Updated INSTALL file, 99% by dubkat, a few minor edits by me :)
+  
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/INSTALL (File Modified) 
+
+
 androsyn    2010/11/03 16:41:10 UTC	(20101103_0-27119)
   Log:
   Clear out logfile names before rehashing the server.  
