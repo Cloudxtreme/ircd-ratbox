@@ -1,3 +1,14 @@
+dubkat      2011/10/12 01:09:17 UTC	(20111012_0-27219)
+  Log:
+  Update included SQLite to the current release: 3.7.8
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/bandb/sqlite3/shell.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/bandb/sqlite3/sqlite3.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/bandb/sqlite3/sqlite3.h (File Modified) 
+
+
 jilles      2011/10/11 22:50:44 UTC	(20111011_1-27215)
   Log:
   Backport r27213 from trunk: Disable keyword expansion for two more files
