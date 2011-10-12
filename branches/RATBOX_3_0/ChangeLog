@@ -1,3 +1,11 @@
+dubkat      2011/10/12 01:26:35 UTC	(20111012_1-27223)
+  Log:
+  Cleanup the INSTALL file.
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/INSTALL (File Modified) 
+
+
 dubkat      2011/10/12 01:09:17 UTC	(20111012_0-27219)
   Log:
   Update included SQLite to the current release: 3.7.8
