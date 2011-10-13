@@ -1,3 +1,14 @@
+dubkat      2011/10/13 05:09:59 UTC	(20111013_0-27227)
+  Log:
+  tabs here, spaces there. clean up the .confs so that everything is nice and neat
+  add cconnext to oper only umode, as it is useless for non-opers
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/doc/example.conf (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/doc/example.efnet.conf (File Modified) 
+
+
 dubkat      2011/10/12 01:26:35 UTC	(20111012_1-27223)
   Log:
   Cleanup the INSTALL file.
