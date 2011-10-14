@@ -1,3 +1,11 @@
+dubkat      2011/10/14 03:58:24 UTC	(20111014_0-27235)
+  Log:
+  update SVN-Access with the corrected links
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/SVN-Access (File Modified) 
+
+
 dubkat      2011/10/13 05:51:26 UTC	(20111013_1-27231)
   Log:
   make bantool have a more meaningful version number
