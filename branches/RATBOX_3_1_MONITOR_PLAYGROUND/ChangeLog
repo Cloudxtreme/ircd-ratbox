@@ -1,3 +1,11 @@
+dubkat      2011/10/14 03:59:21 UTC	(20111014_1-27239)
+  Log:
+  update SVN-Access with the corrected links
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_1_MONITOR_PLAYGROUND/SVN-Access (File Modified) 
+
+
 dubkat      2011/10/14 03:26:25 UTC	(20111014_0-27233)
   Log:
   add a playground branch to be merged back into trunk. this branch is where the new, friendlier server notices will be developed.
