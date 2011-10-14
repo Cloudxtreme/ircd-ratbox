@@ -1,3 +1,12 @@
+dubkat      2011/10/14 03:26:25 UTC	(20111014_0-27233)
+  Log:
+  add a playground branch to be merged back into trunk. this branch is where the new, friendlier server notices will be developed.
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_1_MONITOR_PLAYGROUND/ (File Added) 
+
+
 dubkat      2011/10/13 05:51:10 UTC	(20111013_1-27229)
   Log:
   make bantool have a more meaningful version number
