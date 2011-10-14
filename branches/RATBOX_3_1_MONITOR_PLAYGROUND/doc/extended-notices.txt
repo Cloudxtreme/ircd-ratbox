@@ -1,0 +1,78 @@
+################################################
+# 
+# IRCD-RATBOX - EXTENDED NOTICES FORMAT
+# Dan Reidy <dubkat@gmail.com>
+# $Id$
+#
+################################################
+
+Starting with ircd-ratbox-3.1, you now have yet another new format 
+for server notices (at your discression, of course).
+
+These notices are designed to be far easier to parse, regardless if
+you are using Perl, Python, C, or any other language for your irc client,
+or you are writing an irc bot.
+
+Why another format: 
+Long ago, in another century, irc daemons only had the default umode +c 
+which displayed client's connecting and quitting. ircd coders at the time
+were probably more concerned with readability, than usability... Meaning they
+were easy to read (and i say that subjectivly), but were difficult to handle
+with scripts without jumping though hoops.  Several years ago, ircd-ratbox
+introduced CLICONNEXT (umode +C) notices, which were broken up more, were less
+pre-formatted, and contained some extra information +c was missing. 
+This allowed clients and scripts to read the notices, and handle/reformat them 
+anyway they liked.  This was a great idea, and I believe it to
+be a success. The only problem is, client connections, quits, and ETRACE's are the only
+notices that use this new format.
+
+Just as with CLICONNEXT, the new ENOTICE messages will be given to you 
+IN ADDITION TO any other umode you have. So, you CAN use umode +ECc. This will
+have the side-effect of seeing 3 CONNECT notices per client (or quits)
+
+
+What they look like:
+
+# just a draft of ideas for the irc-monitor api being thrown about for ratbox 3.1
+# any ideas should be easily backported to 3.0.x 
+
+
+basicly, you will be notified of server notices in a different format than human opers
+for example:
+
+# source.server <code> <nick> <user> <host> <ip> <class> <extra1> <extra2> :<string_info>
+
+# disconnect
+irc.he.net: ENOTICE 0 nobody ~nobody some.leet.host 255.255.255.255 lusers - - :<quit message>
+
+# connect (default)
+irc.he.net: ENOTICE 1 nobody ~nobody some.leet.host 255.255.255.255 lusers hi there :i am nobody special
+
+# connect (sslified)
+irc.he.net: ENOTICE 2 nobody ~nobody some.leet.host 255.255.255.255 lusers hi there :i am nobody special
+
+# flood -> channel
+irc.he.net: ENOTICE 3 nobody ~nobody some.leet.host 255.255.255.255 lusers - - :#some_flooded_channel
+
+# flood -> user
+irc.he.net: ENOTICE 4 nobody ~nobody some.leet.host 255.255.255.255 lusers - - :some_flooded_nick
+
+# jupe
+irc.he.net: ENOTICE 5 nobody ~nobody some.leet.host 255.255.255.255 lusers - #CHANNEL :jupe reason
+
+# failed oper
+irc.he.net: ENOTICE 6 nobody ~nobody some.leet.host 255.255.255.255 lusers - - :host mismatch or whatever
+
+# nick change
+irc.he.net: ENOTICE 7 nobody ~nobody some.leet.host 255.255.255.255 lusers - - :NEW_NICK
+
+# too many hosts (local)
+irc.he.net: ENOTICE 8 nobody ~nobody some.leet.host 255.255.255.255 - - :
+
+# too many hosts (global)
+irc.he.net: ENOTICE 9 nobody ~nobody some.leet.host 255.255.255.255 - - :
+
+etc.. etc..
+
+
+
