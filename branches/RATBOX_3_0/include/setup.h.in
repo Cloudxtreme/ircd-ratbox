@@ -70,9 +70,8 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define to 1 if `lstat' has the bug that it succeeds when given the
-   zero-length file name argument. */
-#undef HAVE_LSTAT_EMPTY_STRING_BUG
+/* Define to 1 if you have the `lstat' function. */
+#undef HAVE_LSTAT
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
@@ -85,6 +84,9 @@
 
 /* Define to 1 if you have the `snprintf' function. */
 #undef HAVE_SNPRINTF
+
+/* Define to 1 if you have the `stat' function. */
+#undef HAVE_STAT
 
 /* Define to 1 if you have the <stddef.h> header file. */
 #undef HAVE_STDDEF_H
@@ -150,10 +152,6 @@
 
 /* Prefix where to write logfiles. */
 #undef LOG_DIR
-
-/* Define to 1 if `lstat' dereferences a symlink specified with a trailing
-   slash. */
-#undef LSTAT_FOLLOWS_SLASHED_SYMLINK
 
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
@@ -310,3 +308,6 @@
 #ifndef __cplusplus
 #undef inline
 #endif
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#undef size_t

@@ -42,7 +42,10 @@ build_contrib:
 
 install_contrib: build_contrib
 	cd contrib && $(MAKE) install
-	
+
+install_data-local:
+	-@if test ! -d @logdir@; then mkdir @logdir@;fi
+		
 contrib: build_contrib
 
 

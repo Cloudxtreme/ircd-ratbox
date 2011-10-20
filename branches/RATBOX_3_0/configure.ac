@@ -75,15 +75,19 @@ AC_PROG_LIBTOOL
 
 GCC_STACK_PROTECT_CC
 
+
 cc_accepts_flag()
 {
-	local CFLAGS="$@"
-	AC_MSG_CHECKING([whether $CC accepts $@])
-	AC_COMPILE_IFELSE([int main(){return 0;}] ,
-	[RC=0; AC_MSG_RESULT([yes])],
-	[RC=1; AC_MSG_RESULT([no])]) 
-	return $RC
+        cc_accepts_flag_CFLAGS="$CFLAGS"
+        CFLAGS="$*" 
+        AC_MSG_CHECKING([whether $CC accepts $@])
+        AC_COMPILE_IFELSE([int main(){return 0;}] ,
+        [RC=0; AC_MSG_RESULT([yes])],
+        [RC=1; AC_MSG_RESULT([no])])
+        CFLAGS="$cc_accepts_flag_CFLAGS"
+        return $RC
 }
+                                                                
  
 if cc_accepts_flag -fno-strict-aliasing; then
 	CFLAGS="$CFLAGS -fno-strict-aliasing" 
@@ -253,34 +257,12 @@ LIBS="$LIBS $SSL_LIBS"
 
 
 
-if test "$cf_enable_openssl" != no; then
-	dnl Check OpenSSL version (must be 0.9.7 or above!)
-	AC_MSG_CHECKING(for OpenSSL 0.9.7 or above)
-	AC_RUN_IFELSE(
-		AC_LANG_PROGRAM(
-	    	[#include <openssl/opensslv.h>
-		#include <stdlib.h>],
-		[[if (OPENSSL_VERSION_NUMBER >= 0x00907000)
-		exit(0); else exit(1);]]),
-	cf_enable_openssl=yes,
-	cf_enable_openssl=no,
-	cf_enable_openssl=no)
 
-	if test "$cf_enable_openssl" = yes; then
-		AC_MSG_RESULT(found)
-	else
-		cf_enable_openssl=no
-		AC_MSG_RESULT(not found - OpenSSL support disabled)
-	fi
-fi
-
-if test "$cf_openssl_version_ok" != no; then
-	CPPFLAGS="$CPPFLAGS $SSL_LIBS"
-	AC_CHECK_LIB(crypto, RSA_free, 
-		[SSL_LIBS="$SSL_LIBS -lcrypto $lt_cv_dlopen_libs"], 
-		[cf_enable_openssl=no]  
-	)
-fi
+CPPFLAGS="$CPPFLAGS $SSL_LIBS"
+AC_CHECK_LIB(crypto, RSA_free, 
+	[SSL_LIBS="$SSL_LIBS -lcrypto $lt_cv_dlopen_libs"], 
+	[cf_enable_openssl=no]  
+)
 
 if test "$cf_enable_openssl" != no; then
 	AC_DEFINE(USE_CHALLENGE, 1, [Define to enable CHALLENGE support, requires OpenSSL])
