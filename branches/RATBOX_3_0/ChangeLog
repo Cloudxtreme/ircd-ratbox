@@ -1,3 +1,31 @@
+androsyn    2011/10/20 22:55:29 UTC	(20111020_0-27245)
+  Log:
+  Remove the openssl version check, its sort of pointless.  
+  Rebuild autotools
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/Makefile.am (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/aclocal.m4 (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/bandb/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/bandb/sqlite3/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/configure.ac (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/contrib/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/help/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/include/setup.h.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/libltdl/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/libltdl/aclocal.m4 (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/libltdl/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/ltmain.sh (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/resolver/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/ssld/Makefile.in (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/tools/Makefile.in (File Modified) 
+
+
 dubkat      2011/10/14 03:58:24 UTC	(20111014_0-27235)
   Log:
   update SVN-Access with the corrected links
