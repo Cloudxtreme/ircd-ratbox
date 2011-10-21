@@ -1,3 +1,13 @@
+dubkat      2011/10/21 00:06:19 UTC	(20111021_0-27249)
+  Log:
+  backport r27247 from trunk. make genssl.sh a little more useful
+  
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/doc/genssl.sh (File Modified) (Property Modified)
+
+
 androsyn    2011/10/20 22:55:29 UTC	(20111020_0-27245)
   Log:
   Remove the openssl version check, its sort of pointless.  
