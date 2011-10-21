@@ -1,3 +1,11 @@
+dubkat      2011/10/21 01:59:01 UTC	(20111021_1-27253)
+  Log:
+  Add a working crontab script in docs
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/doc/ircd_crontab.sh (File Added) 
+
+
 dubkat      2011/10/21 00:06:19 UTC	(20111021_0-27249)
   Log:
   backport r27247 from trunk. make genssl.sh a little more useful
