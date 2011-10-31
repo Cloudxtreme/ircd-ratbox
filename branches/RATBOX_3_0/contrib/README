@@ -71,7 +71,6 @@ spy_links_notice.c   - Spy on clients doing LINKS
 spy_motd_notice.c    - Spy on clients doing MOTD
 spy_stats_notice.c   - Spy on clients doing all STATS
 spy_stats_p_notice.c - Spy on clients doing STATS p only
-spy_trace_notice.c   - Spy on clients doing TRACE/LTRACE
 spy_whois_notice.c   - Spy on local clients who WHOIS you.
 spy_whois_notice_global.c - Spy on remote clients who WHOIS you.
 
