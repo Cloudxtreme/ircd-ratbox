@@ -1,3 +1,11 @@
+androsyn    2011/10/31 16:11:37 UTC	(20111031_0-27287)
+  Log:
+  remove spy_trace_notice.c from README
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/contrib/README (File Modified) 
+
+
 androsyn    2011/10/21 13:22:32 UTC	(20111021_2-27255)
   Log:
   - Make ircd_crontab.sh /bin/sh friendly.
