@@ -1,14 +1,22 @@
 
-This is the current release version of the 'testing' tree of ircd-ratbox.
+Please note as of this release, the 3.0 branch is now marked as 'stable'. 
+The 2.2 branch will no longer be maintained.
 
-NOTE: Whilst every effort has been made to make sure this code is usable, it
-      is still not classified as a stable release.  You assume full
-      responsibility for running this on a production network.
+This is the current release version of the 'stable' tree of ircd-ratbox.
 
 If you are upgrading from 2.2, you must read doc/whats-new-3.0.txt
 If you are upgrading from 2.1, you must read doc/whats-new-2.2.txt
 If you are upgrading from 2.0, you must also read doc/whats-new-2.1.txt
 If you are upgrading from 1.x, you must also read doc/whats-new-2.0.txt
+
+-- ircd-ratbox-3.0.7
+- remove sigio code. its buggyness makes it more trouble than its worth
+- stop logging to files when they are commented out in the ircd.conf
+- add help for GUNGLINE
+- make cross compiles work again 
+- fix error handling with GNUTLS
+- update included sqlite3 code to something recent
+- documentation cleanups/updates
 
 -- ircd-ratbox-3.0.6
 - fix a user-triggerable crash in /links handling when flatten_links is
