@@ -1,3 +1,14 @@
+androsyn    2011/11/06 01:11:49 UTC	(20111106_0-27295)
+  Log:
+  update release notes etc
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/CREDITS (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/RELNOTES (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/include/patchlevel.h (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/version.c.SH (File Modified) 
+
+
 androsyn    2011/10/31 16:11:37 UTC	(20111031_0-27287)
   Log:
   remove spy_trace_notice.c from README
