@@ -1,3 +1,15 @@
+dubkat      2011/11/12 21:38:37 UTC	(20111112_1-27313)
+  Log:
+  revert some previous changes made in r27307
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/bandb/bandb.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/core/m_kill.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/m_info.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/m_stats.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/parse.c (File Modified) 
+
+
 dubkat      2011/11/12 20:29:14 UTC	(20111112_0-27307)
   Log:
   GCC Format security fix
