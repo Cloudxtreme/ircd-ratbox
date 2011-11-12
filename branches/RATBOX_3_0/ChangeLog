@@ -1,3 +1,20 @@
+dubkat      2011/11/12 20:29:14 UTC	(20111112_0-27307)
+  Log:
+  GCC Format security fix
+  Patch supplied by Marc Dequ?\195?\168nes from debian.
+  
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/bandb/bandb.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/core/m_kill.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/m_info.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/modules/m_stats.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/parse.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/s_auth.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/sslproc.c (File Modified) 
+
+
 androsyn    2011/11/06 01:11:49 UTC	(20111106_0-27295)
   Log:
   update release notes etc
