@@ -226,7 +226,7 @@ m_stats(struct Client *client_p, struct Client *source_p, int parc, const char *
 			if((stats_cmd_table[i].need_admin && !IsOperAdmin(source_p)) ||
 			   (stats_cmd_table[i].need_oper && !IsOper(source_p)))
 			{
-				sendto_one_numeric(source_p, ERR_NOPRIVILEGES,
+				sendto_one_numeric(source_p, ERR_NOPRIVILEGES, "%s",
 						   form_str(ERR_NOPRIVILEGES));
 				break;
 			}
@@ -284,7 +284,7 @@ stats_connect(struct Client *source_p)
 	if((ConfigFileEntry.stats_c_oper_only ||
 	    (ConfigServerHide.flatten_links && !IsExemptShide(source_p))) && !IsOper(source_p))
 	{
-		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, form_str(ERR_NOPRIVILEGES));
+		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, "%s", form_str(ERR_NOPRIVILEGES));
 		return;
 	}
 
@@ -358,7 +358,7 @@ stats_exempt(struct Client *source_p)
 {
 	if(ConfigFileEntry.stats_e_disabled)
 	{
-		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, form_str(ERR_NOPRIVILEGES));
+		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, "%s", form_str(ERR_NOPRIVILEGES));
 		return;
 	}
 
@@ -470,7 +470,7 @@ stats_hubleaf(struct Client *source_p)
 	if((ConfigFileEntry.stats_h_oper_only ||
 	    (ConfigServerHide.flatten_links && !IsExemptShide(source_p))) && !IsOper(source_p))
 	{
-		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, form_str(ERR_NOPRIVILEGES));
+		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, "%s", form_str(ERR_NOPRIVILEGES));
 		return;
 	}
 
@@ -498,7 +498,7 @@ stats_auth(struct Client *source_p)
 
 	/* Oper only, if unopered, return ERR_NOPRIVS */
 	if((ConfigFileEntry.stats_i_oper_only == 2) && !IsOper(source_p))
-		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, form_str(ERR_NOPRIVILEGES));
+		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, "%s", form_str(ERR_NOPRIVILEGES));
 
 	/* If unopered, Only return matching auth blocks */
 	else if((ConfigFileEntry.stats_i_oper_only == 1) && !IsOper(source_p))
@@ -556,7 +556,7 @@ stats_tklines(struct Client *source_p)
 
 	/* Oper only, if unopered, return ERR_NOPRIVS */
 	if((ConfigFileEntry.stats_k_oper_only == 2) && !IsOper(source_p))
-		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, form_str(ERR_NOPRIVILEGES));
+		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, "%s", form_str(ERR_NOPRIVILEGES));
 
 	/* If unopered, Only return matching klines */
 	else if((ConfigFileEntry.stats_k_oper_only == 1) && !IsOper(source_p))
@@ -621,7 +621,7 @@ stats_klines(struct Client *source_p)
 
 	/* Oper only, if unopered, return ERR_NOPRIVS */
 	if((ConfigFileEntry.stats_k_oper_only == 2) && !IsOper(source_p))
-		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, form_str(ERR_NOPRIVILEGES));
+		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, "%s", form_str(ERR_NOPRIVILEGES));
 
 	/* If unopered, Only return matching klines */
 	else if((ConfigFileEntry.stats_k_oper_only == 1) && !IsOper(source_p))
@@ -708,7 +708,7 @@ stats_oper(struct Client *source_p)
 
 	if(!IsOper(source_p) && ConfigFileEntry.stats_o_oper_only)
 	{
-		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, form_str(ERR_NOPRIVILEGES));
+		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, "%s", form_str(ERR_NOPRIVILEGES));
 		return;
 	}
 
@@ -774,7 +774,7 @@ static void
 stats_ports(struct Client *source_p)
 {
 	if(!IsOper(source_p) && ConfigFileEntry.stats_P_oper_only)
-		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, form_str(ERR_NOPRIVILEGES));
+		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, "%s", form_str(ERR_NOPRIVILEGES));
 	else
 		show_ports(source_p);
 }
@@ -1042,7 +1042,7 @@ stats_servers(struct Client *source_p)
 
 	if(ConfigServerHide.flatten_links && !IsOper(source_p) && !IsExemptShide(source_p))
 	{
-		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, form_str(ERR_NOPRIVILEGES));
+		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, "%s", form_str(ERR_NOPRIVILEGES));
 		return;
 	}
 
@@ -1115,7 +1115,7 @@ stats_class(struct Client *source_p)
 
 	if(ConfigFileEntry.stats_y_oper_only && !IsOper(source_p))
 	{
-		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, form_str(ERR_NOPRIVILEGES));
+		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, "%s", form_str(ERR_NOPRIVILEGES));
 		return;
 	}
 
@@ -1419,7 +1419,7 @@ stats_servlinks(struct Client *source_p)
 
 	if(ConfigServerHide.flatten_links && !IsOper(source_p) && !IsExemptShide(source_p))
 	{
-		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, form_str(ERR_NOPRIVILEGES));
+		sendto_one_numeric(source_p, ERR_NOPRIVILEGES, "%s", form_str(ERR_NOPRIVILEGES));
 		return;
 	}
 
