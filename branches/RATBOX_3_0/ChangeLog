@@ -1,3 +1,11 @@
+androsyn    2012/01/16 22:05:21 UTC	(20120116_2-27348)
+  Log:
+  test
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/CREDITS (File Modified) 
+
+
 dubkat      2012/01/16 21:35:50 UTC	(20120116_1-27345)
   Log:
   Update SQLite to 3.7.10. release information can be read at: http://www.sqlite.org/releaselog/3_7_10.html
