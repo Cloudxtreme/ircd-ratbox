@@ -75,20 +75,19 @@ AC_PROG_LIBTOOL
 
 GCC_STACK_PROTECT_CC
 
-
 cc_accepts_flag()
 {
         cc_accepts_flag_CFLAGS="$CFLAGS"
         CFLAGS="$*" 
         AC_MSG_CHECKING([whether $CC accepts $@])
-        AC_COMPILE_IFELSE([int main(){return 0;}] ,
+        AC_COMPILE_IFELSE([AC_LANG_SOURCE([int main(){return 0;}])] ,
         [RC=0; AC_MSG_RESULT([yes])],
         [RC=1; AC_MSG_RESULT([no])])
         CFLAGS="$cc_accepts_flag_CFLAGS"
         return $RC
 }
-                                                                
- 
+
+
 if cc_accepts_flag -fno-strict-aliasing; then
 	CFLAGS="$CFLAGS -fno-strict-aliasing" 
 fi
