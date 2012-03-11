@@ -1,3 +1,14 @@
+androsyn    2012/03/11 00:34:21 UTC	(20120311_1-27357)
+  Log:
+  Rerun autoconf/libtoolize again...
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/configure (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/configure.ac (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/ltmain.sh (File Modified) 
+
+
 androsyn    2012/03/11 00:12:06 UTC	(20120311_0-27353)
   Log:
   Rerun autoreconf...
