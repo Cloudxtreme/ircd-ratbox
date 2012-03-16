@@ -3,7 +3,7 @@
  *  m_okick.c: Kicks a user from a channel with much prejudice.
  *
  *  Copyright (C) 2002 by the past and present ircd coders, and others.
- *  Copyright (C) 2004 ircd-ratbox Development Team
+ *  Copyright (C) 2004-2012 ircd-ratbox Development Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

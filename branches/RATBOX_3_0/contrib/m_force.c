@@ -1,6 +1,6 @@
 /* contrib/m_force.c
  * Copyright (C) 1996-2002 Hybrid Development Team
- * Copyright (C) 2004 ircd-ratbox Development Team
+ * Copyright (C) 2004-2012 ircd-ratbox Development Team
  *
  *  Redistribution and use in source and binary forms, with or without
  *  modification, are permitted provided that the following conditions are
