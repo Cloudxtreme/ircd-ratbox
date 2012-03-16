@@ -1,3 +1,17 @@
+dubkat      2012/03/16 23:10:29 UTC	(20120316_2-27381)
+  Log:
+  more copyright changes
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/contrib/m_clearchan.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/contrib/m_force.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/contrib/m_ojoin.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/contrib/m_okick.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/contrib/m_olist.c (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/doc/server-version-info (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/src/version.c.SH (File Modified) 
+
+
 dubkat      2012/03/16 05:33:15 UTC	(20120316_1-27371)
   Log:
   House cleaning - update our copyright notices
