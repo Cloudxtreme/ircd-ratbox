@@ -1,3 +1,11 @@
+androsyn    2012/04/15 21:41:07 UTC	(20120415_0-27391)
+  Log:
+  Fix another case of sizeof() returning the pointer size instead of the variable size
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/resolver/resolver.c (File Modified) 
+
+
 dubkat      2012/03/16 23:10:29 UTC	(20120316_2-27381)
   Log:
   more copyright changes
