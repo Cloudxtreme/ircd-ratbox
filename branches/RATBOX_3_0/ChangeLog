@@ -1,3 +1,12 @@
+androsyn    2012/12/31 21:34:15 UTC	(20121231_1-27414)
+  Log:
+  update release version
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/INSTALL (File Modified) 
+	ircd-ratbox/branches/RATBOX_3_0/include/patchlevel.h (File Modified) 
+
+
 androsyn    2012/12/31 21:31:20 UTC	(20121231_0-27412)
   Log:
   update relnotes
