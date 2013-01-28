@@ -1,3 +1,12 @@
+androsyn    2013/01/28 23:38:59 UTC	(20130128_0-27433)
+  Log:
+  Reject cidr masks that are too large to make sense, assume they are nonsense and skip cidr checking for these
+  
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/src/match.c (File Modified) 
+
+
 androsyn    2012/12/31 21:34:15 UTC	(20121231_1-27414)
   Log:
   update release version
