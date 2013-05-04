@@ -280,7 +280,7 @@ init_isupport(void)
 	add_isupport("SAFELIST", isupport_string, "");
 	add_isupport("ELIST", isupport_string, "U");
 	add_isupport("CASEMAPPING", isupport_string, "rfc1459");
-	add_isupport("CHARSET", isupport_string, "ascii");
+	add_isupport("CHARSET", isupport_string, "utf-8");
 	add_isupport("NICKLEN", isupport_intptr, &nicklen);
 	add_isupport("CHANNELLEN", isupport_intptr, &channellen);
 	add_isupport("TOPICLEN", isupport_intptr, &ConfigChannel.topiclen);
