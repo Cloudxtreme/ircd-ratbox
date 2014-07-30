@@ -1,3 +1,23 @@
+androsyn    2014/07/30 16:51:02 UTC	(20140730_2-27472)
+  Log:
+  remove blockheap and use rb_malloc/rb_free
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/bandb/bandb.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/client.h (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/libltdl/configure (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_away.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/resolver/resolver.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/channel.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/client.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/ircd.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/monitor.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/s_auth.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/s_conf.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/s_newconf.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/ssld/ssld.c (File Modified) 
+
+
 androsyn    2014/07/30 15:51:08 UTC	(20140730_1-27466)
   Log:
   update external
