@@ -98,7 +98,7 @@ m_topic(struct Client *client_p, struct Client *source_p, int parc, const char *
 		if((chptr->mode.mode & MODE_TOPICLIMIT) == 0 || is_chanop(msptr))
 		{
 			char topic_info[USERHOST_REPLYLEN];
-			rb_sprintf(topic_info, "%s!%s@%s",
+			snprintf(topic_info, sizeof(topic_info), "%s!%s@%s",
 				   source_p->name, source_p->username, source_p->host);
 			set_channel_topic(chptr, parv[2], topic_info, rb_current_time());
 

@@ -419,7 +419,7 @@ channel_member_names(struct Channel *chptr, struct Client *client_p, int show_eo
 	{
 		is_member = IsMember(client_p, chptr);
 
-		cur_len = mlen = rb_sprintf(lbuf, form_str(RPL_NAMREPLY),
+		cur_len = mlen = sprintf(lbuf, form_str(RPL_NAMREPLY),
 					    me.name, client_p->name,
 					    channel_pub_or_secret(chptr), chptr->chname);
 
@@ -442,7 +442,7 @@ channel_member_names(struct Channel *chptr, struct Client *client_p, int show_eo
 				t = lbuf + mlen;
 			}
 
-			tlen = rb_sprintf(t, "%s%s ", find_channel_status(msptr, stack),
+			tlen = sprintf(t, "%s%s ", find_channel_status(msptr, stack),
 					  target_p->name);
 
 			cur_len += tlen;
@@ -506,8 +506,8 @@ is_banned(struct Channel *chptr, struct Client *who, struct membership *msptr,
 	/* if the buffers havent been built, do it here */
 	if(s == NULL)
 	{
-		rb_sprintf(src_host, "%s!%s@%s", who->name, who->username, who->host);
-		rb_sprintf(src_iphost, "%s!%s@%s", who->name, who->username, who->sockhost);
+		sprintf(src_host, "%s!%s@%s", who->name, who->username, who->host);
+		sprintf(src_iphost, "%s!%s@%s", who->name, who->username, who->sockhost);
 
 		s = src_host;
 		s2 = src_iphost;
@@ -823,21 +823,21 @@ channel_modes(struct Channel *chptr, struct Client *client_p)
 	if(chptr->mode.limit && *chptr->mode.key)
 	{
 		if(IsMe(client_p) || !MyClient(client_p) || IsMember(client_p, chptr))
-			rb_sprintf(mbuf, "lk %d %s", chptr->mode.limit, chptr->mode.key);
+			sprintf(mbuf, "lk %d %s", chptr->mode.limit, chptr->mode.key);
 		else
 			strcpy(mbuf, "lk");
 	}
 	else if(chptr->mode.limit)
 	{
 		if(IsMe(client_p) || !MyClient(client_p) || IsMember(client_p, chptr))
-			rb_sprintf(mbuf, "l %d", chptr->mode.limit);
+			sprintf(mbuf, "l %d", chptr->mode.limit);
 		else
 			strcpy(mbuf, "l");
 	}
 	else if(*chptr->mode.key)
 	{
 		if(IsMe(client_p) || !MyClient(client_p) || IsMember(client_p, chptr))
-			rb_sprintf(mbuf, "k %s", chptr->mode.key);
+			sprintf(mbuf, "k %s", chptr->mode.key);
 		else
 			strcpy(mbuf, "k");
 	}
@@ -987,11 +987,11 @@ send_cap_mode_changes(struct Client *client_p, struct Client *source_p,
 		nocap = chcap_combos[j].cap_no;
 
 		if(cap & CAP_TS6)
-			mbl = preflen = rb_sprintf(modebuf, ":%s TMODE %ld %s ",
+			mbl = preflen = sprintf(modebuf, ":%s TMODE %ld %s ",
 						   use_id(source_p), (long)chptr->channelts,
 						   chptr->chname);
 		else
-			mbl = preflen = rb_sprintf(modebuf, ":%s MODE %s ",
+			mbl = preflen = sprintf(modebuf, ":%s MODE %s ",
 						   source_p->name, chptr->chname);
 
 		/* loop the list of - modes we have */
@@ -1055,7 +1055,7 @@ send_cap_mode_changes(struct Client *client_p, struct Client *source_p,
 
 			if(arg != NULL)
 			{
-				len = rb_sprintf(pbuf, "%s ", arg);
+				len = sprintf(pbuf, "%s ", arg);
 				pbuf += len;
 				pbl += len;
 				mc++;

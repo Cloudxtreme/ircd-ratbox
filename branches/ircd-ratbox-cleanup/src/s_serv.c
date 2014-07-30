@@ -317,7 +317,7 @@ send_capabilities(struct Client *client_p, int cap_can_send)
 	{
 		if(cap->cap & cap_can_send)
 		{
-			tl = rb_sprintf(t, "%s ", cap->name);
+			tl = sprintf(t, "%s ", cap->name);
 			t += tl;
 		}
 	}
@@ -424,7 +424,7 @@ serv_connect(struct server_conf *server_p, struct Client *by)
 	}
 
 	/* servernames are always guaranteed under HOSTLEN chars */
-	rb_snprintf(note, sizeof(note), "Server: %s", server_p->name);
+	snprintf(note, sizeof(note), "Server: %s", server_p->name);
 	rb_note(F, note);
 
 	/* Create a local client */

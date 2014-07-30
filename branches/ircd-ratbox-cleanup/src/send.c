@@ -517,7 +517,7 @@ sendto_channel_flags(struct Client *one, int type, struct Client *source_p,
 	current_serial++;
 
 	va_start(args, pattern);
-	rb_vsnprintf(buf, sizeof(buf), pattern, args);
+	vsnprintf(buf, sizeof(buf), pattern, args);
 	va_end(args);
 
 	if(IsServer(source_p))
@@ -694,7 +694,7 @@ sendto_match_butone(struct Client *one, struct Client *source_p,
 	rb_linebuf_newbuf(&rb_linebuf_id);
 
 	va_start(args, pattern);
-	rb_vsnprintf(buf, sizeof(buf), pattern, args);
+	vsnprintf(buf, sizeof(buf), pattern, args);
 	va_end(args);
 
 	if(IsServer(source_p))
@@ -769,7 +769,7 @@ sendto_match_servs(struct Client *source_p, const char *mask, int cap,
 	rb_linebuf_newbuf(&rb_linebuf_name);
 
 	va_start(args, pattern);
-	rb_vsnprintf(buf, sizeof(buf), pattern, args);
+	vsnprintf(buf, sizeof(buf), pattern, args);
 	va_end(args);
 
 	rb_linebuf_putmsg(&rb_linebuf_id, NULL, NULL, ":%s %s", use_id(source_p), buf);
@@ -1020,7 +1020,7 @@ kill_client_serv_butone(struct Client *one, struct Client *target_p, const char 
 	rb_linebuf_newbuf(&rb_linebuf_id);
 
 	va_start(args, pattern);
-	rb_vsnprintf(buf, sizeof(buf), pattern, args);
+	vsnprintf(buf, sizeof(buf), pattern, args);
 	va_end(args);
 
 	rb_linebuf_putmsg(&rb_linebuf_name, NULL, NULL, ":%s KILL %s :%s",

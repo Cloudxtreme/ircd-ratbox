@@ -439,7 +439,7 @@ register_local_user(struct Client *client_p, struct Client *source_p, const char
 				     "Invalid username: %s (%s@%s)",
 				     source_p->name, source_p->username, source_p->host);
 		ServerStats.is_ref++;
-		rb_sprintf(tmpstr2, "Invalid username [%s]", source_p->username);
+		snprintf(tmpstr2, sizeof(tmpstr2), "Invalid username [%s]", source_p->username);
 		exit_client(client_p, source_p, &me, tmpstr2);
 		return (CLIENT_EXITED);
 	}

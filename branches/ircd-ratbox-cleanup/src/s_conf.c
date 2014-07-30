@@ -1071,13 +1071,13 @@ get_oper_name(struct Client *client_p)
 
 	if(MyOper(client_p))
 	{
-		rb_snprintf(buffer, sizeof(buffer), "%s!%s@%s{%s}",
+		snprintf(buffer, sizeof(buffer), "%s!%s@%s{%s}",
 			    client_p->name, client_p->username,
 			    client_p->host, client_p->localClient->opername);
 		return buffer;
 	}
 
-	rb_snprintf(buffer, sizeof(buffer), "%s!%s@%s{%s}",
+	snprintf(buffer, sizeof(buffer), "%s!%s@%s{%s}",
 		    client_p->name, client_p->username, client_p->host, client_p->servptr->name);
 	return buffer;
 }

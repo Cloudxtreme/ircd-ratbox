@@ -120,7 +120,7 @@ dump_map(struct Client *client_p, struct Client *root_p, char *pbuf)
 		(float)100 * (float)rb_dlink_list_length(&root_p->serv->users) /
 		(float)Count.total);
 
-	rb_snprintf(buf + USER_COL, BUFSIZE - USER_COL,
+	snprintf(buf + USER_COL, BUFSIZE - USER_COL,
 		    " | Users: %5lu (%s)", rb_dlink_list_length(&root_p->serv->users), scratch);
 
 	sendto_one(client_p, form_str(RPL_MAP), me.name, client_p->name, buf);

@@ -191,11 +191,11 @@ start_resolver(void)
 #endif
 	if(resolver_path == NULL)
 	{
-		rb_snprintf(fullpath, sizeof(fullpath), "%s/resolver%s", LIBEXEC_DIR, suffix);
+		snprintf(fullpath, sizeof(fullpath), "%s/resolver%s", LIBEXEC_DIR, suffix);
 
 		if(access(fullpath, X_OK) == -1)
 		{
-			rb_snprintf(fullpath, sizeof(fullpath), "%s/libexec/ircd-ratbox/resolver%s",
+			snprintf(fullpath, sizeof(fullpath), "%s/libexec/ircd-ratbox/resolver%s",
 				    ConfigFileEntry.dpath, suffix);
 			if(access(fullpath, X_OK) == -1)
 			{

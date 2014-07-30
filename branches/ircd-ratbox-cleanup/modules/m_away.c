@@ -84,7 +84,8 @@ m_away(struct Client *client_p, struct Client *source_p, int parc, const char *p
 			sendto_server(client_p, NULL, CAP_TS6, NOCAPS,
 				      ":%s AWAY", use_id(source_p));
 			sendto_server(client_p, NULL, NOCAPS, CAP_TS6, ":%s AWAY", source_p->name);
-			free_away(source_p);
+			rb_free(source_p->user->away);
+			source_p->user->away = NULL;
 		}
 		if(MyConnect(source_p))
 			sendto_one(source_p, form_str(RPL_UNAWAY), me.name, source_p->name);

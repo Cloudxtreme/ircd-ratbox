@@ -628,7 +628,7 @@ set_local_gline(struct Client *source_p, const char *user, const char *host, con
 			aconf->spasswd = rb_strdup(oper_reason);
 	}
 
-	rb_snprintf(buffer, sizeof(buffer), "%s (%s)", reason, current_date);
+	snprintf(buffer, sizeof(buffer), "%s (%s)", reason, current_date);
 
 	aconf->passwd = rb_strdup(buffer);
 	aconf->user = rb_strdup(user);

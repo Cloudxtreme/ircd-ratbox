@@ -208,7 +208,7 @@ cluster_generic(struct Client *source_p, const char *command, int cltype, const 
 	rb_dlink_node *ptr;
 
 	va_start(args, format);
-	rb_vsnprintf(buffer, sizeof(buffer), format, args);
+	vsnprintf(buffer, sizeof(buffer), format, args);
 	va_end(args);
 
 	RB_DLINK_FOREACH(ptr, cluster_conf_list.head)

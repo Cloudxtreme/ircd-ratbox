@@ -218,7 +218,7 @@ auth_connect_callback(rb_fde_t *F, int status, void *data)
 	/* one shot at the send, socket buffers should be able to handle it
 	 * if not, oh well, you lose
 	 */
-	rb_snprintf(authbuf, sizeof(authbuf), "%d , %d\r\n", auth->rport, auth->lport);
+	snprintf(authbuf, sizeof(authbuf), "%d , %d\r\n", auth->rport, auth->lport);
 	if(rb_write(auth->authF, authbuf, strlen(authbuf)) <= 0)
 	{
 		auth_error(auth);

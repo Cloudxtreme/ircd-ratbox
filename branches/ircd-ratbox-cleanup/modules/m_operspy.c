@@ -79,7 +79,7 @@ ms_operspy(struct Client *client_p, struct Client *source_p, int parc, const cha
 			if((size_t)(cur_len + len) >= sizeof(buffer))
 				return 0;
 
-			rb_snprintf(ptr, sizeof(buffer) - cur_len, "%s ", parv[i]);
+			snprintf(ptr, sizeof(buffer) - cur_len, "%s ", parv[i]);
 			ptr += len;
 			cur_len += len;
 		}

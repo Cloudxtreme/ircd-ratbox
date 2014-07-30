@@ -557,7 +557,7 @@ do_query_number(struct DNSQuery *query, const struct rb_sockaddr_storage *addr,
 		const struct sockaddr_in *v4 = (const struct sockaddr_in *)addr;
 		cp = (const unsigned char *)&v4->sin_addr.s_addr;
 
-		rb_sprintf(request->queryname, "%u.%u.%u.%u.in-addr.arpa", (unsigned int)(cp[3]),
+		sprintf(request->queryname, "%u.%u.%u.%u.in-addr.arpa", (unsigned int)(cp[3]),
 			   (unsigned int)(cp[2]), (unsigned int)(cp[1]), (unsigned int)(cp[0]));
 	}
 #ifdef RB_IPV6
@@ -566,7 +566,7 @@ do_query_number(struct DNSQuery *query, const struct rb_sockaddr_storage *addr,
 		const struct sockaddr_in6 *v6 = (const struct sockaddr_in6 *)addr;
 		cp = (const unsigned char *)&v6->sin6_addr.s6_addr;
 
-		rb_sprintf(request->queryname,
+		sprintf(request->queryname,
 			   "%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x."
 			   "%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.ip6.arpa",
 			   (unsigned int)(cp[15] & 0xf), (unsigned int)(cp[15] >> 4),

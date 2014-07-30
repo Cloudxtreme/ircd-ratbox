@@ -623,7 +623,7 @@ set_initial_nick(struct Client *client_p, struct Client *source_p, char *nick)
 	source_p->name = source_p->user->name;
 	add_to_hash(HASH_CLIENT, nick, source_p);
 
-	rb_snprintf(note, sizeof(note), "Nick: %s", nick);
+	snprintf(note, sizeof(note), "Nick: %s", nick);
 	rb_note(client_p->localClient->F, note);
 
 	if(HasSentUser(source_p))
@@ -721,7 +721,7 @@ change_local_nick(struct Client *client_p, struct Client *source_p, char *nick, 
 		rb_dlinkDestroy(ptr, &source_p->on_allow_list);
 	}
 
-	rb_snprintf(note, sizeof(note), "Nick: %s", nick);
+	snprintf(note, sizeof(note), "Nick: %s", nick);
 	rb_note(client_p->localClient->F, note);
 
 	return;

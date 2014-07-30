@@ -30,7 +30,10 @@
 #include "common.h"
 #include "s_log.h"
 
+
+
 int conf_fgets(char *lbuf, int max_size, FILE * fb);
+
 
 int yylex(void);
 
@@ -38,7 +41,7 @@ int yylex(void);
 int yyget_lineno(void);
 FILE *yyget_in(void);
 FILE *yyget_out(void);
-int yyget_leng(void);
+yy_size_t yyget_leng (void );
 char *yyget_text(void);
 void yyset_lineno(int  line_number);
 void yyset_in(FILE *  in_str);
@@ -203,7 +206,7 @@ void cinclude(void)
 			/* if its not found in PREFIX, look in ETCPATH */
 			char fnamebuf[IRCD_BUFSIZE];
 
-			rb_snprintf(fnamebuf, sizeof(fnamebuf), "%s/%s", ETCPATH, c);
+			snprintf(fnamebuf, sizeof(fnamebuf), "%s/%s", ETCPATH, c);
 			tmp_fbfile_in = fopen(fnamebuf, "r");
 
 			/* wasnt found there either.. error. */

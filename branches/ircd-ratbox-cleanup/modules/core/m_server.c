@@ -777,7 +777,7 @@ burst_modes_TS5(struct Client *client_p, char *chname, rb_dlink_list *list, char
 	char *pp;
 	int count = 0;
 
-	mlen = rb_sprintf(buf, ":%s MODE %s +", me.name, chname);
+	mlen = sprintf(buf, ":%s MODE %s +", me.name, chname);
 	cur_len = mlen;
 
 	mp = mbuf;
@@ -804,7 +804,7 @@ burst_modes_TS5(struct Client *client_p, char *chname, rb_dlink_list *list, char
 
 		*mp++ = flag;
 		*mp = '\0';
-		pp += rb_sprintf(pp, "%s ", banptr->banstr);
+		pp += sprintf(pp, "%s ", banptr->banstr);
 		cur_len += tlen;
 		count++;
 	}
@@ -830,7 +830,7 @@ burst_modes_TS6(struct Client *client_p, struct Channel *chptr, rb_dlink_list *l
 	int mlen;
 	int cur_len;
 
-	cur_len = mlen = rb_sprintf(buf, ":%s BMASK %ld %s %c :",
+	cur_len = mlen = sprintf(buf, ":%s BMASK %ld %s %c :",
 				    me.id, (long)chptr->channelts, chptr->chname, flag);
 	t = buf + mlen;
 
@@ -857,7 +857,7 @@ burst_modes_TS6(struct Client *client_p, struct Channel *chptr, rb_dlink_list *l
 			t = buf + mlen;
 		}
 
-		rb_sprintf(t, "%s ", banptr->banstr);
+		sprintf(t, "%s ", banptr->banstr);
 		t += tlen;
 		cur_len += tlen;
 	}
@@ -933,7 +933,7 @@ burst_TS5(struct Client *client_p)
 		if(*chptr->chname != '#')
 			continue;
 
-		cur_len = mlen = rb_sprintf(buf, ":%s SJOIN %ld %s %s :", me.name,
+		cur_len = mlen = sprintf(buf, ":%s SJOIN %ld %s %s :", me.name,
 					    (long)chptr->channelts, chptr->chname,
 					    channel_modes(chptr, client_p));
 
@@ -958,7 +958,7 @@ burst_TS5(struct Client *client_p)
 				t = buf + mlen;
 			}
 
-			rb_sprintf(t, "%s%s ", find_channel_status(msptr, 1),
+			sprintf(t, "%s%s ", find_channel_status(msptr, 1),
 				   msptr->client_p->name);
 
 			cur_len += tlen;
@@ -1068,7 +1068,7 @@ burst_TS6(struct Client *client_p)
 		if(*chptr->chname != '#')
 			continue;
 
-		cur_len = mlen = rb_sprintf(buf, ":%s SJOIN %ld %s %s :", me.id,
+		cur_len = mlen = sprintf(buf, ":%s SJOIN %ld %s %s :", me.id,
 					    (long)chptr->channelts, chptr->chname,
 					    channel_modes(chptr, client_p));
 
@@ -1092,7 +1092,7 @@ burst_TS6(struct Client *client_p)
 				t = buf + mlen;
 			}
 
-			rb_sprintf(t, "%s%s ", find_channel_status(msptr, 1),
+			sprintf(t, "%s%s ", find_channel_status(msptr, 1),
 				   use_id(msptr->client_p));
 
 			cur_len += tlen;
@@ -1283,7 +1283,7 @@ server_estab(struct Client *client_p)
 	hdata.target = client_p;
 	call_hook(h_server_introduced, &hdata);
 
-	rb_snprintf(note, sizeof(note), "Server: %s", client_p->name);
+	snprintf(note, sizeof(note), "Server: %s", client_p->name);
 	rb_note(client_p->localClient->F, note);
 
 	/*

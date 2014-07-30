@@ -88,9 +88,9 @@ add_monitor(struct Client *client_p, const char *nicks)
 	int cur_onlen, cur_offlen;
 
 	/* these two are same length, just diff numeric */
-	cur_offlen = cur_onlen = mlen = rb_sprintf(onbuf, form_str(RPL_MONONLINE),
+	cur_offlen = cur_onlen = mlen = sprintf(onbuf, form_str(RPL_MONONLINE),
 						   me.name, client_p->name, "");
-	rb_sprintf(offbuf, form_str(RPL_MONOFFLINE), me.name, client_p->name, "");
+	sprintf(offbuf, form_str(RPL_MONOFFLINE), me.name, client_p->name, "");
 
 	onptr = onbuf + mlen;
 	offptr = offbuf + mlen;
@@ -113,9 +113,9 @@ add_monitor(struct Client *client_p, const char *nicks)
 				sendto_one_buffer(client_p, offbuf);
 
 			if(p)
-				rb_snprintf(buf, sizeof(buf), "%s,%s", name, p);
+				snprintf(buf, sizeof(buf), "%s,%s", name, p);
 			else
-				rb_snprintf(buf, sizeof(buf), "%s", name);
+				snprintf(buf, sizeof(buf), "%s", name);
 
 			sendto_one(client_p, form_str(ERR_MONLISTFULL),
 				   me.name, client_p->name, ConfigFileEntry.max_monitor, buf);
@@ -146,7 +146,7 @@ add_monitor(struct Client *client_p, const char *nicks)
 				*onptr++ = ',';
 				cur_onlen++;
 			}
-			arglen = rb_sprintf(onptr, "%s!%s@%s",
+			arglen = sprintf(onptr, "%s!%s@%s",
 					    target_p->name, target_p->username, target_p->host);
 			onptr += arglen;
 			cur_onlen += arglen;
@@ -165,7 +165,7 @@ add_monitor(struct Client *client_p, const char *nicks)
 				*offptr++ = ',';
 				cur_offlen++;
 			}
-			arglen = rb_sprintf(offptr, "%s", name);
+			arglen = sprintf(offptr, "%s", name);
 			offptr += arglen;
 			cur_offlen += arglen;
 		}
@@ -219,7 +219,7 @@ list_monitor(struct Client *client_p)
 		return;
 	}
 
-	cur_len = mlen = rb_sprintf(buf, form_str(RPL_MONLIST), me.name, client_p->name, "");
+	cur_len = mlen = sprintf(buf, form_str(RPL_MONLIST), me.name, client_p->name, "");
 	nbuf = buf + mlen;
 	SetCork(client_p);
 	RB_DLINK_FOREACH(ptr, client_p->localClient->monitor_list.head)
@@ -238,7 +238,7 @@ list_monitor(struct Client *client_p)
 			*nbuf++ = ',';
 			cur_len++;
 		}
-		arglen = rb_sprintf(nbuf, "%s", monptr->name);
+		arglen = sprintf(nbuf, "%s", monptr->name);
 		cur_len += arglen;
 		nbuf += arglen;
 	}
@@ -259,8 +259,8 @@ show_monitor_status(struct Client *client_p)
 	int mlen, arglen;
 	rb_dlink_node *ptr;
 
-	mlen = cur_onlen = rb_sprintf(onbuf, form_str(RPL_MONONLINE), me.name, client_p->name, "");
-	cur_offlen = rb_sprintf(offbuf, form_str(RPL_MONOFFLINE), me.name, client_p->name, "");
+	mlen = cur_onlen = sprintf(onbuf, form_str(RPL_MONONLINE), me.name, client_p->name, "");
+	cur_offlen = sprintf(offbuf, form_str(RPL_MONOFFLINE), me.name, client_p->name, "");
 
 	onptr = onbuf + mlen;
 	offptr = offbuf + mlen;
@@ -284,7 +284,7 @@ show_monitor_status(struct Client *client_p)
 				*onptr++ = ',';
 				cur_onlen++;
 			}
-			arglen = rb_sprintf(onptr, "%s!%s@%s",
+			arglen = sprintf(onptr, "%s!%s@%s",
 					    target_p->name, target_p->username, target_p->host);
 			onptr += arglen;
 			cur_onlen += arglen;
@@ -304,7 +304,7 @@ show_monitor_status(struct Client *client_p)
 				cur_offlen++;
 			}
 
-			arglen = rb_sprintf(offptr, "%s", monptr->name);
+			arglen = sprintf(offptr, "%s", monptr->name);
 			offptr += arglen;
 			cur_offlen += arglen;
 		}

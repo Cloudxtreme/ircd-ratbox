@@ -253,7 +253,7 @@ load_all_modules(int warn)
 
 		if((len > ext_len) && !strcmp(ldirent->d_name + len - ext_len, shext))
 		{
-			(void)rb_snprintf(module_fq_name, sizeof(module_fq_name), "%s/%s",
+			snprintf(module_fq_name, sizeof(module_fq_name), "%s/%s",
 					  module_dir_name, ldirent->d_name);
 			(void)load_a_module(module_fq_name, warn, 0);
 		}
@@ -278,7 +278,7 @@ load_core_modules(int warn)
 	core_dir = opendir(MODPATH);
 	if(core_dir == NULL)
 	{
-		rb_snprintf(dir_name, sizeof(dir_name), "%s/modules", ConfigFileEntry.dpath);
+		snprintf(dir_name, sizeof(dir_name), "%s/modules", ConfigFileEntry.dpath);
 		core_dir = opendir(dir_name);
 	}
 	else
@@ -299,7 +299,7 @@ load_core_modules(int warn)
 	for(i = 0; core_module_table[i]; i++)
 	{
 
-		rb_snprintf(module_name, sizeof(module_name), "%s/%s%s", dir_name,
+		snprintf(module_name, sizeof(module_name), "%s/%s%s", dir_name,
 			    core_module_table[i], SHLIBEXT);
 
 		if(load_a_module(module_name, warn, 1) == -1)
@@ -332,7 +332,7 @@ load_one_module(const char *path, int coremodule)
 	{
 		mpath = pathst->data;
 
-		rb_snprintf(modpath, sizeof(modpath), "%s/%s", mpath->path, path);
+		snprintf(modpath, sizeof(modpath), "%s/%s", mpath->path, path);
 		if((strstr(modpath, "../") == NULL) && (strstr(modpath, "/..") == NULL))
 		{
 			if(stat(modpath, &statbuf) == 0)

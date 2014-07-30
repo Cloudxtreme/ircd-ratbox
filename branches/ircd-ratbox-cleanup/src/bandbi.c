@@ -86,11 +86,11 @@ start_bandb(void)
 	rb_setenv("BANDB_DPATH", ServerInfo.bandb_path, 1);
 	if(bandb_path == NULL)
 	{
-		rb_snprintf(fullpath, sizeof(fullpath), "%s/bandb%s", LIBEXEC_DIR, suffix);
+		snprintf(fullpath, sizeof(fullpath), "%s/bandb%s", LIBEXEC_DIR, suffix);
 
 		if(access(fullpath, X_OK) == -1)
 		{
-			rb_snprintf(fullpath, sizeof(fullpath), "%s/libexec/ircd-ratbox/bandb%s",
+			snprintf(fullpath, sizeof(fullpath), "%s/libexec/ircd-ratbox/bandb%s",
 				    ConfigFileEntry.dpath, suffix);
 
 			if(access(fullpath, X_OK) == -1)
@@ -125,7 +125,7 @@ bandb_add(bandb_type type, struct Client *source_p, const char *mask1,
 {
 	static char buf[BUFSIZE];
 
-	rb_snprintf(buf, sizeof(buf), "%c %s ", bandb_add_letter[type], mask1);
+	snprintf(buf, sizeof(buf), "%c %s ", bandb_add_letter[type], mask1);
 
 	if(!EmptyString(mask2))
 		rb_snprintf_append(buf, sizeof(buf), "%s ", mask2);

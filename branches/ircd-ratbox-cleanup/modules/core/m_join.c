@@ -586,14 +586,14 @@ ms_sjoin(struct Client *client_p, struct Client *source_p, int parc, const char 
 	else
 		modes = empty_modes;
 
-	mlen_nick = rb_sprintf(buf_nick, ":%s SJOIN %ld %s %s :",
+	mlen_nick = sprintf(buf_nick, ":%s SJOIN %ld %s %s :",
 			       source_p->name, (long)chptr->channelts, parv[2], modes);
 	ptr_nick = buf_nick + mlen_nick;
 
 	/* working on the presumption eventually itll be more efficient to
 	 * build a TS6 buffer without checking its needed..
 	 */
-	mlen_uid = rb_sprintf(buf_uid, ":%s SJOIN %ld %s %s :",
+	mlen_uid = sprintf(buf_uid, ":%s SJOIN %ld %s %s :",
 			      use_id(source_p), (long)chptr->channelts, parv[2], modes);
 	ptr_uid = buf_uid + mlen_uid;
 
@@ -674,10 +674,10 @@ ms_sjoin(struct Client *client_p, struct Client *source_p, int parc, const char 
 		}
 
 		/* copy the nick to the two buffers */
-		len = rb_sprintf(ptr_nick, "%s ", target_p->name);
+		len = sprintf(ptr_nick, "%s ", target_p->name);
 		ptr_nick += len;
 		len_nick += len;
-		len = rb_sprintf(ptr_uid, "%s ", use_id(target_p));
+		len = sprintf(ptr_uid, "%s ", use_id(target_p));
 		ptr_uid += len;
 		len_uid += len;
 
@@ -901,8 +901,8 @@ can_join(struct Client *source_p, struct Channel *chptr, char *key)
 
 	s_assert(source_p->localClient != NULL);
 
-	rb_sprintf(src_host, "%s!%s@%s", source_p->name, source_p->username, source_p->host);
-	rb_sprintf(src_iphost, "%s!%s@%s", source_p->name, source_p->username, source_p->sockhost);
+	sprintf(src_host, "%s!%s@%s", source_p->name, source_p->username, source_p->host);
+	sprintf(src_iphost, "%s!%s@%s", source_p->name, source_p->username, source_p->sockhost);
 
 	if((is_banned(chptr, source_p, NULL, src_host, src_iphost)) == CHFL_BAN)
 		return (ERR_BANNEDFROMCHAN);
@@ -1035,7 +1035,7 @@ set_final_mode(struct Client *source_p, struct Channel *chptr,
 			dir = MODE_DEL;
 		}
 		*mbuf++ = 'k';
-		pbuf += rb_sprintf(pbuf, "%s ", oldmode->key);
+		pbuf += sprintf(pbuf, "%s ", oldmode->key);
 	}
 	if(mode->limit && oldmode->limit != mode->limit)
 	{
@@ -1045,7 +1045,7 @@ set_final_mode(struct Client *source_p, struct Channel *chptr,
 			dir = MODE_ADD;
 		}
 		*mbuf++ = 'l';
-		pbuf += rb_sprintf(pbuf, "%d ", mode->limit);
+		pbuf += sprintf(pbuf, "%d ", mode->limit);
 	}
 	if(mode->key[0] && strcmp(oldmode->key, mode->key))
 	{
@@ -1055,7 +1055,7 @@ set_final_mode(struct Client *source_p, struct Channel *chptr,
 			dir = MODE_ADD;
 		}
 		*mbuf++ = 'k';
-		pbuf += rb_sprintf(pbuf, "%s ", mode->key);
+		pbuf += sprintf(pbuf, "%s ", mode->key);
 	}
 
 	*mbuf = '\0';
@@ -1196,7 +1196,7 @@ remove_ban_list(struct Channel *chptr, struct Client *source_p,
 
 	pbuf = lparabuf;
 
-	cur_len = mlen = rb_sprintf(lmodebuf, ":%s MODE %s -", source_p->name, chptr->chname);
+	cur_len = mlen = sprintf(lmodebuf, ":%s MODE %s -", source_p->name, chptr->chname);
 	mbuf = lmodebuf + mlen;
 
 	RB_DLINK_FOREACH_SAFE(ptr, next_ptr, list->head)
@@ -1223,7 +1223,7 @@ remove_ban_list(struct Channel *chptr, struct Client *source_p,
 
 		*mbuf++ = c;
 		cur_len += plen;
-		pbuf += rb_sprintf(pbuf, "%s ", banptr->banstr);
+		pbuf += sprintf(pbuf, "%s ", banptr->banstr);
 		count++;
 
 		free_ban(banptr);

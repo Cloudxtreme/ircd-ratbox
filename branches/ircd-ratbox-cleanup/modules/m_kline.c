@@ -350,7 +350,7 @@ set_kline(struct Client *source_p, const char *user, const char *host, const cha
 
 	if(tkline_time > 0)
 	{
-		rb_snprintf(buffer, sizeof(buffer),
+		snprintf(buffer, sizeof(buffer),
 			    "Temporary K-line %d min. - %s (%s)",
 			    (int)(tkline_time / 60), reason, current_date);
 		aconf->passwd = rb_strdup(buffer);
@@ -358,7 +358,7 @@ set_kline(struct Client *source_p, const char *user, const char *host, const cha
 	}
 	else
 	{
-		rb_snprintf(buffer, sizeof(buffer), "%s (%s)", reason, current_date);
+		snprintf(buffer, sizeof(buffer), "%s (%s)", reason, current_date);
 		aconf->passwd = rb_strdup(buffer);
 		apply_kline(source_p, aconf, reason, oper_reason, current_date, admin);
 	}
@@ -476,7 +476,7 @@ mangle_wildcard_to_cidr(const char *text)
 	{
 		if(n3 == NULL || (!strcmp(n3, splat) && (n4 == NULL || !strcmp(n4, splat))))
 		{
-			rb_snprintf(buf, sizeof(buf), "%s.0.0.0/8", n1);
+			snprintf(buf, sizeof(buf), "%s.0.0.0/8", n1);
 			return buf;
 		}
 	}
@@ -488,7 +488,7 @@ mangle_wildcard_to_cidr(const char *text)
 	{
 		if(n4 == NULL || !strcmp(n4, splat))
 		{
-			rb_snprintf(buf, sizeof(buf), "%s.%s.0.0/16", n1, n2);
+			snprintf(buf, sizeof(buf), "%s.%s.0.0/16", n1, n2);
 			return buf;
 		}
 	}
@@ -498,7 +498,7 @@ mangle_wildcard_to_cidr(const char *text)
 
 	if(n4 == NULL || !strcmp(n4, splat))
 	{
-		rb_snprintf(buf, sizeof(buf), "%s.%s.%s.0/24", n1, n2, n3);
+		snprintf(buf, sizeof(buf), "%s.%s.%s.0/24", n1, n2, n3);
 		return buf;
 	}
 

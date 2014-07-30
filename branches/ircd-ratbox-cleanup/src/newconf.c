@@ -235,7 +235,7 @@ conf_report_error_nl(const char *fmt, ...)
 	char msg[IRCD_BUFSIZE + 1];
 
 	va_start(ap, fmt);
-	rb_vsnprintf(msg, sizeof(msg), fmt, ap);
+	vsnprintf(msg, sizeof(msg), fmt, ap);
 	va_end(ap);
 
 	conf_parse_failure++;
@@ -256,7 +256,7 @@ conf_report_warning_nl(const char *fmt, ...)
 	char msg[IRCD_BUFSIZE + 1];
 
 	va_start(ap, fmt);
-	rb_vsnprintf(msg, sizeof(msg), fmt, ap);
+	vsnprintf(msg, sizeof(msg), fmt, ap);
 	va_end(ap);
 
 	if(testing_conf)
@@ -528,7 +528,7 @@ conf_report_error(const char *fmt, ...)
 	char msg[IRCD_BUFSIZE + 1];
 
 	va_start(ap, fmt);
-	rb_vsnprintf(msg, sizeof(msg), fmt, ap);
+	vsnprintf(msg, sizeof(msg), fmt, ap);
 	va_end(ap);
 
 	conf_parse_failure++;

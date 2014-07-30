@@ -329,7 +329,7 @@ set_dline(struct Client *source_p, const char *dlhost, const char *lreason, int 
 
 	if(tdline_time > 0)
 	{
-		rb_snprintf(dlbuffer, sizeof(dlbuffer),
+		snprintf(dlbuffer, sizeof(dlbuffer),
 			    "Temporary D-line %d min. - %s (%s)",
 			    (int)(tdline_time / 60), reason, current_date);
 		aconf->passwd = rb_strdup(dlbuffer);
@@ -349,7 +349,7 @@ set_dline(struct Client *source_p, const char *dlhost, const char *lreason, int 
 	}
 	else
 	{
-		rb_snprintf(dlbuffer, sizeof(dlbuffer), "%s (%s)", reason, current_date);
+		snprintf(dlbuffer, sizeof(dlbuffer), "%s (%s)", reason, current_date);
 		aconf->passwd = rb_strdup(dlbuffer);
 		add_dline(aconf);
 

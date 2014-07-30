@@ -39,7 +39,6 @@
 #include "modules.h"
 #include "s_newconf.h"
 
-static char buf[BUFSIZE];
 
 static int ms_kill(struct Client *, struct Client *, int, const char **);
 static int mo_kill(struct Client *, struct Client *, int, const char **);
@@ -68,6 +67,7 @@ mo_kill(struct Client *client_p, struct Client *source_p, int parc, const char *
 	const char *inpath = client_p->name;
 	const char *user;
 	const char *reason;
+	char buf[BUFSIZE];
 
 	user = parv[1];
 
@@ -143,7 +143,7 @@ mo_kill(struct Client *client_p, struct Client *source_p, int parc, const char *
 		target_p->flags |= FLAGS_KILLED;
 	}
 
-	rb_sprintf(buf, "Killed (%s (%s))", source_p->name, reason);
+	snprintf(buf, sizeof(buf), "Killed (%s (%s))", source_p->name, reason);
 
 	exit_client(client_p, target_p, source_p, buf);
 
@@ -164,6 +164,7 @@ ms_kill(struct Client *client_p, struct Client *source_p, int parc, const char *
 	const char *reason;
 	char default_reason[] = "<No reason given>";
 	const char *path;
+	char buf[BUFSIZE];
 	int chasing = 0;
 
 	*buf = '\0';
@@ -257,7 +258,7 @@ ms_kill(struct Client *client_p, struct Client *source_p, int parc, const char *
 	/* FLAGS_KILLED prevents a quit being sent out */
 	target_p->flags |= FLAGS_KILLED;
 
-	rb_sprintf(buf, "Killed (%s %s)", source_p->name, reason);
+	snprintf(buf, sizeof(buf), "Killed (%s %s)", source_p->name, reason);
 
 	exit_client(client_p, target_p, source_p, buf);
 
@@ -273,11 +274,11 @@ relay_kill(struct Client *one, struct Client *source_p,
 	char buffer[BUFSIZE];
 
 	if(MyClient(source_p))
-		rb_snprintf(buffer, sizeof(buffer),
+		snprintf(buffer, sizeof(buffer),
 			    "%s!%s!%s!%s (%s)",
 			    me.name, source_p->host, source_p->username, source_p->name, reason);
 	else
-		rb_snprintf(buffer, sizeof(buffer), "%s %s", inpath, reason);
+		snprintf(buffer, sizeof(buffer), "%s %s", inpath, reason);
 
 	RB_DLINK_FOREACH(ptr, serv_list.head)
 	{

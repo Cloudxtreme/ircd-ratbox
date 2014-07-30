@@ -94,7 +94,7 @@ get_listener_name(struct Listener *listener)
 #endif
 		port = ntohs(((const struct sockaddr_in *)&listener->addr)->sin_port);
 
-	rb_snprintf(buf, sizeof(buf), "%s[%s/%u]", me.name, listener->name, port);
+	snprintf(buf, sizeof(buf), "%s[%s/%u]", me.name, listener->name, port);
 	return buf;
 }
 
@@ -501,7 +501,7 @@ accept_precallback(rb_fde_t *F, struct sockaddr *addr, rb_socklen_t addrlen, voi
 
 		if(ConfigFileEntry.dline_with_reason)
 		{
-			if(rb_snprintf(buf, sizeof(buf), "ERROR :*** Banned: %s\r\n", aconf->passwd)
+			if(snprintf(buf, sizeof(buf), "ERROR :*** Banned: %s\r\n", aconf->passwd)
 			   >= (int)(sizeof(buf) - 1))
 			{
 				buf[sizeof(buf) - 3] = '\r';

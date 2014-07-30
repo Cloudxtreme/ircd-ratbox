@@ -1143,6 +1143,8 @@ stats_class(struct Client *source_p)
 	send_pop_queue(source_p);
 }
 
+
+#if 0
 static void
 stats_bh_callback(size_t bused, size_t bfree, size_t bmemusage, size_t heapalloc, const char *desc,
 		  void *data)
@@ -1154,6 +1156,7 @@ stats_bh_callback(size_t bused, size_t bfree, size_t bmemusage, size_t heapalloc
 
 	return;
 }
+#endif 
 
 static void
 stats_memory(struct Client *source_p)
@@ -1205,8 +1208,12 @@ stats_memory(struct Client *source_p)
 
 	size_t total_memory = 0;
 	size_t bh_total, bh_used;
-	rb_bh_usage_all(stats_bh_callback, (void *)source_p);
-	rb_bh_total_usage(&bh_total, &bh_used);
+
+	/* XXX fix memory stats */
+	bh_total = 0;
+	bh_used = 0;
+//	rb_bh_usage_all(stats_bh_callback, (void *)source_p);
+//	rb_bh_total_usage(&bh_total, &bh_used);
 
 	sendto_one_numeric(source_p, RPL_STATSDEBUG,
 			   "z :blockheap Total Allocated: %zu Total Used: %zu", bh_total, bh_used);
