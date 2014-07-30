@@ -43,10 +43,7 @@
 
 struct config_channel_entry ConfigChannel;
 rb_dlink_list global_channel_list;
-static rb_bh *channel_heap;
-static rb_bh *ban_heap;
-static rb_bh *topic_heap;
-static rb_bh *member_heap;
+
 struct ev_entry *checksplit_ev;
 
 static int channel_capabs[] = { CAP_EX, CAP_IE,
@@ -72,10 +69,10 @@ static void free_topic(struct Channel *chptr);
 void
 init_channels(void)
 {
-	channel_heap = rb_bh_create(sizeof(struct Channel), CHANNEL_HEAP_SIZE, "channel_heap");
-	ban_heap = rb_bh_create(sizeof(struct Ban), BAN_HEAP_SIZE, "ban_heap");
-	topic_heap = rb_bh_create(sizeof(struct topic_info), TOPIC_HEAP_SIZE, "topic_heap");
-	member_heap = rb_bh_create(sizeof(struct membership), MEMBER_HEAP_SIZE, "member_heap");
+//	channel_heap = rb_bh_create(sizeof(struct Channel), CHANNEL_HEAP_SIZE, "channel_heap");
+	//ban_heap = rb_bh_create(sizeof(struct Ban), BAN_HEAP_SIZE, "ban_heap");
+//	topic_heap = rb_bh_create(sizeof(struct topic_info), TOPIC_HEAP_SIZE, "topic_heap");
+	//member_heap = rb_bh_create(sizeof(struct membership), MEMBER_HEAP_SIZE, "member_heap");
 }
 
 /*
@@ -85,7 +82,7 @@ struct Channel *
 allocate_channel(const char *chname)
 {
 	struct Channel *chptr;
-	chptr = rb_bh_alloc(channel_heap);
+	chptr = rb_malloc(sizeof(struct Channel));
 	chptr->chname = rb_strndup(chname, CHANNELLEN);
 	return (chptr);
 }
@@ -94,14 +91,14 @@ void
 free_channel(struct Channel *chptr)
 {
 	rb_free(chptr->chname);
-	rb_bh_free(channel_heap, chptr);
+	rb_free(chptr);
 }
 
 struct Ban *
 allocate_ban(const char *banstr, const char *who)
 {
 	struct Ban *bptr;
-	bptr = rb_bh_alloc(ban_heap);
+	bptr = rb_malloc(sizeof(struct Ban));
 	bptr->banstr = rb_strndup(banstr, BANLEN);
 	bptr->who = rb_strndup(who, BANLEN);
 
@@ -113,7 +110,7 @@ free_ban(struct Ban *bptr)
 {
 	rb_free(bptr->banstr);
 	rb_free(bptr->who);
-	rb_bh_free(ban_heap, bptr);
+	rb_free(bptr);
 }
 
 
@@ -202,7 +199,7 @@ add_user_to_channel(struct Channel *chptr, struct Client *client_p, int flags)
 	if(client_p->user == NULL)
 		return;
 
-	msptr = rb_bh_alloc(member_heap);
+	msptr = rb_malloc(sizeof(struct membership));
 
 	msptr->chptr = chptr;
 	msptr->client_p = client_p;
@@ -242,7 +239,7 @@ remove_user_from_channel(struct membership *msptr)
 	if(rb_dlink_list_length(&chptr->members) <= 0)
 		destroy_channel(chptr);
 
-	rb_bh_free(member_heap, msptr);
+	rb_free(msptr);
 
 	return;
 }
@@ -277,7 +274,7 @@ remove_user_from_channels(struct Client *client_p)
 		if(rb_dlink_list_length(&chptr->members) <= 0)
 			destroy_channel(chptr);
 
-		rb_bh_free(member_heap, msptr);
+		rb_free(msptr);
 	}
 
 	client_p->user->channel.head = client_p->user->channel.tail = NULL;
@@ -739,7 +736,7 @@ allocate_topic(struct Channel *chptr)
 	if(chptr == NULL)
 		return;
 
-	chptr->topic = rb_bh_alloc(topic_heap);
+	chptr->topic = rb_malloc(sizeof(struct topic_info));
 }
 
 /* free_topic()
@@ -758,7 +755,7 @@ free_topic(struct Channel *chptr)
 	 * MUST change this as well
 	 */
 	rb_free(chptr->topic->topic);
-	rb_bh_free(topic_heap, chptr->topic);
+	rb_free(chptr->topic);
 	chptr->topic = NULL;
 }
 

@@ -94,8 +94,7 @@ m_away(struct Client *client_p, struct Client *source_p, int parc, const char *p
 
 	if(source_p->user->away == NULL)
 	{
-		allocate_away(source_p);
-		rb_strlcpy(source_p->user->away, parv[1], AWAYLEN);
+		source_p->user->away = rb_strndup(parv[1], AWAYLEN);
 		sendto_server(client_p, NULL, CAP_TS6, NOCAPS,
 			      ":%s AWAY :%s", use_id(source_p), source_p->user->away);
 		sendto_server(client_p, NULL, NOCAPS, CAP_TS6,
@@ -104,7 +103,8 @@ m_away(struct Client *client_p, struct Client *source_p, int parc, const char *p
 	}
 	else
 	{
-		rb_strlcpy(source_p->user->away, parv[1], AWAYLEN);
+	        rb_free(source_p->user->away);
+	        source_p->user->away = rb_strndup(parv[1], AWAYLEN);
 	}
 
 	if(MyConnect(source_p))

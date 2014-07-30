@@ -401,7 +401,7 @@ check_rehash(void *unused)
 int
 main(int argc, char **argv)
 {
-	res_helper = rb_helper_child(parse_request, error_cb, NULL, NULL, NULL, 256, 1024, 256, 256);	/* XXX fix me */
+	res_helper = rb_helper_child(parse_request, error_cb, NULL, NULL, NULL, 256);	/* XXX fix me */
 
 	if(res_helper == NULL)
 	{

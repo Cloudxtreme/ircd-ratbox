@@ -93,7 +93,7 @@ ReportType;
 #define sendheader(c, r) sendto_one(c, "%s", HeaderMessages[(r)])
 
 static rb_dlink_list auth_poll_list;
-static rb_bh *auth_heap;
+//static rb_bh *auth_heap;
 static EVH timeout_auth_queries_event;
 static void read_auth(rb_fde_t *F, void *data);
 
@@ -108,7 +108,6 @@ init_auth(void)
 {
 	memset(&auth_poll_list, 0, sizeof(auth_poll_list));
 	rb_event_addish("timeout_auth_queries_event", timeout_auth_queries_event, NULL, 3);
-	auth_heap = rb_bh_create(sizeof(struct AuthRequest), AUTH_HEAP_SIZE, "auth_heap");
 
 }
 
@@ -118,7 +117,7 @@ init_auth(void)
 static struct AuthRequest *
 make_auth_request(struct Client *client)
 {
-	struct AuthRequest *request = rb_bh_alloc(auth_heap);
+	struct AuthRequest *request = rb_malloc(sizeof(struct AuthRequest));
 	client->localClient->auth_request = request;
 	request->client = client;
 	request->dns_query = 0;
@@ -127,14 +126,6 @@ make_auth_request(struct Client *client)
 	return request;
 }
 
-/*
- * free_auth_request - cleanup auth request allocations
- */
-static void
-free_auth_request(struct AuthRequest *request)
-{
-	rb_bh_free(auth_heap, request);
-}
 
 /*
  * release_auth_client - release auth client from auth system
@@ -151,7 +142,7 @@ release_auth_client(struct AuthRequest *auth)
 
 	client->localClient->auth_request = NULL;
 	rb_dlinkDelete(&auth->node, &auth_poll_list);
-	free_auth_request(auth);
+	rb_free(auth);
 
 	/*
 	 * When a client has auth'ed, we want to start reading what it sends
@@ -530,5 +521,5 @@ delete_auth_queries(struct Client *target_p)
 		rb_close(auth->authF);
 
 	rb_dlinkDelete(&auth->node, &auth_poll_list);
-	free_auth_request(auth);
+	rb_free(auth);
 }

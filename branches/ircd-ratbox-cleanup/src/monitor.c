@@ -41,12 +41,12 @@
 #include "send.h"
 
 struct monitor *monitorTable[MONITOR_HASH_SIZE];
-static rb_bh *monitor_heap;
 
 void
 init_monitor(void)
 {
-	monitor_heap = rb_bh_create(sizeof(struct monitor), MONITOR_HEAP_SIZE, "monitor_heap");
+	/* nothing to do here now */
+	return;
 }
 
 static inline unsigned int
@@ -70,7 +70,7 @@ find_monitor(const char *name, int add)
 
 	if(add)
 	{
-		monptr = rb_bh_alloc(monitor_heap);
+		monptr = rb_malloc(sizeof(struct monitor));
 		rb_strlcpy(monptr->name, name, sizeof(monptr->name));
 
 		monptr->hnext = monitorTable[hashv];
@@ -85,7 +85,7 @@ find_monitor(const char *name, int add)
 void
 free_monitor(struct monitor *monptr)
 {
-	rb_bh_free(monitor_heap, monptr);
+	rb_free(monptr);
 }
 
 
