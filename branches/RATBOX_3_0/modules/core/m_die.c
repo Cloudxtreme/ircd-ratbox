@@ -67,7 +67,7 @@ mo_die(struct Client *client_p __unused, struct Client *source_p, int parc, cons
 	}
 	else if(irccmp(parv[1], me.name))
 	{
-		sendto_one(source_p, ":Mismatch on /die %s", me.name);
+		sendto_one_notice(source_p, ":Mismatch on /die %s", me.name);
 		return 0;
 	}
 
