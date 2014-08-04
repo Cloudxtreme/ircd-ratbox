@@ -1,3 +1,16 @@
+androsyn    2014/08/04 21:03:51 UTC	(20140804_8-27502)
+  Log:
+  fix time_t formatting for whois idle at least..
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/configure (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/configure.ac (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/messages.h (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/setup.h.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/stdinc.h (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_whois.c (File Modified) 
+
+
 androsyn    2014/08/04 20:22:18 UTC	(20140804_7-27500)
   Log:
   format string fixups
