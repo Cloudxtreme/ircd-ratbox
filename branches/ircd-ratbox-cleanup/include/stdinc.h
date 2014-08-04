@@ -56,19 +56,13 @@ char *alloca();
 #include <stdlib.h>
 #endif
 
-#ifdef STRING_WITH_STRINGS
+#ifdef HAVE_STRING_H
 # include <string.h>
-# include <strings.h>
-#else
-# ifdef HAVE_STRING_H
-#  include <string.h>
-# else
-#  ifdef HAVE_STRINGS_H
-#   include <strings.h>
-#  endif
-# endif
 #endif
 
+#ifdef HAVE_STRINGS_H
+# include <strings.h>
+#endif
 
 #ifdef HAVE_STDDEF_H
 #include <stddef.h>
@@ -207,6 +201,12 @@ xc_strlcpy(char *dest, const char *src, size_t size)
 
 #ifndef INADDR_LOOPBACK
 # define INADDR_LOOPBACK ((in_addr_t) 0x7f000001)
+#endif
+
+#if SIZE_TIME_T <= 4
+	#define RBTT_PFX "%l"
+#else
+	#define RBTT_PFX "%ll"
 #endif
 
 #include "ratbox_lib.h"

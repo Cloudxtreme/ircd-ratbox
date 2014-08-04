@@ -3,24 +3,6 @@
 /* Define if building universal (internal helper macro) */
 #undef AC_APPLE_UNIVERSAL_BUILD
 
-/* Size of the auth heap. */
-#undef AUTH_HEAP_SIZE
-
-/* Size of away heap. */
-#undef AWAY_HEAP_SIZE
-
-/* Size of the ban heap. */
-#undef BAN_HEAP_SIZE
-
-/* Size of the channel heap. */
-#undef CHANNEL_HEAP_SIZE
-
-/* Size of the client heap. */
-#undef CLIENT_HEAP_SIZE
-
-/* Size of the confitem heap. */
-#undef CONFITEM_HEAP_SIZE
-
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
    systems. This function is required for `alloca.c' support on those systems.
    */
@@ -32,9 +14,6 @@
 /* Define to 1 if using `alloca.c'. */
 #undef C_ALLOCA
 
-/* Size of the dlink_node heap. */
-#undef DNODE_HEAP_SIZE
-
 /* ratbox-services compatibility code */
 #undef ENABLE_SERVICES
 
@@ -43,9 +22,6 @@
 
 /* Prefix where config files are installed. */
 #undef ETC_DIR
-
-/* Size of fd heap. */
-#undef FD_HEAP_SIZE
 
 /* Define to 1 if you have `alloca', as a function or macro. */
 #undef HAVE_ALLOCA
@@ -141,14 +117,8 @@
 /* Prefix where the ircd is installed. */
 #undef IRCD_PREFIX
 
-/* Size of the local client heap. */
-#undef LCLIENT_HEAP_SIZE
-
 /* Prefix where to install non-user executables. */
 #undef LIBEXEC_DIR
-
-/* Size of the linebuf heap. */
-#undef LINEBUF_HEAP_SIZE
 
 /* Prefix where to write logfiles. */
 #undef LOG_DIR
@@ -157,32 +127,20 @@
    */
 #undef LT_OBJDIR
 
-/* Sizeof member heap. */
-#undef MEMBER_HEAP_SIZE
-
 /* This is a MinGW system */
 #undef MINGW
 
 /* Prefix where modules are installed. */
 #undef MODULE_DIR
 
-/* Size of the monitor heap. */
-#undef MONITOR_HEAP_SIZE
-
 /* Define this to disable debugging support. */
 #undef NDEBUG
-
-/* Size of the nick delay heap. */
-#undef ND_HEAP_SIZE
 
 /* Nickname length */
 #undef NICKLEN
 
 /* Size of the WHOWAS array. */
 #undef NICKNAMEHISTORYLENGTH
-
-/* Define to 1 if your C compiler doesn't accept -c and -o together. */
-#undef NO_MINUS_C_MINUS_O
 
 /* Name of package */
 #undef PACKAGE
@@ -214,6 +172,9 @@
 /* Extension that shared libs use */
 #undef SHLIBEXT
 
+/* The size of `time_t', as computed by sizeof. */
+#undef SIZEOF_TIME_T
+
 /* Define this to enable soft asserts. */
 #undef SOFT_ASSERT
 
@@ -231,17 +192,8 @@
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
-/* Define to 1 if string.h may be included along with strings.h */
-#undef STRING_WITH_STRINGS
-
 /* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
 #undef TIME_WITH_SYS_TIME
-
-/* Size of the topic heap. */
-#undef TOPIC_HEAP_SIZE
-
-/* Size of the user heap. */
-#undef USER_HEAP_SIZE
 
 /* Define to enable CHALLENGE support, requires OpenSSL */
 #undef USE_CHALLENGE

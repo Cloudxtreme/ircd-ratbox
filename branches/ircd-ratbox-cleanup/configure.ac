@@ -147,7 +147,7 @@ AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 AC_HEADER_DIRENT
 
-AC_CHECK_HEADERS([sys/types.h sys/resource.h sys/param.h sys/stat.h sys/socket.h netinet/in.h arpa/inet.h errno.h stddef.h ])
+AC_CHECK_HEADERS([sys/types.h sys/resource.h sys/param.h sys/stat.h sys/socket.h netinet/in.h arpa/inet.h errno.h stddef.h strings.h string.h])
 AC_HEADER_TIME
 
 AC_CHECK_FUNCS([snprintf lstat stat])
@@ -161,27 +161,28 @@ dnl this gets passed on to the libratbox configure
 AC_ARG_ENABLE(ipv6,AC_HELP_STRING([--disable-ipv6],[Disable IPv6 support (not recommended)]),[ipv6=$enableval],[ipv6=yes])
         
 
-dnl See whether we can include both string.h and strings.h.
-AC_CACHE_CHECK([whether string.h and strings.h may both be included],
-gcc_cv_header_string,
-[
-	AC_COMPILE_IFELSE(
-	[#include <string.h>
-	#include <strings.h>], 
-	[gcc_cv_header_string=yes],
-	[gcc_cv_header_string=no])
-])
-
-if test "$gcc_cv_header_string" = "yes"; then
-	AC_DEFINE(STRING_WITH_STRINGS, 1, [Define to 1 if string.h may be included along with strings.h])
-fi
-
 AC_C_BIGENDIAN
 
 dnl Check for stdarg.h - if we can't find it, halt configure
 AC_CHECK_HEADER(stdarg.h, , [AC_MSG_ERROR([** stdarg.h could not be found - ircd-ratbox will not compile without it **])])
 
 AC_FUNC_ALLOCA
+
+AC_CHECK_SIZEOF(time_t,,[
+AC_INCLUDES_DEFAULT
+#ifdef TIME_WITH_SYS_TIME
+# include <sys/time.h>
+# include <time.h>
+#else
+# ifdef HAVE_SYS_TIME_H
+#  include <sys/time.h>
+# else
+#  include <time.h>
+# endif
+#endif
+])
+
+
 
 dnl Specialized functions checks
 dnl ============================
@@ -451,6 +452,8 @@ fi
 dnl Server Tweaks
 dnl =============
 
+AC_DEFINE([NICKNAMEHISTORYLENGTH], 30000, [Size of the WHOWAS array.])
+
 AC_ARG_ENABLE(services,
 AC_HELP_STRING([--enable-services],[Enable ratbox-services compatibility code.]),
 [ratbox_services=$enableval], [ratbox_services=no])
@@ -464,49 +467,6 @@ fi
 
 AM_CONDITIONAL([ENABLE_SERVICES], [test x"$M_SERVICES" != "x"])
 
-AC_ARG_ENABLE(small-net,
-AC_HELP_STRING([--enable-small-net],[Enable small network support.]),
-[small_net=$enableval], [small_net=no])
-
-if test "$small_net" = yes; then
-dnl	AC_DEFINE([HASHSIZE], 4096, [Max number of buckets in hash tables.])
-	AC_DEFINE([NICKNAMEHISTORYLENGTH], 1500, [Size of the WHOWAS array.])
-	AC_DEFINE([CHANNEL_HEAP_SIZE], 256, [Size of the channel heap.])
-	AC_DEFINE([BAN_HEAP_SIZE], 128, [Size of the ban heap.])
-	AC_DEFINE([CLIENT_HEAP_SIZE], 256, [Size of the client heap.])
-	AC_DEFINE([LCLIENT_HEAP_SIZE], 128, [Size of the local client heap.])
-	AC_DEFINE([USER_HEAP_SIZE], 128, [Size of the user heap.])
-	AC_DEFINE([DNODE_HEAP_SIZE], 512, [Size of the dlink_node heap.])
-	AC_DEFINE([TOPIC_HEAP_SIZE], 256, [Size of the topic heap.])
-	AC_DEFINE([LINEBUF_HEAP_SIZE], 128, [Size of the linebuf heap.])
-	AC_DEFINE([MEMBER_HEAP_SIZE], 256, [Sizeof member heap.])
-	AC_DEFINE([ND_HEAP_SIZE], 128, [Size of the nick delay heap.])
-	AC_DEFINE([CONFITEM_HEAP_SIZE], 128, [Size of the confitem heap.])
-	AC_DEFINE([MONITOR_HEAP_SIZE], 128, [Size of the monitor heap.])
-	AC_DEFINE([AUTH_HEAP_SIZE], 128, [Size of the auth heap.])
-	AC_DEFINE([FD_HEAP_SIZE], 128, [Size of fd heap.])
-	AC_DEFINE([AWAY_HEAP_SIZE], 128, [Size of away heap.])
-else
-dnl These settings are for a large network like efnet..they will use lots of memory
-dnl so enable small net unless you really need this much support
-        AC_DEFINE([NICKNAMEHISTORYLENGTH], 30000, [Size of the WHOWAS array.])
-        AC_DEFINE([CHANNEL_HEAP_SIZE], 8192, [Size of the channel heap.])
-        AC_DEFINE([BAN_HEAP_SIZE], 4096, [Size of the ban heap.])
-        AC_DEFINE([CLIENT_HEAP_SIZE], 8192, [Size of the client heap.])
-        AC_DEFINE([LCLIENT_HEAP_SIZE], 1024, [Size of the local client heap.])
-        AC_DEFINE([USER_HEAP_SIZE], 8192, [Size of the user heap.])
-        AC_DEFINE([DNODE_HEAP_SIZE], 8192, [Size of the dlink_node heap.])
-        AC_DEFINE([TOPIC_HEAP_SIZE], 4096, [Size of the topic heap.])
-        AC_DEFINE([LINEBUF_HEAP_SIZE], 2048, [Size of the linebuf heap.])
-        AC_DEFINE([MEMBER_HEAP_SIZE], 32768, [Sizeof member heap.])
-        AC_DEFINE([ND_HEAP_SIZE], 512, [Size of the nick delay heap.])
-        AC_DEFINE([CONFITEM_HEAP_SIZE], 1024, [Size of the confitem heap.])
-	AC_DEFINE([MONITOR_HEAP_SIZE], 1024, [Size of the monitor heap.])
-	AC_DEFINE([AUTH_HEAP_SIZE], 256, [Size of the auth heap.])
-	AC_DEFINE([FD_HEAP_SIZE], 1024, [Size of fd heap.])
-	AC_DEFINE([AWAY_HEAP_SIZE], 512, [Size of away heap.])
-
-fi
 
 AC_ARG_WITH(nicklen,
 AC_HELP_STRING([--with-nicklen=LENGTH],[Set the nick length to LENGTH (default 9, max 50)]),
