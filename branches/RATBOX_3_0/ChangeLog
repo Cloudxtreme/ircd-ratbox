@@ -1,3 +1,11 @@
+androsyn    2014/08/04 17:31:18 UTC	(20140804_0-27478)
+  Log:
+  fix notice
+
+  Modified:
+	ircd-ratbox/branches/RATBOX_3_0/modules/core/m_die.c (File Modified) 
+
+
 androsyn    2013/01/28 23:38:59 UTC	(20130128_0-27433)
   Log:
   Reject cidr masks that are too large to make sense, assume they are nonsense and skip cidr checking for these
