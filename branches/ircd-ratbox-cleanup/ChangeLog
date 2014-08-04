@@ -1,3 +1,21 @@
+androsyn    2014/08/04 20:22:18 UTC	(20140804_7-27500)
+  Log:
+  format string fixups
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/ircd.h (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/messages.h (File Added) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/s_serv.h (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/core/m_server.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_pong.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_stats.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_trace.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/s_serv.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/s_user.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/sslproc.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/ssld/ssld.c (File Modified) 
+
+
 androsyn    2014/08/04 19:46:58 UTC	(20140804_6-27498)
   Log:
   suppress clangs empty loop warnings...we know this is an empty loop ;)
