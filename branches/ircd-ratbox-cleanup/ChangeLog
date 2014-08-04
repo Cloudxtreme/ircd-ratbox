@@ -1,3 +1,11 @@
+androsyn    2014/08/04 19:46:58 UTC	(20140804_6-27498)
+  Log:
+  suppress clangs empty loop warnings...we know this is an empty loop ;)
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/match.c (File Modified) 
+
+
 androsyn    2014/08/04 19:41:58 UTC	(20140804_5-27496)
   Log:
   Port messages.tab to messages.h changes from Charybdis.  Next stop..fix the 64bit time_t issues...
