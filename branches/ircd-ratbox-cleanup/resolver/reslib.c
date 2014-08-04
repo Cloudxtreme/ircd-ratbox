@@ -516,8 +516,8 @@ irc_dn_comp(const char *src, unsigned char *dst, int dstsiz,
             unsigned char **dnptrs, unsigned char **lastdnptr)
 {
   return(irc_ns_name_compress(src, dst, (size_t)dstsiz,
-                              (const unsigned char **)dnptrs,
-                              (const unsigned char **)lastdnptr));
+                              (const unsigned char **)(uintptr_t)dnptrs,
+                              (const unsigned char **)(uintptr_t)lastdnptr));
 }
 
 /*
