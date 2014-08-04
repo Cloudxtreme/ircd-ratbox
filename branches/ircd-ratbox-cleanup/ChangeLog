@@ -1,3 +1,34 @@
+androsyn    2014/08/04 19:41:58 UTC	(20140804_5-27496)
+  Log:
+  Port messages.tab to messages.h changes from Charybdis.  Next stop..fix the 64bit time_t issues...
+  
+  
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/aclocal.m4 (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/bandb/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/bandb/sqlite3/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/configure (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/configure.ac (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/contrib/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/help/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/numeric.h (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/setup.h.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/stdinc.h (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/core/m_join.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/core/m_mode.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_trace.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/resolver/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/Makefile.am (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/messages.tab (File Deleted) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/numeric.c (File Deleted) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/ssld/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/tools/Makefile.in (File Modified) 
+
+
 androsyn    2014/08/04 18:49:55 UTC	(20140804_4-27494)
   Log:
   fix compiler warning
