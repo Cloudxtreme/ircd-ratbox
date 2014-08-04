@@ -1,3 +1,11 @@
+androsyn    2014/08/04 18:04:29 UTC	(20140804_2-27488)
+  Log:
+  backport r25473 fix compiler warning
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/parse.c (File Modified) 
+
+
 androsyn    2014/08/04 18:03:19 UTC	(20140804_1-27486)
   Log:
   backport r27457 and r27455
