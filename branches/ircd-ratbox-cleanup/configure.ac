@@ -182,7 +182,7 @@ AC_INCLUDES_DEFAULT
 #endif
 ])
 
-
+AC_CHECK_SIZEOF(long)
 
 dnl Specialized functions checks
 dnl ============================
