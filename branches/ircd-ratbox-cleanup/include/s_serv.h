@@ -89,8 +89,8 @@ struct Capability
  */
 extern struct Capability captab[];
 
-extern int MaxClientCount;	/* GLOBAL - highest number of clients */
-extern int MaxConnectionCount;	/* GLOBAL - highest number of connections */
+extern unsigned long MaxClientCount;	/* GLOBAL - highest number of clients */
+extern unsigned long MaxConnectionCount;	/* GLOBAL - highest number of connections */
 
 extern int refresh_user_links;
 

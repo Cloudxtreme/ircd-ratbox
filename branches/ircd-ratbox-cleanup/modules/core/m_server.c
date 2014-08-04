@@ -880,7 +880,7 @@ burst_modes_TS6(struct Client *client_p, struct Channel *chptr, rb_dlink_list *l
 static void
 burst_TS5(struct Client *client_p)
 {
-	static char ubuf[12];
+	char ubuf[BUFSIZE];
 	char buf[BUFSIZE];
 	struct Client *target_p;
 	struct Channel *chptr;
@@ -1003,7 +1003,7 @@ burst_TS5(struct Client *client_p)
 static void
 burst_TS6(struct Client *client_p)
 {
-	static char ubuf[12];
+	char ubuf[BUFSIZE];
 	char buf[BUFSIZE];
 	struct Client *target_p;
 	struct Channel *chptr;

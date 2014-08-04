@@ -51,8 +51,8 @@ extern char *crypt();
 
 #define MIN_CONN_FREQ 300
 
-int MaxConnectionCount = 1;
-int MaxClientCount = 1;
+unsigned long MaxConnectionCount = 1;
+unsigned long MaxClientCount = 1;
 int refresh_user_links = 0;
 
 static char buf[BUFSIZE];

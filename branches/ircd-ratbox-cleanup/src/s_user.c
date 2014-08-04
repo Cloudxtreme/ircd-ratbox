@@ -514,7 +514,7 @@ register_local_user(struct Client *client_p, struct Client *source_p, const char
 		Count.max_loc = rb_dlink_list_length(&lclient_list);
 		if(!(Count.max_loc % 10))
 			sendto_realops_flags(UMODE_ALL, L_ALL,
-					     "New Max Local Clients: %d", Count.max_loc);
+					     "New Max Local Clients: %lu", Count.max_loc);
 	}
 
 	/* they get a reduced limit */
@@ -540,7 +540,7 @@ register_local_user(struct Client *client_p, struct Client *source_p, const char
 void
 introduce_client(struct Client *client_p, struct Client *source_p)
 {
-	static char ubuf[12];
+	char ubuf[BUFSIZE];
 
 	if(MyClient(source_p))
 		send_umode(source_p, source_p, 0, SEND_UMODES, ubuf);

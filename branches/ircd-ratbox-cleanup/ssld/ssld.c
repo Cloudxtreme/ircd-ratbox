@@ -51,6 +51,7 @@ int32_to_buf(char *buf, int32_t x)
 	return;
 }
 
+#if 0
 static inline uint16_t
 buf_to_uint16(char *buf)
 {
@@ -65,7 +66,7 @@ uint16_to_buf(char *buf, uint16_t x)
 	memcpy(buf, &x, sizeof(x));
 	return;
 }
-
+#endif
 
 static char inbuf[READBUF_SIZE];
 #ifdef HAVE_ZLIB

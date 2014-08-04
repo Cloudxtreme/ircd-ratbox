@@ -92,7 +92,8 @@ int32_to_buf(char *buf, int32_t x)
 	return;
 }
 
-
+#if 0 
+/* unused */
 static inline uint16_t
 buf_to_uint16(char *buf)
 {
@@ -108,7 +109,7 @@ uint16_to_buf(char *buf, uint16_t x)
 	return;
 }
 
-
+#endif 
 static ssl_ctl_t *
 allocate_ssl_daemon(rb_fde_t *F, rb_fde_t *P, int pid)
 {

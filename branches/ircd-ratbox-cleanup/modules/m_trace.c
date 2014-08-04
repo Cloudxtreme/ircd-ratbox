@@ -433,7 +433,7 @@ report_this_status(struct Client *source_p, struct Client *target_p)
 
 	default:		/* ...we actually shouldn't come here... --msa */
 		sendto_one_numeric(source_p, RPL_TRACENEWTYPE,
-				   form_str(RPL_TRACENEWTYPE), me.name, source_p->name, name);
+				   form_str(RPL_TRACENEWTYPE), me.name);
 		cnt++;
 		break;
 	}

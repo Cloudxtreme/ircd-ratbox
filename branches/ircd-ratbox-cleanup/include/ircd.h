@@ -47,11 +47,11 @@ struct SetOptions
 
 struct Counter
 {
-	int oper;		/* Opers */
-	int total;		/* total clients */
-	int invisi;		/* invisible clients */
-	int max_loc;		/* MAX local clients */
-	int max_tot;		/* MAX global clients */
+	unsigned long oper;		/* Opers */
+	unsigned long total;		/* total clients */
+	unsigned long invisi;		/* invisible clients */
+	unsigned long max_loc;		/* MAX local clients */
+	unsigned long max_tot;		/* MAX global clients */
 	unsigned long totalrestartcount;	/* Total client count ever */
 };
 

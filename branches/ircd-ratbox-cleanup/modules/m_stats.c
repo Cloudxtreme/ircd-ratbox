@@ -583,7 +583,7 @@ stats_tklines(struct Client *source_p)
 
 		sendto_one_numeric(source_p, RPL_STATSKLINE,
 				   form_str(RPL_STATSKLINE), 'k',
-				   user, pass, oper_reason ? "|" : "",
+				   host, user, pass, oper_reason ? "|" : "",
 				   oper_reason ? oper_reason : "");
 	}
 	/* Theyre opered, or allowed to see all klines */
@@ -693,8 +693,8 @@ stats_messages(struct Client *source_p)
 
 			sendto_one_numeric(source_p, RPL_STATSCOMMANDS,
 					   form_str(RPL_STATSCOMMANDS),
-					   ptr->cmd, ptr->msg->count,
-					   ptr->msg->bytes, ptr->msg->rcount);
+					   ptr->cmd, (unsigned long)ptr->msg->count,
+					   (unsigned long)ptr->msg->bytes, (unsigned long)ptr->msg->rcount);
 		}
 	}
 	send_pop_queue(source_p);

@@ -117,7 +117,7 @@ mr_pong(struct Client *client_p, struct Client *source_p, int parc, const char *
 				{
 					sendto_one(source_p, form_str(ERR_WRONGPONG),
 						   me.name, source_p->name,
-						   source_p->localClient->random_ping);
+						   (unsigned long)source_p->localClient->random_ping);
 					return 0;
 				}
 			}
