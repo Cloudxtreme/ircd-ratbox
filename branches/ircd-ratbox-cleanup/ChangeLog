@@ -1,3 +1,11 @@
+androsyn    2014/08/04 17:34:18 UTC	(20140804_0-27480)
+  Log:
+  backport die notice fix
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/core/m_die.c (File Modified) 
+
+
 androsyn    2014/07/30 18:02:52 UTC	(20140730_3-27476)
   Log:
   get out of the business of maintaining snprintf/sprintf
