@@ -1,3 +1,12 @@
+androsyn    2014/08/04 18:03:19 UTC	(20140804_1-27486)
+  Log:
+  backport r27457 and r27455
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/doc/example.conf (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_info.c (File Modified) 
+
+
 androsyn    2014/08/04 17:34:18 UTC	(20140804_0-27480)
   Log:
   backport die notice fix
