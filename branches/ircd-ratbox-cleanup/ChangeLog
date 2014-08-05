@@ -1,3 +1,19 @@
+androsyn    2014/08/05 18:40:54 UTC	(20140805_9-27532)
+  Log:
+  I think these are all of the time_t == 64 and long == 32 printf type issues.
+  This *should* fix openbsd 5.5 on 32bit now
+  
+  
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/messages.h (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/stdinc.h (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_stats.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_svinfo.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_whois.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/s_conf.c (File Modified) 
+
+
 androsyn    2014/08/05 18:38:00 UTC	(20140805_8-27530)
   Log:
   fix typo
