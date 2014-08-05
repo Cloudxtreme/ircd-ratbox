@@ -181,7 +181,7 @@ me_rsfnc(struct Client *client_p, struct Client *source_p, int parc, const char 
 			kill_client_serv_butone(NULL, exist_p, "%s (Nickname regained by services)",
 						me.name);
 
-		rb_snprintf(buf, sizeof(buf), "Killed (%s (Nickname regained by services))",
+		snprintf(buf, sizeof(buf), "Killed (%s (Nickname regained by services))",
 			    me.name);
 		exit_client(NULL, exist_p, &me, buf);
 	}
@@ -206,10 +206,10 @@ me_rsfnc(struct Client *client_p, struct Client *source_p, int parc, const char 
 				     target_p->name, target_p->username, target_p->host, parv[2]);
 
 	add_history(target_p, 1);
-	sendto_server(NULL, NULL, CAP_TS6, NOCAPS, ":%s NICK %s :%ld",
-		      use_id(target_p), parv[2], (long)target_p->tsinfo);
-	sendto_server(NULL, NULL, NOCAPS, CAP_TS6, ":%s NICK %s :%ld",
-		      target_p->name, parv[2], (long)target_p->tsinfo);
+	sendto_server(NULL, NULL, CAP_TS6, NOCAPS, ":%s NICK %s :%" RBTT_FMT,
+		      use_id(target_p), parv[2], target_p->tsinfo);
+	sendto_server(NULL, NULL, NOCAPS, CAP_TS6, ":%s NICK %s :%" RBTT_FMT,
+		      target_p->name, parv[2], target_p->tsinfo);
 
 	del_from_hash(HASH_CLIENT, target_p->name, target_p);
 	strcpy(target_p->user->name, parv[2]);
@@ -218,7 +218,7 @@ me_rsfnc(struct Client *client_p, struct Client *source_p, int parc, const char 
 	monitor_signon(target_p);
 
 	del_all_accepts(target_p);
-	rb_snprintf(note, sizeof(note), "Nick: %s", target_p->name);
+	snprintf(note, sizeof(note), "Nick: %s", target_p->name);
 	rb_note(target_p->localClient->F, note);
 	return 0;
 }
@@ -285,7 +285,7 @@ h_svc_stats(hook_data_int * data)
 		RB_DLINK_FOREACH(ptr, service_list.head)
 		{
 			sendto_one_numeric(data->client, RPL_STATSULINE,
-					   form_str(RPL_STATSULINE), ptr->data, "*", "*", "s");
+					   form_str(RPL_STATSULINE), (char *)ptr->data, "*", "*", "s");
 		}
 	}
 }
