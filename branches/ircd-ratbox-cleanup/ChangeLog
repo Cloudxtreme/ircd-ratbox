@@ -1,3 +1,20 @@
+androsyn    2014/08/05 19:10:59 UTC	(20140805_13-27540)
+  Log:
+  More sizeof(time_t) > sizeof(long) cleanups
+  
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/include/messages.h (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/core/m_join.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/core/m_mode.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/core/m_nick.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/core/m_server.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_stats.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_tb.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_testline.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/channel.c (File Modified) 
+
+
 androsyn    2014/08/05 18:53:52 UTC	(20140805_12-27538)
   Log:
   fixup services too
