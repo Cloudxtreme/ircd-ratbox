@@ -1,3 +1,19 @@
+androsyn    2014/08/05 16:18:59 UTC	(20140805_2-27510)
+  Log:
+  Update automake copied addons
+  
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/compile (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/config.guess (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/config.sub (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/depcomp (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/install-sh (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/missing (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/mkinstalldirs (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/ylwrap (File Modified) 
+
+
 androsyn    2014/08/05 16:17:00 UTC	(20140805_1-27508)
   Log:
   change INCLUDES to AM_CPPFLAGS in Makefile.am files
