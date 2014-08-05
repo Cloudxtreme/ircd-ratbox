@@ -1,3 +1,12 @@
+androsyn    2014/08/05 16:34:52 UTC	(20140805_5-27516)
+  Log:
+  add m_webirc to makefile
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/contrib/Makefile.am (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/contrib/Makefile.in (File Modified) 
+
+
 androsyn    2014/08/05 16:28:03 UTC	(20140805_4-27514)
   Log:
   pass AM_CFLAGS too
