@@ -99,7 +99,7 @@ mo_forcejoin(struct Client *client_p, struct Client *source_p, int parc, const c
 	 */
 	if((target_p = find_client(parv[1])) == NULL)
 	{
-		sendto_one(source_p, form_str(ERR_NOSUCHNICK), me.name, source_p->name, parv[1]);
+		sendto_one_numeric(source_p, ERR_NOSUCHNICK, form_str(ERR_NOSUCHNICK), parv[1]);
 		return 0;
 	}
 
@@ -169,16 +169,14 @@ mo_forcejoin(struct Client *client_p, struct Client *source_p, int parc, const c
 		newch = LOCAL_COPY(parv[2]);
 		if(!check_channel_name(newch))
 		{
-			sendto_one(source_p, form_str(ERR_BADCHANNAME), me.name,
-				   source_p->name, (unsigned char *)newch);
+			sendto_one_numeric(source_p, ERR_BADCHANNAME, form_str(ERR_BADCHANNAME), newch);
 			return 0;
 		}
 
 		/* channel name must begin with & or # */
 		if(!IsChannelName(newch))
 		{
-			sendto_one(source_p, form_str(ERR_BADCHANNAME), me.name,
-				   source_p->name, (unsigned char *)newch);
+			sendto_one_numeric(source_p, ERR_BADCHANNAME, form_str(ERR_BADCHANNAME), newch);
 			return 0;
 		}
 
@@ -240,7 +238,7 @@ mo_forcepart(struct Client *client_p, struct Client *source_p, int parc, const c
 	/* if target_p == NULL then let the oper know */
 	if((target_p = find_client(parv[1])) == NULL)
 	{
-		sendto_one(source_p, form_str(ERR_NOSUCHNICK), me.name, source_p->name, parv[1]);
+		sendto_one_numeric(source_p, ERR_NOSUCHNICK, form_str(ERR_NOSUCHNICK), parv[1]);
 		return 0;
 	}
 
@@ -257,8 +255,8 @@ mo_forcepart(struct Client *client_p, struct Client *source_p, int parc, const c
 
 	if((msptr = find_channel_membership(chptr, target_p)) == NULL)
 	{
-		sendto_one(source_p, form_str(ERR_USERNOTINCHANNEL),
-			   me.name, parv[0], parv[1], parv[2]);
+		sendto_one_numeric(source_p, ERR_USERNOTINCHANNEL, form_str(ERR_USERNOTINCHANNEL),
+			   parv[1], parv[2]);
 		return 0;
 	}
 

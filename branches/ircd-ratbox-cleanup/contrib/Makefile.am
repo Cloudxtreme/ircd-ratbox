@@ -6,7 +6,7 @@ servicesdir     = @moduledir@/autoload
 libmodulesdir   = @moduledir@
 contribdir	= @moduledir@/contrib
 
-INCLUDES = -I../include -I../libratbox/include $(INCLTDL)
+AM_CPPFLAGS = -I../include -I../libratbox/include $(INCLTDL)
 AM_CFLAGS=$(WARNFLAGS)
 
 SRCS = \

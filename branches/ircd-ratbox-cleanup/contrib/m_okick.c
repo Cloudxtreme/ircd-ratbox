@@ -108,14 +108,13 @@ mo_okick(struct Client *client_p, struct Client *source_p, int parc, const char 
 
 	if((target_p = find_client(user)) == NULL)
 	{
-		sendto_one(source_p, form_str(ERR_NOSUCHNICK), me.name, parv[0], user);
+		sendto_one_numeric(source_p, ERR_NOSUCHNICK, form_str(ERR_NOSUCHNICK), user);
 		return 0;
 	}
 
 	if((msptr = find_channel_membership(chptr, target_p)) == NULL)
 	{
-		sendto_one(source_p, form_str(ERR_USERNOTINCHANNEL),
-			   me.name, parv[0], parv[1], parv[2]);
+		sendto_one_numeric(source_p, ERR_USERNOTINCHANNEL,  form_str(ERR_USERNOTINCHANNEL), parv[1], user);
 		return 0;
 	}
 
