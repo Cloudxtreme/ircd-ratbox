@@ -263,7 +263,7 @@ stats_delay(struct Client *source_p)
 	HASH_WALK(i, U_MAX, ptr, ndTable)
 	{
 		nd = ptr->data;
-		sendto_one_notice(source_p, "Delaying: %s for %ld", nd->name, (long)nd->expire);
+		sendto_one_notice(source_p, "Delaying: %s for %" RBTT_FMT, nd->name, nd->expire);
 	}
 HASH_WALK_END}
 
@@ -749,19 +749,19 @@ stats_operedup(struct Client *source_p)
 		if(MyClient(source_p) && IsOper(source_p))
 		{
 			sendto_one_numeric(source_p, RPL_STATSDEBUG,
-					   "p :[%c][%s] %s (%s@%s) Idle: %ld",
+					   "p :[%c][%s] %s (%s@%s) Idle: %" RBTT_FMT,
 					   IsAdmin(target_p) ? 'A' : 'O',
 					   get_oper_privs(target_p->operflags),
 					   target_p->name, target_p->username, target_p->host,
-					   (long)(rb_current_time() - target_p->localClient->last));
+					   (rb_current_time() - target_p->localClient->last));
 		}
 		else
 		{
 			sendto_one_numeric(source_p, RPL_STATSDEBUG,
-					   "p :[%c] %s (%s@%s) Idle: %ld",
+					   "p :[%c] %s (%s@%s) Idle: %" RBTT_FMT,
 					   IsAdmin(target_p) ? 'A' : 'O',
 					   target_p->name, target_p->username, target_p->host,
-					   (long)(rb_current_time() - target_p->localClient->last));
+					   (rb_current_time() - target_p->localClient->last));
 		}
 	}
 
@@ -1037,7 +1037,7 @@ stats_servers(struct Client *source_p)
 {
 	struct Client *target_p;
 	rb_dlink_node *ptr;
-	long days, hours, minutes, seconds;
+	time_t days, hours, minutes, seconds;
 	int j = 0;
 
 	if(ConfigServerHide.flatten_links && !IsOper(source_p) && !IsExemptShide(source_p))
@@ -1051,7 +1051,7 @@ stats_servers(struct Client *source_p)
 		target_p = ptr->data;
 
 		j++;
-		seconds = (long)(rb_current_time() - target_p->localClient->firsttime);
+		seconds = (rb_current_time() - target_p->localClient->firsttime);
 
 		days = seconds / 86400;
 		seconds %= 86400;
@@ -1062,7 +1062,7 @@ stats_servers(struct Client *source_p)
 
 		sendto_one_numeric(source_p, RPL_STATSDEBUG,
 				   "V :%s (%s!*@*) Idle: %" RBTT_FMT " SendQ: %d "
-				   "Connected: %ld day%s, %ld:%02ld:%02ld",
+				   "Connected: %" RBTT_FMT " day%s, %"RBTT_FMT":%02" RBTT_FMT ":%02" RBTT_FMT,
 				   target_p->name,
 				   (target_p->serv->by[0] ? target_p->serv->by : "Remote."),
 				   (rb_current_time() - target_p->localClient->lasttime),
@@ -1440,7 +1440,7 @@ stats_servlinks(struct Client *source_p)
 		sent += target_p->localClient->sendB;
 		receive += target_p->localClient->receiveB;
 
-		sendto_one(source_p, ":%s %d %s %s %u %u %llu %u %llu :%lu %lu %s",
+		sendto_one(source_p, ":%s %d %s %s %u %u %llu %u %llu :%" RBTT_FMT " %" RBTT_FMT " %s",
 			   get_id(&me, source_p), RPL_STATSLINKINFO, get_id(source_p, source_p),
 			   target_p->name,
 			   rb_linebuf_len(&target_p->localClient->buf_sendq),
@@ -1448,8 +1448,8 @@ stats_servlinks(struct Client *source_p)
 			   target_p->localClient->sendB / 1024,
 			   target_p->localClient->receiveM,
 			   target_p->localClient->receiveB / 1024,
-			   (long)(rb_current_time() - target_p->localClient->firsttime),
-			   (long)((rb_current_time() > target_p->localClient->lasttime) ?
+			   (rb_current_time() - target_p->localClient->firsttime),
+			   ((rb_current_time() > target_p->localClient->lasttime) ?
 				  (rb_current_time() - target_p->localClient->lasttime) : 0),
 			   IsOper(source_p) ? show_capabilities(target_p) : "TS");
 	}

@@ -694,10 +694,10 @@ change_local_nick(struct Client *client_p, struct Client *source_p, char *nick, 
 
 		if(dosend)
 		{
-			sendto_server(client_p, NULL, CAP_TS6, NOCAPS, ":%s NICK %s :%ld",
-				      use_id(source_p), nick, (long)source_p->tsinfo);
-			sendto_server(client_p, NULL, NOCAPS, CAP_TS6, ":%s NICK %s :%ld",
-				      source_p->name, nick, (long)source_p->tsinfo);
+			sendto_server(client_p, NULL, CAP_TS6, NOCAPS, ":%s NICK %s :%" RBTT_FMT,
+				      use_id(source_p), nick, source_p->tsinfo);
+			sendto_server(client_p, NULL, NOCAPS, CAP_TS6, ":%s NICK %s :%" RBTT_FMT,
+				      source_p->name, nick, source_p->tsinfo);
 		}
 	}
 
@@ -752,10 +752,10 @@ change_remote_nick(struct Client *client_p, struct Client *source_p,
 		add_history(source_p, 1);
 		if(dosend)
 		{
-			sendto_server(client_p, NULL, CAP_TS6, NOCAPS, ":%s NICK %s :%ld",
-				      use_id(source_p), nick, (long)source_p->tsinfo);
-			sendto_server(client_p, NULL, NOCAPS, CAP_TS6, ":%s NICK %s :%ld",
-				      source_p->name, nick, (long)source_p->tsinfo);
+			sendto_server(client_p, NULL, CAP_TS6, NOCAPS, ":%s NICK %s :%" RBTT_FMT,
+				      use_id(source_p), nick, source_p->tsinfo);
+			sendto_server(client_p, NULL, NOCAPS, CAP_TS6, ":%s NICK %s :%" RBTT_FMT,
+				      source_p->name, nick, source_p->tsinfo);
 		}
 	}
 
@@ -801,7 +801,7 @@ perform_nick_collides(struct Client *source_p, struct Client *client_p,
 		{
 			save_user(&me, &me, target_p);
 			ServerStats.is_save++;
-			sendto_one(client_p, ":%s SAVE %s %ld", me.id, uid, (long)newts);
+			sendto_one(client_p, ":%s SAVE %s %" RBTT_FMT, me.id, uid, newts);
 			register_client(client_p, source_p, uid, SAVE_NICKTS, parc, parv);
 		}
 		else
@@ -841,7 +841,7 @@ perform_nick_collides(struct Client *source_p, struct Client *client_p,
 			 */
 			if(use_save)
 			{
-				sendto_one(client_p, ":%s SAVE %s %ld", me.id, uid, (long)newts);
+				sendto_one(client_p, ":%s SAVE %s %" RBTT_FMT, me.id, uid, newts);
 				register_client(client_p, source_p, uid, SAVE_NICKTS, parc, parv);
 			}
 			else if(uid)
@@ -914,7 +914,7 @@ perform_nickchange_collides(struct Client *source_p, struct Client *client_p,
 		{
 			ServerStats.is_save += 2;
 			save_user(&me, &me, target_p);
-			sendto_one(client_p, ":%s SAVE %s %ld", me.id, source_p->id, (long)newts);
+			sendto_one(client_p, ":%s SAVE %s %" RBTT_FMT, me.id, source_p->id, newts);
 			/* don't send a redundant nick change */
 			if(!IsDigit(source_p->name[0]))
 				change_remote_nick(client_p, source_p, SAVE_NICKTS, source_p->id,
@@ -966,8 +966,8 @@ perform_nickchange_collides(struct Client *source_p, struct Client *client_p,
 				/* can't broadcast a SAVE because the
 				 * nickchange has happened at client_p
 				 * but not in other directions -- jilles */
-				sendto_one(client_p, ":%s SAVE %s %ld", me.id,
-					   source_p->id, (long)newts);
+				sendto_one(client_p, ":%s SAVE %s %" RBTT_FMT, me.id,
+					   source_p->id, newts);
 				/* send a :<id> NICK <id> <ts> (!) */
 				if(!IsDigit(source_p->name[0]))
 					change_remote_nick(client_p, source_p, SAVE_NICKTS,
@@ -1200,12 +1200,12 @@ save_user(struct Client *client_p, struct Client *source_p, struct Client *targe
 		(void)exit_client(NULL, target_p, &me, "Nick collision (no SAVE support)");
 		return;
 	}
-	sendto_server(client_p, NULL, CAP_SAVE | CAP_TS6, NOCAPS, ":%s SAVE %s %ld",
-		      source_p->id, target_p->id, (long)target_p->tsinfo);
-	sendto_server(client_p, NULL, CAP_TS6, CAP_SAVE, ":%s NICK %s :%ld",
-		      target_p->id, target_p->id, (long)SAVE_NICKTS);
-	sendto_server(client_p, NULL, NOCAPS, CAP_TS6, ":%s NICK %s :%ld",
-		      target_p->name, target_p->id, (long)SAVE_NICKTS);
+	sendto_server(client_p, NULL, CAP_SAVE | CAP_TS6, NOCAPS, ":%s SAVE %s %" RBTT_FMT,
+		      source_p->id, target_p->id, target_p->tsinfo);
+	sendto_server(client_p, NULL, CAP_TS6, CAP_SAVE, ":%s NICK %s :%" RBTT_FMT,
+		      target_p->id, target_p->id, (time_t)SAVE_NICKTS);
+	sendto_server(client_p, NULL, NOCAPS, CAP_TS6, ":%s NICK %s :%" RBTT_FMT,
+		      target_p->name, target_p->id, (time_t)SAVE_NICKTS);
 	if(!IsMe(client_p))
 		sendto_realops_flags(UMODE_SKILL, L_ALL,
 				     "Received SAVE message for %s from %s",

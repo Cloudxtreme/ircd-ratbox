@@ -86,7 +86,7 @@ mo_testline(struct Client *client_p, struct Client *source_p, int parc, const ch
 			sendto_one(source_p, form_str(RPL_TESTLINE),
 				   me.name, source_p->name,
 				   (resv_p->flags & CONF_FLAGS_TEMPORARY) ? 'q' : 'Q',
-				   (resv_p->flags & CONF_FLAGS_TEMPORARY) ? (long)((resv_p->hold -
+				   (resv_p->flags & CONF_FLAGS_TEMPORARY) ? ((resv_p->hold -
 										    rb_current_time
 										    ()) / 60) : 0L,
 				   resv_p->host, resv_p->passwd);
@@ -134,7 +134,7 @@ mo_testline(struct Client *client_p, struct Client *source_p, int parc, const ch
 				   me.name, source_p->name,
 				   (aconf->flags & CONF_FLAGS_TEMPORARY) ? 'd' : 'D',
 				   (aconf->flags & CONF_FLAGS_TEMPORARY) ?
-				   (long)((aconf->hold - rb_current_time()) / 60) : 0L,
+				   ((aconf->hold - rb_current_time()) / 60) : 0L,
 				   aconf->host, aconf->passwd);
 
 			return 0;
@@ -161,7 +161,7 @@ mo_testline(struct Client *client_p, struct Client *source_p, int parc, const ch
 				   me.name, source_p->name,
 				   (aconf->flags & CONF_FLAGS_TEMPORARY) ? 'k' : 'K',
 				   (aconf->flags & CONF_FLAGS_TEMPORARY) ?
-				   (long)((aconf->hold - rb_current_time()) / 60) : 0L,
+				   ((aconf->hold - rb_current_time()) / 60) : 0L,
 				   buf, aconf->passwd);
 			return 0;
 		}
@@ -170,7 +170,7 @@ mo_testline(struct Client *client_p, struct Client *source_p, int parc, const ch
 			snprintf(buf, sizeof(buf), "%s@%s", aconf->user, aconf->host);
 			sendto_one(source_p, form_str(RPL_TESTLINE),
 				   me.name, source_p->name,
-				   'G', (long)((aconf->hold - rb_current_time()) / 60),
+				   'G', ((aconf->hold - rb_current_time()) / 60),
 				   buf, aconf->passwd);
 			return 0;
 		}
@@ -182,7 +182,7 @@ mo_testline(struct Client *client_p, struct Client *source_p, int parc, const ch
 		sendto_one(source_p, form_str(RPL_TESTLINE),
 			   me.name, source_p->name,
 			   (resv_p->flags & CONF_FLAGS_TEMPORARY) ? 'q' : 'Q',
-			   (resv_p->flags & CONF_FLAGS_TEMPORARY) ? (long)((resv_p->hold -
+			   (resv_p->flags & CONF_FLAGS_TEMPORARY) ? ((resv_p->hold -
 									    rb_current_time()) /
 									   60) : 0L, resv_p->host,
 			   resv_p->passwd);
@@ -223,7 +223,7 @@ mo_testgecos(struct Client *client_p, struct Client *source_p, int parc, const c
 	sendto_one(source_p, form_str(RPL_TESTLINE),
 		   me.name, source_p->name,
 		   (aconf->flags & CONF_FLAGS_TEMPORARY) ? 'x' : 'X',
-		   (aconf->flags & CONF_FLAGS_TEMPORARY) ? (long)((aconf->hold -
+		   (aconf->flags & CONF_FLAGS_TEMPORARY) ? ((aconf->hold -
 								   rb_current_time()) / 60) : 0L,
 		   aconf->host, aconf->passwd);
 	return 0;

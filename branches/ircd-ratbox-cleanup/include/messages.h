@@ -204,7 +204,7 @@
 #define NUMERIC_STR_721	":%s 721 %s :%s"
 #define NUMERIC_STR_722	":%s 722 %s :End of OPER MOTD"
 #define NUMERIC_STR_723	":%s 723 %s %s :Insufficient oper privs"
-#define NUMERIC_STR_725	":%s 725 %s %c %ld %s :%s"
+#define NUMERIC_STR_725	":%s 725 %s %c %" RBTT_FMT " %s :%s"
 #define NUMERIC_STR_726	":%s 726 %s %s :No matches"
 #define NUMERIC_STR_727	":%s 727 %s %d %d %s!%s@%s %s :Local/remote clients match"
 #define NUMERIC_STR_730	":%s 730 %s :%s"

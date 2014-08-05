@@ -987,8 +987,8 @@ send_cap_mode_changes(struct Client *client_p, struct Client *source_p,
 		nocap = chcap_combos[j].cap_no;
 
 		if(cap & CAP_TS6)
-			mbl = preflen = sprintf(modebuf, ":%s TMODE %ld %s ",
-						   use_id(source_p), (long)chptr->channelts,
+			mbl = preflen = sprintf(modebuf, ":%s TMODE %" RBTT_FMT " %s ",
+						   use_id(source_p), chptr->channelts,
 						   chptr->chname);
 		else
 			mbl = preflen = sprintf(modebuf, ":%s MODE %s ",

@@ -293,24 +293,24 @@ m_join(struct Client *client_p, struct Client *source_p, int parc, const char *p
 			if(*chptr->chname == '#')
 			{
 				sendto_server(client_p, chptr, CAP_TS6, NOCAPS,
-					      ":%s SJOIN %ld %s +nt :@%s",
-					      me.id, (long)chptr->channelts,
+					      ":%s SJOIN %" RBTT_FMT " %s +nt :@%s",
+					      me.id, chptr->channelts,
 					      chptr->chname, source_p->id);
 				sendto_server(client_p, chptr, NOCAPS, CAP_TS6,
-					      ":%s SJOIN %ld %s +nt :@%s",
-					      me.name, (long)chptr->channelts,
+					      ":%s SJOIN %" RBTT_FMT " %s +nt :@%s",
+					      me.name, chptr->channelts,
 					      chptr->chname, source_p->name);
 			}
 		}
 		else
 		{
 			sendto_server(client_p, chptr, CAP_TS6, NOCAPS,
-				      ":%s JOIN %ld %s +",
-				      use_id(source_p), (long)chptr->channelts, chptr->chname);
+				      ":%s JOIN %" RBTT_FMT " %s +",
+				      use_id(source_p), chptr->channelts, chptr->chname);
 
 			sendto_server(client_p, chptr, NOCAPS, CAP_TS6,
-				      ":%s SJOIN %ld %s + :%s",
-				      me.name, (long)chptr->channelts,
+				      ":%s SJOIN %" RBTT_FMT " %s + :%s",
+				      me.name, chptr->channelts,
 				      chptr->chname, source_p->name);
 		}
 
@@ -387,11 +387,11 @@ ms_join(struct Client *client_p, struct Client *source_p, int parc, const char *
 	if(!isnew && !newts && oldts)
 	{
 		sendto_channel_local(ALL_MEMBERS, chptr,
-				     ":%s NOTICE %s :*** Notice -- TS for %s changed from %ld to 0",
-				     me.name, chptr->chname, chptr->chname, (long)oldts);
+				     ":%s NOTICE %s :*** Notice -- TS for %s changed from %" RBTT_FMT " to 0",
+				     me.name, chptr->chname, chptr->chname, oldts);
 		sendto_realops_flags(UMODE_ALL, L_ALL,
-				     "Server %s changing TS on %s from %ld to 0",
-				     source_p->name, chptr->chname, (long)oldts);
+				     "Server %s changing TS on %s from %" RBTT_FMT " to 0",
+				     source_p->name, chptr->chname, oldts);
 	}
 
 	if(isnew)
@@ -413,9 +413,8 @@ ms_join(struct Client *client_p, struct Client *source_p, int parc, const char *
 	{
 		remove_our_modes(chptr);
 		sendto_channel_local(ALL_MEMBERS, chptr,
-				     ":%s NOTICE %s :*** Notice -- TS for %s changed from %ld to %ld",
-				     me.name, chptr->chname, chptr->chname, (long)oldts,
-				     (long)newts);
+				     ":%s NOTICE %s :*** Notice -- TS for %s changed from %" RBTT_FMT " to %" RBTT_FMT,
+				     me.name, chptr->chname, chptr->chname, oldts, newts);
 		set_final_mode(source_p->servptr, chptr, &mode, &chptr->mode);
 		chptr->mode = mode;
 	}
@@ -429,10 +428,10 @@ ms_join(struct Client *client_p, struct Client *source_p, int parc, const char *
 	}
 
 	sendto_server(client_p, chptr, CAP_TS6, NOCAPS,
-		      ":%s JOIN %ld %s +", source_p->id, (long)chptr->channelts, chptr->chname);
+		      ":%s JOIN %" RBTT_FMT " %s +", source_p->id, chptr->channelts, chptr->chname);
 	sendto_server(client_p, chptr, NOCAPS, CAP_TS6,
-		      ":%s SJOIN %ld %s %s :%s",
-		      source_p->servptr->name, (long)chptr->channelts,
+		      ":%s SJOIN %" RBTT_FMT " %s %s :%s",
+		      source_p->servptr->name, chptr->channelts,
 		      chptr->chname, keep_new_modes ? "+" : "0", source_p->name);
 	return 0;
 }
@@ -566,11 +565,11 @@ ms_sjoin(struct Client *client_p, struct Client *source_p, int parc, const char 
 	{
 		sendto_channel_local(ALL_MEMBERS, chptr,
 				     ":%s NOTICE %s :*** Notice -- TS for %s "
-				     "changed from %ld to 0",
-				     me.name, chptr->chname, chptr->chname, (long)oldts);
+				     "changed from %" RBTT_FMT " to 0",
+				     me.name, chptr->chname, chptr->chname, oldts);
 		sendto_realops_flags(UMODE_ALL, L_ALL,
-				     "Server %s changing TS on %s from %ld to 0",
-				     source_p->name, chptr->chname, (long)oldts);
+				     "Server %s changing TS on %s from %" RBTT_FMT " to 0",
+				     source_p->name, chptr->chname, oldts);
 	}
 
 	if(isnew)
@@ -603,9 +602,9 @@ ms_sjoin(struct Client *client_p, struct Client *source_p, int parc, const char 
 	{
 		remove_our_modes(chptr);
 		sendto_channel_local(ALL_MEMBERS, chptr,
-				     ":%s NOTICE %s :*** Notice -- TS for %s changed from %ld to %ld",
+				     ":%s NOTICE %s :*** Notice -- TS for %s changed from %" RBTT_FMT "  to %" RBTT_FMT,
 				     me.name, chptr->chname, chptr->chname,
-				     (long)oldts, (long)newts);
+				     oldts, newts);
 	}
 
 	set_final_mode(source_p, chptr, &mode, oldmode);
@@ -618,15 +617,15 @@ ms_sjoin(struct Client *client_p, struct Client *source_p, int parc, const char 
 	else
 		modes = empty_modes;
 
-	mlen_nick = sprintf(buf_nick, ":%s SJOIN %ld %s %s :",
-			       source_p->name, (long)chptr->channelts, parv[2], modes);
+	mlen_nick = sprintf(buf_nick, ":%s SJOIN %" RBTT_FMT " %s %s :",
+			       source_p->name, chptr->channelts, parv[2], modes);
 	ptr_nick = buf_nick + mlen_nick;
 
 	/* working on the presumption eventually itll be more efficient to
 	 * build a TS6 buffer without checking its needed..
 	 */
-	mlen_uid = sprintf(buf_uid, ":%s SJOIN %ld %s %s :",
-			      use_id(source_p), (long)chptr->channelts, parv[2], modes);
+	mlen_uid = sprintf(buf_uid, ":%s SJOIN %" RBTT_FMT " %s %s :",
+			      use_id(source_p), chptr->channelts, parv[2], modes);
 	ptr_uid = buf_uid + mlen_uid;
 
 	mbuf = modebuf;
