@@ -9,6 +9,15 @@ contribdir	= @moduledir@/contrib
 AM_CPPFLAGS = -I../include -I../libratbox/include $(INCLTDL)
 AM_CFLAGS=$(WARNFLAGS)
 
+if MINGW
+EXTRA_FLAGS = -no-undefined -Wl,--enable-runtime-pseudo-reloc -export-symbols-regex '*'
+endif
+
+
+MODULE_FLAGS = $(EXTRA_FLAGS) -avoid-version
+
+
+
 SRCS = \
 example_module.c        \
 m_42.c  	\
