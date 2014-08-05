@@ -45,10 +45,10 @@ ST_OBJS = $(ALL_SRCS:.c=.lo) $(CORE_SRCS:.c=.lo)
 SUFFIXES = .c .so .lo .la
 
 .c.lo:
-	$(LIBTOOL) --mode=compile $(CC) -prefer-pic -DHAVE_CONFIG_H $(INCLUDES) $(AM_CPPFLAGS) $(CFLAGS) -c $< -o $@
+	$(LIBTOOL) --mode=compile $(CC) -prefer-pic -DHAVE_CONFIG_H $(INCLUDES) $(AM_CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c $< -o $@
 
 .lo.la:
-	$(LIBTOOL) --mode=link  $(CC) -rpath $(moduledir) -module -avoid-version $(CFLAGS) -o $@ $< $(LIBS) $(LDFLAGS) 
+	$(LIBTOOL) --mode=link  $(CC) -rpath $(moduledir) -module -avoid-version $(AM_CFLAGS) $(CFLAGS) -o $@ $< $(LIBS) $(LDFLAGS) 
 
 all: $(S_OBJS) $(S_CORE_OBJS) 
 
