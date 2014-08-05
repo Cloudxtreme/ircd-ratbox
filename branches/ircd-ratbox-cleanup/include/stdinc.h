@@ -203,10 +203,10 @@ xc_strlcpy(char *dest, const char *src, size_t size)
 # define INADDR_LOOPBACK ((in_addr_t) 0x7f000001)
 #endif
 
-#if SIZE_TIME_T <= 4 || (SIZEOF_LONG == SIZE_TIME_T)
-	#define RBTT_FMT "%ld"
+#if SIZEOF_TIME_T <= 4 || (SIZEOF_LONG == SIZEOF_TIME_T)
+	#define RBTT_FMT "ld"
 #else
-	#define RBTT_FMT "%lld"
+	#define RBTT_FMT "lld"
 #endif
 
 #include "ratbox_lib.h"

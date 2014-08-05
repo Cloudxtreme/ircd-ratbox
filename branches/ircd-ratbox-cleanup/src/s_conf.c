@@ -1000,11 +1000,11 @@ expire_temp_kd(void *list)
 				#define a_x(x) (aconf->x)
 				ilog(L_MAIN, "WARNING: DLINE with aconf->status & CONF_DLINE but aconf->pnode == NULL! " 
 					"status:%x flags:%x clients:%d info.name:%s info.oper:%s host:%s passwd:%s spasswd:%s user:%s port:%d " 
-					"hold:%ld, class:%p pnode:%p", a_x(status), a_x(flags), a_x(clients), a_string(info.name), a_string(info.oper),
+					"hold:%" RBTT_FMT ", class:%p pnode:%p", a_x(status), a_x(flags), a_x(clients), a_string(info.name), a_string(info.oper),
 					a_string(host), a_string(passwd), a_string(spasswd), a_string(user), a_x(port), a_x(hold), a_x(c_class), a_x(pnode));	
 				sendto_realops_flags(UMODE_ALL, L_ALL, "WARNING: DLINE with aconf->status & CONF_DLINE but aconf->pnode == NULL! " 
 					"status:%x flags:%x clients:%d info.name:%s info.oper:%s host:%s passwd:%s spasswd:%s user:%s port:%d " 
-					"hold:%ld, class:%p pnode:%p", a_x(status), a_x(flags), a_x(clients), a_string(info.name), a_string(info.oper),
+					"hold:%" RBTT_FMT ", class:%p pnode:%p", a_x(status), a_x(flags), a_x(clients), a_string(info.name), a_string(info.oper),
 					a_string(host), a_string(passwd), a_string(spasswd), a_string(user), a_x(port), a_x(hold), a_x(c_class), a_x(pnode));
 				#undef a_string
 				#undef a_x

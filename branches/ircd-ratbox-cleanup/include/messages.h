@@ -42,12 +42,13 @@
 #define NUMERIC_STR_200	"Link %s %s %s"
 #define NUMERIC_STR_201	"Try. %s %s"
 #define NUMERIC_STR_202	"H.S. %s %s"
-#define NUMERIC_STR_203	"???? %s %s (%s) %lu"
-#define NUMERIC_STR_204	"Oper %s %s (%s) %lu %lu"
-#define NUMERIC_STR_205	"User %s %s (%s) %lu %lu"
-#define NUMERIC_STR_206	"Serv %s %dS %dC %s %s!%s@%s %lu"
+#define NUMERIC_STR_203	"???? %s %s (%s) %" RBTT_FMT
+#define NUMERIC_STR_204	"Oper %s %s (%s) %" RBTT_FMT " %" RBTT_FMT
+#define NUMERIC_STR_205	"User %s %s (%s) %" RBTT_FMT " %" RBTT_FMT
+#define NUMERIC_STR_206	"Serv %s %dS %dC %s %s!%s@%s %" RBTT_FMT
 #define NUMERIC_STR_208	"<newtype> 0 %s"
 #define NUMERIC_STR_209	"Class %s %d"
+#define NUMERIC_STR_211 "%s %u %u %llu %u %llu :%" RBTT_FMT "%" RBTT_FMT " %s"
 #define NUMERIC_STR_212	"%s %lu %lu :%lu"
 #define NUMERIC_STR_213	"C %s %s %s %d %s"
 #define NUMERIC_STR_215	"I %s * %s@%s %d %s"
@@ -59,7 +60,7 @@
 #define NUMERIC_STR_221	":%s 221 %s %s"
 #define NUMERIC_STR_225	"%c %s :%s%s%s"
 #define NUMERIC_STR_241	"L %s * %s 0 -1"
-#define NUMERIC_STR_242	":Server Up %lu days, %lu:%02lu:%02lu"
+#define NUMERIC_STR_242	":Server Up %" RBTT_FMT " days, %" RBTT_FMT ":%02" RBTT_FMT ":%02" RBTT_FMT
 #define NUMERIC_STR_243	"O %s@%s * %s %s %s"
 #define NUMERIC_STR_244	"H %s * %s 0 -1"
 #define NUMERIC_STR_247	"%c %d %s :%s"
@@ -90,18 +91,18 @@
 #define NUMERIC_STR_313	"%s :%s"
 #define NUMERIC_STR_314	":%s 314 %s %s %s %s * :%s"
 #define NUMERIC_STR_315	":%s 315 %s %s :End of /WHO list."
-#define NUMERIC_STR_317	"%s " RBTT_FMT " " RBTT_FMT " :seconds idle, signon time"
+#define NUMERIC_STR_317	"%s %" RBTT_FMT " %" RBTT_FMT " :seconds idle, signon time"
 #define NUMERIC_STR_318	"%s :End of /WHOIS list."
 #define NUMERIC_STR_319	":%s 319 %s %s :"
 #define NUMERIC_STR_321	":%s 321 %s Channel :Users  Name"
 #define NUMERIC_STR_322	":%s 322 %s %s %lu :%s"
 #define NUMERIC_STR_323	":%s 323 %s :End of /LIST"
 #define NUMERIC_STR_324	":%s 324 %s %s %s"
-#define NUMERIC_STR_329	":%s 329 %s %s %lu"
+#define NUMERIC_STR_329	":%s 329 %s %s %" RBTT_FMT
 #define NUMERIC_STR_330	":%s 330 %s %s %s :is logged in as"
 #define NUMERIC_STR_331	":%s 331 %s %s :No topic is set."
 #define NUMERIC_STR_332	":%s 332 %s %s :%s"
-#define NUMERIC_STR_333	":%s 333 %s %s %s %lu"
+#define NUMERIC_STR_333	":%s 333 %s %s %s %" RBTT_FMT
 #define NUMERIC_STR_338	"%s %s :actually using host"
 #define NUMERIC_STR_341	":%s 341 %s %s %s"
 #define NUMERIC_STR_346	":%s 346 %s %s %s %s %lu"

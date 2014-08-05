@@ -84,12 +84,12 @@ ms_svinfo(struct Client *client_p, struct Client *source_p, int parc, const char
 	{
 		sendto_realops_flags(UMODE_ALL, L_ALL,
 				     "Link %s dropped, excessive TS delta"
-				     " (my TS=" RBTT_FMT ", their TS=" RBTT_FMT " delta=%d)",
+				     " (my TS=%" RBTT_FMT ", their TS=" RBTT_FMT " delta=%d)",
 				     source_p->name,
 				     rb_current_time(), theirtime, deltat);
 		ilog(L_SERVER,
 		     "Link %s dropped, excessive TS delta"
-		     " (my TS=" RBTT_FMT ", their TS=" RBTT_FMT ", delta=%d)",
+		     " (my TS=" RBTT_FMT ", their TS=%" RBTT_FMT ", delta=%d)",
 		     log_client_name(source_p, SHOW_IP), (long)rb_current_time(), (long)theirtime,
 		     deltat);
 		exit_client(source_p, source_p, source_p, "Excessive TS delta");

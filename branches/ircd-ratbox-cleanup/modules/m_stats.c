@@ -863,13 +863,13 @@ stats_usage(struct Client *source_p)
 		rup = 1;
 
 	sendto_one_numeric(source_p, RPL_STATSDEBUG,
-			   "R :CPU Secs %ld:%ld User %ld:%ld System %ld:%ld",
-			   (long)(secs / 60), (long)(secs % 60),
-			   (long)(rus.ru_utime.tv_sec / 60),
-			   (long)(rus.ru_utime.tv_sec % 60),
-			   (long)(rus.ru_stime.tv_sec / 60), (long)(rus.ru_stime.tv_sec % 60));
+			   "R :CPU Secs %" RBTT_FMT ":%" RBTT_FMT " User %" RBTT_FMT ":%" RBTT_FMT " System %" RBTT_FMT ":%" RBTT_FMT,
+			   (secs / 60), (secs % 60),
+			   (rus.ru_utime.tv_sec / 60),
+			   (rus.ru_utime.tv_sec % 60),
+			   (rus.ru_stime.tv_sec / 60), (rus.ru_stime.tv_sec % 60));
 	sendto_one_numeric(source_p, RPL_STATSDEBUG,
-			   "R :RSS %ld ShMem %ld Data %ld Stack %ld",
+			   "R :RSS %ld ShMem %" RBTT_FMT " Data %" RBTT_FMT " Stack %" RBTT_FMT,
 			   rus.ru_maxrss, (rus.ru_ixrss / rup),
 			   (rus.ru_idrss / rup), (rus.ru_isrss / rup));
 	sendto_one_numeric(source_p, RPL_STATSDEBUG,
@@ -1061,11 +1061,11 @@ stats_servers(struct Client *source_p)
 		seconds %= 60;
 
 		sendto_one_numeric(source_p, RPL_STATSDEBUG,
-				   "V :%s (%s!*@*) Idle: %ld SendQ: %d "
+				   "V :%s (%s!*@*) Idle: %" RBTT_FMT " SendQ: %d "
 				   "Connected: %ld day%s, %ld:%02ld:%02ld",
 				   target_p->name,
 				   (target_p->serv->by[0] ? target_p->serv->by : "Remote."),
-				   (long)(rb_current_time() - target_p->localClient->lasttime),
+				   (rb_current_time() - target_p->localClient->lasttime),
 				   rb_linebuf_len(&target_p->localClient->buf_sendq),
 				   days, (days == 1) ? "" : "s", hours, minutes, seconds);
 	}
@@ -1600,37 +1600,37 @@ stats_l_client(struct Client *source_p, struct Client *target_p, char statchar)
 {
 	if(IsAnyServer(target_p))
 	{
-		sendto_one_numeric(source_p, RPL_STATSLINKINFO, Lformat,
+		sendto_one_numeric(source_p, RPL_STATSLINKINFO, form_str(RPL_STATSLINKINFO),
 				   target_p->name,
 				   rb_linebuf_len(&target_p->localClient->buf_sendq),
 				   target_p->localClient->sendM,
 				   target_p->localClient->sendB / 1024,
 				   target_p->localClient->receiveM,
 				   target_p->localClient->receiveB / 1024,
-				   (long)rb_current_time() - target_p->localClient->firsttime,
-				   (long)(rb_current_time() > target_p->localClient->lasttime) ?
-				   (long)(rb_current_time() - target_p->localClient->lasttime) : 0,
+				   rb_current_time() - target_p->localClient->firsttime,
+				   (rb_current_time() > target_p->localClient->lasttime) ?
+				   (rb_current_time() - target_p->localClient->lasttime) : 0,
 				   IsOper(source_p) ? show_capabilities(target_p) : "-");
 	}
 
 	else if(!show_ip(source_p, target_p))
 	{
-		sendto_one_numeric(source_p, RPL_STATSLINKINFO, Lformat,
+		sendto_one_numeric(source_p, RPL_STATSLINKINFO, form_str(RPL_STATSLINKINFO),
 				   get_client_name(target_p, MASK_IP),
 				   rb_linebuf_len(&target_p->localClient->buf_sendq),
 				   target_p->localClient->sendM,
 				   target_p->localClient->sendB / 1024,
 				   target_p->localClient->receiveM,
 				   target_p->localClient->receiveB / 1024,
-				   (long)(rb_current_time() - target_p->localClient->firsttime),
-				   (long)(rb_current_time() > target_p->localClient->lasttime) ?
-				   (long)(rb_current_time() - target_p->localClient->lasttime) : 0,
+				   (rb_current_time() - target_p->localClient->firsttime),
+				   (rb_current_time() > target_p->localClient->lasttime) ?
+				   (rb_current_time() - target_p->localClient->lasttime) : 0,
 				   "-");
 	}
 
 	else
 	{
-		sendto_one_numeric(source_p, RPL_STATSLINKINFO, Lformat,
+		sendto_one_numeric(source_p, RPL_STATSLINKINFO, form_str(RPL_STATSLINKINFO),
 				   IsUpper(statchar) ?
 				   get_client_name(target_p, SHOW_IP) :
 				   get_client_name(target_p, HIDE_IP),
@@ -1639,9 +1639,9 @@ stats_l_client(struct Client *source_p, struct Client *target_p, char statchar)
 				   target_p->localClient->sendB / 1024,
 				   target_p->localClient->receiveM,
 				   target_p->localClient->receiveB / 1024,
-				   (long)rb_current_time() - target_p->localClient->firsttime,
-				   (long)(rb_current_time() > target_p->localClient->lasttime) ?
-				   (long)(rb_current_time() - target_p->localClient->lasttime) : 0,
+				   rb_current_time() - target_p->localClient->firsttime,
+				   (rb_current_time() > target_p->localClient->lasttime) ?
+				   (rb_current_time() - target_p->localClient->lasttime) : 0,
 				   "-");
 	}
 }
