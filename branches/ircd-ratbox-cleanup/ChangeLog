@@ -1,3 +1,16 @@
+androsyn    2014/08/05 16:16:32 UTC	(20140805_0-27506)
+  Log:
+  Make everything compile in contrib at least...
+  
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/contrib/Makefile.am (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/contrib/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/contrib/m_flags.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/contrib/m_force.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/contrib/m_okick.c (File Modified) 
+
+
 androsyn    2014/08/04 21:08:18 UTC	(20140804_9-27504)
   Log:
   RBTT_FMT svinfo
