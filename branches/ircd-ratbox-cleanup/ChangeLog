@@ -1,3 +1,11 @@
+androsyn    2014/08/05 18:53:52 UTC	(20140805_12-27538)
+  Log:
+  fixup services too
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_services.c (File Modified) 
+
+
 androsyn    2014/08/05 18:48:21 UTC	(20140805_11-27536)
   Log:
   get rid of some more (long) casts on time_t
