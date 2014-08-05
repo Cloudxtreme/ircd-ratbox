@@ -312,7 +312,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CFLAGS = $(WARNFLAGS)
-INCLUDES = -I../include -I../libratbox/include 
+AM_CPPFLAGS = -I../include -I../libratbox/include 
 ssld_SOURCES = ssld.c
 ssld_LDADD = ../libratbox/src/libratbox.la @ZLIB_LD@
 all: all-am

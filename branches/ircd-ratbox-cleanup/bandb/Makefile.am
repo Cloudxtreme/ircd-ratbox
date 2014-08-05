@@ -11,7 +11,7 @@ libexec_PROGRAMS = bandb
 bin_PROGRAMS = bantool
 AM_CFLAGS=$(WARNFLAGS)
 
-INCLUDES = -I../include -I../libratbox/include @SQLITE3_CFLAGS@
+AM_CPPFLAGS = -I../include -I../libratbox/include @SQLITE3_CFLAGS@
 
 
 bandb_SOURCES = bandb.c rsdb_sqlite3.c rsdb_snprintf.c

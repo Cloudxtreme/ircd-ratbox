@@ -7,7 +7,7 @@ modulesdir      = @moduledir@/autoload
 coredir         = @moduledir@
 servicesdir     = @moduledir@/autoload
 libmodulesdir	= @moduledir@
-INCLUDES = -I../libratbox/include -I../include -I../libltdl @SSL_INCLUDES@
+AM_CPPFLAGS = -I../libratbox/include -I../include -I../libltdl @SSL_INCLUDES@
 
 AM_CFLAGS = $(WARNFLAGS)
 

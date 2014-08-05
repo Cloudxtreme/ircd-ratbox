@@ -5,7 +5,7 @@ libcoredir	= @libdir@
 
 AM_YFLAGS = -d
 AM_CFLAGS = $(WARNFLAGS)
-INCLUDES = -I../libratbox/include -I../libltdl @SSL_INCLUDES@
+AM_CPPFLAGS = -I../libratbox/include -I../libltdl @SSL_INCLUDES@
 
 BUILT_SOURCES = version.c
 
