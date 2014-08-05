@@ -1,3 +1,22 @@
+androsyn    2014/08/05 16:17:00 UTC	(20140805_1-27508)
+  Log:
+  change INCLUDES to AM_CPPFLAGS in Makefile.am files
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/bandb/Makefile.am (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/bandb/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/Makefile.am (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/resolver/Makefile.am (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/resolver/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/Makefile.am (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/ssld/Makefile.am (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/ssld/Makefile.in (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/tools/Makefile.am (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/tools/Makefile.in (File Modified) 
+
+
 androsyn    2014/08/05 16:16:32 UTC	(20140805_0-27506)
   Log:
   Make everything compile in contrib at least...
