@@ -1,3 +1,14 @@
+androsyn    2014/08/05 16:38:56 UTC	(20140805_6-27518)
+  Log:
+  Update sqlite3 amalgamation
+  
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/bandb/sqlite3/shell.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/bandb/sqlite3/sqlite3.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/bandb/sqlite3/sqlite3.h (File Modified) 
+
+
 androsyn    2014/08/05 16:34:52 UTC	(20140805_5-27516)
   Log:
   add m_webirc to makefile
