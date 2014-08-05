@@ -1,3 +1,11 @@
+androsyn    2014/08/05 18:38:00 UTC	(20140805_8-27530)
+  Log:
+  fix typo
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/ircd_parser.y (File Modified) 
+
+
 androsyn    2014/08/05 16:39:47 UTC	(20140805_7-27520)
   Log:
   quiet you...
