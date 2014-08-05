@@ -1,3 +1,14 @@
+androsyn    2014/08/05 19:42:00 UTC	(20140805_14-27542)
+  Log:
+  Regenerate lexer/parser files for in-tree
+  
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/ircd_lexer.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/ircd_parser.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/src/ircd_parser.h (File Modified) 
+
+
 androsyn    2014/08/05 19:10:59 UTC	(20140805_13-27540)
   Log:
   More sizeof(time_t) > sizeof(long) cleanups
