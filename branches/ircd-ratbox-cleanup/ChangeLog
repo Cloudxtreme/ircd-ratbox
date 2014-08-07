@@ -1,3 +1,16 @@
+androsyn    2014/08/07 16:53:48 UTC	(20140807_0-27552)
+  Log:
+  remove redundant (void)s
+
+  Modified:
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/core/m_join.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/core/m_message.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/core/m_nick.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_accept.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_close.c (File Modified) 
+	ircd-ratbox/branches/ircd-ratbox-cleanup/modules/m_xline.c (File Modified) 
+
+
 androsyn    2014/08/05 19:42:00 UTC	(20140805_14-27542)
   Log:
   Regenerate lexer/parser files for in-tree
