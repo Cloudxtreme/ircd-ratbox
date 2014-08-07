@@ -670,7 +670,7 @@ msg_client(int p_or_n, const char *command,
 						rb_current_time();
 				}
 				/* Only so opers can watch for floods */
-				(void)flood_attack_client(p_or_n, source_p, target_p);
+				flood_attack_client(p_or_n, source_p, target_p);
 			}
 		}
 		else

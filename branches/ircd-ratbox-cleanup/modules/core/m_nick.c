@@ -879,7 +879,7 @@ perform_nick_collides(struct Client *source_p, struct Client *client_p,
 							"%s (Nick collision (new))", me.name);
 
 				target_p->flags |= FLAGS_KILLED;
-				(void)exit_client(client_p, target_p, &me, "Nick collision");
+				exit_client(client_p, target_p, &me, "Nick collision");
 			}
 
 			register_client(client_p, parc == 10 ? source_p : NULL,
@@ -1023,7 +1023,7 @@ perform_nickchange_collides(struct Client *source_p, struct Client *client_p,
 				ServerStats.is_kill++;
 
 				target_p->flags |= FLAGS_KILLED;
-				(void)exit_client(client_p, target_p, &me, "Nick collision");
+				exit_client(client_p, target_p, &me, "Nick collision");
 			}
 		}
 	}
@@ -1197,7 +1197,7 @@ save_user(struct Client *client_p, struct Client *source_p, struct Client *targe
 		ServerStats.is_kill++;
 
 		target_p->flags |= FLAGS_KILLED;
-		(void)exit_client(NULL, target_p, &me, "Nick collision (no SAVE support)");
+		exit_client(NULL, target_p, &me, "Nick collision (no SAVE support)");
 		return;
 	}
 	sendto_server(client_p, NULL, CAP_SAVE | CAP_TS6, NOCAPS, ":%s SAVE %s %" RBTT_FMT,

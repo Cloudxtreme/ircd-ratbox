@@ -138,7 +138,7 @@ m_join(struct Client *client_p, struct Client *source_p, int parc, const char *p
 		/* join 0 parts all channels */
 		if(*name == '0' && (name[1] == ',' || name[1] == '\0') && name == chanlist)
 		{
-			(void)strcpy(jbuf, "0");
+			strcpy(jbuf, "0");
 			continue;
 		}
 
@@ -181,8 +181,8 @@ m_join(struct Client *client_p, struct Client *source_p, int parc, const char *p
 		}
 
 		if(*jbuf)
-			(void)strcat(jbuf, ",");
-		(void)rb_strlcat(jbuf, name, sizeof(jbuf));
+			strcat(jbuf, ",");
+		rb_strlcat(jbuf, name, sizeof(jbuf));
 	}
 
 	if(parc > 2)

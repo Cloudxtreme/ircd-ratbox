@@ -181,18 +181,18 @@ build_nicklist(struct Client *source_p, char *addbuf, char *delbuf, const char *
 		if(del)
 		{
 			if(*delbuf)
-				(void)strcat(delbuf, ",");
+				strcat(delbuf, ",");
 
-			(void)strncat(delbuf, name, BUFSIZE - lendel - 1);
+			strncat(delbuf, name, BUFSIZE - lendel - 1);
 			lendel += strlen(name) + 1;
 		}
 		/* adding a client */
 		else
 		{
 			if(*addbuf)
-				(void)strcat(addbuf, ",");
+				strcat(addbuf, ",");
 
-			(void)strncat(addbuf, name, BUFSIZE - lenadd - 1);
+			strncat(addbuf, name, BUFSIZE - lenadd - 1);
 			lenadd += strlen(name) + 1;
 		}
 	}

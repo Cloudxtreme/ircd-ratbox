@@ -294,7 +294,7 @@ check_xlines(void)
 			sendto_realops_flags(UMODE_ALL, L_ALL, "XLINE active for %s",
 					     get_client_name(client_p, HIDE_IP));
 
-			(void)exit_client(client_p, client_p, &me, "Bad user info");
+			exit_client(client_p, client_p, &me, "Bad user info");
 			continue;
 		}
 	}
